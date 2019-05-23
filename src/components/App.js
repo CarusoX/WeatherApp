@@ -22,7 +22,6 @@ class App extends React.Component {
       <Title />
 
       <SearchBar />
-
       <Tabs/>
       </div>
       // <div className='BigDiv'>
