@@ -32,7 +32,12 @@ class Weather_API extends React.Component {
             working: true,
             loading: true,
             valid: true,
-            data: null
+            data: null,
+
+            original_temp: '',
+            original_min: '',
+            original_max: '',
+            unit: ''
         }
     }
 
@@ -73,6 +78,27 @@ class Weather_API extends React.Component {
             city_coord[0] = this.state.data['coord']['lon']
             city_coord[1] = this.state.data['coord']['lat']
             city_zipcode = this.state.data['cod']
+
+            this.state.original_temp = temperature
+            this.state.original_min = min_temp
+            this.state.original_max = max_temp
+
+        }
+    }
+
+    updateUnit() {
+        if(this.props.unit === 'celcius') {
+            temperature = this.state.original_temp - 273.15
+            min_temp = this.state.original_min - 273.15
+            max_temp = this.state.original_max - 273.15
+        } else if(this.props.unit === 'fahrenheit') {
+            temperature = ((this.state.original_temp - 273.15) * (9/5)) + 32
+            min_temp = ((this.state.original_min - 273.15) * (9/5)) + 32
+            max_temp = ((this.state.original_max - 273.15) * (9/5)) + 32
+        } else {
+            temperature = this.state.original_temp
+            min_temp = this.state.original_min
+            max_temp = this.state.original_max
         }
     }
 
@@ -88,6 +114,10 @@ class Weather_API extends React.Component {
                         <p>Select a city!</p>
                     </div>
                 )
+            }
+
+            if(this.props.unit !== this.state.unit) {
+                this.updateUnit();
             }
 
             return(
