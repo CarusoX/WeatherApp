@@ -22,6 +22,9 @@ class App extends React.Component {
       
         <button className='buttons' onClick={() => this.setState({city: 'La Plata'})}>La Plata City!</button>
         <button className='buttons' onClick={() => this.setState({city: 'Cordoba'})}>Cordoba City!</button>
+        <form>
+          <input className='textbox' type="text" placeholder="Search for a city here!"/>
+        </form>
         
         <Weather_API className='BigDiv'
                      selected = {this.state.city}

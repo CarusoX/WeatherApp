@@ -21,6 +21,21 @@ html {
   padding-top: 30px; 
 }
 
+::placeholder {
+  color: black; 
+} 
+
+.textbox {
+  border: none;
+  border-radius: 4px;
+  padding: 10px 25px;
+  text-align: center;
+  font-size: 14px;
+  color: white;
+  background-image: linear-gradient(to bottom right, rgb(227, 150, 247), rgb(191, 94, 204));
+  box-shadow: 0 8px 16px 0 rgba(0,0,0,0.1), 0 2px 5px 0 rgba(0,0,0,0.10);
+}
+
 .buttons {
   border: none;
   border-radius: 4px;
