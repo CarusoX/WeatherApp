@@ -57,8 +57,8 @@ class Weather_API extends React.Component {
         } else {
             this.setState({working: true, valid: true});
 
-            weather_state = this.state.data['weather']['main'] // Not sure about this one. It's like an array
-            weather_description = this.state.data['weather']['description']
+            weather_state = this.state.data['weather'][0]['main']
+            weather_description = this.state.data['weather'][0]['description']
             temperature = this.state.data['main']['temp']
             humidity = this.state.data['main']['humidity']
             pressure = this.state.data['main']['pressure']
@@ -70,8 +70,8 @@ class Weather_API extends React.Component {
 
             city_id = this.state.data['id']
             city_name = this.state.data['name']
-            city_coord[0] = this.state.data['coord']['lon'] //longitude
-            city_coord[1] = this.state.data['coord']['lat'] //latitude
+            city_coord[0] = this.state.data['coord']['lon']
+            city_coord[1] = this.state.data['coord']['lat']
             city_zipcode = this.state.data['cod']
         }
     }
