@@ -6,7 +6,7 @@ class App extends React.Component {
   render() {
     return(
       <div>
-        <h1>Hi!</h1>
+        <h1>MyWeather App</h1>
         <p>Test with La Plata city!</p>
         <Weather_API/>
         <p>La cata se debe estar cagando de frio tho</p>
