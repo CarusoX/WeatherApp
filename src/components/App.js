@@ -7,7 +7,9 @@ class App extends React.Component {
     return(
       <div>
         <h1>Hi!</h1>
-        <p>Test with Buenos Aires city!</p>
+        <p>Test with La Plata city!</p>
+        <Weather_API/>
+        <p>La cata se debe estar cagando de frio tho</p>
       </div>
     );
   }
