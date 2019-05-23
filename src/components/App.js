@@ -8,6 +8,7 @@ class App extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
+      unit: 'fahrenheit',
       city: ''
     }
   }
@@ -21,8 +22,14 @@ class App extends React.Component {
       
         <button className='buttons' onClick={() => this.setState({city: 'La Plata'})}>La Plata City!</button>
         <button className='buttons' onClick={() => this.setState({city: 'Cordoba'})}>Cordoba City!</button>
+        
+        <button className='unitbutton' onClick={() => this.setState({unit: 'kelvin'})}>Kelvin</button>
+        <button className='unitbutton' onClick={() => this.setState({unit: 'celcius'})}>Celcius</button>
+        <button className='unitbutton' onClick={() => this.setState({unit: 'fahrenheit'})}>Fahrenheit</button>
 
-        <Weather_API className='BigDiv' selected = {this.state.city}/>
+        <Weather_API className='BigDiv'
+                     selected = {this.state.city}
+                     unit = {this.state.unit}/>
       
       </div>
 
