@@ -2,8 +2,8 @@ import React from 'react'
 import ReactDOM from 'react-dom'
 
 const API_KEY_1 = '98a269de24c9f822e8bb26e56a96575f'
-const API_ENDPOINT = 'api.openweathermap.org'
-const API_FETCH = '/data/2.5/weather?'
+const API_ENDPOINT = 'http://api.openweathermap.org'
+const API_FETCH = '/data/2.5/weather'
 
 var url = ''
 var city_id = ''
@@ -20,8 +20,9 @@ var min_temp = ''
 var max_temp = ''
 var wind_speed = ''
 var wind_direction = ''
-var rain = ''
 var clouds = ''
+
+var pingo = 1
 
 class Weather_API extends React.Component {
     
@@ -30,14 +31,15 @@ class Weather_API extends React.Component {
         this.state = {
             working: true,
             loading: true,
+            valid: true,
             data: null
         }
     }
 
     // I'll make it work by name first, then by other options
     fetch_data() {
-        url = API_ENDPOINT + API_FETCH + '?q=' + city_name;
-
+        city_name = 'La Plata'
+        url = API_ENDPOINT + API_FETCH + '?q=' + city_name + '&appid=' + API_KEY_1;
         fetch(url).then((response) => {
             return response.json();
         }).then((data) => {
@@ -48,10 +50,12 @@ class Weather_API extends React.Component {
     }
 
     set_values() {
-        if(this.data.cod === 429) {
+        if(this.data && this.data.cod === 429) {
             this.setState({working: false});
+        } else if (this.data && this.data.cod === 401) {
+            this.setState({valid: false});
         } else {
-            this.setState({working: true});
+            this.setState({working: true, valid: true});
 
             weather_state = this.state.data['weather']['main'] // Not sure about this one. It's like an array
             weather_description = this.state.data['weather']['description']
@@ -62,7 +66,6 @@ class Weather_API extends React.Component {
             max_temp = this.state.data['main']['temp_max']
             wind_speed = this.state.data['wind']['speed']
             wind_direction = this.state.data['wind']['deg']
-            rain = this.state.data['rain']['3h']
             clouds = this.state.data['clouds']['all']
 
             city_id = this.state.data['id']
@@ -76,6 +79,12 @@ class Weather_API extends React.Component {
 
     render() {
         if(this.state.working) {
+
+            if(pingo === 1) {
+                this.fetch_data();
+                pingo = 2;
+            }
+
             return(
     
                 <div>
@@ -91,7 +100,6 @@ class Weather_API extends React.Component {
                     <p>Maximum Temp: {max_temp}</p>
                     <p>Wind Speed: {wind_speed}</p>
                     <p>Wind Direction: {wind_direction}</p>
-                    <p>Rain: {rain}</p>
                     <p>Clouds: {clouds}</p>
     
                 </div>
@@ -145,5 +153,7 @@ api.openweathermap.org/data/2.5/weather?lat=35&lon=139
 by zipcode
 api.openweathermap.org/data/2.5/weather?zip=94040,us
 
+Names
+http://bulk.openweathermap.org/sample/
 */
 
