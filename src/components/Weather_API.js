@@ -155,7 +155,6 @@ export default Weather_API;
 
 
 /*
-
 60 requests per minute.
 
 Calls are made by:
@@ -165,31 +164,27 @@ Calls are made by:
 - geographic coordinates
 - ZIP code
 
-error response:
-{
-"cod": 429,
-"message": "Your account is temporary blocked due to exceeding of requests limitation of your subscription type. 
-Please choose the proper subscription http://openweathermap.org/price"
-}
-
 Example calls: 
 
 by name
-api.openweathermap.org/data/2.5/weather?q=London
+api.openweathermap.org/data/2.5/weather?q=London + apikey
 
 by id
-api.openweathermap.org/data/2.5/weather?id=2172797
+api.openweathermap.org/data/2.5/weather?id=2172797 + apikey
 
 by coord
-api.openweathermap.org/data/2.5/weather?lat=35&lon=139
+api.openweathermap.org/data/2.5/weather?lat=35&lon=139 + apikey
 
 by zipcode
-api.openweathermap.org/data/2.5/weather?zip=94040,us
+api.openweathermap.org/data/2.5/weather?zip=94040,us + apikey
 
 Names
 http://bulk.openweathermap.org/sample/
 
 Returned Icons
 https://openweathermap.org/weather-conditions
+
+coords to install and implement:
+https://www.npmjs.com/package/react-geolocated
 */
 
