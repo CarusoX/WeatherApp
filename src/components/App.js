@@ -1,6 +1,7 @@
 import React from 'react'
 import ReactDOM from 'react-dom'
 import Weather_API from './Weather_API'
+import './App.css'
 
 class App extends React.Component {
 
@@ -14,14 +15,14 @@ class App extends React.Component {
   render() {
     return(
 
-      <div>
+      <div className="BigDiv">
 
-        <h1>MyWeather App</h1>
+        <h1 className="BigDiv">MyWeather App</h1>
       
-        <button onClick={() => this.setState({city: 'La Plata'})}>La Plata City!</button>
-        <button onClick={() => this.setState({city: 'Cordoba'})}>Cordoba City!</button>
+        <button className="buttons" onClick={() => this.setState({city: 'La Plata'})}>La Plata City!</button>
+        <button className="buttons" onClick={() => this.setState({city: 'Cordoba'})}>Cordoba City!</button>
 
-        <Weather_API selected = {this.state.city}/>
+        <Weather_API className="BigDiv" selected = {this.state.city}/>
       
       </div>
 

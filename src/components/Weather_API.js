@@ -82,6 +82,12 @@ class Weather_API extends React.Component {
 
             if(this.props.selected !== '' && this.props.selected !== city_name) {
                 this.fetch_data();
+            } else if (this.props.selected === '') {
+                return(
+                    <div>
+                        <p>Select a city!</p>
+                    </div>
+                )
             }
 
             return(
@@ -154,5 +160,8 @@ api.openweathermap.org/data/2.5/weather?zip=94040,us
 
 Names
 http://bulk.openweathermap.org/sample/
+
+Returned Icons
+https://openweathermap.org/weather-conditions
 */
 
