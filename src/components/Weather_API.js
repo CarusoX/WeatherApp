@@ -22,8 +22,6 @@ var wind_speed = ''
 var wind_direction = ''
 var clouds = ''
 
-var pingo = 1
-
 class Weather_API extends React.Component {
     
     constructor(props) {
@@ -87,11 +85,11 @@ class Weather_API extends React.Component {
     }
 
     updateUnit() {
-        if(this.props.unit === 'celcius') {
+        if(this.props.unit === 'Cº') {
             temperature = this.state.original_temp - 273.15
             min_temp = this.state.original_min - 273.15
             max_temp = this.state.original_max - 273.15
-        } else if(this.props.unit === 'fahrenheit') {
+        } else if(this.props.unit === 'Fº') {
             temperature = ((this.state.original_temp - 273.15) * (9/5)) + 32
             min_temp = ((this.state.original_min - 273.15) * (9/5)) + 32
             max_temp = ((this.state.original_max - 273.15) * (9/5)) + 32
@@ -128,14 +126,14 @@ class Weather_API extends React.Component {
     
                     <p>Weather State: {weather_state}</p>
                     <p>Weather Description: {weather_description}</p>
-                    <p>Temperature: {temperature}</p>
-                    <p>Humidity: {humidity}</p>
-                    <p>Pressure: {pressure}</p>
-                    <p>Minimum Temp: {min_temp}</p>
-                    <p>Maximum Temp: {max_temp}</p>
-                    <p>Wind Speed: {wind_speed}</p>
-                    <p>Wind Direction: {wind_direction}</p>
-                    <p>Clouds: {clouds}</p>
+                    <p>Temperature: {temperature.toFixed(2)} {this.props.unit}</p>
+                    <p>Humidity: {humidity} %</p>
+                    <p>Pressure: {pressure} hPa</p>
+                    <p>Minimum Temp: {min_temp.toFixed(2)} {this.props.unit}</p>
+                    <p>Maximum Temp: {max_temp.toFixed(2)} {this.props.unit}</p>
+                    <p>Wind Speed: {wind_speed} M/s</p>
+                    <p>Wind Direction: {wind_direction}º</p>
+                    <p>Clouds: {clouds} %</p>
     
                 </div>
     
