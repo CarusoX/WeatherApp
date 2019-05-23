@@ -1,4 +1,4 @@
-import React, Component from 'react'
+import React from 'react'
 import ReactDOM from 'react-dom'
 
 const API_KEY_1 = '98a269de24c9f822e8bb26e56a96575f'
@@ -23,12 +23,12 @@ var wind_direction = ''
 var rain = ''
 var clouds = ''
 
-class Weather_API extends Component {
+class Weather_API extends React.Component {
     
     constructor(props) {
         super(props)
         this.state = {
-            frequency: true,
+            working: true,
             loading: true,
             data: null
         }
@@ -48,10 +48,12 @@ class Weather_API extends Component {
     }
 
     set_values() {
-        if(data.cod === 429) {
-            this.setState({frequency: false});
+        if(this.data.cod === 429) {
+            this.setState({working: false});
         } else {
-            weather_state = this.state.data['weather']['main']
+            this.setState({working: true});
+
+            weather_state = this.state.data['weather']['main'] // Not sure about this one. It's like an array
             weather_description = this.state.data['weather']['description']
             temperature = this.state.data['main']['temp']
             humidity = this.state.data['main']['humidity']
@@ -71,11 +73,49 @@ class Weather_API extends Component {
         }
     }
 
+
+    render() {
+        if(this.state.working) {
+            return(
+    
+                <div>
+    
+                    <h1>{city_name} Weather</h1>
+    
+                    <p>Weather State: {weather_state}</p>
+                    <p>Weather Description: {weather_description}</p>
+                    <p>Temperature: {temperature}</p>
+                    <p>Humidity: {humidity}</p>
+                    <p>Pressure: {pressure}</p>
+                    <p>Minimum Temp: {min_temp}</p>
+                    <p>Maximum Temp: {max_temp}</p>
+                    <p>Wind Speed: {wind_speed}</p>
+                    <p>Wind Direction: {wind_direction}</p>
+                    <p>Rain: {rain}</p>
+                    <p>Clouds: {clouds}</p>
+    
+                </div>
+    
+            )
+    
+        } else {
+            return(
+                <p>Sorry, you can only do 60 requests per minute</p>
+            )
+        }
+    }
+
 }
+
+export default Weather_API;
+
+
+
+
 
 /*
 
-60 requests per minute. 
+60 requests per minute.
 
 Calls are made by:
 
