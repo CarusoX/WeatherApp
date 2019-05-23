@@ -15,14 +15,14 @@ class App extends React.Component {
   render() {
     return(
 
-      <div className="BigDiv">
+      <div className='BigDiv'>
 
-        <h1 className="BigDiv">MyWeather App</h1>
+        <h1 className='title'>MyWeather App</h1>
       
-        <button className="buttons" onClick={() => this.setState({city: 'La Plata'})}>La Plata City!</button>
-        <button className="buttons" onClick={() => this.setState({city: 'Cordoba'})}>Cordoba City!</button>
+        <button className='buttons' onClick={() => this.setState({city: 'La Plata'})}>La Plata City!</button>
+        <button className='buttons' onClick={() => this.setState({city: 'Cordoba'})}>Cordoba City!</button>
 
-        <Weather_API className="BigDiv" selected = {this.state.city}/>
+        <Weather_API className='BigDiv' selected = {this.state.city}/>
       
       </div>
 
