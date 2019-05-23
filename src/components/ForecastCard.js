@@ -3,22 +3,11 @@ import { Segment, Grid, Icon } from 'semantic-ui-react'
 
 
 class ForecastCard extends React.Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      day: ['Lunes', 'Martes', 'Miercoles', 'Jueves', 'Viernes', 'Sabado', 'Domingo'],
+  state = {
+      day: ['Monday', 'Tuesday', 'Tuesday', 'Thursday', 'Friday', 'Saturday', 'Sunday'],
       maxT: 0,
       minT: 0,
-      currentDay: 6
-    };
-  }
-
-  setday(cD, maT, miT) {
-    this.setState({
-      currentDay : cD,
-      maxT : maT,
-      minT : miT,
-    });
+      currentDay: 0,
   }
 
   day(i){
