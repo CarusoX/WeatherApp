@@ -1,0 +1,19 @@
+* {
+  text-align: center;
+}
+
+html {
+  background-image: linear-gradient(to bottom left, #f183c1, #3036ad);
+  width: 100%;
+  height: 100%;
+}
+
+.BigDiv {
+  max-width: 45%;
+  margin: auto;
+  height: 100%;
+}
+
+.buttons {
+  
+}
