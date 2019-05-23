@@ -1,15 +1,14 @@
 import React from 'react'
-import ReactDOM from 'react-dom'
 
 const API_KEY_1 = '98a269de24c9f822e8bb26e56a96575f'
 const API_ENDPOINT = 'http://api.openweathermap.org'
 const API_FETCH = '/data/2.5/weather'
 
 var url = ''
-var city_id = ''
+// var city_id = ''
 var city_name = ''
 var city_coord = []
-var city_zipcode = ''
+// var city_zipcode = ''
 
 var weather_state = ''
 var weather_description = ''
@@ -71,12 +70,12 @@ class Weather_API extends React.Component {
             wind_direction = this.state.data['wind']['deg']
             clouds = this.state.data['clouds']['all']
 
-            city_id = this.state.data['id']
+            // city_id = this.state.data['id']
             city_name = this.state.data['name']
             city_coord[0] = this.state.data['coord']['lon']
             city_coord[1] = this.state.data['coord']['lat']
-            city_zipcode = this.state.data['cod']
-
+            // city_zipcode = this.state.data['cod']
+            
             this.state.original_temp = temperature
             this.state.original_min = min_temp
             this.state.original_max = max_temp
