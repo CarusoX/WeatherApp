@@ -9,18 +9,16 @@ class WeatherAPI extends React.Component {
     constructor(props) {
         super(props)
         this.state = {
-            lastCity: null,
+            city: null,
             working: true,
             loading: true,
             valid: true
         }
     }
 
-    // I'll make it work by name first, then by other options
     fetch_data() {
-        if (this.state.lastCity === this.props.city) return;
-        this.setState({ lastCity: this.props.city }, () => {
-            let url = API_ENDPOINT + API_FETCH + '?q=' + this.state.lastCity + '&units=metric&appid=' + API_KEY_1;
+        this.setState({ city: this.props.city }, () => {
+            let url = API_ENDPOINT + API_FETCH + '?q=' + this.state.city + '&units=metric&appid=' + API_KEY_1;
             fetch(url).then((response) => {
                 return response.json();
             }).then((data) => {
@@ -59,9 +57,12 @@ class WeatherAPI extends React.Component {
         }
     }
 
-
+    componentDidUpdate() {
+        if(this.props.city !== this.state.city) {
+            this.fetch_data();
+        }
+    }
     render() {
-        this.fetch_data();
         return null;
     }
 }

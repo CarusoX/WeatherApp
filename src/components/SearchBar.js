@@ -13,7 +13,7 @@ export default class SearchBar extends Component {
 
   render() {
     return (
-      <div style={{ margin: 30 }} class="ui one column stackable center aligned page grid">
+      <div style={{ margin: 30 }} className="ui one column stackable center aligned page grid">
         <Form onSubmit={this.handleInput}>
           <Form.Group>
             <Form.Input placeholder='Search city...' name='city' onChange={this.handleChange} />
