@@ -1,9 +1,8 @@
 import React from 'react'
+import { Button, Divider, Grid, Placeholder, Segment } from 'semantic-ui-react'
 import Title from './Title'
 import Tabs from './Tabs'
-import SearchBar from './SearchBar'
 import './App.css'
-
 
 class App extends React.Component {
 
@@ -19,31 +18,23 @@ class App extends React.Component {
     return(
 
       <div>
-      <Title />
-
-      <SearchBar />
-
-      <Tabs/>
-      </div>
-      // <div className='BigDiv'>
-
-      //   <h1 className='title'>MyWeather App</h1>
-      
-      //   <button className='buttons' onClick={() => this.setState({city: 'La Plata'})}>La Plata City!</button>
-      //   <button className='buttons' onClick={() => this.setState({city: 'Cordoba'})}>Cordoba City!</button>
-      //   <form>
-      //     <input className='textbox' type="text" placeholder="Search for a city here!"/>
-      //   </form>
+        <Segment>
+          <Grid>
+            <Grid.Column textAlign="center">
+              <Button.Group floated='right'>
+                <Button size='mini' onClick={() => this.setState({unit: 'Cº'})}>Cº</Button>
+                <Button size='mini' onClick={() => this.setState({unit: 'Fº'})}>Fº</Button>
+                <Button size='mini' onClick={() => this.setState({unit: 'Kº'})}>Kº</Button>
+              </Button.Group>  
+            </Grid.Column>
+          </Grid>
+        </Segment>
         
-      //   <Weather_API className='BigDiv'
-      //                selected = {this.state.city}
-      //                unit = {this.state.unit}/>
+        <Title city={this.state.city}/>
 
-      //   <button className='unitbutton' onClick={() => this.setState({unit: 'Kº'})}>Kelvin</button>
-      //   <button className='unitbutton' onClick={() => this.setState({unit: 'Cº'})}>Celcius</button>
-      //   <button className='unitbutton' onClick={() => this.setState({unit: 'Fº'})}>Fahrenheit</button>
+        <Tabs/>
 
-      // </div>
+      </div>
 
     );
   }

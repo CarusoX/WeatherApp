@@ -2,12 +2,7 @@
   text-align: center;
 }
 
-html {
-  background-image: linear-gradient(to bottom left, #f183c1, #3036ad);
-  width: 100%;
-  height: 100%;
-}
-
+/* 
 .BigDiv {
   background-image: linear-gradient(to bottom left, #f183c1, #bc68d1);
   max-width: 50%;
@@ -15,16 +10,19 @@ html {
   height: 100%;
   box-shadow: 0px 0px 25px #3036ad;
   border-radius: 15px; 
-}
+} */
 
+/* 
 .title {
-  padding-top: 30px; 
-}
+  padding-top: 30px;
+} */
 
+/* 
 ::placeholder {
   color: black; 
-} 
+}  */
 
+/* 
 .textbox {
   border: none;
   border-radius: 4px;
@@ -34,8 +32,9 @@ html {
   color: white;
   background-image: linear-gradient(to bottom right, rgb(227, 150, 247), rgb(191, 94, 204));
   box-shadow: 0 8px 16px 0 rgba(0,0,0,0.1), 0 2px 5px 0 rgba(0,0,0,0.10);
-}
+} */
 
+/* 
 .buttons {
   border: none;
   border-radius: 4px;
@@ -47,8 +46,9 @@ html {
   cursor: pointer;
   background-image: linear-gradient(to bottom right, rgb(227, 150, 247), rgb(191, 94, 204));
   box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2), 0 2px 5px 0 rgba(0,0,0,0.19);
-}
+} */
 
+/* 
 .unitbutton {
   border: none;
   border-radius: 4px;
@@ -60,4 +60,4 @@ html {
   cursor: pointer;
   background-image: linear-gradient(to bottom right, rgb(227, 150, 247), rgb(191, 94, 204));
   box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2), 0 2px 5px 0 rgba(0,0,0,0.19);
-}
+} */

@@ -4,9 +4,9 @@ import { Tab } from 'semantic-ui-react'
 import 'semantic-ui-css/semantic.min.css'
 
 const panes = [
-    { menuItem: 'Tab 1', render: () => <Tab.Pane><WheaterCard /> </Tab.Pane> },
-    { menuItem: 'Tab 2', render: () => <Tab.Pane>Tab 2 Content</Tab.Pane> },
-    { menuItem: 'Tab 3', render: () => <Tab.Pane>Tab 3 Content</Tab.Pane> },
+    { menuItem: 'Tab 1', render: () => <Tab.Pane attached={false}><WheaterCard /> </Tab.Pane> },
+    { menuItem: 'Tab 2', render: () => <Tab.Pane attached={false}>Tab 2 Content</Tab.Pane> },
+    { menuItem: 'Tab 3', render: () => <Tab.Pane attached={false}>Tab 3 Content</Tab.Pane> },
 ]
 
 class Tabs extends React.Component {
@@ -20,7 +20,7 @@ class Tabs extends React.Component {
 
     render() {
         return(
-            <Tab panes={panes} />
+            <Tab menu={{ pointing: true, style: { justifyContent: "center" } }} panes={panes} />
         );
     }
 }

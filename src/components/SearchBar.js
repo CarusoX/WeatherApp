@@ -50,21 +50,11 @@ export default class SearchBar extends Component {
               })}
               results={results}
               value={value}
+              placeholder='Search...'
+              focus
               {...this.props}
             />
           </Grid.Column>
-          {/* <Grid.Column width={10}>
-            <Segment>
-              <Header>State</Header>
-              <pre style={{ overflowX: 'auto' }}>
-                {JSON.stringify(this.state, null, 2)}
-              </pre>
-              <Header>Options</Header>
-              <pre style={{ overflowX: 'auto' }}>
-                {JSON.stringify(source, null, 2)}
-              </pre>
-            </Segment>
-          </Grid.Column> */}
         </Grid>
       </Container>
     )
