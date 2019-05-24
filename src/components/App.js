@@ -1,7 +1,5 @@
 import React from 'react'
-import { Button, Divider, Grid, Header, Image, Segment } from 'semantic-ui-react'
-import SearchBar from './SearchBar'
-import Tabs from './Tabs'
+import { Button, Grid, Header, Image, Segment } from 'semantic-ui-react'
 import Menu from './Menu'
 import './App.css'
 

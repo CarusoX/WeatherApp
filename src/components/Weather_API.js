@@ -5,21 +5,7 @@ const API_ENDPOINT = 'http://api.openweathermap.org'
 const API_FETCH = '/data/2.5/weather'
 
 var url = ''
-// var city_id = ''
-var city_name = ''
-var city_coord = []
-// var city_zipcode = ''
-
-var weather_state = ''
-var weather_description = ''
-var temperature = ''
-var humidity = ''
-var pressure = ''
-var min_temp = ''
-var max_temp = ''
-var wind_speed = ''
-var wind_direction = ''
-var clouds = ''
+var last_fetch = ''
 
 class Weather_API extends React.Component {
     
@@ -35,8 +21,8 @@ class Weather_API extends React.Component {
 
     // I'll make it work by name first, then by other options
     fetch_data() {
-        city_name = this.props.city
-        url = API_ENDPOINT + API_FETCH + '?q=' + city_name + '&appid=' + API_KEY_1;
+        last_fetch = this.props.city
+        url = API_ENDPOINT + API_FETCH + '?q=' + last_fetch + '&appid=' + API_KEY_1;
         fetch(url).then((response) => {
             return response.json();
         }).then((data) => {
@@ -51,11 +37,10 @@ class Weather_API extends React.Component {
             this.setState({working: false});
         } else if (this.data && this.data.cod === 401) {
             this.setState({valid: false});
-        } else if (this.data) {
+        } else {
             this.setState({working: true, valid: true});
 
             this.props.clouds(this.state.data['clouds']['all'])
-            this.props.weather(this.state.data['weather'][0]['main'])
             this.props.weather_state(this.state.data['weather'][0]['main'])
             this.props.weather_description(this.state.data['weather'][0]['description'])
             this.props.temperature(this.state.data['main']['temp'])
@@ -65,31 +50,30 @@ class Weather_API extends React.Component {
             this.props.max_temp(this.state.data['main']['temp_max'])
             this.props.wind_speed(this.state.data['wind']['speed'])
             this.props.wind_direction(this.state.data['wind']['deg'])
-
         }
     }
 
-    updateUnit() {
-        if(this.props.unit === 'Cº') {
-            temperature = this.state.original_temp - 273.15
-            min_temp = this.state.original_min - 273.15
-            max_temp = this.state.original_max - 273.15
-        } else if(this.props.unit === 'Fº') {
-            temperature = ((this.state.original_temp - 273.15) * (9/5)) + 32
-            min_temp = ((this.state.original_min - 273.15) * (9/5)) + 32
-            max_temp = ((this.state.original_max - 273.15) * (9/5)) + 32
-        } else {
-            temperature = this.state.original_temp
-            min_temp = this.state.original_min
-            max_temp = this.state.original_max
-        }
-    }
+    // updateUnit() {
+    //     if(this.props.unit === 'Cº') {
+    //         temperature = this.state.original_temp - 273.15
+    //         min_temp = this.state.original_min - 273.15
+    //         max_temp = this.state.original_max - 273.15
+    //     } else if(this.props.unit === 'Fº') {
+    //         temperature = ((this.state.original_temp - 273.15) * (9/5)) + 32
+    //         min_temp = ((this.state.original_min - 273.15) * (9/5)) + 32
+    //         max_temp = ((this.state.original_max - 273.15) * (9/5)) + 32
+    //     } else {
+    //         temperature = this.state.original_temp
+    //         min_temp = this.state.original_min
+    //         max_temp = this.state.original_max
+    //     }
+    // }
 
 
     render() {
         if(this.state.working) { // We should change this, 'cos when it crashes once, then it never recovers
 
-            if(this.props.city !== '' && this.props.city !== city_name) {
+            if(this.props.city !== '' && this.props.city !== last_fetch) {
                 this.fetch_data();
             }
 
