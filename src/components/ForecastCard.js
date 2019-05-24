@@ -3,6 +3,10 @@ import { Segment, Grid, Icon } from 'semantic-ui-react'
 
 
 class ForecastCard extends React.Component {
+  constructor(props) {
+    super(props);
+  }
+
   state = {
       day: ['Monday', 'Tuesday', 'Tuesday', 'Thursday', 'Friday', 'Saturday', 'Sunday'],
       maxT: 0,
@@ -10,7 +14,7 @@ class ForecastCard extends React.Component {
       currentDay: 0,
   }
 
-  day(i){
+  day(){
     return (
           <Grid.Column>
             <Segment>
@@ -18,7 +22,7 @@ class ForecastCard extends React.Component {
                 <Icon name='sun' color='yellow'/>
               </Icon.Group>
             </Segment>
-            <Segment>{this.state.day[i]}</Segment>
+            <Segment>{this.state.day[this.state.currentDay]}</Segment>
             <Segment>{this.state.maxT}</Segment>
             <Segment>{this.state.minT}</Segment>
           </Grid.Column>
@@ -26,16 +30,25 @@ class ForecastCard extends React.Component {
     );
   }
 
+  set_day(maT, miT, cDay){
+      this.state.maxT= maT
+      this.state.minT = miT
+      this.state.currentDay = cDay
+  }
+
   render() {
     return (
       <Grid columns={5} divided>
         <Grid.Row stretched>
           {/* Aun no se como usar los for :P jaja */}
-          {this.day((this.state.currentDay)%7)}
-          {this.day((this.state.currentDay + 1)%7)}
-          {this.day((this.state.currentDay + 2)%7)}
-          {this.day((this.state.currentDay + 3)%7)}
-          {this.day((this.state.currentDay + 4)%7)}
+          {/* console.log(this.props.min_temp)*/}
+          {this.set_day(this.props.max_temp, this.props.min_temp, 0)}
+          {this.day()}
+          {this.set_day(this.props.max_temp, this.props.min_temp, 1)}
+          {this.day()}
+          {this.day()}
+          {this.day()}
+          {this.day()}
         </Grid.Row>
       </Grid>
     );

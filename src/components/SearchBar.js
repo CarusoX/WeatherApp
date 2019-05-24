@@ -1,72 +1,26 @@
-import _ from 'lodash'
-import faker from 'faker'
 import React, { Component } from 'react'
-import { Container, Search, Grid } from 'semantic-ui-react'
-
-const initialState = { isLoading: false, results: [], value: '' }
-
-const source = _.times(5, () => ({
-  title: faker.company.companyName(),
-  description: faker.company.catchPhrase(),
-  image: faker.internet.avatar(),
-  price: faker.finance.amount(0, 100, 2, '$'),
-}))
+import { Form } from 'semantic-ui-react'
 
 export default class SearchBar extends Component {
-  state = initialState
 
-  handleResultSelect = (e, { result }) => this.setState({ value: result.title })
+  handleChange = (e, { value }) => {
+    this.setState({ value });
+  }
 
-  handleSearchChange = (e, { value }) => {
-    this.setState({ isLoading: true, value })
-
-    setTimeout(() => {
-      if (this.state.value.length < 1) return this.setState(initialState)
-
-      const re = new RegExp(_.escapeRegExp(this.state.value), 'i')
-      const isMatch = result => re.test(result.title)
-
-      this.setState({
-        isLoading: false,
-        results: _.filter(source, isMatch),
-      })
-    }, 300)
+  handleInput = () => {
+    this.props.newcity(this.state.value);
   }
 
   render() {
-    const { isLoading, value, results } = this.state
-
     return (
-      <Container fluid>
-        <Grid>
-          <Grid.Column fullwidth>
-            <Search
-              fluid
-              size='big'
-              loading={isLoading}
-              onResultSelect={this.handleResultSelect}
-              onSearchChange={_.debounce(this.handleSearchChange, 500, {
-                leading: true,
-              })}
-              results={results}
-              value={value}
-              {...this.props}
-            />
-          </Grid.Column>
-          {/* <Grid.Column width={10}>
-            <Segment>
-              <Header>State</Header>
-              <pre style={{ overflowX: 'auto' }}>
-                {JSON.stringify(this.state, null, 2)}
-              </pre>
-              <Header>Options</Header>
-              <pre style={{ overflowX: 'auto' }}>
-                {JSON.stringify(source, null, 2)}
-              </pre>
-            </Segment>
-          </Grid.Column> */}
-        </Grid>
-      </Container>
+      <div style={{ margin: 30 }} className="ui one column stackable center aligned page grid">
+        <Form onSubmit={this.handleInput}>
+          <Form.Group>
+            <Form.Input placeholder='Search city...' name='city' onChange={this.handleChange} />
+            <Form.Button icon="search" />
+          </Form.Group>
+        </Form>
+      </div>
     )
   }
 }
