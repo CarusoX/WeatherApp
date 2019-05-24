@@ -30,11 +30,6 @@ class Weather_API extends React.Component {
             loading: true,
             valid: true,
             data: null,
-
-            original_temp: '',
-            original_min: '',
-            original_max: '',
-            unit: ''
         }
     }
 
@@ -56,29 +51,20 @@ class Weather_API extends React.Component {
             this.setState({working: false});
         } else if (this.data && this.data.cod === 401) {
             this.setState({valid: false});
-        } else {
+        } else if (this.data) {
             this.setState({working: true, valid: true});
 
-            weather_state = this.state.data['weather'][0]['main']
-            weather_description = this.state.data['weather'][0]['description']
-            temperature = this.state.data['main']['temp']
-            humidity = this.state.data['main']['humidity']
-            pressure = this.state.data['main']['pressure']
-            min_temp = this.state.data['main']['temp_min']
-            max_temp = this.state.data['main']['temp_max']
-            wind_speed = this.state.data['wind']['speed']
-            wind_direction = this.state.data['wind']['deg']
-            clouds = this.state.data['clouds']['all']
-
-            // city_id = this.state.data['id']
-            city_name = this.state.data['name']
-            city_coord[0] = this.state.data['coord']['lon']
-            city_coord[1] = this.state.data['coord']['lat']
-            // city_zipcode = this.state.data['cod']
-            
-            this.state.original_temp = temperature
-            this.state.original_min = min_temp
-            this.state.original_max = max_temp
+            this.props.clouds(this.state.data['clouds']['all'])
+            this.props.weather(this.state.data['weather'][0]['main'])
+            this.props.weather_state(this.state.data['weather'][0]['main'])
+            this.props.weather_description(this.state.data['weather'][0]['description'])
+            this.props.temperature(this.state.data['main']['temp'])
+            this.props.humidity(this.state.data['main']['humidity'])
+            this.props.pressure(this.state.data['main']['pressure'])
+            this.props.min_temp(this.state.data['main']['temp_min'])
+            this.props.max_temp(this.state.data['main']['temp_max'])
+            this.props.wind_speed(this.state.data['wind']['speed'])
+            this.props.wind_direction(this.state.data['wind']['deg'])
 
         }
     }
@@ -105,43 +91,14 @@ class Weather_API extends React.Component {
 
             if(this.props.city !== '' && this.props.city !== city_name) {
                 this.fetch_data();
-            } else if (this.props.city === '') {
-                return(
-                    <div>
-                        <p>Select a city!</p>
-                    </div>
-                )
             }
 
-            if(this.props.unit !== this.state.unit) {
-                this.updateUnit();
-            }
+            // if(this.props.unit !== this.state.unit) {
+            //     this.updateUnit();
+            // }
 
-            return(
+            return(<p/>)
     
-                <div>
-    
-                    <h1>{city_name} Weather</h1>
-    
-                    <p>Weather State: {weather_state}</p>
-                    <p>Weather Description: {weather_description}</p>
-                    <p>Temperature: {temperature.toFixed(2)} {this.props.unit}</p>
-                    <p>Humidity: {humidity} %</p>
-                    <p>Pressure: {pressure} hPa</p>
-                    <p>Minimum Temp: {min_temp.toFixed(2)} {this.props.unit}</p>
-                    <p>Maximum Temp: {max_temp.toFixed(2)} {this.props.unit}</p>
-                    <p>Wind Speed: {wind_speed} M/s</p>
-                    <p>Wind Direction: {wind_direction}º</p>
-                    <p>Clouds: {clouds} %</p>
-    
-                </div>
-    
-            )
-    
-        } else {
-            return(
-                <p>Sorry, you can only do 60 requests per minute</p>
-            )
         }
     }
 
