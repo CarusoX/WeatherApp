@@ -15,7 +15,7 @@ class App extends React.Component {
   render() {
     return(
 
-      <div>
+      <Container fluid>
         <Segment>
           <Grid>
             <Grid.Column textAlign="center">
@@ -35,7 +35,7 @@ class App extends React.Component {
 
         <Menu unit={this.state.unit}/>
 
-      </div>
+      </Container>
 
     );
   }
