@@ -28,10 +28,13 @@ class App extends React.Component {
           </Grid>
         </Segment>
 
+        {/* <img src={require('../images/map.jpg')} className='background'/> */}
+
         <Header as='h1' icon textAlign='center'>
           <Image src={require('../images/cloud.png')} />
           <Header.Content>Wheater app</Header.Content>
         </Header>
+
 
         <Menu unit={this.state.unit} />
 
