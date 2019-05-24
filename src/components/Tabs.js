@@ -5,9 +5,11 @@ import 'semantic-ui-css/semantic.min.css'
 import UVICard from './UVICard.js';
 
 const panes = [
-    { menuItem: 'Tab 1', render: () => <Tab.Pane><WheaterCard /> </Tab.Pane> },
-    { menuItem: 'Tab 2', render: () => <Tab.Pane>Tab 2 Content</Tab.Pane> },
-    { menuItem: 'Tab 3', render: () => <Tab.Pane><UVICard /></Tab.Pane> },
+  { menuItem: 'Current Weather', render: () => <Tab.Pane attached={false}> <WheaterCard /> </Tab.Pane> },
+    
+  { menuItem: 'Week Forecast', render: () => <Tab.Pane attached={false}>Tab 2 Content</Tab.Pane> },
+    
+  { menuItem: 'UV Rays', render: () => <Tab.Pane attached={false}>Tab 3 Content</Tab.Pane> },
 ]
 
 class Tabs extends React.Component {
@@ -20,9 +22,34 @@ class Tabs extends React.Component {
     }
 
     render() {
-        return(
-            <Tab panes={panes} />
-        );
+      return(
+        <Tab menu={{ pointing: true,
+                     style: { justifyContent: "center" } }}
+                     panes= {[
+                       { menuItem: 'Current Weather', render: () =>
+                         <Tab.Pane attached={false}>
+                           <WheaterCard clouds={this.props.clouds}
+                                       weather_state={this.props.weather_state}
+                                       weather_description={this.props.weather_description}
+                                       temperature={this.props.temperature}
+                                       humidity={this.props.humidity}
+                                       pressure={this.props.pressure}
+                                       min_temp={this.props.min_temp}
+                                       max_temp={this.props.max_temp}
+                                       wind_speed={this.props.wind_speed}
+                                       wind_direction={this.props.wind_direction}
+                                       unit={this.props.unit}
+                           />
+                           
+                           </Tab.Pane> },
+                         
+                       { menuItem: 'Week Forecast', render: () => <Tab.Pane attached={false}>Tab 2 Content</Tab.Pane> },
+                         
+                       { menuItem: 'UV Rays', render: () => <Tab.Pane attached={false}>Tab 3 Content</Tab.Pane> },
+                     ]}
+                     
+        />
+      );
     }
 }
 
