@@ -22,7 +22,7 @@ class WheaterCard extends React.Component {
             <Segment>
               Temp
               <Segment>
-                {this.props.temperature}
+                {this.props.temperature} {this.props.unit}
               </Segment>
             </Segment>
             
@@ -39,25 +39,25 @@ class WheaterCard extends React.Component {
             <Segment>
               Preassure
               <Segment>
-                {this.props.pressure}
+                {this.props.pressure} hPa
               </Segment>
             </Segment>
             <Segment>
               Min temp
               <Segment>
-                {this.props.min_temp}
+                {this.props.min_temp} {this.props.unit}
               </Segment>
             </Segment>
             <Segment>
               Sunrise
               <Segment>
-                No se jaja salu2
+                No se jaja salu2 AM
               </Segment>
             </Segment>
             <Segment>
               Wind
               <Segment>
-                {this.props.wind_speed}
+                {this.props.wind_speed} M/s
               </Segment>
             </Segment>
           
@@ -67,19 +67,19 @@ class WheaterCard extends React.Component {
             <Segment>
               Humidity
               <Segment>
-                {this.props.humidity}
+                {this.props.humidity} %
               </Segment>
             </Segment>
             <Segment>
               Max temp
               <Segment>
-                {this.props.max_temp}
+                {this.props.max_temp} {this.props.unit}
               </Segment>
             </Segment>
             <Segment>
               Sunset
               <Segment>
-                No se jaja salu2
+                No se jaja salu2 PM
               </Segment>
             </Segment>
 

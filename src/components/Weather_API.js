@@ -53,33 +53,12 @@ class Weather_API extends React.Component {
         }
     }
 
-    // updateUnit() {
-    //     if(this.props.unit === 'Cº') {
-    //         temperature = this.state.original_temp - 273.15
-    //         min_temp = this.state.original_min - 273.15
-    //         max_temp = this.state.original_max - 273.15
-    //     } else if(this.props.unit === 'Fº') {
-    //         temperature = ((this.state.original_temp - 273.15) * (9/5)) + 32
-    //         min_temp = ((this.state.original_min - 273.15) * (9/5)) + 32
-    //         max_temp = ((this.state.original_max - 273.15) * (9/5)) + 32
-    //     } else {
-    //         temperature = this.state.original_temp
-    //         min_temp = this.state.original_min
-    //         max_temp = this.state.original_max
-    //     }
-    // }
-
-
     render() {
         if(this.state.working) { // We should change this, 'cos when it crashes once, then it never recovers
 
             if(this.props.city !== '' && this.props.city !== last_fetch) {
                 this.fetch_data();
             }
-
-            // if(this.props.unit !== this.state.unit) {
-            //     this.updateUnit();
-            // }
 
             return(<p/>)
     

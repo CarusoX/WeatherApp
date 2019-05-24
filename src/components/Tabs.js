@@ -25,9 +25,9 @@ class Tabs extends React.Component {
         <Tab menu={{ pointing: true,
                      style: { justifyContent: "center" } }}
                      panes= {[
-                      { menuItem: 'Current Weather', render: () =>
-                        <Tab.Pane attached={false}>
-                          <WheaterCard clouds={this.props.clouds}
+                       { menuItem: 'Current Weather', render: () =>
+                         <Tab.Pane attached={false}>
+                           <WheaterCard clouds={this.props.clouds}
                                        weather_state={this.props.weather_state}
                                        weather_description={this.props.weather_description}
                                        temperature={this.props.temperature}
@@ -37,14 +37,15 @@ class Tabs extends React.Component {
                                        max_temp={this.props.max_temp}
                                        wind_speed={this.props.wind_speed}
                                        wind_direction={this.props.wind_direction}
-                          />
-                          
-                          </Tab.Pane> },
-                        
-                      { menuItem: 'Week Forecast', render: () => <Tab.Pane attached={false}>Tab 2 Content</Tab.Pane> },
-                        
-                      { menuItem: 'UV Rays', render: () => <Tab.Pane attached={false}>Tab 3 Content</Tab.Pane> },
-                    ]}
+                                       unit={this.props.unit}
+                           />
+                           
+                           </Tab.Pane> },
+                         
+                       { menuItem: 'Week Forecast', render: () => <Tab.Pane attached={false}>Tab 2 Content</Tab.Pane> },
+                         
+                       { menuItem: 'UV Rays', render: () => <Tab.Pane attached={false}>Tab 3 Content</Tab.Pane> },
+                     ]}
                      
         />
       );
