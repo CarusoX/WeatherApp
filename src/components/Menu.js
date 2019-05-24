@@ -132,31 +132,32 @@ class Menu extends React.Component {
     this.setState({ unit: now });
   }
 
-  render() {
-
-    if (this.props.unit !== this.state.unit) {
+  componentDidUpdate() {
+    if(this.props.unit !== this.state.unit) {
       this.updateUnit();
     }
+  }
 
+  render() {
     return (
 
       <Container fluid>
 
-        <SearchBar newcity={this.changeCity.bind(this)} />
+        <SearchBar newcity={(_) => this.changeCity(_)} />
 
         <Divider horizontal>City: {this.state.city}</Divider>
 
         <WeatherAPI city={this.state.city}
-          clouds={this.changeClouds.bind(this)}
-          weather_state={this.changeWeatherState.bind(this)}
-          weather_description={this.changeWeatherDescription.bind(this)}
-          temperature={this.changeTemperature.bind(this)}
-          humidity={this.changeHumidity.bind(this)}
-          pressure={this.changePressure.bind(this)}
-          min_temp={this.changeMinTemp.bind(this)}
-          max_temp={this.changeMaxTemp.bind(this)}
-          wind_speed={this.changeWindSpeed.bind(this)}
-          wind_direction={this.changeWindDirection.bind(this)}
+          clouds={(_) => this.changeClouds(_)}
+          weather_state={(_) => this.changeWeatherState(_)}
+          weather_description={(_) => this.changeWeatherDescription(_)}
+          temperature={(_) => this.changeTemperature(_)}
+          humidity={(_) => this.changeHumidity(_)}
+          pressure={(_) => this.changePressure(_)}
+          min_temp={(_) => this.changeMinTemp(_)}
+          max_temp={(_) => this.changeMaxTemp(_)}
+          wind_speed={(_) => this.changeWindSpeed(_)}
+          wind_direction={(_) => this.changeWindDirection(_)}
         />
 
         <Tabs temperature={this.state.temperature}
