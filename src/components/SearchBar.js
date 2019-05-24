@@ -1,62 +1,40 @@
-import _ from 'lodash'
-import faker from 'faker'
 import React, { Component } from 'react'
-import { Container, Search, Grid } from 'semantic-ui-react'
+import { Container, Form, Grid, Segment } from 'semantic-ui-react'
 
-const initialState = { isLoading: false, results: [], value: '' }
 
-const source = _.times(5, () => ({
-  title: faker.company.companyName(),
-  description: faker.company.catchPhrase(),
-  image: faker.internet.avatar(),
-  price: faker.finance.amount(0, 100, 2, '$'),
-}))
+const API_KEY_1 = '98a269de24c9f822e8bb26e56a96575f'
+const API_ENDPOINT = 'http://api.openweathermap.org'
+const API_FETCH = '/data/2.5/weather'
+
+const initialState = { value: '' }
 
 export default class SearchBar extends Component {
   state = initialState
 
   handleResultSelect = (e, { result }) => this.setState({ value: result.title })
 
-  handleSearchChange = (e, { value }) => {
-    this.setState({ isLoading: true, value })
-
-    setTimeout(() => {
-      if (this.state.value.length < 1) return this.setState(initialState)
-
-      const re = new RegExp(_.escapeRegExp(this.state.value), 'i')
-      const isMatch = result => re.test(result.title)
-
-      this.setState({
-        isLoading: false,
-        results: _.filter(source, isMatch),
-      })
-    }, 300)
+  handleChange = (e, { value }) => {
+    this.setState({ value })
+  }
+  handleFetch = () => {
+    let url = API_ENDPOINT + API_FETCH + '?q=' + this.state.value + '&appid=' + API_KEY_1;
+    fetch(url).then((response) => {
+      return response.json();
+    }).then((data) => {
+      console.log(data);
+    })
   }
 
   render() {
-    const { isLoading, value, results } = this.state
-
     return (
-      <Container fluid>
-        <Grid>
-          <Grid.Column fullwidth>
-            <Search
-              fluid
-              size='big'
-              loading={isLoading}
-              onResultSelect={this.handleResultSelect}
-              onSearchChange={_.debounce(this.handleSearchChange, 500, {
-                leading: true,
-              })}
-              results={results}
-              value={value}
-              placeholder='Search...'
-              focus
-              {...this.props}
-            />
-          </Grid.Column>
-        </Grid>
-      </Container>
+      <div class="ui one column stackable center aligned page grid">
+          <Form onSubmit={this.handleFetch}>
+            <Form.Group>
+              <Form.Input placeholder='City' name='city'  onChange={this.handleChange} />
+              <Form.Button icon="search"/>
+            </Form.Group>
+          </Form>
+      </div>
     )
   }
 }
