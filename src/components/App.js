@@ -2,6 +2,7 @@ import React from 'react'
 import { Button, Divider, Grid, Header, Image, Segment } from 'semantic-ui-react'
 import SearchBar from './SearchBar'
 import Tabs from './Tabs'
+import Menu from './Menu'
 import './App.css'
 
 class App extends React.Component {
@@ -9,15 +10,10 @@ class App extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      unit: 'Cº',
-      city: ''
+      unit: 'Cº'
     }
   }
-
-  changeCity(newcity) {
-    this.setState({city: newcity})
-  }
-
+  
   render() {
     return(
 
@@ -39,11 +35,7 @@ class App extends React.Component {
           <Header.Content>Wheater app</Header.Content>
         </Header>
 
-        <SearchBar newcity={this.changeCity.bind(this)} />
-        
-        <Divider horizontal>City: {this.state.city}</Divider>
-
-        <Tabs/>
+        <Menu unit={this.state.unit}/>
 
       </div>
 

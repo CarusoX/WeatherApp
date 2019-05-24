@@ -1,8 +1,5 @@
 import React, { Component } from 'react'
 import { Form } from 'semantic-ui-react'
-import Weather_API from './Weather_API'
-
-const initialState = { value: '' }
 
 export default class SearchBar extends Component {
 
@@ -10,18 +7,12 @@ export default class SearchBar extends Component {
     super(props);
   }
 
-  state = initialState
-
-  handleResultSelect = (e, { result }) => this.setState({ value: result.title })
-
   handleChange = (e, { value }) => {
     this.setState({ value })
   }
 
   handleInput = () => {
     this.props.newcity(this.state.value);
-    let update = <Weather_API city={this.state.value} />;
-    console.log(update)
   }
 
   render() {
