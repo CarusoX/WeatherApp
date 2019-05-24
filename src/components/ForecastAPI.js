@@ -1,8 +1,8 @@
 import React from 'react'
 
-const API_KEY_1 = '44dcc5512287c61aacb75ea1685bae29'
+const API_KEY_1 = '4e4360f48334a879ee009e6f11cad8ed'
 const API_ENDPOINT = 'http://api.openweathermap.org'
-const API_FETCH = '/data/2.5/forecast/daily'
+const API_FETCH = '/data/2.5/forecast'
 
 var url = ''
 var last_fetch = ''
@@ -19,7 +19,6 @@ class ForecastAPI extends React.Component {
       valid: true
     }
   }
-
 
   fetch_data() {
     this.setState({ id: this.props.id }, () => {
