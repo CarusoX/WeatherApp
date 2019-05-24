@@ -35,7 +35,6 @@ class App extends React.Component {
           <Header.Content>Wheater app</Header.Content>
         </Header>
 
-
         <Menu unit={this.state.unit} />
 
       </Container>

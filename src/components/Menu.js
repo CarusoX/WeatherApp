@@ -1,6 +1,7 @@
 import React from 'react'
 import { Container, Divider } from 'semantic-ui-react'
 import WeatherAPI from './WeatherAPI'
+import ForecastAPI from './ForecastAPI'
 import SearchBar from './SearchBar'
 import Tabs from './Tabs'
 
@@ -19,13 +20,15 @@ class Menu extends React.Component {
       wind_speed: '',
       wind_direction: '',
       clouds: '',
+      list: undefined,
+      id: 0,
 
       unit: 'Cº',
       city: ''
     }
   }
 
-  setData(data) {
+  setWeatherData(data) {
     this.setState({
       weather_state: data['wheater_state'],
       weather_description: data['wheater_description'],
@@ -37,6 +40,12 @@ class Menu extends React.Component {
       wind_speed: data['wind_speed'],
       wind_direction: data['wind_dir'],
       clouds: data['clouds'],
+      id: data['id'],
+    })
+  }
+  setForeData(data) {
+    this.setState({
+      list: data['list'],
     })
   }
 
@@ -103,7 +112,11 @@ class Menu extends React.Component {
         <Divider horizontal>City: {this.state.city}</Divider>
 
         <WeatherAPI city={this.state.city}
-          setData={(data) => this.setData(data)}
+          setData={(data) => this.setWeatherData(data)}
+        />
+
+         <ForecastAPI id={this.state.id}
+          setData={(data) => this.setForeData(data)}
         />
 
         <Tabs temperature={this.state.temperature}
@@ -117,8 +130,10 @@ class Menu extends React.Component {
           pressure={this.state.pressure}
           wind_speed={this.state.wind_speed}
           wind_direction={this.state.wind_direction}
+          list={this.state.list}
+          id={this.state.id}
         />
-
+        
       </Container>
 
     );
