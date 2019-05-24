@@ -20,11 +20,7 @@ class Menu extends React.Component {
       wind_direction: '',
       clouds: '',
 
-      original_temp: '',
-      original_min: '',
-      original_max: '',
-
-      unit: 'Kº',
+      unit: 'Cº',
       city: ''
     }
   }
@@ -38,7 +34,7 @@ class Menu extends React.Component {
   }
 
   changeTemperature(newTemp) {
-    this.setState({ original_temp: newTemp })
+    this.setState({ temperature: newTemp })
   }
 
   changeHumidity(newHum) {
@@ -50,11 +46,11 @@ class Menu extends React.Component {
   }
 
   changeMinTemp(newMin) {
-    this.setState({ original_min: newMin })
+    this.setState({ min_temp: newMin })
   }
 
   changeMaxTemp(newMax) {
-    this.setState({ original_max: newMax })
+    this.setState({ max_temp: newMax })
   }
 
   changeWindSpeed(newSpeed) {
@@ -73,26 +69,72 @@ class Menu extends React.Component {
     this.setState({ city: newCity })
   }
 
+  FarToCel() {
+    let temperature = (5 / 9) * (this.state.temperature - 32);
+    let min_temp = (5 / 9) * (this.state.min_temp - 32);
+    let max_temp = (5 / 9) * (this.state.max_temp - 32);
+    this.setState({ temperature, min_temp, max_temp })
+  }
+
+  CelToFar() {
+    let temperature = this.state.temperature * (9 / 5) + 32;
+    let min_temp = this.state.temperature * (9 / 5) + 32;
+    let max_temp = this.state.temperature * (9 / 5) + 32;
+    this.setState({ temperature, min_temp, max_temp });
+  }
+
+  CelToKel() {
+    let temperature = this.state.temperature + 273.15;
+    let min_temp = this.state.temperature + 273.15;
+    let max_temp = this.state.temperature + 273.15;
+    this.setState({ temperature, min_temp, max_temp });
+  }
+
+  KelToCel() {
+    let temperature = this.state.temperature - 273.15;
+    let min_temp = this.state.temperature - 273.15;
+    let max_temp = this.state.temperature - 273.15;
+    this.setState({ temperature, min_temp, max_temp });
+  }
+
+  FarToKel() {
+    let temperature = (this.state.temperature + 459.67) * (5 / 9);
+    let min_temp = (this.state.temperature + 459.67) * (5 / 9);
+    let max_temp = (this.state.temperature + 459.67) * (5 / 9);
+    this.setState({ temperature, min_temp, max_temp });
+  }
+
+  KelToFar() {
+    let temperature = this.state.temperature * (9 / 5) - 459.67;
+    let min_temp = this.state.temperature * (9 / 5) - 459.67;
+    let max_temp = this.state.temperature * (9 / 5) - 459.67;
+    this.setState({ temperature, min_temp, max_temp });
+  }
+
   updateUnit() {
-    if (this.props.unit === 'Cº') {
-      this.changeTemperature(this.state.original_temp - 273.15);
-      this.changeMinTemp(this.state.original_min - 273.15);
-      this.changeMaxTemp(this.state.original_max - 273.15);
-    } else if (this.props.unit === 'Fº') {
-      this.changeTemperature((this.state.original_temp - 273.15) * (9 / 5) + 32);
-      this.changeMinTemp((this.state.original_min - 273.15) * (9 / 5) + 32);
-      this.changeMaxTemp((this.state.original_max - 273.15) * (9 / 5) + 32);
-    } else {
-      this.changeTemperature(this.state.original_temp);
-      this.changeMinTemp(this.state.original_min);
-      this.changeMaxTemp(this.state.original_max);
+    let now = this.props.unit;
+    let last = this.state.unit;
+    if (now === last) return;
+
+    if (now === 'Cº' && last === 'Fº') {
+      this.FarToCel();
+    } else if (now === 'Fº' && last === 'Cº') {
+      this.CelToFar();
+    } else if (now === 'Cº' && last === 'Kº') {
+      this.KelToCel();
+    } else if (now === 'Kº' && last === 'Cº') {
+      this.CelToKel();
+    } else if (now === 'Fº' && last === 'Kº') {
+      this.KelToFar();
+    } else if (now === 'Kº' && last === 'Fº') {
+      this.FarToKel();
     }
+    this.setState({ unit: now });
   }
 
   render() {
 
     if (this.props.unit !== this.state.unit) {
-      this.setState({ unit: this.props.unit })
       this.updateUnit();
     }
 

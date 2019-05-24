@@ -4,13 +4,12 @@ const API_KEY_1 = '98a269de24c9f822e8bb26e56a96575f'
 const API_ENDPOINT = 'http://api.openweathermap.org'
 const API_FETCH = '/data/2.5/weather'
 
-let timer = 0;
-
 class WeatherAPI extends React.Component {
 
     constructor(props) {
         super(props)
         this.state = {
+            lastCity: null,
             working: true,
             loading: true,
             valid: true
@@ -19,12 +18,15 @@ class WeatherAPI extends React.Component {
 
     // I'll make it work by name first, then by other options
     fetch_data() {
-        let url = API_ENDPOINT + API_FETCH + '?q=' + this.props.city + '&appid=' + API_KEY_1;
-        fetch(url).then((response) => {
-            return response.json();
-        }).then((data) => {
-            return this.setState({ loading: false }, () => {
-                this.set_values(data);
+        if (this.state.lastCity === this.props.city) return;
+        this.setState({ lastCity: this.props.city }, () => {
+            let url = API_ENDPOINT + API_FETCH + '?q=' + this.state.lastCity + '&units=metric&appid=' + API_KEY_1;
+            fetch(url).then((response) => {
+                return response.json();
+            }).then((data) => {
+                return this.setState({ loading: false }, () => {
+                    this.set_values(data);
+                })
             })
         })
     }
@@ -35,6 +37,10 @@ class WeatherAPI extends React.Component {
         } else if (data && data.cod === "401") {
             this.setState({ valid: false });
         } else if (data && data.cod === "400") {
+            // Invalid search
+            this.setState({ valid: false });
+        } else if (data && data.cod === "404") {
+            // Not found
             this.setState({ valid: false });
         }
         else {
@@ -51,12 +57,10 @@ class WeatherAPI extends React.Component {
             this.props.wind_speed(data['wind']['speed'])
             this.props.wind_direction(data['wind']['deg'])
         }
-        console.log(data);
     }
 
 
     render() {
-        console.log(timer++);
         this.fetch_data();
         return null;
     }
