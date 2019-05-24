@@ -6,65 +6,68 @@ const API_FETCH = '/data/2.5/weather'
 
 class WeatherAPI extends React.Component {
 
-    constructor(props) {
-        super(props)
-        this.state = {
-            city: null,
-            working: true,
-            loading: true,
-            valid: true
-        }
+  constructor(props) {
+    super(props)
+    this.state = {
+      city: null,
+      working: true,
+      loading: true,
+      valid: true
     }
+  }
 
-    fetch_data() {
-        this.setState({ city: this.props.city }, () => {
-            let url = API_ENDPOINT + API_FETCH + '?q=' + this.state.city + '&units=metric&appid=' + API_KEY_1;
-            fetch(url).then((response) => {
-                return response.json();
-            }).then((data) => {
-                return this.setState({ loading: false }, () => {
-                    this.set_values(data);
-                })
-            })
+  fetch_data() {
+    this.setState({ city: this.props.city }, () => {
+      let url = API_ENDPOINT + API_FETCH + '?q=' + this.state.city + '&units=metric&appid=' + API_KEY_1;
+      fetch(url).then((response) => {
+        return response.json();
+      }).then((data) => {
+        return this.setState({ loading: false }, () => {
+          this.set_values(data);
         })
-    }
+      })
+    })
+  }
 
-    set_values(data) {
-        if (data && data.cod === "429") {
-            this.setState({ working: false });
-        } else if (data && data.cod === "401") {
-            this.setState({ valid: false });
-        } else if (data && data.cod === "400") {
-            // Invalid search
-            this.setState({ valid: false });
-        } else if (data && data.cod === "404") {
-            // Not found
-            this.setState({ valid: false });
-        }
-        else {
-            this.setState({ working: true, valid: true });
+  set_values(data) {
+    if (data && data.cod === "429") {
+      this.setState({ working: false });
+    } else if (data && data.cod === "401") {
+      this.setState({ valid: false });
+    } else if (data && data.cod === "400") {
+      // Invalid search
+      this.setState({ valid: false });
+    } else if (data && data.cod === "404") {
+      // Not found
+      this.setState({ valid: false });
+    }
+    else {
+      this.setState({ working: true, valid: true });
 
-            this.props.clouds(data['clouds']['all'])
-            this.props.weather_state(data['weather'][0]['main'])
-            this.props.weather_description(data['weather'][0]['description'])
-            this.props.temperature(data['main']['temp'])
-            this.props.humidity(data['main']['humidity'])
-            this.props.pressure(data['main']['pressure'])
-            this.props.min_temp(data['main']['temp_min'])
-            this.props.max_temp(data['main']['temp_max'])
-            this.props.wind_speed(data['wind']['speed'])
-            this.props.wind_direction(data['wind']['deg'])
-        }
+      let results = {
+        'clouds': data['clouds']['all'],
+        'wheater_state': data['weather'][0]['main'],
+        'wheater_description': data['weather'][0]['description'],
+        'temp': data['main']['temp'],
+        'humidity': data['main']['humidity'],
+        'pressure': data['main']['pressure'],
+        'temp_min': data['main']['temp_min'],
+        'temp_max': data['main']['temp_max'],
+        'wind_speed': data['wind']['speed'],
+        'wind_dir': data['wind']['deg'],
+      }
+      this.setState({working:false}, this.props.setData(results));
     }
+  }
 
-    componentDidUpdate() {
-        if(this.props.city !== this.state.city) {
-            this.fetch_data();
-        }
+  componentDidUpdate() {
+    if (this.props.city !== this.state.city) {
+      this.fetch_data();
     }
-    render() {
-        return null;
-    }
+  }
+  render() {
+    return null;
+  }
 }
 
 export default WeatherAPI;
