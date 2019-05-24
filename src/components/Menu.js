@@ -25,90 +25,45 @@ class Menu extends React.Component {
     }
   }
 
-  changeWeatherState(newState) {
-    this.setState({ weather_state: newState })
+  setData(data) {
+    this.setState({
+      weather_state: data['wheater_state'],
+      weather_description: data['wheater_description'],
+      temperature: data['temp'],
+      humidity: data['humidity'],
+      pressure: data['pressure'],
+      min_temp: data['temp_min'],
+      max_temp: data['temp_max'],
+      wind_speed: data['wind_speed'],
+      wind_direction: data['wind_dir'],
+      clouds: data['clouds'],
+    })
   }
 
-  changeWeatherDescription(newDesc) {
-    this.setState({ weather_description: newDesc })
-  }
-
-  changeTemperature(newTemp) {
-    this.setState({ temperature: newTemp })
-  }
-
-  changeHumidity(newHum) {
-    this.setState({ humidity: newHum })
-  }
-
-  changePressure(newPress) {
-    this.setState({ pressure: newPress })
-  }
-
-  changeMinTemp(newMin) {
-    this.setState({ min_temp: newMin })
-  }
-
-  changeMaxTemp(newMax) {
-    this.setState({ max_temp: newMax })
-  }
-
-  changeWindSpeed(newSpeed) {
-    this.setState({ wind_speed: newSpeed })
-  }
-
-  changeWindDirection(newDir) {
-    this.setState({ wind_direction: newDir })
-  }
-
-  changeClouds(newClouds) {
-    this.setState({ clouds: newClouds })
-  }
 
   changeCity(newCity) {
     this.setState({ city: newCity })
   }
 
-  FarToCel() {
+  FarToCel(callback) {
     let temperature = (5 / 9) * (this.state.temperature - 32);
     let min_temp = (5 / 9) * (this.state.min_temp - 32);
     let max_temp = (5 / 9) * (this.state.max_temp - 32);
-    this.setState({ temperature, min_temp, max_temp })
+    this.setState({ temperature, min_temp, max_temp }, callback)
   }
 
-  CelToFar() {
-    let temperature = this.state.temperature * (9 / 5) + 32;
-    let min_temp = this.state.temperature * (9 / 5) + 32;
-    let max_temp = this.state.temperature * (9 / 5) + 32;
-    this.setState({ temperature, min_temp, max_temp });
-  }
-
-  CelToKel() {
+  CelToKel(callback) {
     let temperature = this.state.temperature + 273.15;
     let min_temp = this.state.temperature + 273.15;
     let max_temp = this.state.temperature + 273.15;
-    this.setState({ temperature, min_temp, max_temp });
+    this.setState({ temperature, min_temp, max_temp }, callback);
   }
 
-  KelToCel() {
-    let temperature = this.state.temperature - 273.15;
-    let min_temp = this.state.temperature - 273.15;
-    let max_temp = this.state.temperature - 273.15;
-    this.setState({ temperature, min_temp, max_temp });
-  }
-
-  FarToKel() {
-    let temperature = (this.state.temperature + 459.67) * (5 / 9);
-    let min_temp = (this.state.temperature + 459.67) * (5 / 9);
-    let max_temp = (this.state.temperature + 459.67) * (5 / 9);
-    this.setState({ temperature, min_temp, max_temp });
-  }
-
-  KelToFar() {
+  KelToFar(callback) {
     let temperature = this.state.temperature * (9 / 5) - 459.67;
     let min_temp = this.state.temperature * (9 / 5) - 459.67;
     let max_temp = this.state.temperature * (9 / 5) - 459.67;
-    this.setState({ temperature, min_temp, max_temp });
+    this.setState({ temperature, min_temp, max_temp }, callback);
   }
 
   updateUnit() {
@@ -119,15 +74,15 @@ class Menu extends React.Component {
     if (now === 'Cº' && last === 'Fº') {
       this.FarToCel();
     } else if (now === 'Fº' && last === 'Cº') {
-      this.CelToFar();
+      this.CelToKel(this.KelToFar);
     } else if (now === 'Cº' && last === 'Kº') {
-      this.KelToCel();
+      this.KelToFar(this.FarToCel);
     } else if (now === 'Kº' && last === 'Cº') {
       this.CelToKel();
     } else if (now === 'Fº' && last === 'Kº') {
       this.KelToFar();
     } else if (now === 'Kº' && last === 'Fº') {
-      this.FarToKel();
+      this.FarToCel(this.CelToKel);
     }
     this.setState({ unit: now });
   }
@@ -148,16 +103,7 @@ class Menu extends React.Component {
         <Divider horizontal>City: {this.state.city}</Divider>
 
         <WeatherAPI city={this.state.city}
-          clouds={(_) => this.changeClouds(_)}
-          weather_state={(_) => this.changeWeatherState(_)}
-          weather_description={(_) => this.changeWeatherDescription(_)}
-          temperature={(_) => this.changeTemperature(_)}
-          humidity={(_) => this.changeHumidity(_)}
-          pressure={(_) => this.changePressure(_)}
-          min_temp={(_) => this.changeMinTemp(_)}
-          max_temp={(_) => this.changeMaxTemp(_)}
-          wind_speed={(_) => this.changeWindSpeed(_)}
-          wind_direction={(_) => this.changeWindDirection(_)}
+          setData={(data) => this.setData(data)}
         />
 
         <Tabs temperature={this.state.temperature}
