@@ -34,8 +34,10 @@ class Tabs extends React.Component {
                   wind_speed={this.props.wind_speed}
                   wind_direction={this.props.wind_direction}
                   unit={this.props.unit}
+                  list={this.props.list}
                 />
-
+                {console.log("------")}
+                {console.log(this.props.list)}
               </Tab.Pane>
           },
 

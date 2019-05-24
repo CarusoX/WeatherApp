@@ -55,6 +55,7 @@ class WeatherAPI extends React.Component {
         'temp_max': data['main']['temp_max'],
         'wind_speed': data['wind']['speed'],
         'wind_dir': data['wind']['deg'],
+        'id': data['id'],
       }
       this.setState({working:false}, this.props.setData(results));
     }
