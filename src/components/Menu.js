@@ -4,6 +4,10 @@ import Weather_API from './Weather_API'
 import SearchBar from './SearchBar'
 import Tabs from './Tabs'
 
+var temp = 0
+var min = 0
+var max = 0
+
 class Menu extends React.Component {
 
   constructor(props) {
@@ -26,7 +30,7 @@ class Menu extends React.Component {
       original_max: '',
       unit: '',
 
-      unit: 'Cº',
+      unit: 'Kº',
       city: ''
     }
   }
@@ -71,15 +75,33 @@ class Menu extends React.Component {
     this.setState({clouds: newClouds})
   }
 
-  changeUnit(newUnit){
-    this.setState({unit: newUnit})
-  }
-
   changeCity(newCity) {
     this.setState({city: newCity})
   }
 
+  updateUnit() {
+    if(this.props.unit === 'Cº') {
+        temp = this.state.temperature - 273.15
+        min = this.state.min_temp - 273.15
+        max = this.state.max_temp - 273.15
+    } else if(this.props.unit === 'Fº') {
+        temp = ((this.state.temperature - 273.15) * (9/5)) + 32
+        min = ((this.state.min_temp - 273.15) * (9/5)) + 32
+        max = ((this.state.max_temp - 273.15) * (9/5)) + 32
+    } else {
+        temp = this.state.temperature
+        min = this.state.min_temp
+        max = this.state.max_temp
+    }
+  }
+
   render() {
+
+    if(this.props.unit !== this.state.unit) {
+      this.setState({unit: this.props.unit})
+      this.updateUnit();
+    }
+
     return(
 
       <div>
@@ -101,14 +123,15 @@ class Menu extends React.Component {
                      wind_direction={this.changeWindDirection.bind(this)}
         />
 
-        <Tabs clouds={this.state.clouds}
+        <Tabs temperature={this.state.temperature} // Tendriamos que pasar temp, no esta.
+              min_temp={this.state.min_temp} // Igual para min
+              max_temp={this.state.max_temp} // y max.
+              unit={this.state.unit}
+              clouds={this.state.clouds}
               weather_state={this.state.weather_state}
               weather_description={this.state.weather_description}
-              temperature={this.state.temperature}
               humidity={this.state.humidity}
               pressure={this.state.pressure}
-              min_temp={this.state.min_temp}
-              max_temp={this.state.max_temp}
               wind_speed={this.state.wind_speed}
               wind_direction={this.state.wind_direction}
         />
