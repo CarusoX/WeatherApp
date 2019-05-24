@@ -1,5 +1,5 @@
 import React from 'react'
-import { Button, Grid, Header, Image, Segment } from 'semantic-ui-react'
+import { Button, Container, Grid, Header, Image, Segment } from 'semantic-ui-react'
 import Menu from './Menu'
 import './App.css'
 

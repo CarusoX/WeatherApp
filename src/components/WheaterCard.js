@@ -1,5 +1,5 @@
 import React from 'react'
-import { Segment, Grid, Icon } from 'semantic-ui-react'
+import { Segment, Grid, Icon, Divider } from 'semantic-ui-react'
 
 class WheaterCard extends React.Component {
 
@@ -16,68 +16,64 @@ class WheaterCard extends React.Component {
             </Segment>
 
             <Segment>
+              Max temp
+              <Divider/>
+              {this.props.max_temp} {this.props.unit}
+            </Segment>
+
+            <Segment>
+              Min temp
+              <Divider/>
+              {this.props.min_temp} {this.props.unit}
+            </Segment>
+
+          </Grid.Column>
+          <Grid.Column>
+
+            <Segment>
               Temp
-              <Segment>
-                {this.props.temperature} {this.props.unit}
-              </Segment>
+              <Divider/>
+              {this.props.temperature} {this.props.unit}
             </Segment>
 
             <Segment>
               State
-              <Segment>
-                {this.props.weather_state}
-              </Segment>
+              <Divider/>
+              {this.props.weather_state}
             </Segment>
-
-          </Grid.Column>
-          <Grid.Column>
-
-            <Segment>
-              Preassure
-              <Segment>
-                {this.props.pressure} hPa
-              </Segment>
-            </Segment>
-            <Segment>
-              Min temp
-              <Segment>
-                {this.props.min_temp} {this.props.unit}
-              </Segment>
-            </Segment>
-            <Segment>
-              Sunrise
-              <Segment>
-                No se jaja salu2 AM
-              </Segment>
-            </Segment>
-            <Segment>
-              Wind
-              <Segment>
-                {this.props.wind_speed} M/s
-              </Segment>
-            </Segment>
-
-          </Grid.Column>
-          <Grid.Column>
 
             <Segment>
               Humidity
-              <Segment>
-                {this.props.humidity} %
-              </Segment>
+              <Divider/>
+              {this.props.humidity} %
             </Segment>
+
             <Segment>
-              Max temp
-              <Segment>
-                {this.props.max_temp} {this.props.unit}
-              </Segment>
+              Wind
+              <Divider/>
+              {this.props.wind_speed} M/s
+            </Segment>          
+
+          </Grid.Column>
+          <Grid.Column>
+
+          <Segment>
+              Sunrise
+              <Divider/>
+              No se jaja salu2 AM
             </Segment>
+            
             <Segment>
               Sunset
-              <Segment>
-                No se jaja salu2 PM
-              </Segment>
+              <Divider/>
+              No se jaja salu2 PM
             </Segment>
+
+            <Segment>
+              Preassure
+              <Divider/>
+              {this.props.pressure} hPa
+            </Segment>  
 
           </Grid.Column>
         </Grid.Row>
