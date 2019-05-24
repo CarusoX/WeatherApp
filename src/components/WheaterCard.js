@@ -2,30 +2,26 @@ import React from 'react'
 import { Segment, Grid, Icon } from 'semantic-ui-react'
 
 class WheaterCard extends React.Component {
-  
-  constructor(props) {
-    super(props);
-  }
 
   render() {
-    return(
+    return (
       <Grid columns={3} divided>
         <Grid.Row stretched>
           <Grid.Column>
 
             <Segment>
               <Icon.Group size='massive'>
-                <Icon name='sun' color='yellow'/>
+                <Icon name='sun' color='yellow' />
               </Icon.Group>
             </Segment>
-            
+
             <Segment>
               Temp
               <Segment>
                 {this.props.temperature} {this.props.unit}
               </Segment>
             </Segment>
-            
+
             <Segment>
               State
               <Segment>
@@ -60,7 +56,7 @@ class WheaterCard extends React.Component {
                 {this.props.wind_speed} M/s
               </Segment>
             </Segment>
-          
+
           </Grid.Column>
           <Grid.Column>
 
