@@ -4,10 +4,7 @@ import { Tab } from 'semantic-ui-react'
 import 'semantic-ui-css/semantic.min.css'
 
 const panes = [
-  { menuItem: 'Current Weather', render: () => 
-    <Tab.Pane attached={false}>
-      <WheaterCard />
-        </Tab.Pane> },
+  { menuItem: 'Current Weather', render: () => <Tab.Pane attached={false}> <WheaterCard /> </Tab.Pane> },
     
   { menuItem: 'Week Forecast', render: () => <Tab.Pane attached={false}>Tab 2 Content</Tab.Pane> },
     
@@ -24,9 +21,33 @@ class Tabs extends React.Component {
     }
 
     render() {
-        return(
-            <Tab menu={{ pointing: true, style: { justifyContent: "center" } }} panes={panes} />
-        );
+      return(
+        <Tab menu={{ pointing: true,
+                     style: { justifyContent: "center" } }}
+                     panes= {[
+                      { menuItem: 'Current Weather', render: () =>
+                        <Tab.Pane attached={false}>
+                          <WheaterCard clouds={this.props.clouds}
+                                       weather_state={this.props.weather_state}
+                                       weather_description={this.props.weather_description}
+                                       temperature={this.props.temperature}
+                                       humidity={this.props.humidity}
+                                       pressure={this.props.pressure}
+                                       min_temp={this.props.min_temp}
+                                       max_temp={this.props.max_temp}
+                                       wind_speed={this.props.wind_speed}
+                                       wind_direction={this.props.wind_direction}
+                          />
+                          
+                          </Tab.Pane> },
+                        
+                      { menuItem: 'Week Forecast', render: () => <Tab.Pane attached={false}>Tab 2 Content</Tab.Pane> },
+                        
+                      { menuItem: 'UV Rays', render: () => <Tab.Pane attached={false}>Tab 3 Content</Tab.Pane> },
+                    ]}
+                     
+        />
+      );
     }
 }
 
