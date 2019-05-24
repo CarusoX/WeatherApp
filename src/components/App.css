@@ -2,6 +2,19 @@
   text-align: center;
 }
 
+body {
+  background-image: linear-gradient(to bottom right, #dbdbdb, #afafaf);
+}
+
+/* .background {
+  background-repeat: no-repeat;
+  background-position: center;
+  width:100%;
+  height: 200px;
+  filter: blur(2px);
+  background-size: cover;
+} */
+
 /* 
 .BigDiv {
   background-image: linear-gradient(to bottom left, #f183c1, #bc68d1);
