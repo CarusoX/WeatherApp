@@ -1,10 +1,6 @@
 import React, { Component } from 'react'
 import { Form } from 'semantic-ui-react'
-
-
-const API_KEY_1 = '98a269de24c9f822e8bb26e56a96575f'
-const API_ENDPOINT = 'http://api.openweathermap.org'
-const API_FETCH = '/data/2.5/weather'
+import Weather_API from './Weather_API'
 
 const initialState = { value: '' }
 
@@ -22,20 +18,16 @@ export default class SearchBar extends Component {
     this.setState({ value })
   }
 
-  handleFetch = () => {
-    this.props.newcity(this.state.value)
-    let url = API_ENDPOINT + API_FETCH + '?q=' + this.state.value + '&appid=' + API_KEY_1;
-    fetch(url).then((response) => {
-      return response.json();
-    }).then((data) => {
-      console.log(data);
-    })
+  handleInput = () => {
+    this.props.newcity(this.state.value);
+    let update = <Weather_API city={this.state.value} />;
+    console.log(update)
   }
 
   render() {
     return (
-      <div style={{margin: 30}} class="ui one column stackable center aligned page grid">
-        <Form onSubmit={this.handleFetch}>
+      <div style={{margin: 30 }} class="ui one column stackable center aligned page grid">
+        <Form onSubmit={this.handleInput}>
           <Form.Group>
             <Form.Input placeholder='Search city...' name='city' onChange={this.handleChange} />
             <Form.Button icon="search"/>

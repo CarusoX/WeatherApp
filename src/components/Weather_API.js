@@ -40,7 +40,7 @@ class Weather_API extends React.Component {
 
     // I'll make it work by name first, then by other options
     fetch_data() {
-        city_name = this.props.selected
+        city_name = this.props.city
         url = API_ENDPOINT + API_FETCH + '?q=' + city_name + '&appid=' + API_KEY_1;
         fetch(url).then((response) => {
             return response.json();
@@ -103,9 +103,9 @@ class Weather_API extends React.Component {
     render() {
         if(this.state.working) { // We should change this, 'cos when it crashes once, then it never recovers
 
-            if(this.props.selected !== '' && this.props.selected !== city_name) {
+            if(this.props.city !== '' && this.props.city !== city_name) {
                 this.fetch_data();
-            } else if (this.props.selected === '') {
+            } else if (this.props.city === '') {
                 return(
                     <div>
                         <p>Select a city!</p>
