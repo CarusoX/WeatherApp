@@ -1,8 +1,8 @@
 import React from 'react'
-import WheaterCard from './WheaterCard.js'
-import DefaultTab from './DefaultTab.js'
 import { Tab } from 'semantic-ui-react'
 import 'semantic-ui-css/semantic.min.css'
+import DefaultTab from './DefaultTab.js'
+import WheaterCard from './WheaterCard.js'
 import UVICard from './UVICard.js';
 
 const defaultPanes = (mode) => [
@@ -12,15 +12,6 @@ const defaultPanes = (mode) => [
 ]
 
 class Tabs extends React.Component {
-
-  constructor(props) {
-    super(props);
-    this.state = {
-      currentTab: 1,
-      loading: false,
-      error: false
-    }
-  }
 
   render() {
     if (this.props.show === false) {
@@ -40,10 +31,7 @@ class Tabs extends React.Component {
     }
     else {
       return (
-        <Tab menu={{
-          pointing: true,
-          style: { justifyContent: "center" }
-        }}
+        <Tab menu={{ pointing: true, style: { justifyContent: "center" }}}
           panes={[
             {
               menuItem: 'Current Weather', render: () =>
@@ -54,12 +42,10 @@ class Tabs extends React.Component {
                   />
                 </Tab.Pane>
             },
-
             {
               menuItem: 'Week Forecast', render: () =>
                 <Tab.Pane attached={false}>Tab 2 Content</Tab.Pane>
             },
-
             {
               menuItem: 'UV Rays', render: () =>
                 <Tab.Pane attached={false}>
