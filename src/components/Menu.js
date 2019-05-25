@@ -119,7 +119,8 @@ class Menu extends React.Component {
           setData={(data) => this.setForeData(data)}
         />
 
-        <Tabs temperature={this.state.temperature}
+        <Tabs show={this.state.city !== ''}
+          temperature={this.state.temperature}
           min_temp={this.state.min_temp}
           max_temp={this.state.max_temp}
           unit={this.state.unit}
@@ -133,7 +134,7 @@ class Menu extends React.Component {
           list={this.state.list}
           id={this.state.id}
         />
-        
+
       </Container>
 
     );
