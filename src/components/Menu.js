@@ -9,8 +9,8 @@ class Menu extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      city: '',
       loading: false,
+      city: undefined, // { id, coords:{ lat, lon }}
       currentWeather: undefined,
       UV: undefined,
       list: undefined,
@@ -33,8 +33,8 @@ class Menu extends React.Component {
     })
   }
 
-  changeCity(city) {
-    this.setState({ city }, () => this.setData());
+  setCity(city) {
+    this.setState({ city }, () => this.setData);
   }
 
   render() {
@@ -43,9 +43,9 @@ class Menu extends React.Component {
 
       <Container fluid>
 
-        <SearchBar newcity={(_) => this.changeCity(_)} />
+        <SearchBar setCity={(_) => this.setCity(_)} />
 
-        <Divider horizontal>City: {this.state.city}</Divider>
+        <Divider horizontal>City: {(this.state.city) ? this.state.city.city_name : ""}</Divider>
 
         <Tabs
           show={this.state.city !== ''}

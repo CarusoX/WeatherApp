@@ -1,7 +1,7 @@
 import React from 'react'
 import { Card, Image, Placeholder, Segment } from 'semantic-ui-react'
 
-export default PlaceholderImageSquare = () => (
+export const PlaceholderImageSquare = () => (
   <Card>
     <Card.Content>
     <Placeholder>
@@ -9,9 +9,9 @@ export default PlaceholderImageSquare = () => (
     </Placeholder>
     </Card.Content>
   </Card>
-)
+);
 
-export default PlaceholderParagraph = () => (
+export const PlaceholderParagraph = () => (
   <Placeholder>
     <Placeholder.Paragraph>
       <Placeholder.Line />
@@ -23,7 +23,7 @@ export default PlaceholderParagraph = () => (
   </Placeholder>
 )
 
-export default SegmentExampleLoading = () => (
+export const SegmentExampleLoading = () => (
   <Segment loading>
     <Image src={require('../images/paragraph.png')} />
   </Segment>
