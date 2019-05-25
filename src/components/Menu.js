@@ -22,7 +22,6 @@ class Menu extends React.Component {
   setData() {
     // Start loading
     this.setState({ loading: true });
-
     fetch_data(this.state.city).then((data) => {
       if (!data) return;
       this.setState({
@@ -34,7 +33,7 @@ class Menu extends React.Component {
   }
 
   setCity(city) {
-    this.setState({ city }, () => this.setData);
+    this.setState({ city }, () => this.setData());
   }
 
   render() {

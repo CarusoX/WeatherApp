@@ -32,14 +32,12 @@ export default class SearchExampleStandard extends Component {
 
       fetch_cities(value).then(result => {
         if (!result) return this.setState({ loading: false, results: [] })
-        console.log(result);
         const cities = result.map(res => ({
           'name': res.name,
           'country': res.sys.country,
           'coords': res.coord,
           'key': res.id
         }))
-        console.log(cities);
         this.setState({
           isLoading: false,
           results: cities
