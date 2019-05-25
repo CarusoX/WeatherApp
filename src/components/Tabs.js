@@ -6,9 +6,9 @@ import 'semantic-ui-css/semantic.min.css'
 import UVICard from './UVICard.js';
 
 const defaultPanes = [
-  { menu: 'Current Weather', render: () => <DefaultTab /> },
-  { menu: 'Week Forecast', render: () => <DefaultTab /> },
-  { menu: 'UV Rays', render: () => <DefaultTab /> },
+  { menuItem: 'Current Weather', render: () => <DefaultTab /> },
+  { menuItem: 'Week Forecast', render: () => <DefaultTab /> },
+  { menuItem: 'UV Rays', render: () => <DefaultTab /> },
 ]
 
 class Tabs extends React.Component {
