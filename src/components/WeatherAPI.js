@@ -9,8 +9,8 @@ const getCityList = (city) => {
   return fetch(url);
 }
 
-const getCurrentWeather = (city) => {
-  const url = `${API_ENDPOINT}${API_WEATHER}?q=${city}&units=metric&appid=${API_KEY_1}`;
+const getCurrentWeather = (id) => {
+  const url = `${API_ENDPOINT}${API_WEATHER}?id=${id}&units=metric&appid=${API_KEY_1}`;
   return fetch(url);
 }
 
@@ -21,61 +21,45 @@ const getUVIndex = (coords) => {
 
 export const fetch_data = async (city) => {
 
-  // Different api-calls
-  const tasks = [
-    getCurrentWeather, getCurrentWeather, 
-  ];
-
-  return tasks.reduce((promiseChain, currentTask) => {
-    return promiseChain.then(chainResults => {
-      // Distribute arguments
-      let arg = '';
-      if (currentTask === getCurrentWeather) arg = city;
-      // if (currentTask === getUVIndex) arg = chainResults[0]['coord'];
-      // Call the api
-      return currentTask(arg).then(currentResult => {
-        // Extract and concat the result
-        // console.log(currentResult.json());
-        return currentResult.json().then(result => [...chainResults, result])
-      })
-    });
-  }, Promise.resolve([])).then(responses => {
-    // Now here we have an array of responses
-    // Every response is either data or a message with an error code
-
-    // Seeks errors -- TODO: Return real errors to app
-    if (responses.filter((instance) => instance.cod === "429").length) {
+  return Promise.all([
+    getCurrentWeather(city.city_id),
+    getCurrentWeather(city.city_id),
+    getUVIndex(city.coords),
+  ]).then(responses => {
+    console.log(responses);
+    return Promise.all(responses.map(result => result.json()))
+  }).then(results => {
+    if (results.filter((instance) => instance.cod === "429").length) {
       // {What error?}
       return null;
     }
-    if (responses.filter((instance) => instance.cod === "401").length) {
+    if (results.filter((instance) => instance.cod === "401").length) {
       // {What error?}
       return null;
     }
-    if (responses.filter((instance) => instance.cod === "400").length) {
+    if (results.filter((instance) => instance.cod === "400").length) {
       // Invalid search
       return null;
     }
-    if (responses.filter((instance) => instance.cod === "404").length) {
+    if (results.filter((instance) => instance.cod === "404").length) {
       // Not found
       return null;
     }
-    console.log(responses);
-    let results = {
+    let data = {
       "results": [
         {
-          'weather_id': responses[0]['weather'][0]['id'],
-          'weather_state': responses[0]['weather'][0]['main'],
-          'weather_description': responses[0]['weather'][0]['description'],
-          'temp': responses[0]['main']['temp'],
-          'humidity': responses[0]['main']['humidity'],
-          'pressure': responses[0]['main']['pressure'],
-          'min_temp': responses[0]['main']['temp_min'],
-          'max_temp': responses[0]['main']['temp_max'],
-          'wind_speed': responses[0]['wind']['speed'],
-          'wind_dir': responses[0]['wind']['deg'],
-          'clouds': responses[0]['clouds']['all'],
-          'id': responses[0]['id'],
+          'weather_id': results[0]['weather'][0]['id'],
+          'weather_state': results[0]['weather'][0]['main'],
+          'weather_description': results[0]['weather'][0]['description'],
+          'temp': results[0]['main']['temp'],
+          'humidity': results[0]['main']['humidity'],
+          'pressure': results[0]['main']['pressure'],
+          'min_temp': results[0]['main']['temp_min'],
+          'max_temp': results[0]['main']['temp_max'],
+          'wind_speed': results[0]['wind']['speed'],
+          'wind_dir': results[0]['wind']['deg'],
+          'clouds': results[0]['clouds']['all'],
+          'id': results[0]['id'],
         },
         // Forecast
         {
@@ -83,21 +67,21 @@ export const fetch_data = async (city) => {
         },
         // UVI
         {
-          'uvi_index': responses[2]['value'],
+          'uvi_index': results[2]['value'],
         }
       ]
     };
-    return results;
+    return data;
   })
 }
 
 export const fetch_cities = (city) => {
   return getCityList(city).then(response => response.json())
-  .then(data => {
-    if(data.cod === '400') return null;
-    if(data.cod === '404') return null;
-    return data['list']
-  })
+    .then(data => {
+      if (data.cod === '400') return null;
+      if (data.cod === '404') return null;
+      return data['list']
+    })
 }
 
 /*
