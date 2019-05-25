@@ -9,7 +9,6 @@ class ForecastCard extends React.Component {
 
   state = {
       day: ['Sunday', 'Monday', 'Tuesday', 'Tuesday', 'Thursday', 'Friday', 'Saturday'],
-      m : [0, 3, 3, 6, 1, 4, 6, 2, 5, 0, 3, 5],
       maxT: 0,
       minT: 0,
       date : [],
@@ -35,11 +34,12 @@ class ForecastCard extends React.Component {
   set_day(maT, miT, d){
       this.state.maxT= maT
       this.state.minT = miT
-
+      let key_month = [0, 3, 3, 6, 1, 4, 6, 2, 5, 0, 3, 5]
       let day = this.state.date[2] - '0'
       let month = this.state.date[1] - '0' - 1
       let year = Math.floor((this.state.date[0] - '0')/4)
-      this.state.currentDay = (day + month + year) % 7
+      let correction = key_month[month]
+      this.state.currentDay = (day + month + year + correction + 6) % 7
   }
 
   set_date(k){
