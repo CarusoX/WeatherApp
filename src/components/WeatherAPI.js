@@ -12,13 +12,21 @@ class WeatherAPI extends React.Component {
       city: null,
       working: true,
       loading: true,
-      valid: true
+      valid: true,
+      unit: ''
     }
   }
 
   fetch_data() {
-    this.setState({ city: this.props.city }, () => {
-      let url = API_ENDPOINT + API_FETCH + '?q=' + this.state.city + '&units=metric&appid=' + API_KEY_1;
+    this.setState({ city: this.props.city, unit: this.props.unit }, () => {
+      let url = API_ENDPOINT + API_FETCH + '?q=' + this.state.city;
+
+      if(this.props.unit === 'Cº') url += '&units=metric&appid=';
+      else if(this.props.unit === 'Fº') url += '&units=imperial&appid=';
+      else url += '&appid=';
+
+      url += API_KEY_1
+
       fetch(url).then((response) => {
         return response.json();
       }).then((data) => {
@@ -45,24 +53,38 @@ class WeatherAPI extends React.Component {
       this.setState({ working: true, valid: true });
 
       let results = {
-        'clouds': data['clouds']['all'],
-        'wheater_state': data['weather'][0]['main'],
-        'wheater_description': data['weather'][0]['description'],
-        'temp': data['main']['temp'],
-        'humidity': data['main']['humidity'],
-        'pressure': data['main']['pressure'],
-        'temp_min': data['main']['temp_min'],
-        'temp_max': data['main']['temp_max'],
-        'wind_speed': data['wind']['speed'],
-        'wind_dir': data['wind']['deg'],
-        'id': data['id'],
-      }
-      this.setState({working:false}, this.props.setData(results));
+        'results': [
+          // Current
+          {
+            'weather_id': data['weather'][0]['id'],
+            'weather_state': data['weather'][0]['main'],
+            'weather_description': data['weather'][0]['description'],
+            'temp': data['main']['temp'],
+            'humidity': data['main']['humidity'],
+            'pressure': data['main']['pressure'],
+            'min_temp': data['main']['temp_min'],
+            'max_temp': data['main']['temp_max'],
+            'wind_speed': data['wind']['speed'],
+            'wind_dir': data['wind']['deg'],
+            'clouds': data['clouds']['all'],
+            'id': data['id'],
+          },
+          // Forecast
+          {
+
+          },
+          // UVI
+          {
+
+          }
+        ]
+      };
+      this.setState({ working: false }, this.props.setData(results));
     }
   }
 
   componentDidUpdate() {
-    if (this.props.city !== this.state.city) {
+    if (this.props.city !== this.state.city || this.props.unit !== this.state.unit) {
       this.fetch_data();
     }
   }

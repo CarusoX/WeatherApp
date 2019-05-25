@@ -1,9 +1,17 @@
 import React from 'react'
 import { Segment, Grid, Icon, Divider } from 'semantic-ui-react'
 
-class WheaterCard extends React.Component {
+class WheaterCard extends React.Component { 
 
   render() {
+    if(!this.props.currentWeather) return null;
+    
+    const {
+      weather_id, weather_state, weather_description,
+      temp, humidity, pressure, min_temp, max_temp, wind_speed,
+      wind_dir, clouds, id
+    } = this.props.currentWeather;
+
     return (
       <Grid columns={3} divided>
         <Grid.Row stretched>
@@ -17,14 +25,14 @@ class WheaterCard extends React.Component {
 
             <Segment>
               Max temp
-              <Divider/>
-              {this.props.max_temp} {this.props.unit}
+              <Divider />
+              {max_temp} {this.props.unit}
             </Segment>
 
             <Segment>
               Min temp
-              <Divider/>
-              {this.props.min_temp} {this.props.unit}
+              <Divider />
+              {min_temp} {this.props.unit}
             </Segment>
 
           </Grid.Column>
@@ -32,48 +40,48 @@ class WheaterCard extends React.Component {
 
             <Segment>
               Temp
-              <Divider/>
-              {this.props.temperature} {this.props.unit}
+              <Divider />
+              {temp} {this.props.unit}
             </Segment>
 
             <Segment>
               State
-              <Divider/>
-              {this.props.weather_state}
+              <Divider />
+              {weather_state}
             </Segment>
 
             <Segment>
               Humidity
-              <Divider/>
-              {this.props.humidity} %
+              <Divider />
+              {humidity} %
             </Segment>
 
             <Segment>
               Wind
-              <Divider/>
-              {this.props.wind_speed} M/s
-            </Segment>          
+              <Divider />
+              {wind_speed} M/s
+            </Segment>
 
           </Grid.Column>
           <Grid.Column>
 
-          <Segment>
+            <Segment>
               Sunrise
-              <Divider/>
+              <Divider />
               No se jaja salu2 AM
             </Segment>
-            
+
             <Segment>
               Sunset
-              <Divider/>
+              <Divider />
               No se jaja salu2 PM
             </Segment>
 
             <Segment>
               Preassure
-              <Divider/>
-              {this.props.pressure} hPa
-            </Segment>  
+              <Divider />
+              {pressure} hPa
+            </Segment>
 
           </Grid.Column>
         </Grid.Row>
