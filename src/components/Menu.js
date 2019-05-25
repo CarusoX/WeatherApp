@@ -1,7 +1,6 @@
 import React from 'react'
 import { Container, Divider } from 'semantic-ui-react'
-import WeatherAPI from './WeatherAPI'
-import ForecastAPI from './ForecastAPI'
+import { fetch_data } from './WeatherAPI'
 import SearchBar from './SearchBar'
 import Tabs from './Tabs'
 
@@ -10,31 +9,26 @@ class Menu extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
+      city: '',
       currentWeather: undefined,
-
       list: undefined,
-      city: ''
     }
   }
 
-  setData(data) {
-    this.setState({
-      currentWeather: data['results'][0]
+  setData() {
+    fetch_data(this.state.city, this.props.unit).then((data) => {
+      if (!data) return;
+      this.setState({ currentWeather: data['results'][0] });
     })
+
   }
 
-  setForeData(data) {
-    this.setState({
-      list: data['list'],
-    })
-  }
-
-
-  changeCity(newCity) {
-    this.setState({ city: newCity })
+  changeCity(city) {
+    this.setState({ city }, this.setData());
   }
 
   render() {
+
     return (
 
       <Container fluid>
@@ -43,22 +37,12 @@ class Menu extends React.Component {
 
         <Divider horizontal>City: {this.state.city}</Divider>
 
-        <WeatherAPI
-          city={this.state.city}
-          setData={(data) => this.setData(data)}
-          unit={this.props.unit}
-        />
-
-        <ForecastAPI id={this.state.id}
-          setData={(data) => this.setForeData(data)}
-        />
-
         <Tabs show={this.state.city !== ''}
           currentWeather={this.state.currentWeather}
           unit={this.props.unit}
         />
 
-      </Container>
+      </Container >
 
     );
   }
