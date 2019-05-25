@@ -3,15 +3,7 @@ const API_ENDPOINT = 'http://api.openweathermap.org'
 const API_FETCH = '/data/2.5/weather'
 
 const constructCurrentWeatherURL = (city, unit) => {
-  let url = API_ENDPOINT + API_FETCH + '?q=' + city;
-
-  if (unit === 'Cº') url += '&units=metric&appid=';
-  else if (unit === 'Fº') url += '&units=imperial&appid=';
-  else url += '&appid=';
-
-  url += API_KEY_1
-
-  return url;
+  return API_ENDPOINT + API_FETCH + '?q=' + city + '&units=metric&appid=' + API_KEY_1;
 }
 
 export const fetch_data = (city, unit) => {
@@ -72,7 +64,6 @@ export const fetch_data = (city, unit) => {
         }
       ]
     };
-    console.log(results);
     return results;
   });
 }
