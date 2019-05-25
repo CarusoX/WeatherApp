@@ -16,6 +16,7 @@ class App extends React.Component {
     return (
 
       <Container fluid>
+
         <Segment>
           <Grid>
             <Grid.Column textAlign="center">
@@ -35,8 +36,13 @@ class App extends React.Component {
           <Header.Content>Wheater app</Header.Content>
         </Header>
 
-        <Menu unit={this.state.unit} />
+        <Grid centered>
+          <Grid.Column width='15' verticalAlign='middle'>
 
+            <Menu unit={this.state.unit} />
+
+          </Grid.Column>
+        </Grid>
       </Container>
 
     );
