@@ -1,11 +1,17 @@
 const API_KEY_1 = '98a269de24c9f822e8bb26e56a96575f'
 const API_ENDPOINT = 'http://api.openweathermap.org'
-const API_FETCH = '/data/2.5/weather'
+const API_FIND = '/data/2.5/find'
+const API_WEATHER = '/data/2.5/weather'
 const API_UVI = '/data/2.5/uvi'
 
+const getCityList = (city) => {
+  const url = `${API_ENDPOINT}${API_FIND}?q=${city}&appid=${API_KEY_1}`;
+  return fetch(url);
+}
+
 const getCurrentWeather = (city) => {
-  const url = `${API_ENDPOINT}${API_FETCH}?q=${city}&units=metric&appid=${API_KEY_1}`;
-  return fetch(url)
+  const url = `${API_ENDPOINT}${API_WEATHER}?q=${city}&units=metric&appid=${API_KEY_1}`;
+  return fetch(url);
 }
 
 const getUVIndex = (coords) => {
@@ -17,7 +23,7 @@ export const fetch_data = async (city) => {
 
   // Different api-calls
   const tasks = [
-    getCurrentWeather, getCurrentWeather, getUVIndex
+    getCurrentWeather, getCurrentWeather, 
   ];
 
   return tasks.reduce((promiseChain, currentTask) => {
@@ -25,10 +31,11 @@ export const fetch_data = async (city) => {
       // Distribute arguments
       let arg = '';
       if (currentTask === getCurrentWeather) arg = city;
-      if (currentTask === getUVIndex) arg = chainResults[0]['coord'];
+      // if (currentTask === getUVIndex) arg = chainResults[0]['coord'];
       // Call the api
       return currentTask(arg).then(currentResult => {
         // Extract and concat the result
+        // console.log(currentResult.json());
         return currentResult.json().then(result => [...chainResults, result])
       })
     });
@@ -53,6 +60,7 @@ export const fetch_data = async (city) => {
       // Not found
       return null;
     }
+    console.log(responses);
     let results = {
       "results": [
         {
@@ -80,6 +88,15 @@ export const fetch_data = async (city) => {
       ]
     };
     return results;
+  })
+}
+
+export const fetch_cities = (city) => {
+  return getCityList(city).then(response => response.json())
+  .then(data => {
+    if(data.cod === '400') return null;
+    if(data.cod === '404') return null;
+    return data['list']
   })
 }
 
