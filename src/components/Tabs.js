@@ -16,7 +16,6 @@ class Tabs extends React.Component {
   }
 
   render() {
-
     if (this.props.show === false) {
       return (
         <Tab menu={{
@@ -76,11 +75,10 @@ class Tabs extends React.Component {
             {
               menuItem: 'UV Rays', render: () =>
                 <Tab.Pane attached={false}>
-                  <UVICard />
+                  <UVICard UV={this.props.UV} />
                 </Tab.Pane>
             },
           ]}
-
         />
       );
 

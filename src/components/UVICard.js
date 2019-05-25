@@ -2,27 +2,31 @@ import React from 'react'
 import { Grid, Container } from 'semantic-ui-react'
 import UVIIndex from './UVIIndex';
 
-const UVICard = () => (
-    <Container fluid>
+class UVICard extends React.Component {
+  render() {
+    return (
+      <Container fluid>
         <Grid>
-            <Grid.Row>
-                <UVIIndex />
-            </Grid.Row>
-            
-            <Grid.Row>
-                
-            </Grid.Row>
-            
-            <Grid.Row>
-                
-            </Grid.Row>
-            
-            <Grid.Row>
-            
-            </Grid.Row>
-                
+          <Grid.Row>
+            <UVIIndex {...this.props.UV} />
+          </Grid.Row>
+
+          <Grid.Row>
+
+          </Grid.Row>
+
+          <Grid.Row>
+
+          </Grid.Row>
+
+          <Grid.Row>
+
+          </Grid.Row>
+
         </Grid>
-    </Container>
-)
+      </Container>
+    )
+  }
+}
 
 export default UVICard;
