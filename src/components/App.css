@@ -2,8 +2,16 @@
   text-align: center;
 }
 
+html {
+  height: 125%;
+}
+
 body {
+  height: 125%;
   background-image: linear-gradient(to bottom right, #dbdbdb, #afafaf);
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+  background-size: 125% 125%;
 }
 
 /* .background {
