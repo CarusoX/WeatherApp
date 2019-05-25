@@ -15,6 +15,8 @@ class Menu extends React.Component {
     }
   }
 
+  // TODO: Set correct Unit
+
   setData() {
     fetch_data(this.state.city, this.props.unit).then((data) => {
       if (!data) return;
@@ -24,7 +26,7 @@ class Menu extends React.Component {
   }
 
   changeCity(city) {
-    this.setState({ city }, this.setData());
+    this.setState({ city }, () => this.setData());
   }
 
   render() {
