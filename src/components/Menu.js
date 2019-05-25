@@ -10,6 +10,7 @@ class Menu extends React.Component {
     super(props);
     this.state = {
       city: '',
+      loading: false,
       currentWeather: undefined,
       UV: undefined,
       list: undefined,
@@ -19,12 +20,15 @@ class Menu extends React.Component {
   // TODO: Set correct Unit
 
   setData() {
+    // Start loading
+    this.setState({ loading: true });
+
     fetch_data(this.state.city).then((data) => {
       if (!data) return;
-      console.log(data);
       this.setState({
         currentWeather: data['results'][0],
         UV: data['results'][2],
+        loading: false,
       });
     })
   }
@@ -43,10 +47,12 @@ class Menu extends React.Component {
 
         <Divider horizontal>City: {this.state.city}</Divider>
 
-        <Tabs show={this.state.city !== ''}
+        <Tabs
+          show={this.state.city !== ''}
           currentWeather={this.state.currentWeather}
           UV={this.state.UV}
           unit={this.props.unit}
+          loading={this.state.loading}
         />
 
       </Container >

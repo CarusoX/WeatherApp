@@ -5,10 +5,10 @@ import { Tab } from 'semantic-ui-react'
 import 'semantic-ui-css/semantic.min.css'
 import UVICard from './UVICard.js';
 
-const defaultPanes = [
-  { menuItem: 'Current Weather', render: () => <DefaultTab /> },
-  { menuItem: 'Week Forecast', render: () => <DefaultTab /> },
-  { menuItem: 'UV Rays', render: () => <DefaultTab /> },
+const defaultPanes = (mode) => [
+  { menuItem: 'Current Weather', render: () => <DefaultTab mode={mode} /> },
+  { menuItem: 'Week Forecast', render: () => <DefaultTab mode={mode} /> },
+  { menuItem: 'UV Rays', render: () => <DefaultTab mode={mode} /> },
 ]
 
 class Tabs extends React.Component {
@@ -27,10 +27,18 @@ class Tabs extends React.Component {
       return (
         <Tab
           menu={{ pointing: true, style: { justifyContent: "center" } }}
-          panes={defaultPanes}
+          panes={defaultPanes(false)}
         />
       )
-    } else {
+    } else if (this.props.loading) {
+      return (
+        <Tab
+          menu={{ pointing: true, style: { justifyContent: "center" } }}
+          panes={defaultPanes(true)}
+        />
+      )
+    }
+    else {
       return (
         <Tab menu={{
           pointing: true,
