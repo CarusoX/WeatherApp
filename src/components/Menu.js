@@ -20,7 +20,7 @@ class Menu extends React.Component {
       wind_speed: '',
       wind_direction: '',
       clouds: '',
-      list: undefined,
+      list: [],
       id: 0,
 
       unit: 'Cº',

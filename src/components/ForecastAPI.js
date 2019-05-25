@@ -22,16 +22,13 @@ class ForecastAPI extends React.Component {
 
   fetch_data() {
     this.setState({ id: this.props.id }, () => {
-      let url = API_ENDPOINT + API_FETCH + '?id=' + this.state.id + '&cnt=' + cnt + '&units=metric&appid=' + API_KEY_1;
+      let url = API_ENDPOINT + API_FETCH + '?id=' + this.state.id + '&units=metric&appid=' + API_KEY_1;
       fetch(url).then((response) => {
         return response.json();
       }).then((data) => {
         return this.setState({ loading: false }, () => {
           this.set_values(data);
-          console.log("FOREEE")
-          console.log(this.state.id)
-          console.log(API_ENDPOINT + API_FETCH + '?id=' + this.state.id + '&cnt=' + cnt + '&units=metric&appid=' + API_KEY_1)
-          console.log(data)
+          console.log(url)
         })
       })
     })

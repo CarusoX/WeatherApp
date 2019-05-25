@@ -1,5 +1,6 @@
 import React from 'react'
 import WheaterCard from './WheaterCard.js'
+import ForecastCard from './ForecastCard.js'
 import { Tab } from 'semantic-ui-react'
 import 'semantic-ui-css/semantic.min.css'
 import UVICard from './UVICard.js';
@@ -34,14 +35,18 @@ class Tabs extends React.Component {
                   wind_speed={this.props.wind_speed}
                   wind_direction={this.props.wind_direction}
                   unit={this.props.unit}
-                  list={this.props.list}
                 />
-                {console.log("------")}
-                {console.log(this.props.list)}
               </Tab.Pane>
           },
+          { 
+            menuItem: 'Week Forecast', render: () => 
+              <Tab.Pane attached={false}>
+              <ForecastCard clouds={this.props.clouds}
+                  list={this.props.list}
+                />
+              </Tab.Pane> 
 
-          { menuItem: 'Week Forecast', render: () => <Tab.Pane attached={false}>Tab 2 Content</Tab.Pane> },
+          },
 
           { menuItem: 'UV Rays', render: () => <Tab.Pane attached={false}>Tab 3 Content</Tab.Pane> },
         ]}
