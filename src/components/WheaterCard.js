@@ -3,14 +3,12 @@ import { Segment, Grid, Icon, Divider } from 'semantic-ui-react'
 
 class WheaterCard extends React.Component { 
 
-  render() {
-    if(!this.props.currentWeather) return null;
-    
+  render() {    
     const {
       weather_id, weather_state, weather_description,
       temp, humidity, pressure, min_temp, max_temp, wind_speed,
       wind_dir, clouds, id
-    } = this.props.currentWeather;
+    } = this.props;
 
     return (
       <Grid columns={3} divided>

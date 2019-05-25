@@ -1,103 +1,81 @@
-import React from 'react'
-
 const API_KEY_1 = '98a269de24c9f822e8bb26e56a96575f'
 const API_ENDPOINT = 'http://api.openweathermap.org'
 const API_FETCH = '/data/2.5/weather'
 
-class WeatherAPI extends React.Component {
+const constructCurrentWeatherURL = (city, unit) => {
+  let url = API_ENDPOINT + API_FETCH + '?q=' + city;
 
-  constructor(props) {
-    super(props)
-    this.state = {
-      city: null,
-      working: true,
-      loading: true,
-      valid: true,
-      unit: ''
-    }
-  }
+  if (unit === 'Cº') url += '&units=metric&appid=';
+  else if (unit === 'Fº') url += '&units=imperial&appid=';
+  else url += '&appid=';
 
-  fetch_data() {
-    this.setState({ city: this.props.city, unit: this.props.unit }, () => {
-      let url = API_ENDPOINT + API_FETCH + '?q=' + this.state.city;
+  url += API_KEY_1
 
-      if(this.props.unit === 'Cº') url += '&units=metric&appid=';
-      else if(this.props.unit === 'Fº') url += '&units=imperial&appid=';
-      else url += '&appid=';
-
-      url += API_KEY_1
-
-      fetch(url).then((response) => {
-        return response.json();
-      }).then((data) => {
-        return this.setState({ loading: false }, () => {
-          this.set_values(data);
-        })
-      })
-    })
-  }
-
-  set_values(data) {
-    if (data && data.cod === "429") {
-      this.setState({ working: false });
-    } else if (data && data.cod === "401") {
-      this.setState({ valid: false });
-    } else if (data && data.cod === "400") {
-      // Invalid search
-      this.setState({ valid: false });
-    } else if (data && data.cod === "404") {
-      // Not found
-      this.setState({ valid: false });
-    }
-    else {
-      this.setState({ working: true, valid: true });
-
-      let results = {
-        'results': [
-          // Current
-          {
-            'weather_id': data['weather'][0]['id'],
-            'weather_state': data['weather'][0]['main'],
-            'weather_description': data['weather'][0]['description'],
-            'temp': data['main']['temp'],
-            'humidity': data['main']['humidity'],
-            'pressure': data['main']['pressure'],
-            'min_temp': data['main']['temp_min'],
-            'max_temp': data['main']['temp_max'],
-            'wind_speed': data['wind']['speed'],
-            'wind_dir': data['wind']['deg'],
-            'clouds': data['clouds']['all'],
-            'id': data['id'],
-          },
-          // Forecast
-          {
-
-          },
-          // UVI
-          {
-
-          }
-        ]
-      };
-      this.setState({ working: false }, this.props.setData(results));
-    }
-  }
-
-  componentDidUpdate() {
-    if (this.props.city !== this.state.city || this.props.unit !== this.state.unit) {
-      this.fetch_data();
-    }
-  }
-  render() {
-    return null;
-  }
+  return url;
 }
 
-export default WeatherAPI;
+export const fetch_data = (city, unit) => {
+  // Different urls
+  let currentWeatherURL = constructCurrentWeatherURL(city, unit);
 
+  // API calls
+  let currentWeather = fetch(currentWeatherURL);
 
+  return Promise.all([currentWeather]).then(async (responses) => {
+    // TODO: manage errors of fetchs
 
+    // Extract values on success
+    return await Promise.all(responses.map((response) => response.json()))
+  }).then((data) => {
+    if (data.filter((instance) => instance.cod === "429").length) {
+      // What error?
+      return null;
+    }
+    if (data.filter((instance) => instance.cod === "401").length) {
+      // What error?
+      return null;
+    }
+    if (data.filter((instance) => instance.cod === "400").length) {
+      // Invalid search
+      return null;
+    }
+    if (data.filter((instance) => instance.cod === "404").length) {
+      // Not found
+      return null;
+    }
+    // More errors?
 
+    // Filter values
+    let results = {
+      "results": [
+        {
+          'weather_id': data[0]['weather'][0]['id'],
+          'weather_state': data[0]['weather'][0]['main'],
+          'weather_description': data[0]['weather'][0]['description'],
+          'temp': data[0]['main']['temp'],
+          'humidity': data[0]['main']['humidity'],
+          'pressure': data[0]['main']['pressure'],
+          'min_temp': data[0]['main']['temp_min'],
+          'max_temp': data[0]['main']['temp_max'],
+          'wind_speed': data[0]['wind']['speed'],
+          'wind_dir': data[0]['wind']['deg'],
+          'clouds': data[0]['clouds']['all'],
+          'id': data[0]['id'],
+        },
+        // Forecast
+        {
+
+        },
+        // UVI
+        {
+
+        }
+      ]
+    };
+    console.log(results);
+    return results;
+  });
+}
 
 /*
 60 requests per minute.

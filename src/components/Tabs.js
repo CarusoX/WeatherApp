@@ -52,7 +52,6 @@ class Tabs extends React.Component {
         />
       )
     } else {
-
       return (
         <Tab menu={{
           pointing: true,
@@ -63,7 +62,7 @@ class Tabs extends React.Component {
               menuItem: 'Current Weather', render: () =>
                 <Tab.Pane attached={false}>
                   <WheaterCard
-                    currentWeather={this.props.currentWeather}
+                    {...this.props.currentWeather}
                     unit={this.props.unit}
                   />
                 </Tab.Pane>
