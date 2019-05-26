@@ -47,7 +47,7 @@ class Menu extends React.Component {
         <Divider horizontal>City: {(this.state.city) ? this.state.city.city_name : ""}</Divider>
 
         <Tabs
-          show={this.state.city !== ''}
+          show={this.state.city !== undefined}
           currentWeather={this.state.currentWeather}
           UV={this.state.UV}
           unit={this.props.unit}
