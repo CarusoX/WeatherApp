@@ -4,7 +4,7 @@ import { Segment, Grid, Icon } from 'semantic-ui-react'
 
 class ForecastCard extends React.Component {
   state = {
-      day: ['Sunday', 'Monday', 'Tuesday', 'Tuesday', 'Thursday', 'Friday', 'Saturday'],
+      day: ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'],
       maxT: 0,
       minT: 0,
       date : [],
@@ -20,8 +20,17 @@ class ForecastCard extends React.Component {
               </Icon.Group>
             </Segment>
             <Segment>{this.state.day[this.state.currentDay]}</Segment>
-            <Segment>{this.state.maxT}</Segment>
+            <Segment>
+              {
+                this.state.date[2] + '/' +
+                this.state.date[1] + '/' +
+                this.state.date[0] 
+                
+              }
+
+            </Segment>
             <Segment>{this.state.minT}</Segment>
+            <Segment>{this.state.maxT}</Segment>
           </Grid.Column>
     );
   }
