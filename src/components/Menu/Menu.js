@@ -42,9 +42,9 @@ class Menu extends React.Component {
 
       <Container fluid>
 
-        <SearchBar setCity={(_) => this.setCity(_)} />
+        <SearchBar setCity={(city) => this.setCity(city)} />
 
-        <Divider horizontal>City: {(this.state.city) ? this.state.city.city_name : ""}</Divider>
+        <Divider section horizontal>City: {(this.state.city) ? this.state.city.city_name : ""}</Divider>
 
         <Tabs
           show={this.state.city !== undefined}

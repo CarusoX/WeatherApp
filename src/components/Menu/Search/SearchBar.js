@@ -2,13 +2,14 @@ import _ from 'lodash'
 import React, { Component } from 'react'
 import { Search, Grid } from 'semantic-ui-react'
 import { fetch_cities } from '../../../helpers/WeatherAPI'
+import { getCountryName } from '../../../helpers/countries'
 
 const initialState = { isLoading: false, results: [], value: '' }
 
-const resultRenderer = ({ name, country, coord, key }) => [
-  <div key='key' className='content'>
-    {name && <div className='title'>{name} - {country}</div>}
-    {coord && <div className='description'>Lat:{coord.lat} Long:{coord.lon}</div>}
+const resultRenderer = ({ title, description }) => [
+  <div key='content' className='content'>
+    {title && <div className='title'>{title}</div>}
+    {description && <div className='description'>{description}</div>}
   </div>,
 ]
 
@@ -33,8 +34,10 @@ export default class SearchExampleStandard extends Component {
       fetch_cities(value).then(result => {
         if (!result) return this.setState({ loading: false, results: [] })
         const cities = result.map(res => ({
+          'title': `${res.name} - ${getCountryName(res.sys.country)}`,
+          'description': `(Lat, Lon): (${res.coord.lat}, ${res.coord.lon})`,
           'name': res.name,
-          'country': res.sys.country,
+          'country': getCountryName(res.sys.country),
           'coords': res.coord,
           'key': res.id
         }))
@@ -50,9 +53,10 @@ export default class SearchExampleStandard extends Component {
     const { isLoading, value, results } = this.state
 
     return (
-      <Grid>
+      <Grid centered stretched padded='vertically'>
         <Grid.Column width={6}>
           <Search
+            fluid
             loading={isLoading}
             onResultSelect={this.handleResultSelect}
             onSearchChange={_.debounce(this.handleSearchChange, 500, {
