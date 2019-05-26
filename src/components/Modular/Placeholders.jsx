@@ -25,6 +25,6 @@ export const PlaceholderParagraph = () => (
 
 export const SegmentExampleLoading = () => (
   <Segment loading>
-    <Image src={require('../images/paragraph.png')} />
+    <Image src={require('../../images/paragraph.png')} />
   </Segment>
 )

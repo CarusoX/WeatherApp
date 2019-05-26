@@ -1,8 +1,6 @@
 import React from 'react'
 import { Tab } from 'semantic-ui-react'
-import 'semantic-ui-css/semantic.min.css'
-import DefaultTab from '../../Modular/DefaultTab'
-import ErrorTab from '../../Modular/ErrorTab'
+import { DefaultTab, ErrorTab } from '../../Modular/index.ts'
 import WheaterCard from './CurrentWeather/WheaterCard'
 import ForecastCard from './ForecastWeather/ForecastCard'
 import UVICard from './UVWeather/UVICard';
