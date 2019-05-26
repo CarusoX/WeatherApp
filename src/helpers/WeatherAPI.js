@@ -29,7 +29,7 @@ const getUVForecast = (coords) => {
 //   return fetch(url);
 // }
 
-export const fetch_data = async (city) => {
+export const fetch_data = (city) => {
 
     return Promise.all([
         getCurrentWeather(city.city_id),

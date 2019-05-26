@@ -53,13 +53,13 @@ export default class SearchExampleStandard extends Component {
     const { isLoading, value, results } = this.state
 
     return (
-      <Grid centered stretched padded='vertically'>
-        <Grid.Column width={6}>
+      <Grid container stretched padded='vertically'>
+        <Grid.Column>
           <Search
             fluid
             loading={isLoading}
             onResultSelect={this.handleResultSelect}
-            onSearchChange={_.debounce(this.handleSearchChange, 500, {
+            onSearchChange={_.debounce(this.handleSearchChange, 750, {
               leading: true,
             })}
             results={results}
