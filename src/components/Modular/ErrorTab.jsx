@@ -1,6 +1,5 @@
 import React from 'react'
-import { Tab } from 'semantic-ui-react'
-import 'semantic-ui-css/semantic.min.css'
+import { Tab, Image } from 'semantic-ui-react'
 
 const ErrorImages = {
   1: 'invalid_key.png',
@@ -18,7 +17,7 @@ const ErrorMessages = {
 
 const ErrorTab = (props) => {
   return (
-    <Tab.Pane attached={false} loading={props.mode}>
+    <Tab.Pane attached={false}>
       <h1> We're sorry! </h1>
       <h3> Something went wrong :( </h3>
       <h3> {ErrorMessages[this.props.error]} </h3>
