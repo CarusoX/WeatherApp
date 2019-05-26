@@ -1,3 +1,12 @@
+const API_KEY=process.env.API_KEY;
+const API_ENDPOINT=process.env.API_ENDPOINT;
+const API_FIND=process.env.API_FIND;
+const API_WEATHER=process.env.API_WEATHER;
+const API_FORECAST=process.env.API_FORECAST;
+const API_UVI=process.env.API_UVI;
+const API_UVF=process.env.API_UVF;
+const API_UVH=process.env.API_UVH;
+
 const getCityList = (city) => {
     const url = `${API_ENDPOINT}${API_FIND}?q=${city}&appid=${API_KEY}`;
     return fetch(url);
