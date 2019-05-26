@@ -24,13 +24,18 @@ class Menu extends React.Component {
   setData() {
     // Start loading
     this.setState({ loading: true });
-    error = fetch_data(this.state.city).then((data) => {
+    fetch_data(this.state.city).then((data) => {
       if (!data) return;
+      if(data > 0 && data < 5) {
+        this.setState({error: data})
+        return
+      } 
       this.setState({
         currentWeather: data['results'][0],
         list: data['results'][1],
         UV: data['results'][2],
-        loading: false,
+        error: undefined,
+        loading: false
       });
     })
   }

@@ -16,6 +16,13 @@ const resultRenderer = ({ title, description }) => [
 export default class SearchExampleStandard extends Component {
   state = initialState
 
+  constructor(props) {
+    super(props);
+    this.state = {
+      error: undefined,
+    }
+  }
+
   handleResultSelect = (e, { result }) => {
     this.setState({ value: result.name })
     this.props.setCity({
@@ -33,6 +40,10 @@ export default class SearchExampleStandard extends Component {
 
       fetch_cities(value).then(result => {
         if (!result) return this.setState({ loading: false, results: [] })
+        if(result > 0 && result < 5) {
+          this.setState({error: result})
+          return
+        } 
         const cities = result.map(res => ({
           'title': `${res.name} - ${getCountryName(res.sys.country)}`,
           'description': `(Lat, Lon): (${res.coord.lat}, ${res.coord.lon})`,
