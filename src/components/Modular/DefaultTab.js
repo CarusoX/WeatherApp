@@ -6,7 +6,7 @@ const DefaultTab = (props) => {
   return (
     <Tab.Pane attached={false} loading={props.mode}>
       <h1> Search a city! </h1>
-      <img src={require('../images/lupa.png')} alt='Search city' style={{ maxHeight: 50, maxWidth: 50 }} />
+      <img src={require('../../images/lupa.png')} alt='Search city' style={{ maxHeight: 50, maxWidth: 50 }} />
     </Tab.Pane>
   )
 }

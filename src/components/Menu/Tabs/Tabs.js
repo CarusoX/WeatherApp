@@ -1,9 +1,9 @@
 import React from 'react'
 import { Tab } from 'semantic-ui-react'
 import 'semantic-ui-css/semantic.min.css'
-import DefaultTab from './DefaultTab.js'
-import WheaterCard from './WheaterCard.js'
-import UVICard from './UVICard.js';
+import DefaultTab from '../../Modular/DefaultTab'
+import WheaterCard from './CurrentWeather/WheaterCard'
+import UVICard from './UVWeather/UVICard';
 
 const defaultPanes = (mode) => [
   { menuItem: 'Current Weather', render: () => <DefaultTab mode={mode} /> },

@@ -1,7 +1,7 @@
 import _ from 'lodash'
 import React, { Component } from 'react'
 import { Search, Grid } from 'semantic-ui-react'
-import { fetch_cities } from './WeatherAPI'
+import { fetch_cities } from '../../../helpers/WeatherAPI'
 
 const initialState = { isLoading: false, results: [], value: '' }
 
