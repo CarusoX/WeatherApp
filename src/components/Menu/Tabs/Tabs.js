@@ -3,6 +3,7 @@ import { Tab } from 'semantic-ui-react'
 import 'semantic-ui-css/semantic.min.css'
 import DefaultTab from '../../Modular/DefaultTab'
 import WheaterCard from './CurrentWeather/WheaterCard'
+import ForecastCard from './ForecastWeather/ForecastCard'
 import UVICard from './UVWeather/UVICard';
 
 const defaultPanes = (mode) => [
@@ -44,7 +45,9 @@ class Tabs extends React.Component {
             },
             {
               menuItem: 'Week Forecast', render: () =>
-                <Tab.Pane attached={false}>Tab 2 Content</Tab.Pane>
+                <Tab.Pane attached={false}>
+                  <ForecastCard list={this.props.list} />
+              </Tab.Pane> 
             },
             {
               menuItem: 'UV Rays', render: () =>

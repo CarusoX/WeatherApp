@@ -13,7 +13,8 @@ class Menu extends React.Component {
       city: undefined, // { id, coords:{ lat, lon }}
       currentWeather: undefined,
       UV: undefined,
-      list: undefined,
+      list: [],
+      id: 0,
     }
   }
 
@@ -26,6 +27,7 @@ class Menu extends React.Component {
       if (!data) return;
       this.setState({
         currentWeather: data['results'][0],
+        list: data['results'][1],
         UV: data['results'][2],
         loading: false,
       });
@@ -50,6 +52,7 @@ class Menu extends React.Component {
           show={this.state.city !== undefined}
           currentWeather={this.state.currentWeather}
           UV={this.state.UV}
+          list={this.state.list}
           unit={this.props.unit}
           loading={this.state.loading}
         />
