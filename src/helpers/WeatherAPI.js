@@ -47,11 +47,19 @@ export const fetch_data = (city) => {
         getUVForecast(city.coords),
         // getUVHistory(city.coords),
     ]).then(responses => {
-        // TODO: Errors
         return Promise.all(responses.map(result => result.json()))
     }).then(results => {
-        // TODO: Errors
-        // Data SHOULD be found but we could really assure
+
+        if(results.cod === 401) { // Invalid API Key
+            return 1
+        } else if (results.cod === 404) { // Wrong Search
+            return 2
+        } else if (results.cod === 429) { // API Key Blocked
+            return 3
+        } else if (results.cod === 501) { // Server Error
+            return 4
+        }
+
         let data = {
             "results": [
                 {

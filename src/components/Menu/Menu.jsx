@@ -9,6 +9,7 @@ class Menu extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
+      error: undefined,
       loading: false,
       city: undefined, // { id, coords:{ lat, lon }}
       currentWeather: undefined,
@@ -23,7 +24,7 @@ class Menu extends React.Component {
   setData() {
     // Start loading
     this.setState({ loading: true });
-    fetch_data(this.state.city).then((data) => {
+    error = fetch_data(this.state.city).then((data) => {
       if (!data) return;
       this.setState({
         currentWeather: data['results'][0],
@@ -49,6 +50,7 @@ class Menu extends React.Component {
         <Divider section horizontal>City: {(this.state.city) ? this.state.city.city_name : ""}</Divider>
 
         <Tabs
+          error={this.state.error}
           show={this.state.city !== undefined}
           currentWeather={this.state.currentWeather}
           UV={this.state.UV}
