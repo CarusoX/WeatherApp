@@ -1,13 +1,13 @@
 import { filter } from "minimatch";
 
-const API_KEY=process.env.API_KEY;
-const API_ENDPOINT=process.env.API_ENDPOINT;
-const API_FIND=process.env.API_FIND;
-const API_WEATHER=process.env.API_WEATHER;
-const API_FORECAST=process.env.API_FORECAST;
-const API_UVI=process.env.API_UVI;
-const API_UVF=process.env.API_UVF;
-const API_UVH=process.env.API_UVH;
+const API_KEY = process.env.API_KEY;
+const API_ENDPOINT = process.env.API_ENDPOINT;
+const API_FIND = process.env.API_FIND;
+const API_WEATHER = process.env.API_WEATHER;
+const API_FORECAST = process.env.API_FORECAST;
+const API_UVI = process.env.API_UVI;
+const API_UVF = process.env.API_UVF;
+const API_UVH = process.env.API_UVH;
 
 const getCityList = (city) => {
   const url = `${API_ENDPOINT}${API_FIND}?q=${city}&appid=${API_KEY}`;
@@ -30,7 +30,7 @@ const getUVIndex = (coords) => {
 }
 
 const getUVForecast = (coords) => {
-  const url = `${API_ENDPOINT}${API_UVF}?appid=${API_KEY}&lat=${coords.lat}&lon=${coords.lon}&cnt=4`;
+  const url = `${API_ENDPOINT}${API_UVF}?appid=${API_KEY}&lat=${coords.lat}&lon=${coords.lon}&cnt=8`;
   return fetch(url);
 }
 
@@ -49,12 +49,12 @@ export const fetch_data = (city) => {
     getUVForecast(city.coords),
     // getUVHistory(city.coords),
   ]).then(responses => {
-    if(responses.filter(response => !response.ok).length)
+    if (responses.filter(response => !response.ok).length)
       throw Error('Error on fetch')
     return Promise.all(responses.map(result => result.json()))
   }).then(results => {
 
-    if(results.cod === "401") { // Invalid API Key
+    if (results.cod === "401") { // Invalid API Key
       return 1
     } else if (results.cod === "404") { // Wrong Search
       return 2
@@ -87,7 +87,12 @@ export const fetch_data = (city) => {
         // UVI
         {
           'uvi_index': results[2]['value'],
-          'uvi_forecast': results[3].map((_) => _['value'])
+          'uvi_forecast': results[3].map(function (day) {
+            return {
+              'index': day['value'],
+              'date': day['date_iso'].slice(0, 10)
+            }
+          })
         }
       ]
     };
@@ -97,23 +102,23 @@ export const fetch_data = (city) => {
 
 export const fetch_cities = (city) => {
   return getCityList(city)
-  .then(response => {
-    if(!response.ok)
-      throw Error('Error on fetch');
-    return response.json()
-  })
-  .then(data => {
-    if(data.cod === "401") { // Invalid API Key
-      return 1
-    } else if (data.cod === "404") { // Wrong Search
-      return 2
-    } else if (data.cod === "429") { // API Key Blocked
-      return 3
-    } else if (data.cod === "501") { // Server Error
-      return 4
-    }
-    return data['list']
-  })
-  .catch(err => console.log(err));
+    .then(response => {
+      if (!response.ok)
+        throw Error('Error on fetch');
+      return response.json()
+    })
+    .then(data => {
+      if (data.cod === "401") { // Invalid API Key
+        return 1
+      } else if (data.cod === "404") { // Wrong Search
+        return 2
+      } else if (data.cod === "429") { // API Key Blocked
+        return 3
+      } else if (data.cod === "501") { // Server Error
+        return 4
+      }
+      return data['list']
+    })
+    .catch(err => console.log(err));
   // TODO: do something with these errors
 }

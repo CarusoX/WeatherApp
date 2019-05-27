@@ -3,7 +3,7 @@ import { Tab } from 'semantic-ui-react'
 import { DefaultTab, ErrorTab } from '../Modular/index.ts'
 import WheaterCard from './CurrentWeather/WheaterCard'
 import ForecastCard from './ForecastWeather/ForecastCard'
-import UVCard from './UVWeather/UVCard';
+import { UVCard } from './UVWeather/UVCard';
 
 const defaultPanes = (mode) => [
   { menuItem: 'Current Weather', render: () => <DefaultTab mode={mode} /> },
