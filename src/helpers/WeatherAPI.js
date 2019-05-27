@@ -30,7 +30,7 @@ const getUVIndex = (coords) => {
 }
 
 const getUVForecast = (coords) => {
-  const url = `${API_ENDPOINT}${API_UVF}?appid=${API_KEY}&lat=${coords.lat}&lon=${coords.lon}&cnt=8`;
+  const url = `${API_ENDPOINT}${API_UVF}?appid=${API_KEY}&lat=${coords.lat}&lon=${coords.lon}&cnt=4`;
   return fetch(url);
 }
 
@@ -86,11 +86,11 @@ export const fetch_data = (city) => {
         },
         // UVI
         {
-          'uvi_index': results[2]['value'],
-          'uvi_forecast': results[3].map(function (day) {
+          'uv_index': results[2]['value'],
+          'uv_forecast': results[3].map(function (day) {
             return {
               'index': day['value'],
-              'date': day['date_iso'].slice(0, 10)
+              'date': day['date_iso'].slice(0, 10).split('-').join('/')
             }
           })
         }

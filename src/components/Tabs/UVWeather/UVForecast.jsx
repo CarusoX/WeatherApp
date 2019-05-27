@@ -1,54 +1,21 @@
 import React from 'react'
-import { Button, Card, Image, Icon } from 'semantic-ui-react'
+import { Container, Card } from 'semantic-ui-react'
+import { UVCard } from '../../Modular/index.ts'
+import { getDateName } from '../../../helpers/index.ts'
 
 export const UVForecast = (props) => (
-  <Card.Group>
-    <Card>
-      <Card.Content>
-        <Card.Header>Day</Card.Header>
-        <Card.Meta>Date</Card.Meta>
-      </Card.Content>
-      <Card.Content>
-      </Card.Content>
-    </Card>
-      {console.log(props)};
-    <Card>
-      <Card.Content>
-        <Image floated='right' size='mini' src='https://react.semantic-ui.com/images/avatar/large/molly.png' />
-        <Card.Header>Molly Thomas</Card.Header>
-        <Card.Meta>New User</Card.Meta>
-        <Card.Description>
-          Molly wants to add you to the group <strong>musicians</strong>
-        </Card.Description>
-      </Card.Content>
-      <Card.Content extra>
-        <div className='ui two buttons'>
-          <Button basic color='green'>
-            Approve
-          </Button>
-          <Button basic color='red'>
-            Decline
-          </Button>
-        </div>
-      </Card.Content>
-    </Card>
-    <Card>
-      <Card.Content>
-        <Image floated='right' size='mini' src='https://react.semantic-ui.com/images/avatar/large/jenny.jpg' />
-        <Card.Header>Jenny Lawrence</Card.Header>
-        <Card.Meta>New User</Card.Meta>
-        <Card.Description>Jenny requested permission to view your contact details</Card.Description>
-      </Card.Content>
-      <Card.Content extra>
-        <div className='ui two buttons'>
-          <Button basic color='green'>
-            Approve
-          </Button>
-          <Button basic color='red'>
-            Decline
-          </Button>
-        </div>
-      </Card.Content>
-    </Card>
-  </Card.Group>
+  <Container>
+    <Card.Group centered itemsPerRow={'5'}>
+      {
+        props.uv_forecast.map((item, index) =>
+          <UVCard
+            key={index}
+            date={item.date.slice(5)}
+            dateName={getDateName(item.date)}
+            index={item.index}
+          />
+        )
+      }
+    </Card.Group>
+  </Container>
 )
