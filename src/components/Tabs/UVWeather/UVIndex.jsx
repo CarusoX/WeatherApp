@@ -88,7 +88,6 @@ export default class UVIIndex extends PureComponent {
   }
 
   render() {
-    console.log(this.props.uvi_index);
     return (
       <Container fluid>
         <Grid textAlign='center' verticalAlign='middle' container columns='equal' relaxed stretched divided>

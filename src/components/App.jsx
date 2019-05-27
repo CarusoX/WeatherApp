@@ -1,5 +1,6 @@
 import React from 'react'
-import { Button, Container, Grid, Header, Image, Segment } from 'semantic-ui-react'
+import { Button, Container, Grid, Segment } from 'semantic-ui-react'
+import { Title } from './Title/index.ts'
 import { Menu } from './Menu/index.ts'
 import './App.css'
 
@@ -29,12 +30,7 @@ class App extends React.Component {
           </Grid>
         </Segment>
 
-        {/* <img src={require('../images/map.jpg')} className='background'/> */}
-
-        <Header as='h1' icon textAlign='center'>
-          <Image src={require('../images/cloud.png')} />
-          <Header.Content>Wheater app</Header.Content>
-        </Header>
+        <Title title='Wheater app' size='h1' image='cloud.png' />
 
         <Grid centered>
           <Grid.Column width='15' verticalAlign='middle'>
@@ -43,6 +39,7 @@ class App extends React.Component {
 
           </Grid.Column>
         </Grid>
+
       </Container>
 
     );
