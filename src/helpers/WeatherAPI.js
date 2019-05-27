@@ -90,7 +90,7 @@ export const fetch_data = (city) => {
           'uv_forecast': results[3].map(function (day) {
             return {
               'index': day['value'],
-              'date': day['date_iso'].slice(0, 10)
+              'date': day['date_iso'].slice(0, 10).split('-').join('/')
             }
           })
         }

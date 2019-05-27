@@ -4,14 +4,14 @@ import { Card } from 'semantic-ui-react'
 export const UVCard = (props) => (
   <Card>
     <Card.Content>
-      <Card.Header>Day of week</Card.Header>
-      <Card.Meta>Month/DayNumber</Card.Meta>
+      <Card.Header>{ props.dateName }</Card.Header>
+      <Card.Meta>{ props.date }</Card.Meta>
     </Card.Content>
     <Card.Content>
       CIRCLE OF COLOR
     </Card.Content>
     <Card.Content extra>
-      UV index for the day
+      {props.index}
     </Card.Content>
   </Card>
 )
