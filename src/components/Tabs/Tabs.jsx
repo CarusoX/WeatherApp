@@ -26,7 +26,7 @@ class Tabs extends React.Component {
       return (
         <Tab
           menu={{ pointing: true, style: { justifyContent: "center" } }}
-          panes={ errorPanes(false) }
+          panes={ errorPanes() }
         />
       )
     }
