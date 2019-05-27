@@ -1,9 +1,9 @@
 import React from 'react'
 import { Tab } from 'semantic-ui-react'
-import { DefaultTab, ErrorTab } from '../../Modular/index.ts'
+import { DefaultTab, ErrorTab } from '../Modular/index.ts'
 import WheaterCard from './CurrentWeather/WheaterCard'
 import ForecastCard from './ForecastWeather/ForecastCard'
-import UVICard from './UVWeather/UVICard';
+import UVCard from './UVWeather/UVCard';
 
 const defaultPanes = (mode) => [
   { menuItem: 'Current Weather', render: () => <DefaultTab mode={mode} /> },
@@ -68,7 +68,7 @@ class Tabs extends React.Component {
           {
             menuItem: 'UV Rays', render: () =>
               <Tab.Pane attached={false}>
-                <UVICard UV={this.props.UV} />
+                <UVCard UV={this.props.UV} />
               </Tab.Pane>
           },
         ]}

@@ -1,3 +1,5 @@
+import { filter } from "minimatch";
+
 const API_KEY=process.env.API_KEY;
 const API_ENDPOINT=process.env.API_ENDPOINT;
 const API_FIND=process.env.API_FIND;
@@ -47,16 +49,18 @@ export const fetch_data = (city) => {
     getUVForecast(city.coords),
     // getUVHistory(city.coords),
   ]).then(responses => {
+    if(responses.filter(response => !response.ok).length)
+      throw Error('Error on fetch')
     return Promise.all(responses.map(result => result.json()))
   }).then(results => {
 
-    if(results.cod === 401) { // Invalid API Key
+    if(results.cod === "401") { // Invalid API Key
       return 1
-    } else if (results.cod === 404) { // Wrong Search
+    } else if (results.cod === "404") { // Wrong Search
       return 2
-    } else if (results.cod === 429) { // API Key Blocked
+    } else if (results.cod === "429") { // API Key Blocked
       return 3
-    } else if (results.cod === 501) { // Server Error
+    } else if (results.cod === "501") { // Server Error
       return 4
     }
 
@@ -92,18 +96,24 @@ export const fetch_data = (city) => {
 }
 
 export const fetch_cities = (city) => {
-  return getCityList(city).then(response => {
+  return getCityList(city)
+  .then(response => {
+    if(!response.ok)
+      throw Error('Error on fetch');
     return response.json()
-  }).then(data => {
-    if(results.cod === 401) { // Invalid API Key
+  })
+  .then(data => {
+    if(data.cod === "401") { // Invalid API Key
       return 1
-    } else if (results.cod === 404) { // Wrong Search
+    } else if (data.cod === "404") { // Wrong Search
       return 2
-    } else if (results.cod === 429) { // API Key Blocked
+    } else if (data.cod === "429") { // API Key Blocked
       return 3
-    } else if (results.cod === 501) { // Server Error
+    } else if (data.cod === "501") { // Server Error
       return 4
     }
     return data['list']
   })
+  .catch(err => console.log(err));
+  // TODO: do something with these errors
 }

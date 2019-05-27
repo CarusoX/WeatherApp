@@ -1,8 +1,8 @@
 import React from 'react'
 import { Container, Divider } from 'semantic-ui-react'
-import { fetch_data } from '../../helpers/WeatherAPI'
-import SearchBar from './Search/SearchBar'
-import Tabs  from './Tabs/Tabs'
+import { SearchBar } from '../Search/index.ts'
+import { Tabs }  from '../Tabs/index.ts'
+import { fetch_data } from '../../helpers/index.ts'
 
 class Menu extends React.Component {
 

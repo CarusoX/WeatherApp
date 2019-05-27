@@ -1,8 +1,7 @@
 import _ from 'lodash'
 import React, { Component } from 'react'
 import { Search, Grid } from 'semantic-ui-react'
-import { fetch_cities } from '../../../helpers/WeatherAPI'
-import { getCountryName } from '../../../helpers/countries'
+import { fetch_cities, getCountryName } from '../../helpers/index.ts'
 
 const initialState = { isLoading: false, results: [], value: '' }
 
@@ -40,10 +39,11 @@ export default class SearchExampleStandard extends Component {
 
       fetch_cities(value).then(result => {
         if (!result) return this.setState({ loading: false, results: [] })
-        if(result > 0 && result < 5) {
-          this.setState({error: result})
-          return
-        } 
+
+        if(typeof(result) == 'number') {
+          return this.setState({error: result})
+        }
+
         const cities = result.map(res => ({
           'title': `${res.name} - ${getCountryName(res.sys.country)}`,
           'description': `(Lat, Lon): (${res.coord.lat}, ${res.coord.lon})`,
@@ -70,7 +70,7 @@ export default class SearchExampleStandard extends Component {
             fluid
             loading={isLoading}
             onResultSelect={this.handleResultSelect}
-            onSearchChange={_.debounce(this.handleSearchChange, 750, {
+            onSearchChange={_.debounce(this.handleSearchChange, 500, {
               leading: true,
             })}
             results={results}

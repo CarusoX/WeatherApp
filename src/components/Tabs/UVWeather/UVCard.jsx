@@ -1,6 +1,6 @@
 import React from 'react'
 import { Grid, Container } from 'semantic-ui-react'
-import UVIIndex from './UVIIndex';
+import UVIndex from './UVIndex';
 
 class UVICard extends React.Component {
   render() {
@@ -8,11 +8,10 @@ class UVICard extends React.Component {
       <Container fluid>
         <Grid>
           <Grid.Row>
-            <UVIIndex {...this.props.UV} />
+            <UVIndex {...this.props.UV} />
           </Grid.Row>
-
           <Grid.Row>
-
+            <UVIForecast />
           </Grid.Row>
 
           <Grid.Row>
