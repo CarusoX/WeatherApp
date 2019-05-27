@@ -78,10 +78,10 @@ export default class UVIIndex extends PureComponent {
   static getDerivedStateFromProps(props) {
     let activeIndex;
 
-    if(props.uvi_index < 3) activeIndex = 0;
-    else if(props.uvi_index < 6) activeIndex = 1;
-    else if(props.uvi_index < 8) activeIndex = 2;
-    else if(props.uvi_index < 11) activeIndex = 3;
+    if(props.uv_index < 3) activeIndex = 0;
+    else if(props.uv_index < 6) activeIndex = 1;
+    else if(props.uv_index < 8) activeIndex = 2;
+    else if(props.uv_index < 11) activeIndex = 3;
     else activeIndex = 4;
 
     return {activeIndex}
@@ -94,7 +94,7 @@ export default class UVIIndex extends PureComponent {
           <Grid.Row>
             <Grid.Column>
               <Statistic>
-                <Statistic.Value>{this.props.uvi_index}</Statistic.Value>
+                <Statistic.Value>{this.props.uv_index}</Statistic.Value>
                 <Statistic.Label>Current UVI index</Statistic.Label>
               </Statistic>
             </Grid.Column>

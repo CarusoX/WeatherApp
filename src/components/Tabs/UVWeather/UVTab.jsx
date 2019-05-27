@@ -3,24 +3,16 @@ import { Divider, Grid } from 'semantic-ui-react'
 import UVIndex from './UVIndex';
 import { UVForecast } from './UVForecast'
 
-export const UVCard = (props) => (
-  <Grid fluid='true' container centered>
+export const UVTab = (props) => (
+  <Grid centered>
     <Grid.Row>
-      <UVIndex uvi_index={props.UV.uvi_index} />
+      <UVIndex uv_index={props.UV.uv_index} />
     </Grid.Row>
     <Divider />
-    <Grid.Row>
+    <Grid.Row stretched divided>
       <UVForecast
-        uvi_forecast={props.UV.uvi_forecast}
+        uv_forecast={props.UV.uv_forecast}
       />
-    </Grid.Row>
-
-    <Grid.Row>
-
-    </Grid.Row>
-
-    <Grid.Row>
-
     </Grid.Row>
 
   </Grid>
