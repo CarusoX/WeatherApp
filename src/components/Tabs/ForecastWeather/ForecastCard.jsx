@@ -1,29 +1,44 @@
 import React from 'react'
-import { Segment, Grid, Icon } from 'semantic-ui-react'
+import { Grid, Header, Icon, Image, Modal, Segment } from 'semantic-ui-react'
 import { getDateName } from '../../../helpers/index.ts'
 
 
 class ForecastCard extends React.Component {
   state = {
-      maxT: 0,
-      minT: 0,
-      date : '',
-      currentDay: '',
+    maxT: 0,
+    minT: 0,
+    date : '',
+    currentDay: '',
   }
 
-  day(){
+  day() {
     return (
-          <Grid.Column>
-            <Segment>
-              <Icon.Group size='massive'>
-                <Icon name='sun' color='yellow'/>
-              </Icon.Group>
-            </Segment>
-            <Segment>{this.state.currentDay}</Segment>
-            <Segment>{this.state.date}</Segment>
-            <Segment>{this.state.minT}</Segment>
-            <Segment>{this.state.maxT}</Segment>
-          </Grid.Column>
+
+      <Modal trigger={
+  
+        <Grid.Column>
+          <Segment>
+            <Icon.Group size='massive'>
+              <Icon name='sun' color='yellow'/>
+            </Icon.Group>
+          </Segment>
+          <Segment>{this.state.currentDay}</Segment>
+          <Segment>{this.state.date}</Segment>
+          <Segment>{this.state.minT}</Segment>
+          <Segment>{this.state.maxT}</Segment>
+        </Grid.Column>
+  
+      }>
+        <Modal.Header>Title! :D</Modal.Header>
+        <Modal.Content image>
+          <Image wrapped size='medium' src={require('../../../images/error.png')}/>
+          <Modal.Description>
+            <Header>S a d f a c e</Header>
+            <p>Asi es como se pone un modal Lucas</p>
+            <p>Aprende a leer las documentaciones :)</p>
+          </Modal.Description>
+        </Modal.Content>
+      </Modal>
     );
   }
 
@@ -59,21 +74,20 @@ class ForecastCard extends React.Component {
           </Grid.Row>
         </Grid>
       )
-    }
-    else {
+    } else {
       return (
         <Grid columns={5} divided>
           <Grid.Row stretched>
-                {this.set_day(7)}
-                {this.day()}
-                {this.set_day(15)}
-                {this.day()}
-                {this.set_day(23)}
-                {this.day()}
-                {this.set_day(31)}
-                {this.day()}
-                {this.set_day(39)}
-                {this.day()}
+            {this.set_day(7)}
+            {this.day()}
+            {this.set_day(15)}
+            {this.day()}
+            {this.set_day(23)}
+            {this.day()}
+            {this.set_day(31)}
+            {this.day()}
+            {this.set_day(39)}
+            {this.day()}
           </Grid.Row>
         </Grid>
       );
