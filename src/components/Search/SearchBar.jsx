@@ -37,6 +37,8 @@ export default class SearchExampleStandard extends Component {
     setTimeout(() => {
       if (this.state.value.length < 1) return this.setState(initialState)
 
+      if(this.state.value.length < 4) return null;
+
       fetch_cities(value).then(result => {
         if (!result) return this.setState({ loading: false, results: [] })
 

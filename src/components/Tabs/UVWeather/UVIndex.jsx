@@ -61,7 +61,7 @@ const renderActiveShape = (props) => {
         outerRadius={outerRadius + 10}
         fill={fill}
       />
-      <text x={cx} y={cy} dy={8} textAnchor="middle" style={{fontSize:20}} fill={fill}>{payload.name}</text>
+      <text x={cx} y={cy} dy={8} textAnchor="middle" style={{ fontSize: 20 }} fill={fill}>{payload.name}</text>
     </g>
   );
 };
@@ -76,15 +76,11 @@ export default class UVIIndex extends PureComponent {
   }
 
   static getDerivedStateFromProps(props) {
-    let activeIndex;
-
-    if(props.uv_index < 3) activeIndex = 0;
-    else if(props.uv_index < 6) activeIndex = 1;
-    else if(props.uv_index < 8) activeIndex = 2;
-    else if(props.uv_index < 11) activeIndex = 3;
-    else activeIndex = 4;
-
-    return {activeIndex}
+    if (props.uv_index < 3) return { activeIndex: 0 };
+    else if (props.uv_index < 6) return { activeIndex: 1 };
+    else if (props.uv_index < 8) return { activeIndex: 2 };
+    else if (props.uv_index < 11) return { activeIndex: 3 };
+    else return { activeIndex: 4 }
   }
 
   render() {

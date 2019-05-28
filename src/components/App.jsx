@@ -15,9 +15,7 @@ class App extends React.Component {
 
   render() {
     return (
-
       <Container fluid>
-
         <Segment>
           <Grid>
             <Grid.Column textAlign="center">

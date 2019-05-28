@@ -21,8 +21,7 @@ class Tabs extends React.Component {
 
   render() {
 
-    let check = this.props.error
-    if (check > 0 && check < 5) { // Either 1, 2, 3, or 4
+    if (typeof(this.props.error) === 'number') { // Either 1, 2, 3, or 4
       return (
         <Tab
           menu={{ pointing: true, style: { justifyContent: "center" } }}

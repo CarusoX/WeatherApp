@@ -65,7 +65,7 @@ export const fetch_data = (city) => {
       return 4
     }
 
-    let data = {
+    return ({
       "results": [
         {
           'weather_id': results[0]['weather'][0]['id'],
@@ -97,8 +97,7 @@ export const fetch_data = (city) => {
           'uv_history': results[4]
         }
       ]
-    };
-    return data;
+    });
   })
 }
 
