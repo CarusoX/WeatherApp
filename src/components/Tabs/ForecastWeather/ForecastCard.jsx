@@ -7,6 +7,11 @@ class ForecastCard extends React.Component {
   state = {
     maxT: 0,
     minT: 0,
+    pressure: 0,
+    humidity: 0,
+    wind: 0,
+    rain: 0,
+    hour: '',
     date : '',
     currentDay: '',
   }
@@ -15,7 +20,6 @@ class ForecastCard extends React.Component {
     return (
 
       <Modal trigger={
-  
         <Grid.Column>
           <Segment>
             <Icon.Group size='massive'>
@@ -27,17 +31,23 @@ class ForecastCard extends React.Component {
           <Segment>{this.state.minT}</Segment>
           <Segment>{this.state.maxT}</Segment>
         </Grid.Column>
-  
       }>
-        <Modal.Header>Title! :D</Modal.Header>
-        <Modal.Content image>
-          <Image wrapped size='medium' src={require('../../../images/error.png')}/>
-          <Modal.Description>
-            <Header>S a d f a c e</Header>
-            <p>Asi es como se pone un modal Lucas</p>
-            <p>Aprende a leer las documentaciones :)</p>
-          </Modal.Description>
-        </Modal.Content>
+      <Modal.Content image>
+        <Icon.Group size='massive'>
+          <Icon name='sun' color='yellow'/>
+        </Icon.Group>
+        <Modal.Description>
+          <Header>Date: {this.state.hour}</Header>
+          <p>Temp Max: {this.state.date}</p>
+          <p>Temp Min: {this.state.minT}</p>
+          <p>Temp Max: {this.state.maxT}</p>
+          <p>Pressure: {this.state.pressure}</p>
+          <p>Humidity: {this.state.humidity}</p>
+          <p>Wind Speed: {this.state.wind}</p>
+          <p>Rain: {this.state.rain}</p>
+
+        </Modal.Description>
+      </Modal.Content>
       </Modal>
     );
   }
@@ -45,7 +55,13 @@ class ForecastCard extends React.Component {
   set_day(k) {
       this.state.maxT= this.props.list.list[k].main.temp_max
       this.state.minT = this.props.list.list[k].main.temp_min
+      this.state.pressure = this.props.list.list[k].main.pressure
+      this.state.humidity = this.props.list.list[k].main.humidity
+      this.state.wind = this.props.list.list[k].wind.speed
+      this.state.rain = this.props.list.list[k].rain
       this.state.date = ''
+      this.state.hour = ''
+      
       var n = ''
       for (var i = 5; i < 10; i++) {
         n = this.props.list.list[k].dt_txt[i]
@@ -58,9 +74,17 @@ class ForecastCard extends React.Component {
         this.state.date += n
       }
       this.state.currentDay = getDateName(this.state.date)
+
+      n = ''
+      for(var i = 11; i < 16; i++){
+        n = this.props.list.list[k].dt_txt[i]
+        if(n === '-') n = '/'
+        this.state.hour += n
+      }
   }
 
   render() {
+    console.log(this.props.list)
     if(this.props.list.length === 0){
       return (
         <Grid columns={5} divided>
