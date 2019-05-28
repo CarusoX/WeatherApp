@@ -17,6 +17,23 @@ const errorPanes = (mode) => [
   { menuItem: 'UV Rays', render: () => <ErrorTab mode={mode} /> },
 ]
 
+/*
+
+There are 9 possible responses for icons.
+Note: They'll change between day and night.
+
+- clear sky ...................... 01d - 01n
+- few clouds ..................... 02d - 02n
+- scattered clouds ............... 03d - 03n
+- broken clouds .................. 04d - 04n
+- shower rain .................... 09d - 09n
+- rain ........................... 10d - 10n
+- thunderstorm ................... 11d - 11n
+- snow ........................... 13d - 13n
+- mist ........................... 50d - 50n
+
+*/
+
 class Tabs extends React.Component {
 
   render() {

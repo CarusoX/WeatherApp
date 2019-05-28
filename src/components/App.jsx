@@ -23,21 +23,18 @@ class App extends React.Component {
                 <Button
                   onClick={() => this.setState({ unit: 'Cº' })}
                   active={this.state.unit === 'Cº'}
-                >
-                  Cº
-                </Button>
+                  content='Cº'
+                />
                 <Button
                   onClick={() => this.setState({ unit: 'Fº' })}
                   active={this.state.unit === 'Fº'}
-                >
-                  Fº
-                </Button>
+                  content='Fº'
+                />
                 <Button
                   onClick={() => this.setState({ unit: 'Kº' })}
                   active={this.state.unit === 'Kº'}
-                >
-                  Kº
-                </Button>
+                  content='Kº'
+                />
               </Button.Group>
             </Grid.Column>
           </Grid>

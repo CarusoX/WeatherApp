@@ -6,11 +6,12 @@ class WheaterCard extends React.Component {
 
   render() {
     const {
-      weather_id, weather_state, weather_description,
+      weather_id, weather_state, weather_description, weather_icon,
       temp, humidity, pressure, min_temp, max_temp, wind_speed,
       wind_dir, clouds, id, unit
     } = this.props;
 
+    alert({weather_icon})
     return (
       <Grid columns={3} divided>
         <Grid.Row stretched>
