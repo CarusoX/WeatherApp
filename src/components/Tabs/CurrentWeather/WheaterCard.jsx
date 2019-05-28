@@ -11,7 +11,6 @@ class WheaterCard extends React.Component {
       wind_dir, clouds, id, unit
     } = this.props;
 
-    alert({weather_icon})
     return (
       <Grid columns={3} divided>
         <Grid.Row stretched>

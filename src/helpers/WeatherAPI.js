@@ -71,6 +71,7 @@ export const fetch_data = (city) => {
           'weather_id': results[0]['weather'][0]['id'],
           'weather_state': results[0]['weather'][0]['main'],
           'weather_description': results[0]['weather'][0]['description'],
+          'weather_icon': results[0]['weather'][0]['icon'],
           'temp': results[0]['main']['temp'],
           'humidity': results[0]['main']['humidity'],
           'pressure': results[0]['main']['pressure'],
