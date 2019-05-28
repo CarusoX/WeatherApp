@@ -5,7 +5,7 @@ import { getDateName } from '../../../helpers/index.ts'
 
 export const UVForecast = (props) => (
   <Container>
-    <Card.Group centered itemsPerRow={'5'}>
+    <Card.Group stackable centered itemsPerRow={'5'}>
       {
         props.uv_forecast.map((item, index) =>
           <UVCard

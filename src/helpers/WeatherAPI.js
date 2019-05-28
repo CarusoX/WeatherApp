@@ -1,5 +1,3 @@
-import { filter } from "minimatch";
-
 const API_KEY = process.env.API_KEY;
 const API_ENDPOINT = process.env.API_ENDPOINT;
 const API_FIND = process.env.API_FIND;
@@ -8,6 +6,8 @@ const API_FORECAST = process.env.API_FORECAST;
 const API_UVI = process.env.API_UVI;
 const API_UVF = process.env.API_UVF;
 const API_UVH = process.env.API_UVH;
+
+import { getMonthPeriod } from '../helpers/index.ts'
 
 const getCityList = (city) => {
   const url = `${API_ENDPOINT}${API_FIND}?q=${city}&appid=${API_KEY}`;
@@ -34,11 +34,12 @@ const getUVForecast = (coords) => {
   return fetch(url);
 }
 
-// const getUVHistory = (coords) => {
-//   // TODO: Need to find a way to work with UNIX time
-//   const url = `${API_ENDPOINT}${API_UVH}?appid=${API_KEY_1}&lat=${coords.lat}&lon=${coords.lon}`;
-//   return fetch(url);
-// }
+const getUVHistory = (coords) => {
+  const period = getMonthPeriod();
+  const url = `${API_ENDPOINT}${API_UVH}?appid=${API_KEY}&lat=${coords.lat}&lon=${coords.lon}&start=${period.start}&end=${period.end}`;
+  console.log(url);
+  return fetch(url);
+}
 
 export const fetch_data = (city) => {
 
@@ -47,7 +48,7 @@ export const fetch_data = (city) => {
     getForecastWeather(city.city_id),
     getUVIndex(city.coords),
     getUVForecast(city.coords),
-    // getUVHistory(city.coords),
+    getUVHistory(city.coords),
   ]).then(responses => {
     if (responses.filter(response => !response.ok).length)
       throw Error('Error on fetch')
@@ -63,6 +64,8 @@ export const fetch_data = (city) => {
     } else if (results.cod === "501") { // Server Error
       return 4
     }
+
+    console.log(results)
 
     let data = {
       "results": [
@@ -92,7 +95,8 @@ export const fetch_data = (city) => {
               'index': day['value'],
               'date': day['date_iso'].slice(0, 10).split('-').join('/')
             }
-          })
+          }),
+          'history': results[4]
         }
       ]
     };

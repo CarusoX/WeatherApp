@@ -4,7 +4,7 @@ import UVIndex from './UVIndex';
 import { UVForecast } from './UVForecast'
 
 export const UVTab = (props) => (
-  <Grid centered>
+  <Grid stackable centered>
     <Grid.Row>
       <UVIndex uv_index={props.UV.uv_index} />
     </Grid.Row>
@@ -14,6 +14,5 @@ export const UVTab = (props) => (
         uv_forecast={props.UV.uv_forecast}
       />
     </Grid.Row>
-
   </Grid>
 )
