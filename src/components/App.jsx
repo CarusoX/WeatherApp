@@ -1,6 +1,5 @@
 import React from 'react'
 import { Button, Container, Grid, Segment } from 'semantic-ui-react'
-// import { ButtonList } from './ButtonList/index.ts'
 import { Title } from './Title/index.ts'
 import { Menu } from './Menu/index.ts'
 import './App.css'

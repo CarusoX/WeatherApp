@@ -10,6 +10,20 @@ class WheaterCard extends React.Component {
       wind_dir, clouds, id
     } = this.props;
 
+    var tempp = temp
+    var Mtemp = min_temp
+    var mtemp = max_temp
+
+    if (this.props.unit === 'Fº') {
+      tempp = (temp * (9/5)) + 32
+      Mtemp = (min_temp * (9/5)) + 32
+      mtemp = (max_temp * (9/5)) + 32
+    } else if (this.props.unit === 'Kº') {
+      tempp = temp + 273.15
+      Mtemp = min_temp + 273.15
+      mtemp = max_temp + 273.15
+    }
+
     return (
       <Grid columns={3} divided>
         <Grid.Row stretched>
@@ -24,13 +38,13 @@ class WheaterCard extends React.Component {
             <Segment>
               Max temp
               <Divider />
-              {max_temp} {this.props.unit}
+              {Mtemp} {this.props.unit}
             </Segment>
 
             <Segment>
               Min temp
               <Divider />
-              {min_temp} {this.props.unit}
+              {mtemp} {this.props.unit}
             </Segment>
 
           </Grid.Column>
@@ -39,7 +53,7 @@ class WheaterCard extends React.Component {
             <Segment>
               Temp
               <Divider />
-              {temp} {this.props.unit}
+              {tempp} {this.props.unit}
             </Segment>
 
             <Segment>

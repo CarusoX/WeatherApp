@@ -5,7 +5,7 @@ import { Tabs }  from '../Tabs/index.ts'
 import { fetch_data } from '../../helpers/index.ts'
 
 class Menu extends React.Component {
-
+  
   constructor(props) {
     super(props);
     this.state = {
@@ -19,10 +19,7 @@ class Menu extends React.Component {
     }
   }
 
-  // TODO: Set correct Unit
-
   setData() {
-    // Start loading
     this.setState({ loading: true });
     fetch_data(this.state.city).then((data) => {
       if (!data) return;
@@ -52,7 +49,7 @@ class Menu extends React.Component {
 
         <SearchBar setCity={(city) => this.setCity(city)} />
 
-        <Divider section horizontal>City: {(this.state.city) ? this.state.city.city_name : ""}</Divider>
+        <Divider section horizontal>City: {(this.state.city) ? this.state.city.city_name : ''}</Divider>
 
         <Tabs
           error={this.state.error}
