@@ -21,10 +21,25 @@ class App extends React.Component {
         <Segment>
           <Grid>
             <Grid.Column textAlign="center">
-              <Button.Group floated='right'>
-                <Button size='mini' onClick={() => this.setState({ unit: 'Cº' })} active>Cº</Button>
-                <Button size='mini' onClick={() => this.setState({ unit: 'Fº' })}>Fº</Button>
-                <Button size='mini' onClick={() => this.setState({ unit: 'Kº' })}>Kº</Button>
+              <Button.Group floated='right' size='mini'>
+                <Button
+                  onClick={() => this.setState({ unit: 'Cº' })}
+                  active={this.state.unit === 'Cº'}
+                >
+                  Cº
+                </Button>
+                <Button
+                  onClick={() => this.setState({ unit: 'Fº' })}
+                  active={this.state.unit === 'Fº'}
+                >
+                  Fº
+                </Button>
+                <Button
+                  onClick={() => this.setState({ unit: 'Kº' })}
+                  active={this.state.unit === 'Kº'}
+                >
+                  Kº
+                </Button>
               </Button.Group>
             </Grid.Column>
           </Grid>
