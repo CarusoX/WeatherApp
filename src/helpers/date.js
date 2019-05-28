@@ -3,8 +3,7 @@ export const getDateName = (dateStr) => {
     return date.toLocaleDateString('en-EN', { weekday: 'short' });
 }
 
-const format = (d) =>
-    `${Math.round(d.getTime() / 1000)}`
+const format = (d) => `${Math.round(d.getTime() / 1000)}`
 
 export const getMonthPeriod = () => {
     const date = new Date();

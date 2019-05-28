@@ -65,8 +65,6 @@ export const fetch_data = (city) => {
       return 4
     }
 
-    console.log(results)
-
     let data = {
       "results": [
         {

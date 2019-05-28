@@ -1,28 +1,15 @@
 import React from 'react'
 import { Segment, Grid, Icon, Divider } from 'semantic-ui-react'
+import { getTemp } from '../../../helpers/index.ts'
 
-class WheaterCard extends React.Component { 
+class WheaterCard extends React.Component {
 
-  render() {    
+  render() {
     const {
       weather_id, weather_state, weather_description,
       temp, humidity, pressure, min_temp, max_temp, wind_speed,
-      wind_dir, clouds, id
+      wind_dir, clouds, id, unit
     } = this.props;
-
-    var tempp = temp
-    var Mtemp = min_temp
-    var mtemp = max_temp
-
-    if (this.props.unit === 'Fº') {
-      tempp = (temp * (9/5)) + 32
-      Mtemp = (min_temp * (9/5)) + 32
-      mtemp = (max_temp * (9/5)) + 32
-    } else if (this.props.unit === 'Kº') {
-      tempp = temp + 273.15
-      Mtemp = min_temp + 273.15
-      mtemp = max_temp + 273.15
-    }
 
     return (
       <Grid columns={3} divided>
@@ -38,13 +25,13 @@ class WheaterCard extends React.Component {
             <Segment>
               Max temp
               <Divider />
-              {Mtemp} {this.props.unit}
+              {getTemp(max_temp, unit)}
             </Segment>
 
             <Segment>
               Min temp
               <Divider />
-              {mtemp} {this.props.unit}
+              {getTemp(min_temp, unit)}
             </Segment>
 
           </Grid.Column>
@@ -52,8 +39,8 @@ class WheaterCard extends React.Component {
 
             <Segment>
               Temp
-              <Divider />
-              {tempp} {this.props.unit}
+            <Divider />
+              {getTemp(temp, unit)}
             </Segment>
 
             <Segment>
