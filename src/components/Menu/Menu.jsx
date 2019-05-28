@@ -42,9 +42,7 @@ class Menu extends React.Component {
   }
 
   render() {
-
     return (
-
       <Container fluid>
 
         <SearchBar setCity={(city) => this.setCity(city)} />
@@ -62,7 +60,6 @@ class Menu extends React.Component {
         />
 
       </Container >
-
     );
   }
 }

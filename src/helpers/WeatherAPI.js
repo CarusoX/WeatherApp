@@ -94,7 +94,7 @@ export const fetch_data = (city) => {
               'date': day['date_iso'].slice(0, 10).split('-').join('/')
             }
           }),
-          'history': results[4]
+          'uv_history': results[4]
         }
       ]
     };
