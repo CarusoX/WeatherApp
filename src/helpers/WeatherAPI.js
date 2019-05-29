@@ -82,11 +82,6 @@ export const fetch_data = (city) => {
         // Forecast
         {
           'days': results[1]['list'],
-          'date_forecast': results[3].map(day => {
-            return {
-              'date': day['date_iso'].slice(0, 10).split('-').join('/')
-            }
-          }),
           'date_days': results[1]['list'].filter(day => {
             return (
               day.dt_txt.slice(11, 21) === '00:00:00'
