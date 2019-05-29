@@ -82,7 +82,12 @@ export const fetch_data = (city) => {
         },
         // Forecast
         {
-          'list': results[1]['list'],
+          'days': results[1]['list'],
+          'date_forecast': results[3].map(function (day) {
+            return {
+              'date': day['date_iso'].slice(0, 10).split('-').join('/')
+            }
+          }),
         },
         // UVI
         {

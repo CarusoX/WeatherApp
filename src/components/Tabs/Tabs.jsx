@@ -18,7 +18,6 @@ const errorPanes = (mode) => [
 ]
 
 class Tabs extends React.Component {
-
   render() {
 
     let check = this.props.error
@@ -46,7 +45,7 @@ class Tabs extends React.Component {
         />
       )
     }
-    
+    {console.log(this.props)}
     return (
       <Tab menu={{ pointing: true, style: { justifyContent: "center" }}}
         panes={[

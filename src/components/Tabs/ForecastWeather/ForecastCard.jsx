@@ -53,34 +53,11 @@ class ForecastCard extends React.Component {
   }
 
   set_day(k) {
-      this.state.maxT= this.props.list.list[k].main.temp_max
-      this.state.minT = this.props.list.list[k].main.temp_min
-      this.state.pressure = this.props.list.list[k].main.pressure
-      this.state.humidity = this.props.list.list[k].main.humidity
-      this.state.wind = this.props.list.list[k].wind.speed
-      this.state.rain = this.props.list.list[k].rain
-      this.state.date = ''
-      this.state.hour = ''
-      
-      var n = ''
-      for (var i = 5; i < 10; i++) {
-        n = this.props.list.list[k].dt_txt[i]
-        if(n === '-') n = '/'
-        this.state.date += n
-      }
-      this.state.date += '/'
-      for (var i = 2; i < 4; i++) {
-        n = this.props.list.list[k].dt_txt[i]
-        this.state.date += n
-      }
-      this.state.currentDay = getDateName(this.state.date)
+      this.state.maxT= this.props.list.days[k].main.temp_max
+      this.state.minT = this.props.list.days[k].main.temp_min
+      this.state.date = this.props.list.date_forecast[Math.ceil(k/8) - 1].date
 
-      n = ''
-      for(var i = 11; i < 16; i++){
-        n = this.props.list.list[k].dt_txt[i]
-        if(n === '-') n = '/'
-        this.state.hour += n
-      }
+      this.state.currentDay = getDateName(this.state.date)
   }
 
   render() {
