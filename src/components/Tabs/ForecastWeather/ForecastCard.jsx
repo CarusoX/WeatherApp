@@ -1,6 +1,7 @@
 import React from 'react'
 import { Grid, Header, Icon, Image, Modal, Segment } from 'semantic-ui-react'
 import { getDateName } from '../../../helpers/index.ts'
+import { ModalForecast } from './ModalForecast'
 
 
 class ForecastCard extends React.Component {
@@ -43,21 +44,15 @@ class ForecastCard extends React.Component {
           <Segment>{this.state.maxT}</Segment>
         </Grid.Column>
       }>
-      <Modal.Content image>
-        <Icon.Group size='massive'>
-          <Icon name='sun' color='yellow'/>
-        </Icon.Group>
-        <Modal.Description>
-          <Header>Date: {this.state.date}</Header>
-          <p>Hour: {this.state.hour}</p>
-          <p>Temp Min: {this.state.minT}</p>
-          <p>Temp Max: {this.state.maxT}</p>
-          <p>Pressure: {this.state.pressure}</p>
-          <p>Humidity: {this.state.humidity}</p>
-          <p>Wind Speed: {this.state.wind}</p>
-
-        </Modal.Description>
-      </Modal.Content>
+      <ModalForecast 
+        date={this.state.date}
+        Hour={this.state.hour}
+        minT={this.state.minT}
+        maxT={this.state.maxT}
+        pressure={this.state.pressure}
+        humidity={this.state.humidity}
+        wind={this.state.wind}
+      />
       </Modal>
     );
   }
