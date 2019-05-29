@@ -45,7 +45,6 @@ class Tabs extends React.Component {
         />
       )
     }
-    {console.log(this.props)}
     return (
       <Tab menu={{ pointing: true, style: { justifyContent: "center" }}}
         panes={[

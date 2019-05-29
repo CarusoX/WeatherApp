@@ -63,7 +63,6 @@ export const fetch_data = (city) => {
     } else if (results.cod === "501") { // Server Error
       return 4
     }
-
     let data = {
       "results": [
         {
@@ -83,16 +82,21 @@ export const fetch_data = (city) => {
         // Forecast
         {
           'days': results[1]['list'],
-          'date_forecast': results[3].map(function (day) {
+          'date_forecast': results[3].map(day => {
             return {
               'date': day['date_iso'].slice(0, 10).split('-').join('/')
             }
+          }),
+          'date_days': results[1]['list'].filter(day => {
+            return (
+              day.dt_txt.slice(11, 21) === '00:00:00'
+            )
           }),
         },
         // UVI
         {
           'uv_index': results[2]['value'],
-          'uv_forecast': results[3].map(function (day) {
+          'uv_forecast': results[3].map(day => {
             return {
               'index': day['value'],
               'date': day['date_iso'].slice(0, 10).split('-').join('/')

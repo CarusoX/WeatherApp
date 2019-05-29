@@ -16,9 +16,17 @@ class ForecastCard extends React.Component {
     currentDay: '',
   }
 
-  day() {
-    return (
+  set_day(day) {
+      this.state.maxT= day.main.temp_max
+      this.state.minT = day.main.temp_min
+      this.state.date = day.dt_txt.slice(0, 10).split('-').join('/')
+      this.state.currentDay = getDateName(this.state.date)
+  }
 
+
+  day(d) {
+    {this.set_day(d)}
+    return (
       <Modal trigger={
         <Grid.Column>
           <Segment>
@@ -52,42 +60,18 @@ class ForecastCard extends React.Component {
     );
   }
 
-  set_day(k) {
-      this.state.maxT= this.props.list.days[k].main.temp_max
-      this.state.minT = this.props.list.days[k].main.temp_min
-      this.state.date = this.props.list.date_forecast[Math.ceil(k/8) - 1].date
-
-      this.state.currentDay = getDateName(this.state.date)
-  }
-
   render() {
-    console.log(this.props.list)
     if(this.props.list.length === 0){
       return (
-        <Grid columns={5} divided>
-          <Grid.Row stretched>
-            {this.day()}
-            {this.day()}
-            {this.day()}
-            {this.day()}
-            {this.day()}
-          </Grid.Row>
-        </Grid>
+        <h1> LOADING </h1>
       )
     } else {
       return (
         <Grid columns={5} divided>
           <Grid.Row stretched>
-            {this.set_day(7)}
-            {this.day()}
-            {this.set_day(15)}
-            {this.day()}
-            {this.set_day(23)}
-            {this.day()}
-            {this.set_day(31)}
-            {this.day()}
-            {this.set_day(39)}
-            {this.day()}
+            {this.props.list.date_days.map(day =>
+                this.day(day),
+            )}
           </Grid.Row>
         </Grid>
       );
