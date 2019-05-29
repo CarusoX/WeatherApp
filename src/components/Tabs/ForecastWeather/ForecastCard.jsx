@@ -8,10 +8,6 @@ class ForecastCard extends React.Component {
   state = {
     maxT: 0,
     minT: 0,
-    pressure: 0,
-    humidity: 0,
-    wind: 0,
-    hour: '',
     date : '',
     currentDay: '',
   }
@@ -19,10 +15,6 @@ class ForecastCard extends React.Component {
   set_day(day) {
       this.state.maxT = day.main.temp_max
       this.state.minT = day.main.temp_min
-      this.state.pressure = day.main.pressure
-      this.state.humidity = day.main.humidity
-      this.state.wind = day.wind.speed
-      this.state.hour = day.dt_txt.slice(10, 19)
       this.state.date = day.dt_txt.slice(0, 10).split('-').join('/')
       this.state.currentDay = getDateName(this.state.date)
   }
