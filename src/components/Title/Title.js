@@ -4,7 +4,7 @@ import 'semantic-ui-css/semantic.min.css'
 
 export const Title = (props) => (
   <Header as={props.size} icon textAlign='center'>
-    <Image src={require('../../images/' + props.image)} />
+    <Image src={require('../../icons/Theme2/' + props.image)} />
     <Header.Content>{props.title}</Header.Content>
   </Header>
 )

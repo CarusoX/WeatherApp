@@ -2,7 +2,6 @@ import React from 'react'
 import { Button, Container, Grid, Segment } from 'semantic-ui-react'
 import { Title } from './Title/index.ts'
 import { Menu } from './Menu/index.ts'
-import './App.css'
 
 class App extends React.Component {
 
@@ -40,7 +39,7 @@ class App extends React.Component {
           </Grid>
         </Segment>
 
-        <Title title='Wheater app' size='h1' image='cloud.png' />
+        <Title title='WHEATHER APP' size='h1' image='045-weather.png' />
 
         <Grid centered>
           <Grid.Column width='15' verticalAlign='middle'>
