@@ -30,6 +30,8 @@ class ForecastCard extends React.Component {
 
   day(d) {
     {this.set_day(d)}
+    var flag = false
+    var a = 7
     return (
       <Modal trigger={
         <Grid.Column>
@@ -45,20 +47,25 @@ class ForecastCard extends React.Component {
         </Grid.Column>
       }>
       <ModalForecast 
-        date={this.state.date}
-        Hour={this.state.hour}
-        minT={this.state.minT}
-        maxT={this.state.maxT}
-        pressure={this.state.pressure}
-        humidity={this.state.humidity}
-        wind={this.state.wind}
+        data={this.props.list.days.filter(days => {
+                  if(d === days){
+                    flag = true
+                    return true
+                  }
+                  else if(flag && a > 0){
+                    a--
+                    return true
+                  }
+                  else return false
+                })}
+
       />
       </Modal>
     );
   }
 
   render() {
-    {console.log(this.props.list.date_days)}
+    {console.log(this.props.list)}
     if(this.props.list.length === 0){
       return (
         <h1> LOADING </h1>

@@ -41,7 +41,7 @@ const getUVForecast = (coords) => {
 // }
 
 export const fetch_data = (city) => {
-
+  var flag = false
   return Promise.all([
     getCurrentWeather(city.city_id),
     getForecastWeather(city.city_id),
@@ -81,7 +81,15 @@ export const fetch_data = (city) => {
         },
         // Forecast
         {
-          'days': results[1]['list'],
+          'days': results[1]['list'].filter(day => {
+            if(flag || day.dt_txt.slice(11, 21) === '00:00:00'){
+              flag = true
+              return true
+            }
+            else if(flag) return true
+
+          }),
+
           'date_days': results[1]['list'].filter(day => {
             return (
               day.dt_txt.slice(11, 21) === '00:00:00'
