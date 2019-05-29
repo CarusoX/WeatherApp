@@ -35,7 +35,6 @@ export default class UVHistory extends PureComponent {
   static jsfiddleUrl = 'https://jsfiddle.net/alidingling/xqjtetw0/';
 
   render() {
-    console.log(this.props.uv_history);
     return (
       <div style={{ width: '100%', height: 300 }}>
         <ResponsiveContainer>

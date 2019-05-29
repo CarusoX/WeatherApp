@@ -41,6 +41,7 @@ class Menu extends React.Component {
     this.setState({ city }, () => this.setData());
   }
 
+
   render() {
     return (
       <Container fluid>
@@ -48,7 +49,6 @@ class Menu extends React.Component {
         <SearchBar setCity={(city) => this.setCity(city)} />
 
         <Divider section horizontal>City: {(this.state.city) ? this.state.city.city_name : ''}</Divider>
-
         <Tabs
           error={this.state.error}
           show={this.state.city !== undefined}

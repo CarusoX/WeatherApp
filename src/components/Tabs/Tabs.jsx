@@ -41,7 +41,7 @@ Icons taken of:
 class Tabs extends React.Component {
 
   render() {
-
+    {console.log(this.props)}
     if (typeof(this.props.error) === 'number') { // Either 1, 2, 3, or 4
       return (
         <Tab
@@ -66,8 +66,8 @@ class Tabs extends React.Component {
         />
       )
     }
-    
     return (
+      
       <Tab menu={{ pointing: true, style: { justifyContent: "center" }}}
         panes={[
           {
