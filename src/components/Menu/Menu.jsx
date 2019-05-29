@@ -10,6 +10,7 @@ class Menu extends React.Component {
     super(props);
     this.state = {
       error: undefined,
+      icon: undefined,
       loading: false,
       city: undefined, // { id, coords:{ lat, lon }}
       currentWeather: undefined,
@@ -23,16 +24,16 @@ class Menu extends React.Component {
     this.setState({ loading: true });
     fetch_data(this.state.city).then((data) => {
       if (!data) return;
-      if(data > 0 && data < 5) {
-        this.setState({error: data})
-        return
+      if(typeof(data) == 'number') {
+        return this.setState({error: data})
       } 
       this.setState({
+        icon: data['results'][0]['weather_icon'],
         currentWeather: data['results'][0],
         list: data['results'][1],
         UV: data['results'][2],
         error: undefined,
-        loading: false
+        loading: false,
       });
     })
   }
@@ -49,6 +50,9 @@ class Menu extends React.Component {
         <SearchBar setCity={(city) => this.setCity(city)} />
 
         <Divider section horizontal>City: {(this.state.city) ? this.state.city.city_name : ''}</Divider>
+
+        im passing {this.state.icon}
+
         <Tabs
           error={this.state.error}
           show={this.state.city !== undefined}
@@ -57,6 +61,7 @@ class Menu extends React.Component {
           list={this.state.list}
           unit={this.props.unit}
           loading={this.state.loading}
+          icon={this.state.icon}
         />
 
       </Container >

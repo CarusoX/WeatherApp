@@ -19,27 +19,13 @@ const errorPanes = (mode) => [
 
 /*
 
-There are 9 possible responses for icons.
-Note: They'll change between day and night.
-
-- clear sky ...................... 01d - 01n
-- few clouds ..................... 02d - 02n
-- scattered clouds ............... 03d - 03n
-- broken clouds .................. 04d - 04n
-- shower rain .................... 09d - 09n
-- rain ........................... 10d - 10n
-- thunderstorm ................... 11d - 11n
-- snow ........................... 13d - 13n
-- mist ........................... 50d - 50n
-
 Icons taken of:
 <div>Icons made by <a href="https://www.flaticon.com/authors/good-ware" title="Good Ware">Good Ware</a> from <a href="https://www.flaticon.com/" 		    title="Flaticon">www.flaticon.com</a> is licensed by <a href="http://creativecommons.org/licenses/by/3.0/" 		    title="Creative Commons BY 3.0" target="_blank">CC 3.0 BY</a></div>
 <div>Icons made by <a href="https://www.flaticon.com/authors/good-ware" title="Good Ware">Good Ware</a> from <a href="https://www.flaticon.com/" 		    title="Flaticon">www.flaticon.com</a> is licensed by <a href="http://creativecommons.org/licenses/by/3.0/" 		    title="Creative Commons BY 3.0" target="_blank">CC 3.0 BY</a></div>
 
 */
-
 class Tabs extends React.Component {
-
+  
   render() {
     {console.log(this.props)}
     if (typeof(this.props.error) === 'number') { // Either 1, 2, 3, or 4
@@ -74,8 +60,9 @@ class Tabs extends React.Component {
             menuItem: 'Current Weather', render: () =>
               <Tab.Pane attached={false}>
                 <WheaterCard
-                  {...this.props.currentWeather}
                   unit={this.props.unit}
+                  nana={this.props.icon}
+                  {...this.props.currentWeather}
                 />
               </Tab.Pane>
           },

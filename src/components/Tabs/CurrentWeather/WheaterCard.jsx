@@ -5,6 +5,18 @@ import { getTemp } from '../../../helpers/index.ts'
 const path1 = '../../../icons/Theme1/'
 const path2 = '../../../icons/Theme2/'
 
+var iconmap = {
+  ['01d']: '036-sun', ['01n']: '024-moon',
+  ['02d']: '007-cloudy day', ['02n']: '025-night',
+  ['03d']: '003-cloud', ['03n']: '003-cloud',
+  ['04d']: '004-clouds', ['04n']: '004-clouds',
+  ['09d']: '027-rain', ['09n']: '027-rain',
+  ['10d']: '046-weather', ['10n']: '046-weather',
+  ['11d']: '041-thunderstorm', ['11n']: '041-thunderstorm',
+  ['13d']: '032-snowy', ['13n']: '033-snowy',
+  ['50d']: '016-haze', ['50n']: '016-haze',
+}
+
 class WheaterCard extends React.Component {
   
   render() {
@@ -14,17 +26,25 @@ class WheaterCard extends React.Component {
       wind_dir, clouds, id, unit
     } = this.props;
 
+    const icon = iconmap[this.props.nana]
+    
     return (
       <Grid columns={3} divided>
         <Grid.Row stretched>
           <Grid.Column>
 
-            <Segment>
-            <Image src={require('../../../icons/Theme2/036-sun.png')}
+            ireceive {this.props.nana}
+            i process {iconmap[this.props.nana]}
+            const is equall to {icon}
+            {/* 
+            Cuando pongo require('../../../icons/Theme2/' + icon + '.png') me tira error :(
+            */}
+            <Segment raised compact>
+            <Image src={require('../../../icons/Theme2/018-high temperature.png')}
                    size='medium' verticalAlign='middle' />
             </Segment>
 
-            <Segment>
+            <Segment raised compact>
               Max temp
               <Divider />
               <Image src={require('../../../icons/Theme2/018-high temperature.png')}
@@ -32,7 +52,7 @@ class WheaterCard extends React.Component {
               {getTemp(max_temp, unit)}
             </Segment>
 
-            <Segment>
+            <Segment raised compact>
               Min temp
               <Divider />
               <Image src={require('../../../icons/Theme2/022-low temperature.png')}
@@ -43,7 +63,7 @@ class WheaterCard extends React.Component {
           </Grid.Column>
           <Grid.Column>
 
-            <Segment>
+            <Segment raised compact>
               Temp
               <Divider />
               <Image src={require('../../../icons/Theme2/039-thermometer.png')}
@@ -51,7 +71,7 @@ class WheaterCard extends React.Component {
               {getTemp(temp, unit)}
             </Segment>
 
-            <Segment>
+            <Segment raised compact>
               State
               <Divider />
               <Image src={require('../../../icons/Theme2/045-weather.png')}
@@ -59,7 +79,7 @@ class WheaterCard extends React.Component {
               {weather_state}
             </Segment>
 
-            <Segment>
+            <Segment raised compact>
               Humidity
               <Divider />
               <Image src={require('../../../icons/Theme2/019-humidity.png')}
@@ -67,7 +87,7 @@ class WheaterCard extends React.Component {
               {humidity} %
             </Segment>
 
-            <Segment>
+            <Segment raised compact>
               Wind
               <Divider />
               <Image src={require('../../../icons/Theme2/048-wind.png')}
@@ -78,7 +98,7 @@ class WheaterCard extends React.Component {
           </Grid.Column>
           <Grid.Column>
 
-            <Segment>
+            <Segment raised compact>
               Sunrise
               <Divider />
               <Image src={require('../../../icons/Theme2/012-dawn.png')}
@@ -86,7 +106,7 @@ class WheaterCard extends React.Component {
               No se jaja salu2 AM
             </Segment>
 
-            <Segment>
+            <Segment raised compact>
               Sunset
               <Divider />
               <Image src={require('../../../icons/Theme2/037-sunset.png')}
@@ -94,7 +114,7 @@ class WheaterCard extends React.Component {
               No se jaja salu2 PM
             </Segment>
 
-            <Segment>
+            <Segment raised compact>
               Preassure
               <Divider />
               <Image src={require('../../../icons/Theme2/026-pressure.png')}
