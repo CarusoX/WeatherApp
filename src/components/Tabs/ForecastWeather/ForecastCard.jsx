@@ -10,15 +10,18 @@ class ForecastCard extends React.Component {
     pressure: 0,
     humidity: 0,
     wind: 0,
-    rain: 0,
     hour: '',
     date : '',
     currentDay: '',
   }
 
   set_day(day) {
-      this.state.maxT= day.main.temp_max
+      this.state.maxT = day.main.temp_max
       this.state.minT = day.main.temp_min
+      this.state.pressure = day.main.pressure
+      this.state.humidity = day.main.humidity
+      this.state.wind = day.wind.speed
+      this.state.hour = day.dt_txt.slice(10, 19)
       this.state.date = day.dt_txt.slice(0, 10).split('-').join('/')
       this.state.currentDay = getDateName(this.state.date)
   }
@@ -45,14 +48,13 @@ class ForecastCard extends React.Component {
           <Icon name='sun' color='yellow'/>
         </Icon.Group>
         <Modal.Description>
-          <Header>Date: {this.state.hour}</Header>
-          <p>Temp Max: {this.state.date}</p>
+          <Header>Date: {this.state.date}</Header>
+          <p>Hour: {this.state.hour}</p>
           <p>Temp Min: {this.state.minT}</p>
           <p>Temp Max: {this.state.maxT}</p>
           <p>Pressure: {this.state.pressure}</p>
           <p>Humidity: {this.state.humidity}</p>
           <p>Wind Speed: {this.state.wind}</p>
-          <p>Rain: {this.state.rain}</p>
 
         </Modal.Description>
       </Modal.Content>
@@ -61,6 +63,7 @@ class ForecastCard extends React.Component {
   }
 
   render() {
+    {console.log(this.props.list.date_days)}
     if(this.props.list.length === 0){
       return (
         <h1> LOADING </h1>
