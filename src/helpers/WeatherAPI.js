@@ -137,6 +137,8 @@ export const fetch_data = (city) => {
       ]
     });
   })
+  .catch(err => console.log(err));
+  // TODO: do something with these errors
 }
 
 export const fetch_cities = (city) => {
