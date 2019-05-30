@@ -1,7 +1,7 @@
 import React from 'react'
 import { Tab } from 'semantic-ui-react'
 import { DefaultTab, ErrorTab } from '../Modular/index.ts'
-import WheaterCard from './CurrentWeather/WheaterCard'
+import WeatherCard from './CurrentWeather/WeatherCard'
 import ForecastCard from './ForecastWeather/ForecastCard'
 import { UVTab } from './UVWeather/UVTab';
 
@@ -59,7 +59,7 @@ class Tabs extends React.Component {
           {
             menuItem: 'Current Weather', render: () =>
               <Tab.Pane attached={false}>
-                <WheaterCard
+                <WeatherCard
                   unit={this.props.unit}
                   nana={this.props.icon}
                   {...this.props.currentWeather}

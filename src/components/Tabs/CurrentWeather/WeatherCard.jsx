@@ -6,7 +6,7 @@ import { bold } from 'ansi-colors';
 const path1 = '../../../icons/Theme1/'
 const path2 = '../../../icons/Theme2/'
 
-class WheaterCard extends React.Component {
+class WeatherCard extends React.Component {
 
   render() {
     const {
@@ -200,4 +200,4 @@ class WheaterCard extends React.Component {
 
 }
 
-export default WheaterCard;
+export default WeatherCard;

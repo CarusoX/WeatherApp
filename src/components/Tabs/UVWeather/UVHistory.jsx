@@ -1,6 +1,6 @@
 import React, { PureComponent } from 'react';
 import {
-  LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, Legend, ResponsiveContainer, Dot
+  AreaChart, Area, XAxis, YAxis, CartesianGrid, Tooltip, Legend, ResponsiveContainer, Dot
 } from 'recharts';
 
 const getColor = (index) => {
@@ -38,20 +38,26 @@ export default class UVHistory extends PureComponent {
     return (
       <div style={{ width: '100%', height: 300 }}>
         <ResponsiveContainer>
-          <LineChart
+          <AreaChart
             width={500}
-            height={300}
-            data={this.props.uv_history.map((x) => ({ 'date': x.date_iso.slice(5, 10).split('-').join('/'), 'uv': x.value, 'stroke': 'red' }))}
+            height={400}
+            data={data}
             margin={{
-              top: 5, right: 30, left: 20, bottom: 5,
+              top: 10, right: 30, left: 0, bottom: 0,
             }}
           >
             <CartesianGrid strokeDasharray="3 3" />
-            <XAxis dataKey="date" height={60} tick={<CustomizedAxisTick />} />
+            <XAxis dataKey="name" />
             <YAxis />
             <Tooltip />
-            <Line type='monotone' dataKey='uv' stroke='blue' dot={<CustomizedDot />} />
-          </LineChart>
+            <defs>
+              <linearGradient id="splitColor" x1="0" y1="0" x2="0" y2="1">
+                <stop offset={off} stopColor="green" stopOpacity={1} />
+                <stop offset={off} stopColor="red" stopOpacity={1} />
+              </linearGradient>
+            </defs>
+            <Area type="monotone" dataKey="uv" stroke="#000" fill="url(#splitColor)" />
+          </AreaChart>
         </ResponsiveContainer>
       </div>
     );
