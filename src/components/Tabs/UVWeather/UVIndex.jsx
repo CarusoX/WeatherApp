@@ -91,7 +91,7 @@ export default class UVIIndex extends PureComponent {
             <Grid.Column>
               <Statistic>
                 <Statistic.Value>{this.props.uv_index}</Statistic.Value>
-                <Statistic.Label>Current UVI index</Statistic.Label>
+                <Statistic.Label>Current UV index</Statistic.Label>
               </Statistic>
             </Grid.Column>
             <Grid.Column style={{ width: '40%', height: 300 }}>
