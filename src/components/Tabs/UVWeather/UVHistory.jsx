@@ -1,58 +1,42 @@
-import React, { PureComponent } from 'react';
+import React from 'react';
 import {
   AreaChart, Area, XAxis, YAxis, CartesianGrid, Tooltip, Legend, ResponsiveContainer, Dot
 } from 'recharts';
 
-const getColor = (index) => {
-  if (index < 3) return 'green';
-  else if (index < 6) return 'yellow';
-  else if (index < 8) return 'orange';
-  else if (index < 11) return 'red';
-  else return 'purple';
-}
-
-const gradientOffset = (data) => {
-  const dataMax = Math.max(...data.map(i => i.value));
-  const dataMin = Math.min(...data.map(i => i.value));
-
-  if (dataMax <= 6) {
-    return 0;
-  }
-  if (dataMin >= 4) {
-    return 1;
-  }
-
-  return dataMax / (dataMax - dataMin);
-};
-
-const off = (data) => gradientOffset(data);
-
-export default class UVHistory extends PureComponent {
+export default class UVHistory extends React.Component {
   static jsfiddleUrl = 'https://jsfiddle.net/alidingling/xqjtetw0/';
 
   render() {
+    const data = this.props.uv_history.map((x) =>
+      ({
+        'date': x.date_iso.slice(5, 10).split('-').join('/'),
+        'uv1': Math.min(x.value, 3),
+        'uv2': Math.min(Math.max(0, x.value - 3), 3),
+        'uv3': Math.min(Math.max(0, x.value - 6), 2),
+        'uv4': Math.min(Math.max(0, x.value - 8), 3),
+        'uv5': Math.max(0, x.value - 11)
+      }))
+
     return (
       <div style={{ width: '100%', height: 300 }}>
         <ResponsiveContainer>
           <AreaChart
             width={500}
             height={400}
-            data={this.props.uv_history.map((x) => ({ 'date': x.date_iso.slice(5, 10).split('-').join('/'), 'uv': x.value }))}
+            data={data}
             margin={{
               top: 10, right: 30, left: 0, bottom: 0,
             }}
           >
             <CartesianGrid strokeDasharray="3 3" />
-            <XAxis dataKey="name" />
+            <XAxis dataKey="date" />
             <YAxis />
             <Tooltip />
-            <defs>
-              <linearGradient id="splitColor" x1="0" y1="0" x2="0" y2="1">
-                <stop offset={off(this.props.uv_history)} stopColor="green" stopOpacity={1} />
-                <stop offset={off(this.props.uv_history)} stopColor="red" stopOpacity={1} />
-              </linearGradient>
-            </defs>
-            <Area type="monotone" dataKey="uv" stroke="#000" fill="url(#splitColor)" />
+            <Area type="monotone" dataKey="uv1" stackId="1" stroke="green" fill="green" />
+            <Area type="monotone" dataKey="uv2" stackId="1" stroke="yellow" fill="yellow" />
+            <Area type="monotone" dataKey="uv3" stackId="1" stroke="orange" fill="orange" />
+            <Area type="monotone" dataKey="uv4" stackId="1" stroke="red" fill="red" />
+            <Area type="monotone" dataKey="uv5" stackId="1" stroke="violet" fill="violet" />
           </AreaChart>
         </ResponsiveContainer>
       </div>
