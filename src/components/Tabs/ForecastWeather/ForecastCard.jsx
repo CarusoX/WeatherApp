@@ -19,8 +19,8 @@ class ForecastCard extends React.Component {
           </Segment>
           <Segment>{d.dt_txt.slice(0, 10).split('-').join('/')}</Segment>
           <Segment>{getDateName(d.dt_txt.slice(0, 10).split('-').join('/'))}</Segment>
-          <Segment>{d.main.temp_max}</Segment>
-          <Segment>{d.main.temp_min}</Segment>
+          <Segment>{d.max_temp}</Segment>
+          <Segment>{d.min_temp}</Segment>
         </Grid.Column>
       }>
       <ModalForecast 
@@ -41,6 +41,7 @@ class ForecastCard extends React.Component {
   }
 
   render() {
+    console.log(this.props)
     if(this.props.list.length === 0){
       return (
         <h1> LOADING </h1>
@@ -49,7 +50,7 @@ class ForecastCard extends React.Component {
       return (
         <Grid columns={5} divided>
           <Grid.Row stretched>
-            {this.props.list.date_days.map(day =>
+            {this.props.list.days.map(day =>
                 this.day(day),
             )}
           </Grid.Row>

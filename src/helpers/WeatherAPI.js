@@ -44,11 +44,11 @@ const filterDay = (result) => {
   return ({
     'weather_state': result['weather'][0]['main'],
     'weather_icon': result['weather'][0]['icon'],
-    'temp': Number(result['main']['temp']),
+    'temp': result['main']['temp'],
     'humidity': result['main']['humidity'],
     'pressure': result['main']['pressure'],
-    'min_temp': Number(result['main']['temp_min']),
-    'max_temp': Number(result['main']['temp_max']),
+    'min_temp': result['main']['temp_min'],
+    'max_temp': result['main']['temp_max'],
     'wind_speed': result['wind']['speed'],
     'wind_dir': result['wind']['deg'],
     'clouds': result['clouds']['all'],
@@ -65,14 +65,14 @@ const compressDays = (result) => {
         a[a.length - 1]['temp'] = a[a.length - 1]['temp'].toFixed(2);
       }
       a.push(Object.assign({ 'num': 1 }, b));
-    }
-    else {
+    } else {
       a[a.length - 1]['min_temp'] = Math.min(a[a.length - 1]['min_temp'], b['min_temp']);
       a[a.length - 1]['max_temp'] = Math.max(a[a.length - 1]['max_temp'], b['max_temp']);
       a[a.length - 1]['temp'] += b['temp'];
       a[a.length - 1]['num']++;
     }
-    if (i == result.length - 1) {
+
+    if (i === result.length - 1) {
       a[a.length - 1]['temp'] /= a[a.length - 1]['num'];
       a[a.length - 1]['temp'] = a[a.length - 1]['temp'].toFixed(2);
     }
@@ -87,22 +87,22 @@ export const fetch_data = (city) => {
     getUVIndex(city.coords),
     getUVForecast(city.coords),
     getUVHistory(city.coords),
-  ]).then(responses => {
+  ])
+  .then(responses => {
     if (responses.filter(response => !response.ok).length)
       throw Error('Error on fetch')
     return Promise.all(responses.map(result => result.json()))
-  }).then(results => {
+  })
+  .then(results => {
 
-    if (results.cod === "401") { // Invalid API Key
+    if (results.cod === "401") // Invalid API Key
       return 1
-    } else if (results.cod === "404") { // Wrong Search
+    if (results.cod === "404") // Wrong Search
       return 2
-    } else if (results.cod === "429") { // API Key Blocked
+    if (results.cod === "429") // API Key Blocked
       return 3
-    } else if (results.cod === "501") { // Server Error
+    if (results.cod === "501") // Server Error
       return 4
-    }
-
 
     const detailed_days = results[1]['list'].reduce((a, b) => {
       if (a.length)
@@ -149,15 +149,15 @@ export const fetch_cities = (city) => {
       return response.json()
     })
     .then(data => {
-      if (data.cod === "401") { // Invalid API Key
+      if (data.cod === "401") // Invalid API Key
         return 1
-      } else if (data.cod === "404") { // Wrong Search
+      if (data.cod === "404") // Wrong Search
         return 2
-      } else if (data.cod === "429") { // API Key Blocked
+      if (data.cod === "429") // API Key Blocked
         return 3
-      } else if (data.cod === "501") { // Server Error
+      if (data.cod === "501") // Server Error
         return 4
-      }
+      
       return data['list']
     })
     .catch(err => console.log(err));
