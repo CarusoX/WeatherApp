@@ -1,6 +1,6 @@
 import React from 'react'
 import { Segment, Grid, Image } from 'semantic-ui-react'
-import { getTemp, iconMap, unixtohours } from '../../../helpers/index.ts'
+import { getTemp, getIconName, unixtohours } from '../../../helpers/index.ts'
 import { Cell } from '../../Modular/index.ts'
 
 const path1 = '../../../icons/Theme1/'
@@ -10,12 +10,12 @@ class WeatherCard extends React.Component {
 
   render() {
     const {
-      weather_id, weather_state, weather_description, weather_icon,
+      weather_state, weather_description, weather_icon,
       temp, humidity, pressure, min_temp, max_temp, wind_speed,
-      wind_dir, clouds, sunrise, sunset, id, unit
+      wind_dir, clouds, sunrise, sunset, unit
     } = this.props;
 
-    const icon = iconMap(weather_icon)
+    const icon = getIconName(weather_icon)
     
     return (
       <Grid columns={3} divided>
