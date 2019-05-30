@@ -1,6 +1,6 @@
 import React from 'react'
 import { Segment, Grid, Image } from 'semantic-ui-react'
-import { getTemp, iconMap } from '../../../helpers/index.ts'
+import { getTemp, iconMap, unixtohours } from '../../../helpers/index.ts'
 import { Cell } from '../../Modular/index.ts'
 
 const path1 = '../../../icons/Theme1/'
@@ -31,7 +31,8 @@ class WeatherCard extends React.Component {
                   verticalAlign='middle'
                 />
               }
-              <p>{weather_state}</p>
+              <p style={{fontWeight: 'bold'}}>{weather_state}</p>
+              <p>{weather_description}</p>
             </Segment>
 
           </Grid.Column>
@@ -56,6 +57,13 @@ class WeatherCard extends React.Component {
             />
 
             <Cell 
+              image='004-clouds.png'
+              title='Clouds'
+              content={clouds}
+              unit='%'
+            />
+
+            <Cell 
               image='048-wind.png'
               title='Wind Speed'
               content={wind_speed}
@@ -65,18 +73,16 @@ class WeatherCard extends React.Component {
           </Grid.Column>
           <Grid.Column>
 
-          <Cell 
+            <Cell 
               image='012-dawn.png'
               title='Sunrise'
-              content='sunrise'
-              unit='AM'
+              content={unixtohours(sunrise)}
             />
 
             <Cell 
               image='037-sunset.png'
               title='Sunset'
-              content='sunset'
-              unit='PM'
+              content={unixtohours(sunset)}
             />
 
             <Cell 
