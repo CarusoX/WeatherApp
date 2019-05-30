@@ -1,43 +1,43 @@
-const API_KEY = process.env.API_KEY;
-const API_ENDPOINT = process.env.API_ENDPOINT;
-const API_FIND = process.env.API_FIND;
-const API_WEATHER = process.env.API_WEATHER;
-const API_FORECAST = process.env.API_FORECAST;
-const API_UVI = process.env.API_UVI;
-const API_UVF = process.env.API_UVF;
-const API_UVH = process.env.API_UVH;
+const API_KEY = process.env.API_KEY
+const API_ENDPOINT = process.env.API_ENDPOINT
+const API_FIND = process.env.API_FIND
+const API_WEATHER = process.env.API_WEATHER
+const API_FORECAST = process.env.API_FORECAST
+const API_UVI = process.env.API_UVI
+const API_UVF = process.env.API_UVF
+const API_UVH = process.env.API_UVH
 
 import { getMonthPeriod } from '../helpers/index.ts'
 
 const getCityList = (city) => {
-  const url = `${API_ENDPOINT}${API_FIND}?q=${city}&appid=${API_KEY}`;
-  return fetch(url);
+  const url = `${API_ENDPOINT}${API_FIND}?q=${city}&appid=${API_KEY}`
+  return fetch(url)
 }
 
 const getCurrentWeather = (id) => {
-  const url = `${API_ENDPOINT}${API_WEATHER}?id=${id}&units=metric&appid=${API_KEY}`;
-  return fetch(url);
+  const url = `${API_ENDPOINT}${API_WEATHER}?id=${id}&units=metric&appid=${API_KEY}`
+  return fetch(url)
 }
 
 const getForecastWeather = (id) => {
-  const url = `${API_ENDPOINT}${API_FORECAST}?id=${id}&units=metric&appid=${API_KEY}`;
-  return fetch(url);
+  const url = `${API_ENDPOINT}${API_FORECAST}?id=${id}&units=metric&appid=${API_KEY}`
+  return fetch(url)
 }
 
 const getUVIndex = (coords) => {
-  const url = `${API_ENDPOINT}${API_UVI}?appid=${API_KEY}&lat=${coords.lat}&lon=${coords.lon}`;
-  return fetch(url);
+  const url = `${API_ENDPOINT}${API_UVI}?appid=${API_KEY}&lat=${coords.lat}&lon=${coords.lon}`
+  return fetch(url)
 }
 
 const getUVForecast = (coords) => {
-  const url = `${API_ENDPOINT}${API_UVF}?appid=${API_KEY}&lat=${coords.lat}&lon=${coords.lon}&cnt=4`;
-  return fetch(url);
+  const url = `${API_ENDPOINT}${API_UVF}?appid=${API_KEY}&lat=${coords.lat}&lon=${coords.lon}&cnt=4`
+  return fetch(url)
 }
 
 const getUVHistory = (coords) => {
-  const period = getMonthPeriod();
-  const url = `${API_ENDPOINT}${API_UVH}?appid=${API_KEY}&lat=${coords.lat}&lon=${coords.lon}&start=${period.start}&end=${period.end}`;
-  return fetch(url);
+  const period = getMonthPeriod()
+  const url = `${API_ENDPOINT}${API_UVH}?appid=${API_KEY}&lat=${coords.lat}&lon=${coords.lon}&start=${period.start}&end=${period.end}`
+  return fetch(url)
 }
 
 const filterDay = (result) => {
@@ -61,22 +61,26 @@ const compressDays = (result) => {
   return result.reduce((a, b, i) => {
     if (b.dt_txt.slice(11, 21) === '00:00:00') {
       if (a.length) {
-        a[a.length - 1]['temp'] /= a[a.length - 1]['num'];
-        a[a.length - 1]['temp'] = a[a.length - 1]['temp'].toFixed(2);
+        a[a.length - 1]['temp'] /= a[a.length - 1]['num']
+        a[a.length - 1]['temp'] = a[a.length - 1]['temp'].toFixed(2)
       }
-      a.push(Object.assign({ 'num': 1 }, b));
+      a.push(Object.assign({ 'num': 1 }, b))
     } else {
-      a[a.length - 1]['min_temp'] = Math.min(a[a.length - 1]['min_temp'], b['min_temp']);
-      a[a.length - 1]['max_temp'] = Math.max(a[a.length - 1]['max_temp'], b['max_temp']);
-      a[a.length - 1]['temp'] += b['temp'];
-      a[a.length - 1]['num']++;
+      a[a.length - 1]['min_temp'] = Math.min(a[a.length - 1]['min_temp'], b['min_temp'])
+      a[a.length - 1]['max_temp'] = Math.max(a[a.length - 1]['max_temp'], b['max_temp'])
+      a[a.length - 1]['temp'] += b['temp']
+      a[a.length - 1]['num']++
+    }
+
+    if (b.dt_txt.slice(11, 21) === '12:00:00') {
+      a[a.length - 1]['weather_icon'] = b['weather_icon']
     }
 
     if (i === result.length - 1) {
-      a[a.length - 1]['temp'] /= a[a.length - 1]['num'];
-      a[a.length - 1]['temp'] = a[a.length - 1]['temp'].toFixed(2);
+      a[a.length - 1]['temp'] /= a[a.length - 1]['num']
+      a[a.length - 1]['temp'] = a[a.length - 1]['temp'].toFixed(2)
     }
-    return a;
+    return a
   }, [])
 }
 
@@ -135,9 +139,9 @@ export const fetch_data = (city) => {
           'uv_history': results[4]
         }
       ]
-    });
+    })
   })
-  .catch(err => console.log(err));
+  .catch(err => console.log(err))
   // TODO: do something with these errors
 }
 
@@ -145,7 +149,7 @@ export const fetch_cities = (city) => {
   return getCityList(city)
     .then(response => {
       if (!response.ok)
-        throw Error('Error on fetch');
+        throw Error('Error on fetch')
       return response.json()
     })
     .then(data => {
@@ -160,6 +164,6 @@ export const fetch_cities = (city) => {
       
       return data['list']
     })
-    .catch(err => console.log(err));
+    .catch(err => console.log(err))
   // TODO: do something with these errors
 }

@@ -1,42 +1,22 @@
 import React from 'react'
-import { Grid, Header, Icon, Image, Modal, Segment } from 'semantic-ui-react'
-import { getDateName } from '../../../helpers/index.ts'
-import { ModalForecast } from './ModalForecast'
+import { Grid } from 'semantic-ui-react'
+import { getDateName, getIconName } from '../../../helpers/index.ts'
+import { Cell2 } from '../../Modular/index.ts'
 
 
 class ForecastCard extends React.Component {
 
-  day(d) {
-    var flag = false
-    var a = 7
+  day(d, w) {
+    
     return (
-      <Modal trigger={
-        <Grid.Column>
-          <Segment>
-            <Icon.Group size='massive'>
-              <Icon name='sun' color='yellow'/>
-            </Icon.Group>
-          </Segment>
-          <Segment>{d.dt_txt.slice(0, 10).split('-').join('/')}</Segment>
-          <Segment>{getDateName(d.dt_txt.slice(0, 10).split('-').join('/'))}</Segment>
-          <Segment>{d.max_temp}</Segment>
-          <Segment>{d.min_temp}</Segment>
-        </Grid.Column>
-      }>
-      <ModalForecast 
-        data={this.props.list.days.filter(days => {
-                  if(d === days){
-                    flag = true
-                    return true
-                  }
-                  if(flag && a > 0){
-                    a--
-                    return true
-                  }
-                  return false
-                })}
+      <Cell2 
+        width={w}
+        icon={getIconName(d.weather_icon)}
+        date={d.dt_txt.slice(0, 10).split('-').join('/')}
+        day={getDateName(d.dt_txt.slice(0, 10).split('-').join('/'))}
+        max={d.max_temp}
+        min={d.min_temp}
       />
-      </Modal>
     );
   }
 
@@ -48,12 +28,19 @@ class ForecastCard extends React.Component {
       )
     } else {
       return (
-        <Grid columns={5} divided>
-          <Grid.Row stretched>
+
+        <Grid columns={6} divided centered>
+
+          <Grid.Row>
+            {this.day(this.props.list.days[0], 10)}
+          </Grid.Row>
+
+          <Grid.Row>
             {this.props.list.days.map(day =>
-                this.day(day),
+                this.day(day, 3),
             )}
           </Grid.Row>
+
         </Grid>
       );
     }
