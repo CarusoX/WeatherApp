@@ -41,6 +41,7 @@ class ForecastCard extends React.Component {
   }
 
   render() {
+    {console.log(this.props.list)}
     if(this.props.list.length === 0){
       return (
         <h1> LOADING </h1>

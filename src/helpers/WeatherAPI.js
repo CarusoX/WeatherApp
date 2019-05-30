@@ -37,12 +37,50 @@ const getUVForecast = (coords) => {
 const getUVHistory = (coords) => {
   const period = getMonthPeriod();
   const url = `${API_ENDPOINT}${API_UVH}?appid=${API_KEY}&lat=${coords.lat}&lon=${coords.lon}&start=${period.start}&end=${period.end}`;
-  console.log(url);
   return fetch(url);
 }
 
+const filterDay = (result) => {
+  return ({
+    'weather_state': result['weather'][0]['main'],
+    'weather_icon': result['weather'][0]['icon'],
+    'temp': Number(result['main']['temp']),
+    'humidity': result['main']['humidity'],
+    'pressure': result['main']['pressure'],
+    'min_temp': Number(result['main']['temp_min']),
+    'max_temp': Number(result['main']['temp_max']),
+    'wind_speed': result['wind']['speed'],
+    'wind_dir': result['wind']['deg'],
+    'clouds': result['clouds']['all'],
+    'sunrise': result['sys']['sunrise'],
+    'sunset': result['sys']['sunset']
+  })
+}
+
+const compressDays = (result) => {
+  return result.reduce((a, b, i) => {
+    if (b.dt_txt.slice(11, 21) === '00:00:00') {
+      if (a.length) {
+        a[a.length - 1]['temp'] /= a[a.length - 1]['num'];
+        a[a.length - 1]['temp'] = a[a.length - 1]['temp'].toFixed(2);
+      }
+      a.push(Object.assign(b, { 'num': 0 }));
+    }
+    else {
+      a[a.length - 1]['min_temp'] = Math.min(a[a.length - 1]['min_temp'], b['min_temp']);
+      a[a.length - 1]['max_temp'] = Math.max(a[a.length - 1]['max_temp'], b['max_temp']);
+      a[a.length - 1]['temp'] += b.temp;
+      a[a.length - 1]['num']++;
+    }
+    if (i == result.length - 1) {
+      a[a.length - 1]['temp'] /= a[a.length - 1]['num'];
+      a[a.length - 1]['temp'] = a[a.length - 1]['temp'].toFixed(2);
+    }
+    return a;
+  }, [])
+}
+
 export const fetch_data = (city) => {
-  var flag = false
   return Promise.all([
     getCurrentWeather(city.city_id),
     getForecastWeather(city.city_id),
@@ -65,39 +103,26 @@ export const fetch_data = (city) => {
       return 4
     }
 
+
+    const detailed_days = results[1]['list'].reduce((a, b) => {
+      if (a.length)
+        a.push(Object.assign(filterDay(b), { 'dt_txt': b.dt_txt }))
+      else if (b.dt_txt.slice(11, 21) === '00:00:00')
+        a.push(Object.assign(filterDay(b), { 'dt_txt': b.dt_txt }))
+      return a
+    }, [])
+
     return ({
       "results": [
-        {
-          'weather_state': results[0]['weather'][0]['main'],
-          'weather_icon': results[0]['weather'][0]['icon'],
-          'temp': results[0]['main']['temp'],
-          'humidity': results[0]['main']['humidity'],
-          'pressure': results[0]['main']['pressure'],
-          'min_temp': results[0]['main']['temp_min'],
-          'max_temp': results[0]['main']['temp_max'],
-          'wind_speed': results[0]['wind']['speed'],
-          'wind_dir': results[0]['wind']['deg'],
-          'clouds': results[0]['clouds']['all'],
-          'sunrise': results[0]['sys']['sunrise'],
-          'sunset': results[0]['sys']['sunset'],
-        },
+        // Current
+        filterDay(results[0]),
+
         // Forecast
         {
-          'days': results[1]['list'].filter(day => {
-            if(flag || day.dt_txt.slice(11, 21) === '00:00:00'){
-              flag = true
-              return true
-            }
-            else if(flag) return true
-
-          }),
-
-          'date_days': results[1]['list'].filter(day => {
-            return (
-              day.dt_txt.slice(11, 21) === '00:00:00'
-            )
-          }),
+          'detailed_days': detailed_days,
+          'days': compressDays(detailed_days)
         },
+
         // UVI
         {
           'uv_index': results[2]['value'],
