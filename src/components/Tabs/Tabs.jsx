@@ -61,7 +61,6 @@ class Tabs extends React.Component {
               <Tab.Pane attached={false}>
                 <WeatherCard
                   unit={this.props.unit}
-                  nana={this.props.icon}
                   {...this.props.currentWeather}
                 />
               </Tab.Pane>

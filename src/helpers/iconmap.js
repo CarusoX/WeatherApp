@@ -1,4 +1,4 @@
-export const iconmap = {
+const iconmap = {
   '01d': '036-sun', '01n': '024-moon',
   '02d': '007-cloudy day', '02n': '025-night',
   '03d': '003-cloud', '03n': '003-cloud',
@@ -8,4 +8,8 @@ export const iconmap = {
   '11d': '041-thunderstorm', '11n': '041-thunderstorm',
   '13d': '032-snowy', '13n': '033-snowy',
   '50d': '016-haze', '50n': '016-haze',
+}
+
+export const iconMap = (code) => {
+  return iconmap[code];
 }

@@ -51,8 +51,6 @@ class Menu extends React.Component {
 
         <Divider section horizontal>City: {(this.state.city) ? this.state.city.city_name : ''}</Divider>
 
-        im passing {this.state.icon}
-
         <Tabs
           error={this.state.error}
           show={this.state.city !== undefined}
@@ -61,7 +59,6 @@ class Menu extends React.Component {
           list={this.state.list}
           unit={this.props.unit}
           loading={this.state.loading}
-          icon={this.state.icon}
         />
 
       </Container >
