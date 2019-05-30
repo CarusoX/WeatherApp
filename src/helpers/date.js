@@ -1,6 +1,6 @@
 export const getDateName = (dateStr) => {
     const date = new Date(dateStr);
-    return date.toLocaleDateString('en-EN', { weekday: 'short' });
+    return date.toLocaleDateString('en-EN', { weekday: 'long' });
 }
 
 const format = (d) => `${Math.round(d.getTime() / 1000)}`
