@@ -1,21 +1,9 @@
 import React from 'react'
 import { Segment, Grid, Image, Divider, GridColumn } from 'semantic-ui-react'
-import { getTemp } from '../../../helpers/index.ts'
+import { getTemp, iconmap } from '../../../helpers/index.ts'
 
 const path1 = '../../../icons/Theme1/'
 const path2 = '../../../icons/Theme2/'
-
-var iconmap = {
-  '01d': '036-sun', '01n': '024-moon',
-  '02d': '007-cloudy day', '02n': '025-night',
-  '03d': '003-cloud', '03n': '003-cloud',
-  '04d': '004-clouds', '04n': '004-clouds',
-  '09d': '027-rain', '09n': '027-rain',
-  '10d': '046-weather', '10n': '046-weather',
-  '11d': '041-thunderstorm', '11n': '041-thunderstorm',
-  '13d': '032-snowy', '13n': '033-snowy',
-  '50d': '016-haze', '50n': '016-haze',
-}
 
 class WheaterCard extends React.Component {
   
@@ -46,7 +34,7 @@ class WheaterCard extends React.Component {
               <Grid columns={2} stackable>
                 <Grid.Column>
                 <Image src={require('../../../icons/Theme2/018-high temperature.png')}
-                      size='mini' verticalAlign='middle' />
+                       size='mini' verticalAlign='middle' />
                 </Grid.Column>
                 <Grid.Column>
                   <Grid.Row>
@@ -63,7 +51,7 @@ class WheaterCard extends React.Component {
               <Grid columns={2} stackable>
                 <Grid.Column>
                 <Image src={require('../../../icons/Theme2/022-low temperature.png')}
-                      size='mini' verticalAlign='middle' />
+                       size='mini' verticalAlign='middle' />
                 </Grid.Column>
                 <Grid.Column>
                   <Grid.Row>
@@ -83,7 +71,7 @@ class WheaterCard extends React.Component {
               <Grid columns={2} stackable>
                 <Grid.Column>
                 <Image src={require('../../../icons/Theme2/039-thermometer.png')}
-                      size='mini' verticalAlign='middle' />
+                       size='mini' verticalAlign='middle' />
                 </Grid.Column>
                 <Grid.Column>
                   <Grid.Row>
@@ -100,7 +88,7 @@ class WheaterCard extends React.Component {
               <Grid columns={2} stackable>
                 <Grid.Column>
                 <Image src={require('../../../icons/Theme2/045-weather.png')}
-                      size='mini' verticalAlign='middle' />
+                       size='mini' verticalAlign='middle' />
                 </Grid.Column>
                 <Grid.Column>
                   <Grid.Row>
@@ -117,7 +105,7 @@ class WheaterCard extends React.Component {
               <Grid columns={2} stackable>
                 <Grid.Column>
                 <Image src={require('../../../icons/Theme2/019-humidity.png')}
-                      size='mini' verticalAlign='middle' />
+                       size='mini' verticalAlign='middle' />
                 </Grid.Column>
                 <Grid.Column>
                   <Grid.Row>
@@ -134,7 +122,7 @@ class WheaterCard extends React.Component {
               <Grid columns={2} stackable>
                 <Grid.Column>
                 <Image src={require('../../../icons/Theme2/048-wind.png')}
-                      size='mini' verticalAlign='middle' />
+                       size='mini' verticalAlign='middle' />
                 </Grid.Column>
                 <Grid.Column>
                   <Grid.Row>
@@ -154,7 +142,7 @@ class WheaterCard extends React.Component {
               <Grid columns={2} stackable>
                 <Grid.Column>
                 <Image src={require('../../../icons/Theme2/012-dawn.png')}
-                      size='mini' verticalAlign='middle' />
+                       size='mini' verticalAlign='middle' />
                 </Grid.Column>
                 <Grid.Column>
                   <Grid.Row>
@@ -171,7 +159,7 @@ class WheaterCard extends React.Component {
               <Grid columns={2} stackable>
                 <Grid.Column>
                 <Image src={require('../../../icons/Theme2/037-sunset.png')}
-                      size='mini' verticalAlign='middle' />
+                       size='mini' verticalAlign='middle' />
                 </Grid.Column>
                 <Grid.Column>
                   <Grid.Row>
@@ -188,7 +176,7 @@ class WheaterCard extends React.Component {
               <Grid columns={2} stackable>
                 <Grid.Column>
                 <Image src={require('../../../icons/Theme2/026-pressure.png')}
-                      size='mini' verticalAlign='middle' />
+                       size='mini' verticalAlign='middle' />
                 </Grid.Column>
                 <Grid.Column>
                   <Grid.Row>
