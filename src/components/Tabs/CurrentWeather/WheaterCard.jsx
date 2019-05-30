@@ -1,6 +1,7 @@
 import React from 'react'
 import { Segment, Grid, Image, Divider, GridColumn } from 'semantic-ui-react'
 import { getTemp, iconmap } from '../../../helpers/index.ts'
+import { bold } from 'ansi-colors';
 
 const path1 = '../../../icons/Theme1/'
 const path2 = '../../../icons/Theme2/'
@@ -30,40 +31,6 @@ class WheaterCard extends React.Component {
                    size='medium' verticalAlign='middle' />
             </Segment>
 
-            <Segment raised compact>
-              <Grid columns={2} stackable>
-                <Grid.Column>
-                <Image src={require('../../../icons/Theme2/018-high temperature.png')}
-                       size='mini' verticalAlign='middle' />
-                </Grid.Column>
-                <Grid.Column>
-                  <Grid.Row>
-                    Max temp
-                  </Grid.Row>
-                  <Grid.Row>
-                    {getTemp(max_temp, unit)}
-                  </Grid.Row>
-                </Grid.Column>
-              </Grid>
-            </Segment>
-
-            <Segment raised compact>
-              <Grid columns={2} stackable>
-                <Grid.Column>
-                <Image src={require('../../../icons/Theme2/022-low temperature.png')}
-                       size='mini' verticalAlign='middle' />
-                </Grid.Column>
-                <Grid.Column>
-                  <Grid.Row>
-                    Min temp
-                  </Grid.Row>
-                  <Grid.Row>
-                    {getTemp(min_temp, unit)}
-                  </Grid.Row>
-                </Grid.Column>
-              </Grid>
-            </Segment>
-
           </Grid.Column>
           <Grid.Column>
 
@@ -75,7 +42,7 @@ class WheaterCard extends React.Component {
                 </Grid.Column>
                 <Grid.Column>
                   <Grid.Row>
-                    Temp
+                    <h3 style={{fontSize: 15}}>Temp</h3>
                   </Grid.Row>
                   <Grid.Row>
                     {getTemp(temp, unit)}
@@ -92,7 +59,7 @@ class WheaterCard extends React.Component {
                 </Grid.Column>
                 <Grid.Column>
                   <Grid.Row>
-                    State
+                    <h3 style={{fontSize: 15}}>State</h3>
                   </Grid.Row>
                   <Grid.Row>
                     {weather_state}
@@ -109,7 +76,7 @@ class WheaterCard extends React.Component {
                 </Grid.Column>
                 <Grid.Column>
                   <Grid.Row>
-                    Humidity
+                    <h3 style={{fontSize: 15}}>Humidity</h3>
                   </Grid.Row>
                   <Grid.Row>
                     {humidity} %
@@ -126,7 +93,7 @@ class WheaterCard extends React.Component {
                 </Grid.Column>
                 <Grid.Column>
                   <Grid.Row>
-                    Wind
+                    <h3 style={{fontSize: 15}}>Wind</h3>
                   </Grid.Row>
                   <Grid.Row>
                     {wind_speed} M/s
@@ -146,7 +113,7 @@ class WheaterCard extends React.Component {
                 </Grid.Column>
                 <Grid.Column>
                   <Grid.Row>
-                    Sunrise
+                    <h3 style={{fontSize: 15}}>Sunrise</h3>
                   </Grid.Row>
                   <Grid.Row>
                     No se jaja salu2 AM
@@ -163,10 +130,44 @@ class WheaterCard extends React.Component {
                 </Grid.Column>
                 <Grid.Column>
                   <Grid.Row>
-                    Sunset
+                    <h3 style={{fontSize: 15}}>Sunset</h3>
                   </Grid.Row>
                   <Grid.Row>
                     No se jaja salu2 PM
+                  </Grid.Row>
+                </Grid.Column>
+              </Grid>
+            </Segment>
+
+            <Segment raised compact>
+              <Grid columns={2} stackable>
+                <Grid.Column>
+                <Image src={require('../../../icons/Theme2/018-high temperature.png')}
+                       size='mini' verticalAlign='middle' />
+                </Grid.Column>
+                <Grid.Column>
+                  <Grid.Row>
+                    <h3 style={{fontSize: 15}}>Max temp</h3>
+                  </Grid.Row>
+                  <Grid.Row>
+                    {getTemp(max_temp, unit)}
+                  </Grid.Row>
+                </Grid.Column>
+              </Grid>
+            </Segment>
+
+            <Segment raised compact>
+              <Grid columns={2} stackable>
+                <Grid.Column>
+                <Image src={require('../../../icons/Theme2/022-low temperature.png')}
+                       size='mini' verticalAlign='middle' />
+                </Grid.Column>
+                <Grid.Column>
+                  <Grid.Row>
+                    <h3 style={{fontSize: 15}}>Min temp</h3>
+                  </Grid.Row>
+                  <Grid.Row>
+                    {getTemp(min_temp, unit)}
                   </Grid.Row>
                 </Grid.Column>
               </Grid>
@@ -180,7 +181,7 @@ class WheaterCard extends React.Component {
                 </Grid.Column>
                 <Grid.Column>
                   <Grid.Row>
-                    Preassure
+                    <h3 style={{fontSize: 15}}>Preassure</h3>
                   </Grid.Row>
                   <Grid.Row>
                     {pressure} hPa
