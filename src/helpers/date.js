@@ -14,3 +14,11 @@ export const getMonthPeriod = () => {
         'end': format(date)
     }
 }
+
+export const unixtohours = (t) => {
+    var dt = new Date(1000 * t);
+    var hr = dt.getHours();
+    var m = "0" + dt.getMinutes();
+    var s = "0" + dt.getSeconds();
+    return hr + ':' + m.substr(-2) + ':' + s.substr(-2);
+}

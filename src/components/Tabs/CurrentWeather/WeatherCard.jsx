@@ -1,7 +1,7 @@
 import React from 'react'
-import { Segment, Grid, Image, Divider, GridColumn } from 'semantic-ui-react'
-import { getTemp, iconmap } from '../../../helpers/index.ts'
-import { bold } from 'ansi-colors';
+import { Segment, Grid, Image } from 'semantic-ui-react'
+import { getTemp, getIconName, unixtohours } from '../../../helpers/index.ts'
+import { Cell } from '../../Modular/index.ts'
 
 const path1 = '../../../icons/Theme1/'
 const path2 = '../../../icons/Theme2/'
@@ -10,20 +10,20 @@ class WeatherCard extends React.Component {
 
   render() {
     const {
-      weather_id, weather_state, weather_description, weather_icon,
-      temp, humidity, pressure, min_temp, max_temp, wind_speed,
-      wind_dir, clouds, id, unit
+      weather_state, weather_icon, temp, 
+      humidity, pressure, min_temp, max_temp, wind_speed,
+      wind_dir, clouds, sunrise, sunset, unit
     } = this.props;
 
-    // TODO: Make a function that returs it, not the map directly
-    // Map should be protected in this sense (not exported)
-    const icon = iconmap[this.props.nana]
-
+    const icon = getIconName(weather_icon)
+    
     return (
       <Grid columns={3} divided>
         <Grid.Row stretched>
           <Grid.Column>
+
             <Segment raised compact>
+              <h3 style={{fontSize: 25}}>State</h3>
               {
                 icon && <Image
                   src={require(`../../../icons/Theme2/${icon}.png`)}
@@ -31,173 +31,87 @@ class WeatherCard extends React.Component {
                   verticalAlign='middle'
                 />
               }
+              <p style={{fontWeight: 'bold'}}>{weather_state}</p>
             </Segment>
 
           </Grid.Column>
           <Grid.Column>
 
-            <Segment raised compact>
-              <Grid columns={2} stackable>
-                <Grid.Column>
-                  <Image src={require('../../../icons/Theme2/018-high temperature.png')}
-                    size='mini' verticalAlign='middle' />
-                </Grid.Column>
-                <Grid.Column>
-                  <Grid.Row>
-                    <h3 style={{fontSize: 15}}>Temp</h3>
-                  </Grid.Row>
-                  <Grid.Row>
-                    {getTemp(temp, unit)}
-                  </Grid.Row>
-                </Grid.Column>
-              </Grid>
-            </Segment>
+            <Cell 
+              image='039-thermometer.png'
+              title='Temperature'
+              content={getTemp(temp, unit)}
+            />
 
-            <Segment raised compact>
-              <Grid columns={2} stackable>
-                <Grid.Column>
-                  <Image src={require('../../../icons/Theme2/022-low temperature.png')}
-                    size='mini' verticalAlign='middle' />
-                </Grid.Column>
-                <Grid.Column>
-                  <Grid.Row>
-                    <h3 style={{fontSize: 15}}>State</h3>
-                  </Grid.Row>
-                  <Grid.Row>
-                    {weather_state}
-                  </Grid.Row>
-                </Grid.Column>
-              </Grid>
-            </Segment>
+            <Cell 
+              image='018-high temperature.png'
+              title='Max Temperature'
+              content={getTemp(max_temp, unit)}
+            />
 
-            <Segment raised compact>
-              <Grid columns={2} stackable>
-                <Grid.Column>
-                  <Image src={require('../../../icons/Theme2/039-thermometer.png')}
-                    size='mini' verticalAlign='middle' />
-                </Grid.Column>
-                <Grid.Column>
-                  <Grid.Row>
-                    <h3 style={{fontSize: 15}}>Humidity</h3>
-                  </Grid.Row>
-                  <Grid.Row>
-                    {humidity} %
-                  </Grid.Row>
-                </Grid.Column>
-              </Grid>
-            </Segment>
+            <Cell 
+              image='022-low temperature.png'
+              title='Min Temperature'
+              content={getTemp(min_temp, unit)}
+            />
 
-            <Segment raised compact>
-              <Grid columns={2} stackable>
-                <Grid.Column>
-                  <Image src={require('../../../icons/Theme2/045-weather.png')}
-                    size='mini' verticalAlign='middle' />
-                </Grid.Column>
-                <Grid.Column>
-                  <Grid.Row>
-                    <h3 style={{fontSize: 15}}>Wind</h3>
-                  </Grid.Row>
-                  <Grid.Row>
-                    {wind_speed} M/s
-                  </Grid.Row>
-                </Grid.Column>
-              </Grid>
-            </Segment>
+            <Cell 
+              image='004-clouds.png'
+              title='Clouds'
+              content={clouds}
+              unit='%'
+            />
+
+            <Cell 
+              image='048-wind.png'
+              title='Wind Speed'
+              content={wind_speed}
+              unit='M/s'
+            />
 
           </Grid.Column>
           <Grid.Column>
 
-            <Segment raised compact>
-              <Grid columns={2} stackable>
-                <Grid.Column>
-                  <Image src={require('../../../icons/Theme2/019-humidity.png')}
-                    size='mini' verticalAlign='middle' />
-                </Grid.Column>
-                <Grid.Column>
-                  <Grid.Row>
-                    <h3 style={{fontSize: 15}}>Sunrise</h3>
-                  </Grid.Row>
-                  <Grid.Row>
-                    No se jaja salu2 AM
-                  </Grid.Row>
-                </Grid.Column>
-              </Grid>
-            </Segment>
+            <Cell 
+              image='012-dawn.png'
+              title='Sunrise'
+              content={unixtohours(sunrise)}
+              unit='Hs'
+            />
 
-            <Segment raised compact>
-              <Grid columns={2} stackable>
-                <Grid.Column>
-                  <Image src={require('../../../icons/Theme2/048-wind.png')}
-                    size='mini' verticalAlign='middle' />
-                </Grid.Column>
-                <Grid.Column>
-                  <Grid.Row>
-                    <h3 style={{fontSize: 15}}>Sunset</h3>
-                  </Grid.Row>
-                  <Grid.Row>
-                    No se jaja salu2 PM
-                  </Grid.Row>
-                </Grid.Column>
-              </Grid>
-            </Segment>
+            <Cell 
+              image='037-sunset.png'
+              title='Sunset'
+              content={unixtohours(sunset)}
+              unit='Hs'
+            />
 
-            <Segment raised compact>
-              <Grid columns={2} stackable>
-                <Grid.Column>
-                  <Image src={require('../../../icons/Theme2/012-dawn.png')}
-                    size='mini' verticalAlign='middle' />
-                </Grid.Column>
-                <Grid.Column>
-                  <Grid.Row>
-                    <h3 style={{fontSize: 15}}>Max temp</h3>
-                  </Grid.Row>
-                  <Grid.Row>
-                    {getTemp(max_temp, unit)}
-                  </Grid.Row>
-                </Grid.Column>
-              </Grid>
-            </Segment>
+            <Cell 
+              image='019-humidity.png'
+              title='Humidity'
+              content={humidity}
+              unit='%'
+            />
+            
+            <Cell 
+              image='026-pressure.png'
+              title='Preassure'
+              content={pressure}
+              unit='hPa'
+            />
 
-            <Segment raised compact>
-              <Grid columns={2} stackable>
-                <Grid.Column>
-                  <Image src={require('../../../icons/Theme2/037-sunset.png')}
-                    size='mini' verticalAlign='middle' />
-                </Grid.Column>
-                <Grid.Column>
-                  <Grid.Row>
-                    <h3 style={{fontSize: 15}}>Min temp</h3>
-                  </Grid.Row>
-                  <Grid.Row>
-                    {getTemp(min_temp, unit)}
-                  </Grid.Row>
-                </Grid.Column>
-              </Grid>
-            </Segment>
-
-            <Segment raised compact>
-              <Grid columns={2} stackable>
-                <Grid.Column>
-                  <Image src={require('../../../icons/Theme2/026-pressure.png')}
-                    size='mini' verticalAlign='middle' />
-                </Grid.Column>
-                <Grid.Column>
-                  <Grid.Row>
-                    <h3 style={{fontSize: 15}}>Preassure</h3>
-                  </Grid.Row>
-                  <Grid.Row>
-                    {pressure} hPa
-                  </Grid.Row>
-                </Grid.Column>
-              </Grid>
-            </Segment>
+            <Cell 
+              image='047-weathercock.png'
+              title='Wind Direction'
+              content={wind_dir}
+              unit='º'
+            />
 
           </Grid.Column>
         </Grid.Row>
       </Grid>
     )
   }
-
 }
 
 export default WeatherCard;

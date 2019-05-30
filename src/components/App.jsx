@@ -1,5 +1,5 @@
 import React from 'react'
-import { Button, Container, Grid, Segment } from 'semantic-ui-react'
+import { Button, Container, Grid, Header, Modal, Segment } from 'semantic-ui-react'
 import { Title } from './Title/index.ts'
 import { Menu } from './Menu/index.ts'
 
@@ -48,6 +48,20 @@ class App extends React.Component {
 
           </Grid.Column>
         </Grid>
+
+        <Modal trigger={
+          <Segment>
+            <p>Third party code and resources</p>
+          </Segment>
+        }>
+          <Modal.Header>Title! :D</Modal.Header>
+          <Modal.Content>
+            <Modal.Description>
+              <Header>ICONS</Header>
+              <p>https://www.flaticon.com/authors/good-ware</p>
+            </Modal.Description>
+          </Modal.Content>
+        </Modal>
 
       </Container>
     );

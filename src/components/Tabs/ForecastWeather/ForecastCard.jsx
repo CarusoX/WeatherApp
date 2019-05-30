@@ -1,82 +1,57 @@
 import React from 'react'
 import { Grid, Header, Icon, Image, Modal, Segment } from 'semantic-ui-react'
 import { getDateName } from '../../../helpers/index.ts'
+import { ModalForecast } from './ModalForecast'
 
 
 class ForecastCard extends React.Component {
-  state = {
-    maxT: 0,
-    minT: 0,
-    date : '',
-    currentDay: '',
-  }
 
-  day() {
+  day(d) {
+    var flag = false
+    var a = 7
     return (
-
       <Modal trigger={
-  
         <Grid.Column>
           <Segment>
             <Icon.Group size='massive'>
               <Icon name='sun' color='yellow'/>
             </Icon.Group>
           </Segment>
-          <Segment>{this.state.currentDay}</Segment>
-          <Segment>{this.state.date}</Segment>
-          <Segment>{this.state.minT}</Segment>
-          <Segment>{this.state.maxT}</Segment>
+          <Segment>{d.dt_txt.slice(0, 10).split('-').join('/')}</Segment>
+          <Segment>{getDateName(d.dt_txt.slice(0, 10).split('-').join('/'))}</Segment>
+          <Segment>{d.main.temp_max}</Segment>
+          <Segment>{d.main.temp_min}</Segment>
         </Grid.Column>
-  
       }>
-        <Modal.Header>Title! :D</Modal.Header>
-        <Modal.Content image>
-          <Image wrapped size='medium' src={require('../../../images/error.png')}/>
-          <Modal.Description>
-            <Header>S a d f a c e</Header>
-            <p>Asi es como se pone un modal Lucas</p>
-            <p>Aprende a leer las documentaciones :)</p>
-          </Modal.Description>
-        </Modal.Content>
+      <ModalForecast 
+        data={this.props.list.days.filter(days => {
+                  if(d === days){
+                    flag = true
+                    return true
+                  }
+                  if(flag && a > 0){
+                    a--
+                    return true
+                  }
+                  return false
+                })}
+      />
       </Modal>
     );
-  }
-
-  set_day(k) {
-      this.state.maxT= this.props.list.days[k].main.temp_max
-      this.state.minT = this.props.list.days[k].main.temp_min
-      this.state.date = this.props.list.date_forecast[Math.ceil(k/8) - 1].date
-
-      this.state.currentDay = getDateName(this.state.date)
   }
 
   render() {
     if(this.props.list.length === 0){
       return (
-        <Grid columns={5} divided>
-          <Grid.Row stretched>
-            {this.day()}
-            {this.day()}
-            {this.day()}
-            {this.day()}
-            {this.day()}
-          </Grid.Row>
-        </Grid>
+        <h1> LOADING </h1>
       )
     } else {
       return (
         <Grid columns={5} divided>
           <Grid.Row stretched>
-            {this.set_day(7)}
-            {this.day()}
-            {this.set_day(15)}
-            {this.day()}
-            {this.set_day(23)}
-            {this.day()}
-            {this.set_day(31)}
-            {this.day()}
-            {this.set_day(39)}
-            {this.day()}
+            {this.props.list.date_days.map(day =>
+                this.day(day),
+            )}
           </Grid.Row>
         </Grid>
       );
