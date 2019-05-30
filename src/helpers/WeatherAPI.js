@@ -42,7 +42,7 @@ const getUVHistory = (coords) => {
 }
 
 export const fetch_data = (city) => {
-
+  var flag = false
   return Promise.all([
     getCurrentWeather(city.city_id),
     getForecastWeather(city.city_id),
@@ -83,18 +83,25 @@ export const fetch_data = (city) => {
         },
         // Forecast
         {
-          'days': results[1]['list'],
-          'date_forecast': results[3].map(function (day) {
-            return {
-              'index': day,
-              'date': day['date_iso'].slice(0, 10).split('-').join('/')
+          'days': results[1]['list'].filter(day => {
+            if(flag || day.dt_txt.slice(11, 21) === '00:00:00'){
+              flag = true
+              return true
             }
+            else if(flag) return true
+
+          }),
+
+          'date_days': results[1]['list'].filter(day => {
+            return (
+              day.dt_txt.slice(11, 21) === '00:00:00'
+            )
           }),
         },
         // UVI
         {
           'uv_index': results[2]['value'],
-          'uv_forecast': results[3].map(function (day) {
+          'uv_forecast': results[3].map(day => {
             return {
               'index': day['value'],
               'date': day['date_iso'].slice(0, 10).split('-').join('/')

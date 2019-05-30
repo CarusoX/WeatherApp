@@ -32,7 +32,6 @@ class WeatherCard extends React.Component {
                 />
               }
               <p style={{fontWeight: 'bold'}}>{weather_state}</p>
-              <p>{weather_description}</p>
             </Segment>
 
           </Grid.Column>

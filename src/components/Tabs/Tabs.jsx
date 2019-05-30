@@ -20,7 +20,6 @@ const errorPanes = (mode) => [
 class Tabs extends React.Component {
   
   render() {
-    {console.log(this.props)}
     if (typeof(this.props.error) === 'number') { // Either 1, 2, 3, or 4
       return (
         <Tab
