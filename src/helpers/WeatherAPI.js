@@ -68,9 +68,7 @@ export const fetch_data = (city) => {
     return ({
       "results": [
         {
-          'weather_id': results[0]['weather'][0]['id'],
           'weather_state': results[0]['weather'][0]['main'],
-          'weather_description': results[0]['weather'][0]['description'],
           'weather_icon': results[0]['weather'][0]['icon'],
           'temp': results[0]['main']['temp'],
           'humidity': results[0]['main']['humidity'],
@@ -82,7 +80,6 @@ export const fetch_data = (city) => {
           'clouds': results[0]['clouds']['all'],
           'sunrise': results[0]['sys']['sunrise'],
           'sunset': results[0]['sys']['sunset'],
-          'id': results[0]['id'],
         },
         // Forecast
         {

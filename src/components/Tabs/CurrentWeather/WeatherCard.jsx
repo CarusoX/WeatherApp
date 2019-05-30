@@ -10,8 +10,8 @@ class WeatherCard extends React.Component {
 
   render() {
     const {
-      weather_state, weather_description, weather_icon,
-      temp, humidity, pressure, min_temp, max_temp, wind_speed,
+      weather_state, weather_icon, temp, 
+      humidity, pressure, min_temp, max_temp, wind_speed,
       wind_dir, clouds, sunrise, sunset, unit
     } = this.props;
 
