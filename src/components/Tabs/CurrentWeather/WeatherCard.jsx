@@ -12,7 +12,7 @@ class WeatherCard extends React.Component {
     const {
       weather_id, weather_state, weather_description, weather_icon,
       temp, humidity, pressure, min_temp, max_temp, wind_speed,
-      wind_dir, clouds, id, unit
+      wind_dir, clouds, sunrise, sunset, id, unit
     } = this.props;
 
     const icon = iconMap(weather_icon)
@@ -77,12 +77,14 @@ class WeatherCard extends React.Component {
               image='012-dawn.png'
               title='Sunrise'
               content={unixtohours(sunrise)}
+              unit='Hs'
             />
 
             <Cell 
               image='037-sunset.png'
               title='Sunset'
               content={unixtohours(sunset)}
+              unit='Hs'
             />
 
             <Cell 
@@ -99,12 +101,18 @@ class WeatherCard extends React.Component {
               unit='hPa'
             />
 
+            <Cell 
+              image='047-weathercock.png'
+              title='Wind Direction'
+              content={wind_dir}
+              unit='º'
+            />
+
           </Grid.Column>
         </Grid.Row>
       </Grid>
     )
   }
-
 }
 
 export default WeatherCard;

@@ -80,6 +80,8 @@ export const fetch_data = (city) => {
           'wind_speed': results[0]['wind']['speed'],
           'wind_dir': results[0]['wind']['deg'],
           'clouds': results[0]['clouds']['all'],
+          'sunrise': results[0]['sys']['sunrise'],
+          'sunset': results[0]['sys']['sunset'],
           'id': results[0]['id'],
         },
         // Forecast
