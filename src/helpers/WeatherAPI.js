@@ -64,12 +64,12 @@ const compressDays = (result) => {
         a[a.length - 1]['temp'] /= a[a.length - 1]['num'];
         a[a.length - 1]['temp'] = a[a.length - 1]['temp'].toFixed(2);
       }
-      a.push(Object.assign(b, { 'num': 0 }));
+      a.push(Object.assign({ 'num': 1 }, b));
     }
     else {
       a[a.length - 1]['min_temp'] = Math.min(a[a.length - 1]['min_temp'], b['min_temp']);
       a[a.length - 1]['max_temp'] = Math.max(a[a.length - 1]['max_temp'], b['max_temp']);
-      a[a.length - 1]['temp'] += b.temp;
+      a[a.length - 1]['temp'] += b['temp'];
       a[a.length - 1]['num']++;
     }
     if (i == result.length - 1) {
