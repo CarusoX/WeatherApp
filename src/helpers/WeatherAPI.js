@@ -140,8 +140,8 @@ export const fetchData = city => {
 
           // UVI
           {
-            uv_index: results[2].value,
-            uv_forecast: results[3].map(day => {
+            index: results[2].value,
+            forecast: results[3].map(day => {
               return {
                 index: day.value,
                 date: day.date_iso
@@ -150,7 +150,7 @@ export const fetchData = city => {
                   .join("/")
               };
             }),
-            uv_history: results[4]
+            history: results[4]
           }
         ]
       };

@@ -1,3 +1,4 @@
+import PropTypes from "prop-types";
 import React from "react";
 import { Tab } from "semantic-ui-react";
 import "semantic-ui-css/semantic.min.css";
@@ -14,6 +15,10 @@ const DefaultTab = props => {
       />
     </Tab.Pane>
   );
+};
+
+DefaultTab.propTypes = {
+  mode: PropTypes.bool.isRequired
 };
 
 export default DefaultTab;

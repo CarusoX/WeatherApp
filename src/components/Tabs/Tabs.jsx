@@ -1,3 +1,4 @@
+import PropTypes from "prop-types";
 import React from "react";
 import { Tab } from "semantic-ui-react";
 import { DefaultTab, ErrorTab } from "../Modular/index.ts";
@@ -75,6 +76,58 @@ const Tabs = props => {
       ]}
     />
   );
+};
+
+Tabs.defaultProps = {
+  error: false,
+  currentWeather: {},
+  list: {},
+  UV: {}
+};
+
+const weather_propTypes = {
+  weather_state: PropTypes.string,
+  weather_icon: PropTypes.string,
+  temp: PropTypes.number,
+  humidity: PropTypes.number,
+  pressure: PropTypes.number,
+  min_temp: PropTypes.number,
+  max_temp: PropTypes.number,
+  wind_speed: PropTypes.number,
+  wind_dir: PropTypes.string,
+  clouds: PropTypes.string,
+  sunrise: PropTypes.string,
+  sunset: PropTypes.string
+};
+
+Tabs.propTypes = {
+  error: PropTypes.bool,
+  show: PropTypes.bool.isRequired,
+  loading: PropTypes.bool.isRequired,
+  unit: PropTypes.string.isRequired,
+  currentWeather: PropTypes.shape({
+    weather_state: PropTypes.string,
+    weather_icon: PropTypes.string,
+    temp: PropTypes.number,
+    humidity: PropTypes.number,
+    pressure: PropTypes.number,
+    min_temp: PropTypes.number,
+    max_temp: PropTypes.number,
+    wind_speed: PropTypes.number,
+    wind_dir: PropTypes.string,
+    clouds: PropTypes.string,
+    sunrise: PropTypes.string,
+    sunset: PropTypes.string
+  }),
+  list: PropTypes.shape({
+    detailedDays: PropTypes.array,
+    days: PropTypes.array
+  }),
+  UV: PropTypes.shape({
+    index: PropTypes.number,
+    forecast: PropTypes.array,
+    history: PropTypes.array
+  })
 };
 
 export default Tabs;

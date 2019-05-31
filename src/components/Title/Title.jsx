@@ -1,3 +1,4 @@
+import PropTypes from "prop-types";
 import React from "react";
 import { Header, Image } from "semantic-ui-react";
 import "semantic-ui-css/semantic.min.css";
@@ -10,6 +11,12 @@ const Title = props => {
       <Header.Content>{title}</Header.Content>
     </Header>
   );
+};
+
+Title.propTypes = {
+  size: PropTypes.string.isRequired,
+  image: PropTypes.string.isRequired,
+  title: PropTypes.string.isRequired
 };
 
 export default Title;

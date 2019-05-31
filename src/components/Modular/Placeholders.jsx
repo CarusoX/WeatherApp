@@ -1,12 +1,12 @@
-import React from 'react'
-import { Card, Image, Placeholder, Segment } from 'semantic-ui-react'
+import React from "react";
+import { Card, Image, Placeholder, Segment } from "semantic-ui-react";
 
 export const PlaceholderImageSquare = () => (
   <Card>
     <Card.Content>
-    <Placeholder>
-      <Placeholder.Image square />
-    </Placeholder>
+      <Placeholder>
+        <Placeholder.Image square />
+      </Placeholder>
     </Card.Content>
   </Card>
 );
@@ -21,10 +21,10 @@ export const PlaceholderParagraph = () => (
       <Placeholder.Line />
     </Placeholder.Paragraph>
   </Placeholder>
-)
+);
 
 export const SegmentExampleLoading = () => (
   <Segment loading>
-    <Image src={require('../../images/paragraph.png')} />
+    <Image src={require("../../images/paragraph.png")} />
   </Segment>
-)
+);

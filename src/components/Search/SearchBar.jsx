@@ -1,4 +1,5 @@
 import _ from "lodash";
+import PropTypes from "prop-types";
 import React, { Component } from "react";
 import { Search, Grid } from "semantic-ui-react";
 import { fetchCities, getCountryName } from "../../helpers/index.ts";
@@ -26,36 +27,34 @@ export default class SearchExampleStandard extends Component {
   };
 
   handleSearchChange = (e, { value }) => {
-    this.setState({ isLoading: true, value });
+    this.setState({ isLoading: true, value }, () => {
+      setTimeout(() => {
+        if (value.length < 1) return this.setState(initialState);
 
-    setTimeout(() => {
-      const { value } = this.state;
+        if (value.length < 4) return null;
 
-      if (value.length < 1) return this.setState(initialState);
+        return fetchCities(value).then(result => {
+          if (!result) return this.setState({ isLoading: false, results: [] });
 
-      if (value.length < 4) return null;
+          if (typeof result === "number") {
+            return this.setState({ error: result });
+          }
 
-      return fetchCities(value).then(result => {
-        if (!result) return this.setState({ isLoading: false, results: [] });
-
-        if (typeof result === "number") {
-          return this.setState({ error: result });
-        }
-
-        const cities = result.map(res => ({
-          title: `${res.name} - ${getCountryName(res.sys.country)}`,
-          description: `(Lat, Lon): (${res.coord.lat}, ${res.coord.lon})`,
-          name: res.name,
-          country: getCountryName(res.sys.country),
-          coords: res.coord,
-          key: res.id
-        }));
-        return this.setState({
-          isLoading: false,
-          results: cities
+          const cities = result.map(res => ({
+            title: `${res.name} - ${getCountryName(res.sys.country)}`,
+            description: `(Lat, Lon): (${res.coord.lat}, ${res.coord.lon})`,
+            name: res.name,
+            country: getCountryName(res.sys.country),
+            coords: res.coord,
+            key: res.id
+          }));
+          return this.setState({
+            isLoading: false,
+            results: cities
+          });
         });
-      });
-    }, 300);
+      }, 300);
+    });
   };
 
   render() {
@@ -82,3 +81,7 @@ export default class SearchExampleStandard extends Component {
     );
   }
 }
+
+SearchExampleStandard.propTypes = {
+  setCity: PropTypes.func.isRequired
+};

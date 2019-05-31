@@ -1,3 +1,4 @@
+import PropTypes from "prop-types";
 import React from "react";
 import { Container, Divider } from "semantic-ui-react";
 import { SearchBar } from "../Search/index.ts";
@@ -9,13 +10,11 @@ class Menu extends React.Component {
     super(props);
     this.state = {
       error: undefined,
-      icon: undefined,
       loading: false,
       city: undefined, // { id, coords:{ lat, lon }}
       currentWeather: undefined,
       UV: undefined,
-      list: [],
-      id: 0
+      list: undefined
     };
   }
 
@@ -29,7 +28,6 @@ class Menu extends React.Component {
         return this.setState({ error: data });
       }
       return this.setState({
-        icon: data.results[0].weather_icon,
         currentWeather: data.results[0],
         list: data.results[1],
         UV: data.results[2],
@@ -68,5 +66,9 @@ class Menu extends React.Component {
     );
   }
 }
+
+Menu.propTypes = {
+  unit: PropTypes.string.isRequired
+};
 
 export default Menu;
