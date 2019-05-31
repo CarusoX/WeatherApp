@@ -1,7 +1,7 @@
 import React from 'react'
 import { Grid } from 'semantic-ui-react'
 import { getDateName, getIconName } from '../../../helpers/index.ts'
-import { Cell2, Polaroid } from '../../Modular/index.ts'
+import { Polaroid } from '../../Modular/index.ts'
 
 class ForecastCard extends React.Component {
 
@@ -41,25 +41,39 @@ class ForecastCard extends React.Component {
         //   this.day(day, 3),
         // )}
 
-        <Polaroid text1='pichula' />
-        // <Grid divided centered>
+        <Grid>
 
-        //   <Grid.Column> {/* Card grande */}
-        //     {/* {this.day(this.props.list.days[0], 10)} */}
-        //   </Grid.Column>
+          <Grid.Column width={5}> {/* Card grande */}
 
-        //   <Grid.Column> {/* Card chicas y grafico */}
-            
-        //     <Grid.Row> {/* Card chicas */}
-        //     </Grid.Row>
+            <Polaroid
+              text='Selected'
+              image='004-clouds.png'
+            />
 
-        //     <Grid.Row> {/* Grafico */}
-              
-        //     </Grid.Row>
+          </Grid.Column>
 
-        //   </Grid.Column>
+            <Grid.Column width={3}>
+              <Polaroid
+                text='DAY 1'
+                image='004-clouds.png'
+              />
+            </Grid.Column>
 
-        // </Grid>
+            <Grid.Column width={3}>
+              <Polaroid
+                text='DAY 2'
+                image='004-clouds.png'
+              />
+            </Grid.Column>
+
+            <Grid.Column width={3}>
+              <Polaroid
+                text='DAY 3'
+                image='004-clouds.png'
+              />
+            </Grid.Column>
+
+        </Grid>
       );
     }
   };

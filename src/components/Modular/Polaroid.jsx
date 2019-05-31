@@ -25,10 +25,14 @@ const container = {
 
 export const Polaroid = (props) => (
   <div style={polaroid}>
-    <img style={image} src={require('../../images/cloud.png')} />
+    <img style={image} src={require('../../icons/Theme2/' + props.image)} />
     <Divider />
     <div style={container}>
-      <p style={text}>{props.text1}</p>
+      <p style={text}>{props.text}</p>
     </div>
   </div>
 )
+
+// {this.texts.map(txt => (
+//   <p style={text}>{txt}</p>
+// ))}
