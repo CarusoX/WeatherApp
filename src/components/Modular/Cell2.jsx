@@ -2,7 +2,7 @@ import React from 'react'
 import { Grid, Image, Segment } from 'semantic-ui-react'
 
 export const Cell2 = (props) => (
-  <Grid.Column width={props.width} centered>
+  <Grid.Column width={props.width}>
     {/* <Segment>
       {
         <Image
