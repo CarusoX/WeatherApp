@@ -50,7 +50,9 @@ class Menu extends React.Component {
 
         <SearchBar setCity={(city) => this.setCity(city)} />
 
-        <Divider section horizontal>City: {(this.state.city) ? this.state.city.city_name : ''}</Divider>
+        <Divider section horizontal>
+          City: {(this.state.city) ? this.state.city.city_name : ''}
+        </Divider>
 
         <Tabs
           error={this.state.error}

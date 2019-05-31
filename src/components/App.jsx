@@ -1,5 +1,11 @@
 import React from 'react'
-import { Button, Container, Grid, Header, Modal, Segment } from 'semantic-ui-react'
+import { 
+  Button, 
+  Container, 
+  Grid, 
+  Header, 
+  Modal, 
+  Segment } from 'semantic-ui-react'
 import { Title } from './Title/index.ts'
 import { Menu } from './Menu/index.ts'
 

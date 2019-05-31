@@ -1,6 +1,14 @@
 import React from 'react';
 import {
-  AreaChart, Area, XAxis, YAxis, CartesianGrid, Tooltip, Legend, ResponsiveContainer, Dot
+  AreaChart, 
+  Area, 
+  XAxis, 
+  YAxis, 
+  CartesianGrid, 
+  Tooltip, 
+  Legend, 
+  ResponsiveContainer, 
+  Dot
 } from 'recharts';
 
 export default class UVHistory extends React.Component {
@@ -32,11 +40,46 @@ export default class UVHistory extends React.Component {
             <XAxis dataKey="date" />
             <YAxis />
             <Tooltip />
-            <Area type="monotone" dataKey="uv1" activeDot={false} stackId="1" stroke="green" fill="green" />
-            <Area type="monotone" dataKey="uv2" activeDot={false} stackId="1" stroke="yellow" fill="yellow" />
-            <Area type="monotone" dataKey="uv3" activeDot={false} stackId="1" stroke="orange" fill="orange" />
-            <Area type="monotone" dataKey="uv4" activeDot={false} stackId="1" stroke="red" fill="red" />
-            <Area type="monotone" dataKey="uv5" activeDot={true} stackId="1" stroke="violet" fill="violet" />
+            <Area 
+              type="monotone" 
+              dataKey="uv1" 
+              activeDot={false} 
+              stackId="1" 
+              stroke="green" 
+              fill="green" 
+            />
+            <Area 
+              type="monotone" 
+              dataKey="uv2" 
+              activeDot={false} 
+              stackId="1" 
+              stroke="yellow" 
+              fill="yellow" 
+            />
+            <Area 
+              type="monotone" 
+              dataKey="uv3" 
+              activeDot={false} 
+              stackId="1" 
+              stroke="orange" 
+              fill="orange" 
+            />
+            <Area 
+              type="monotone" 
+              dataKey="uv4" 
+              activeDot={false} 
+              stackId="1" 
+              stroke="red" 
+              fill="red" 
+            />
+            <Area 
+              type="monotone" 
+              dataKey="uv5" 
+              activeDot={true} 
+              stackId="1" 
+              stroke="violet" 
+              fill="violet" 
+            />
           </AreaChart>
         </ResponsiveContainer>
       </div>

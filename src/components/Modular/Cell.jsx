@@ -5,8 +5,8 @@ export const Cell = (props) => (
     <Segment raised compact>
         <Grid columns={2} stackable centered>
         <Grid.Column width={4}>
-            <Image src={require('../../icons/Theme2/' + props.image)}
-            size='mini' verticalAlign='middle' />
+            <Image src={require('../../icons/Theme2/' + props.image)
+}            size='mini' verticalAlign='middle' />
         </Grid.Column>
         <Grid.Column width={10}>
             <Grid.Row>

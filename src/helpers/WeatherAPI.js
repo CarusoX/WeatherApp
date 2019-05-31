@@ -1,42 +1,42 @@
 const API_KEY = process.env.API_KEY
-const API_ENDPOINT = process.env.API_ENDPOINT
+const AE = process.env.API_ENDPOINT
 const API_FIND = process.env.API_FIND
-const API_WEATHER = process.env.API_WEATHER
-const API_FORECAST = process.env.API_FORECAST
-const API_UVI = process.env.API_UVI
-const API_UVF = process.env.API_UVF
-const API_UVH = process.env.API_UVH
+const AW = process.env.API_WEATHER
+const AF = process.env.API_FORECAST
+const AUI = process.env.API_UVI
+const AUF = process.env.API_UVF
+const AUH = process.env.API_UVH
 
 import { getMonthPeriod } from '../helpers/index.ts'
 
 const getCityList = (city) => {
-  const url = `${API_ENDPOINT}${API_FIND}?q=${city}&appid=${API_KEY}`
+  const url = `${AE}${API_FIND}?q=${city}&appid=${API_KEY}`
   return fetch(url)
 }
 
 const getCurrentWeather = (id) => {
-  const url = `${API_ENDPOINT}${API_WEATHER}?id=${id}&units=metric&appid=${API_KEY}`
+  const url = `${AE}${AW}?id=${id}&units=metric&appid=${API_KEY}`
   return fetch(url)
 }
 
 const getForecastWeather = (id) => {
-  const url = `${API_ENDPOINT}${API_FORECAST}?id=${id}&units=metric&appid=${API_KEY}`
+  const url = `${AE}${AF}?id=${id}&units=metric&appid=${API_KEY}`
   return fetch(url)
 }
 
-const getUVIndex = (coords) => {
-  const url = `${API_ENDPOINT}${API_UVI}?appid=${API_KEY}&lat=${coords.lat}&lon=${coords.lon}`
+const getUVIndex = (c) => {
+  const url = `${AE}${AUI}?appid=${API_KEY}&lat=${c.lat}&lon=${c.lon}`
   return fetch(url)
 }
 
-const getUVForecast = (coords) => {
-  const url = `${API_ENDPOINT}${API_UVF}?appid=${API_KEY}&lat=${coords.lat}&lon=${coords.lon}&cnt=4`
+const getUVForecast = (c) => {
+  const url = `${AE}${AUF}?appid=${API_KEY}&lat=${c.lat}&lon=${c.lon}&cnt=4`
   return fetch(url)
 }
 
-const getUVHistory = (coords) => {
+const getUVHistory = (c) => {
   const period = getMonthPeriod()
-  const url = `${API_ENDPOINT}${API_UVH}?appid=${API_KEY}&lat=${coords.lat}&lon=${coords.lon}&start=${period.start}&end=${period.end}`
+  const url = `${AE}${AUH}?appid=${API_KEY}&lat=${c.lat}&lon=${c.lon}&start=${period.start}&end=${period.end}`
   return fetch(url)
 }
 
@@ -59,26 +59,28 @@ const filterDay = (result) => {
 
 const compressDays = (result) => {
   return result.reduce((a, b, i) => {
+    const len = a.length - 1
     if (b.dt_txt.slice(11, 21) === '00:00:00') {
       if (a.length) {
-        a[a.length - 1]['temp'] /= a[a.length - 1]['num']
-        a[a.length - 1]['temp'] = a[a.length - 1]['temp'].toFixed(2)
+        a[len]['temp'] /= a[len]['num']
+        a[len]['temp'] = a[len]['temp'].toFixed(2)
       }
       a.push(Object.assign({ 'num': 1 }, b))
     } else {
-      a[a.length - 1]['min_temp'] = Math.min(a[a.length - 1]['min_temp'], b['min_temp'])
-      a[a.length - 1]['max_temp'] = Math.max(a[a.length - 1]['max_temp'], b['max_temp'])
-      a[a.length - 1]['temp'] += b['temp']
-      a[a.length - 1]['num']++
+
+      a[len]['min_temp'] = Math.min(a[len]['min_temp'], b['min_temp'])
+      a[len]['max_temp'] = Math.max(a[len]['max_temp'], b['max_temp'])
+      a[len]['temp'] += b['temp']
+      a[len]['num']++
     }
 
     if (b.dt_txt.slice(11, 21) === '12:00:00') {
-      a[a.length - 1]['weather_icon'] = b['weather_icon']
+      a[len]['weather_icon'] = b['weather_icon']
     }
 
     if (i === result.length - 1) {
-      a[a.length - 1]['temp'] /= a[a.length - 1]['num']
-      a[a.length - 1]['temp'] = a[a.length - 1]['temp'].toFixed(2)
+      a[len]['temp'] /= a[len]['num']
+      a[len]['temp'] = a[len]['temp'].toFixed(2)
     }
     return a
   }, [])

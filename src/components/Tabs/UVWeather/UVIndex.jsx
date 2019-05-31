@@ -24,13 +24,15 @@ const data = [
   {
     "name": "Very High",
     "value": 60,
-    "description": "Take extra precautions because unprotected skin and eyes will be damaged and can burn quickly.",
+    "description": "Take extra precautions because unprotected skin and eyes\
+                    will be damaged and can burn quickly.",
     "color": "brown"
   },
   {
     "name": "Extreme",
     "value": 60,
-    "description": "Take all precautions because unprotected skin and eyes can burn in minutes.",
+    "description": "Take all precautions because unprotected skin and eyes\
+                    can burn in minutes.",
     "color": "purple"
   }
 ];
@@ -61,7 +63,14 @@ const renderActiveShape = (props) => {
         outerRadius={outerRadius + 10}
         fill={fill}
       />
-      <text x={cx} y={cy} dy={8} textAnchor="middle" style={{ fontSize: 20 }} fill={fill}>{payload.name}</text>
+      <text 
+        x={cx} 
+        y={cy} 
+        dy={8} 
+        textAnchor="middle" 
+        style={{ fontSize: 20 }} 
+        fill={fill}>{payload.name}
+      </text>
     </g>
   );
 };
@@ -86,7 +95,12 @@ export default class UVIIndex extends PureComponent {
   render() {
     return (
       <Container fluid>
-        <Grid textAlign='center' verticalAlign='middle' container columns='equal' relaxed stretched divided>
+        <Grid 
+          textAlign='center' 
+          verticalAlign='middle' 
+          container columns='equal' 
+          relaxed stretched divided
+        >
           <Grid.Row>
             <Grid.Column>
               <Statistic>
@@ -109,7 +123,8 @@ export default class UVIIndex extends PureComponent {
                     dataKey="value"
                   >
                     {
-                      data.map((entry, index) => <Cell key={`cell-${index}`} fill={entry.color} />)
+                      data.map((entry, index) => 
+                            <Cell key={`cell-${index}`} fill={entry.color} />)
                     }
                   </Pie>
                 </PieChart>
@@ -117,7 +132,9 @@ export default class UVIIndex extends PureComponent {
             </Grid.Column>
             <Grid.Column>
               <Statistic>
-                <Statistic.Label>{data[this.state.activeIndex].description}</Statistic.Label>
+                <Statistic.Label>
+                  {data[this.state.activeIndex].description}
+                </Statistic.Label>
               </Statistic>
             </Grid.Column>
           </Grid.Row>
