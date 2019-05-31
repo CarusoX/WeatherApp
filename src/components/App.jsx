@@ -1,74 +1,51 @@
-import React from 'react'
-import { 
-  Button, 
-  Container, 
-  Grid, 
-  Header, 
-  Modal, 
-  Segment } from 'semantic-ui-react'
-import { Title } from './Title/index.ts'
-import { Menu } from './Menu/index.ts'
+import React from "react";
+import { Button, Container, Grid, Segment } from "semantic-ui-react";
+import { Title } from "./Title/index.ts";
+import { Menu } from "./Menu/index.ts";
 
 class App extends React.Component {
-
   constructor(props) {
     super(props);
     this.state = {
-      unit: 'Cº'
-    }
+      unit: "Cº"
+    };
   }
 
   render() {
+    const { unit } = this.state;
     return (
       <Container fluid>
         <Segment>
           <Grid>
             <Grid.Column textAlign="center">
-              <Button.Group floated='right' size='mini'>
+              <Button.Group floated="right" size="mini">
                 <Button
-                  onClick={() => this.setState({ unit: 'Cº' })}
-                  active={this.state.unit === 'Cº'}
-                  content='Cº'
+                  onClick={() => this.setState({ unit: "Cº" })}
+                  active={unit === "Cº"}
+                  content="Cº"
                 />
                 <Button
-                  onClick={() => this.setState({ unit: 'Fº' })}
-                  active={this.state.unit === 'Fº'}
-                  content='Fº'
+                  onClick={() => this.setState({ unit: "Fº" })}
+                  active={unit === "Fº"}
+                  content="Fº"
                 />
                 <Button
-                  onClick={() => this.setState({ unit: 'Kº' })}
-                  active={this.state.unit === 'Kº'}
-                  content='Kº'
+                  onClick={() => this.setState({ unit: "Kº" })}
+                  active={unit === "Kº"}
+                  content="Kº"
                 />
               </Button.Group>
             </Grid.Column>
           </Grid>
         </Segment>
 
-        <Title title='WEATHER APP' size='h1' image='045-weather.png' />
+        <Title title="WEATHER APP" size="h1" image="045-weather.png" />
 
         <Grid centered>
-          <Grid.Column width='15' verticalAlign='middle'>
-
-            <Menu unit={this.state.unit} />
-
+          <Grid.Column width="15" verticalAlign="middle">
+            <Menu unit={unit} />
           </Grid.Column>
         </Grid>
-
-        <Modal trigger={
-          <Segment>
-            <p>Third party code and resources</p>
-          </Segment>
-        }>
-          <Modal.Header>Title! :D</Modal.Header>
-          <Modal.Content>
-            <Modal.Description>
-              <Header>ICONS</Header>
-              <p>https://www.flaticon.com/authors/good-ware</p>
-            </Modal.Description>
-          </Modal.Content>
-        </Modal>
-
       </Container>
     );
   }

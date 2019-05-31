@@ -1,21 +1,23 @@
-import React from 'react'
-import { Container, Card } from 'semantic-ui-react'
-import { UVCard } from '../../Modular/index.ts'
-import { getDateName } from '../../../helpers/index.ts'
+import React from "react";
+import { Container, Card } from "semantic-ui-react";
+import { UVCard } from "../../Modular/index.ts";
+import { getDateName } from "../../../helpers/index.ts";
 
-export const UVForecast = (props) => (
-  <Container>
-    <Card.Group stackable centered itemsPerRow={'5'}>
-      {
-        props.uv_forecast.map((item, index) =>
+const UVForecast = props => {
+  const {uvForecast} = props;
+  return (
+    <Container>
+      <Card.Group stackable centered itemsPerRow="5">
+        {uvForecast.map((item) => (
           <UVCard
-            key={index}
             date={item.date.slice(5)}
             dateName={getDateName(item.date)}
             index={item.index}
           />
-        )
-      }
-    </Card.Group>
-  </Container>
-)
+        ))}
+      </Card.Group>
+    </Container>
+  );
+};
+
+export default UVForecast;

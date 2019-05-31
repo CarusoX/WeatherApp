@@ -1,6 +1,6 @@
 import React from 'react'
 import { Segment, Grid, Image, Statistic } from 'semantic-ui-react'
-import { getTemp, getIconName, unixtohours } from '../../../helpers/index.ts'
+import { getTemp, getIconName, unixToHours } from '../../../helpers/index.ts'
 import { Cell } from '../../Modular/index.ts'
 
 const path1 = '../../../icons/Theme1/'
@@ -79,14 +79,14 @@ class WeatherCard extends React.Component {
             <Cell
               image='012-dawn.png'
               title='Sunrise'
-              content={unixtohours(sunrise)}
+              content={unixToHours(sunrise)}
               unit='Hs'
             />
 
             <Cell
               image='037-sunset.png'
               title='Sunset'
-              content={unixtohours(sunset)}
+              content={unixToHours(sunset)}
               unit='Hs'
             />
 
