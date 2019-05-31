@@ -27,7 +27,6 @@ class ForecastCard extends React.Component {
   }
 
   render() {
-    console.log(this.props)
     if(this.props.list.length === 0){
       return (
         <h1> LOADING </h1>
@@ -53,31 +52,13 @@ class ForecastCard extends React.Component {
 
               <div style={{flexGrow: '1', display: 'flex', flexDirection: 'row', justifyContent: 'space-evenly'}}>
 
-                <Polaroid
-                  text='DAY 1'
-                  image='004-clouds.png'
-                  style={{maxWidth: '15%', height: '70%'}}
-                />
-                <Polaroid
-                  text='DAY 2'
-                  image='004-clouds.png'
-                  style={{maxWidth: '15%', height: '70%'}}
-                />
-                <Polaroid
-                  text='DAY 3'
-                  image='004-clouds.png'
-                  style={{maxWidth: '15%', height: '70%'}}
-                />
-                <Polaroid
-                  text='DAY 4'
-                  image='004-clouds.png'
-                  style={{maxWidth: '15%', height: '70%'}}
-                />
-                <Polaroid
-                  text='DAY 5'
-                  image='004-clouds.png'
-                  style={{maxWidth: '15%', height: '70%'}}
-                />
+                {this.props.list.days.map(day =>
+                  <Polaroid
+                    text={day.dt_txt}
+                    image='004-clouds.png'
+                    style={{maxWidth: '15%', height: '70%'}}
+                  />
+                )}
 
               </div> 
 

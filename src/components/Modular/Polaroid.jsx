@@ -29,6 +29,6 @@ export const Polaroid = (props) => (
   </div>
 )
 
-// {this.texts.map(txt => (
+// {props.texts.map(txt => (
 //   <p style={text}>{txt}</p>
 // ))}
