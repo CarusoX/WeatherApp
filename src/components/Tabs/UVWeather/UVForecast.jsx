@@ -5,11 +5,11 @@ import { UVCard } from "../../Modular/index.ts";
 import { getDateName } from "../../../helpers/index.ts";
 
 const UVForecast = props => {
-  const { uvForecast } = props;
+  const { forecast } = props;
   return (
     <Container>
       <Card.Group stackable centered itemsPerRow="5">
-        {uvForecast.map(item => (
+        {forecast.map(item => (
           <UVCard
             date={item.date.slice(5)}
             dateName={getDateName(item.date)}
@@ -22,7 +22,7 @@ const UVForecast = props => {
 };
 
 UVForecast.propTypes = {
-  uvForecast: PropTypes.arrayOf(PropTypes.shape).isRequired
+  forecast: PropTypes.arrayOf(PropTypes.shape).isRequired
 };
 
 export default UVForecast;

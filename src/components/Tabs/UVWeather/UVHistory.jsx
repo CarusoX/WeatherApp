@@ -14,9 +14,9 @@ export default class UVHistory extends React.Component {
   static jsfiddleUrl = "https://jsfiddle.net/alidingling/xqjtetw0/";
 
   render() {
-    const { UVHistoryData } = this.props;
+    const { history } = this.props;
 
-    const data = UVHistoryData.map(x => ({
+    const data = history.map(x => ({
       date: x.date_iso
         .slice(5, 10)
         .split("-")
@@ -93,5 +93,5 @@ export default class UVHistory extends React.Component {
 }
 
 UVHistory.propTypes = {
-  UVHistoryData: PropTypes.arrayOf(PropTypes.shape).isRequired
+  history: PropTypes.arrayOf(PropTypes.shape).isRequired
 };
