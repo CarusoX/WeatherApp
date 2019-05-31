@@ -1,5 +1,5 @@
 import React from 'react'
-import { Segment, Grid, Image } from 'semantic-ui-react'
+import { Segment, Grid, Image, Statistic } from 'semantic-ui-react'
 import { getTemp, getIconName, unixtohours } from '../../../helpers/index.ts'
 import { Cell } from '../../Modular/index.ts'
 
@@ -10,59 +10,63 @@ class WeatherCard extends React.Component {
 
   render() {
     const {
-      weather_state, weather_icon, temp, 
+      weather_state, weather_icon, temp,
       humidity, pressure, min_temp, max_temp, wind_speed,
       wind_dir, clouds, sunrise, sunset, unit
     } = this.props;
 
     const icon = getIconName(weather_icon)
-    
+
     return (
       <Grid columns={3} divided>
         <Grid.Row stretched>
-          <Grid.Column>
+          <Grid.Column stretched>
 
-            <Segment raised compact>
-              <h3 style={{fontSize: 25}}>State</h3>
-              {
-                icon && <Image
-                  src={require(`../../../icons/Theme2/${icon}.png`)}
-                  size='medium'
-                  verticalAlign='middle'
-                />
-              }
-              <p style={{fontWeight: 'bold'}}>{weather_state}</p>
+            <Segment raised stretched>
+              <div>
+                <h3 style={{ fontSize: 25 }}>State</h3>
+                {
+                  icon && <Image
+                    src={require(`../../../icons/Theme2/${icon}.png`)}
+                    size='medium'
+                    verticalAlign='middle'
+                  />
+                }
+              </div>
+              <Statistic>
+                <Statistic.Label style={{ paddingTop:'40%', fontWeight: 'bold' }}>{weather_state}</Statistic.Label>
+              </Statistic>
             </Segment>
 
           </Grid.Column>
           <Grid.Column>
 
-            <Cell 
+            <Cell
               image='039-thermometer.png'
               title='Temperature'
               content={getTemp(temp, unit)}
             />
 
-            <Cell 
+            <Cell
               image='018-high temperature.png'
               title='Max Temperature'
               content={getTemp(max_temp, unit)}
             />
 
-            <Cell 
+            <Cell
               image='022-low temperature.png'
               title='Min Temperature'
               content={getTemp(min_temp, unit)}
             />
 
-            <Cell 
+            <Cell
               image='004-clouds.png'
               title='Clouds'
               content={clouds}
               unit='%'
             />
 
-            <Cell 
+            <Cell
               image='048-wind.png'
               title='Wind Speed'
               content={wind_speed}
@@ -72,35 +76,35 @@ class WeatherCard extends React.Component {
           </Grid.Column>
           <Grid.Column>
 
-            <Cell 
+            <Cell
               image='012-dawn.png'
               title='Sunrise'
               content={unixtohours(sunrise)}
               unit='Hs'
             />
 
-            <Cell 
+            <Cell
               image='037-sunset.png'
               title='Sunset'
               content={unixtohours(sunset)}
               unit='Hs'
             />
 
-            <Cell 
+            <Cell
               image='019-humidity.png'
               title='Humidity'
               content={humidity}
               unit='%'
             />
-            
-            <Cell 
+
+            <Cell
               image='026-pressure.png'
               title='Preassure'
               content={pressure}
               unit='hPa'
             />
 
-            <Cell 
+            <Cell
               image='047-weathercock.png'
               title='Wind Direction'
               content={wind_dir}
