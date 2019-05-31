@@ -1,7 +1,7 @@
 import React from 'react'
-import { Grid, Divider } from 'semantic-ui-react'
 import { getDateName, getIconName } from '../../../helpers/index.ts'
 import { Polaroid } from '../../Modular/index.ts'
+import UVHistory from '../UVWeather/UVHistory'
 
 class ForecastCard extends React.Component {
 
@@ -63,6 +63,10 @@ class ForecastCard extends React.Component {
               </div> 
 
               <div style={{flexGrow: '1', display: 'flex', flexDirection: 'row', justifyContent: 'space-evenly'}}>
+
+                <UVHistory 
+                  uv_history={this.props.UV.uv_history}
+                />
 
               </div> 
 

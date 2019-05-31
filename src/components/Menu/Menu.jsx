@@ -24,7 +24,6 @@ class Menu extends React.Component {
     this.setState({ loading: true });
     fetch_data(this.state.city).then((data) => {
       if (!data) return;
-      console.log(data)
       if(typeof(data) == 'number') {
         return this.setState({error: data})
       } 

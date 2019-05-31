@@ -60,7 +60,7 @@ class Tabs extends React.Component {
           {
             menuItem: 'Week Forecast', render: () =>
               <Tab.Pane attached={false}>
-                <ForecastCard list={this.props.list} />
+                <ForecastCard list={this.props.list} UV={this.props.UV} />
             </Tab.Pane> 
           },
           {
