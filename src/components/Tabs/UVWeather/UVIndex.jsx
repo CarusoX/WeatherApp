@@ -1,3 +1,4 @@
+import PropTypes from "prop-types";
 import React, { PureComponent } from "react";
 import { Container, Statistic, Grid } from "semantic-ui-react";
 import { ResponsiveContainer, PieChart, Cell, Pie, Sector } from "recharts";
@@ -102,7 +103,7 @@ export default class UVIndex extends PureComponent {
   }
 
   render() {
-    const { uvIndex } = this.props;
+    const { index } = this.props;
     const { activeIndex } = this.state;
     return (
       <Container fluid>
@@ -118,7 +119,7 @@ export default class UVIndex extends PureComponent {
           <Grid.Row>
             <Grid.Column>
               <Statistic>
-                <Statistic.Value>{uvIndex}</Statistic.Value>
+                <Statistic.Value>{index}</Statistic.Value>
                 <Statistic.Label>Current UV index</Statistic.Label>
               </Statistic>
             </Grid.Column>
@@ -156,3 +157,18 @@ export default class UVIndex extends PureComponent {
     );
   }
 }
+
+UVIndex.propTypes = {
+  index: PropTypes.number.isRequired
+};
+
+renderActiveShape.propTypes = {
+  cx: PropTypes.number.isRequired,
+  cy: PropTypes.number.isRequired,
+  innerRadius: PropTypes.number.isRequired,
+  outerRadius: PropTypes.number.isRequired,
+  startAngle: PropTypes.number.isRequired,
+  endAngle: PropTypes.number.isRequired,
+  fill: PropTypes.string.isRequired,
+  payload: PropTypes.shape.isRequired
+};

@@ -1,3 +1,4 @@
+import PropTypes from "prop-types";
 import React from "react";
 import {
   AreaChart,
@@ -90,3 +91,7 @@ export default class UVHistory extends React.Component {
     );
   }
 }
+
+UVHistory.propTypes = {
+  UVHistoryData: PropTypes.arrayOf(PropTypes.shape).isRequired
+};

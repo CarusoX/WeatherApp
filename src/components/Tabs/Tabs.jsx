@@ -1,78 +1,80 @@
-import React from 'react'
-import { Tab } from 'semantic-ui-react'
-import { DefaultTab, ErrorTab } from '../Modular/index.ts'
-import WeatherCard from './CurrentWeather/WeatherCard'
-import ForecastCard from './ForecastWeather/ForecastCard'
-import { UVTab } from './UVWeather/UVTab';
+import React from "react";
+import { Tab } from "semantic-ui-react";
+import { DefaultTab, ErrorTab } from "../Modular/index.ts";
+import WeatherCard from "./CurrentWeather/WeatherCard";
+import ForecastCard from "./ForecastWeather/ForecastCard";
+import UVTab from "./UVWeather/UVTab";
 
-const defaultPanes = (mode) => [
-  { menuItem: 'Current Weather', render: () => <DefaultTab mode={mode} /> },
-  { menuItem: 'Week Forecast', render: () => <DefaultTab mode={mode} /> },
-  { menuItem: 'UV Rays', render: () => <DefaultTab mode={mode} /> },
-]
+const defaultPanes = mode => [
+  { menuItem: "Current Weather", render: () => <DefaultTab mode={mode} /> },
+  { menuItem: "Week Forecast", render: () => <DefaultTab mode={mode} /> },
+  { menuItem: "UV Rays", render: () => <DefaultTab mode={mode} /> }
+];
 
-const errorPanes = (mode) => [
-  { menuItem: 'Current Weather', render: () => <ErrorTab mode={mode} /> },
-  { menuItem: 'Week Forecast', render: () => <ErrorTab mode={mode} /> },
-  { menuItem: 'UV Rays', render: () => <ErrorTab mode={mode} /> },
-]
+const errorPanes = mode => [
+  { menuItem: "Current Weather", render: () => <ErrorTab mode={mode} /> },
+  { menuItem: "Week Forecast", render: () => <ErrorTab mode={mode} /> },
+  { menuItem: "UV Rays", render: () => <ErrorTab mode={mode} /> }
+];
 
-class Tabs extends React.Component {
-  
-  render() {
-    if (typeof(this.props.error) === 'number') { // Either 1, 2, 3, or 4
-      return (
-        <Tab
-          menu={{ pointing: true, style: { justifyContent: "center" } }}
-          panes={ errorPanes() }
-        />
-      )
-    }
-    if (this.props.show === false) {
-      return (
-        <Tab
-          menu={{ pointing: true, style: { justifyContent: "center" } }}
-          panes={ defaultPanes(false) }
-        />
-      )
-    }
-    if (this.props.loading) {
-      return (
-        <Tab
-          menu={{ pointing: true, style: { justifyContent: "center" } }}
-          panes={ defaultPanes(true) }
-        />
-      )
-    }
+const Tabs = props => {
+  const { error, show, loading, unit, currentWeather, list, UV } = props;
+  if (typeof error === "number") {
+    // Either 1, 2, 3, or 4
     return (
-      
-      <Tab menu={{ pointing: true, style: { justifyContent: "center" }}}
-        panes={[
-          {
-            menuItem: 'Current Weather', render: () =>
-              <Tab.Pane attached={false}>
-                <WeatherCard
-                  unit={this.props.unit}
-                  {...this.props.currentWeather}
-                />
-              </Tab.Pane>
-          },
-          {
-            menuItem: 'Week Forecast', render: () =>
-              <Tab.Pane attached={false}>
-                <ForecastCard list={this.props.list} />
-            </Tab.Pane> 
-          },
-          {
-            menuItem: 'UV Rays', render: () =>
-              <Tab.Pane attached={false}>
-                <UVTab UV={this.props.UV} />
-              </Tab.Pane>
-          },
-        ]}
+      <Tab
+        menu={{ pointing: true, style: { justifyContent: "center" } }}
+        panes={errorPanes()}
       />
     );
   }
-}
+  if (show === false) {
+    return (
+      <Tab
+        menu={{ pointing: true, style: { justifyContent: "center" } }}
+        panes={defaultPanes(false)}
+      />
+    );
+  }
+  if (loading) {
+    return (
+      <Tab
+        menu={{ pointing: true, style: { justifyContent: "center" } }}
+        panes={defaultPanes(true)}
+      />
+    );
+  }
+  return (
+    <Tab
+      menu={{ pointing: true, style: { justifyContent: "center" } }}
+      panes={[
+        {
+          menuItem: "Current Weather",
+          render: () => (
+            <Tab.Pane attached={false}>
+              <WeatherCard unit={unit} {...currentWeather} />
+            </Tab.Pane>
+          )
+        },
+        {
+          menuItem: "Week Forecast",
+          render: () => (
+            <Tab.Pane attached={false}>
+              <ForecastCard list={list} />
+            </Tab.Pane>
+          )
+        },
+        {
+          menuItem: "UV Rays",
+          render: () => (
+            <Tab.Pane attached={false}>
+              <UVTab UV={UV} />
+            </Tab.Pane>
+          )
+        }
+      ]}
+    />
+  );
+};
 
 export default Tabs;
