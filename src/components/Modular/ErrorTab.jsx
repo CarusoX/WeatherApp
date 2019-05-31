@@ -17,9 +17,9 @@ const ErrorMessages = {
 };
 
 const ErrorTab = props => {
-  const { error, mode } = props;
+  const { error } = props;
   return (
-    <Tab.Pane attached={false} loading={mode}>
+    <Tab.Pane attached={false}>
       <h1>We&apos;re sorry!</h1>
       <h3> Something went wrong :( </h3>
       <h3>{ErrorMessages[error]}</h3>
@@ -34,6 +34,5 @@ const ErrorTab = props => {
 export default ErrorTab;
 
 ErrorTab.propTypes = {
-  error: PropTypes.number.isRequired,
-  mode: PropTypes.bool.isRequired
+  error: PropTypes.number.isRequired
 };

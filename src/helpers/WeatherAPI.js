@@ -50,15 +50,15 @@ const getUVHistory = coords => {
 
 const filterDay = result => {
   return {
-    weather_state: result.weather[0].main,
-    weather_icon: result.weather[0].icon,
+    state: result.weather[0].main,
+    icon: result.weather[0].icon,
     temp: result.main.temp,
     humidity: result.main.humidity,
     pressure: result.main.pressure,
-    min_temp: result.main.temp_min,
-    max_temp: result.main.temp_max,
-    wind_speed: result.wind.speed,
-    wind_dir: result.wind.deg,
+    minTemp: result.main.temp_min,
+    maxTemp: result.main.temp_max,
+    windSpeed: result.wind.speed,
+    windDir: result.wind.deg,
     clouds: result.clouds.all,
     sunrise: result.sys.sunrise,
     sunset: result.sys.sunset

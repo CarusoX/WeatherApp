@@ -12,20 +12,19 @@ const defaultPanes = mode => [
   { menuItem: "UV Rays", render: () => <DefaultTab mode={mode} /> }
 ];
 
-const errorPanes = mode => [
-  { menuItem: "Current Weather", render: () => <ErrorTab mode={mode} /> },
-  { menuItem: "Week Forecast", render: () => <ErrorTab mode={mode} /> },
-  { menuItem: "UV Rays", render: () => <ErrorTab mode={mode} /> }
+const errorPanes = error => [
+  { menuItem: "Current Weather", render: () => <ErrorTab error={error} /> },
+  { menuItem: "Week Forecast", render: () => <ErrorTab error={error} /> },
+  { menuItem: "UV Rays", render: () => <ErrorTab error={error} /> }
 ];
 
 const Tabs = props => {
   const { error, show, loading, unit, currentWeather, list, UV } = props;
-  if (typeof error === "number") {
-    // Either 1, 2, 3, or 4
+  if (error > 0) {
     return (
       <Tab
         menu={{ pointing: true, style: { justifyContent: "center" } }}
-        panes={errorPanes()}
+        panes={errorPanes(error, false)}
       />
     );
   }
@@ -78,43 +77,29 @@ const Tabs = props => {
   );
 };
 
+export default Tabs;
+
 Tabs.defaultProps = {
-  error: false,
   currentWeather: {},
   list: {},
   UV: {}
 };
 
-const weather_propTypes = {
-  weather_state: PropTypes.string,
-  weather_icon: PropTypes.string,
-  temp: PropTypes.number,
-  humidity: PropTypes.number,
-  pressure: PropTypes.number,
-  min_temp: PropTypes.number,
-  max_temp: PropTypes.number,
-  wind_speed: PropTypes.number,
-  wind_dir: PropTypes.string,
-  clouds: PropTypes.string,
-  sunrise: PropTypes.string,
-  sunset: PropTypes.string
-};
-
 Tabs.propTypes = {
-  error: PropTypes.bool,
+  error: PropTypes.number.isRequired,
   show: PropTypes.bool.isRequired,
   loading: PropTypes.bool.isRequired,
   unit: PropTypes.string.isRequired,
   currentWeather: PropTypes.shape({
-    weather_state: PropTypes.string,
-    weather_icon: PropTypes.string,
+    state: PropTypes.string,
+    icon: PropTypes.string,
     temp: PropTypes.number,
     humidity: PropTypes.number,
     pressure: PropTypes.number,
-    min_temp: PropTypes.number,
-    max_temp: PropTypes.number,
-    wind_speed: PropTypes.number,
-    wind_dir: PropTypes.string,
+    minTemp: PropTypes.number,
+    maxTemp: PropTypes.number,
+    windSpeed: PropTypes.number,
+    windDir: PropTypes.string,
     clouds: PropTypes.string,
     sunrise: PropTypes.string,
     sunset: PropTypes.string
@@ -129,5 +114,3 @@ Tabs.propTypes = {
     history: PropTypes.array
   })
 };
-
-export default Tabs;

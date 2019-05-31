@@ -5,6 +5,7 @@ import { Search, Grid } from "semantic-ui-react";
 import { fetchCities, getCountryName } from "../../helpers/index.ts";
 
 const initialState = { isLoading: false, results: [], value: "" };
+const errorState = { isLoading: false, results: [] };
 
 const resultRenderer = ({ title, description }) => [
   <div key="content" className="content">
@@ -31,13 +32,13 @@ export default class SearchExampleStandard extends Component {
       setTimeout(() => {
         if (value.length < 1) return this.setState(initialState);
 
-        if (value.length < 4) return null;
-
         return fetchCities(value).then(result => {
-          if (!result) return this.setState({ isLoading: false, results: [] });
+          if (!result) return this.setState(errorState);
 
           if (typeof result === "number") {
-            return this.setState({ error: result });
+            const { setError } = this.props;
+            setError(result);
+            return this.setState(errorState);
           }
 
           const cities = result.map(res => ({
@@ -83,5 +84,6 @@ export default class SearchExampleStandard extends Component {
 }
 
 SearchExampleStandard.propTypes = {
-  setCity: PropTypes.func.isRequired
+  setCity: PropTypes.func.isRequired,
+  setError: PropTypes.func.isRequired
 };

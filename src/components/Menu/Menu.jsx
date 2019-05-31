@@ -31,7 +31,7 @@ class Menu extends React.Component {
         currentWeather: data.results[0],
         list: data.results[1],
         UV: data.results[2],
-        error: undefined,
+        error: 0,
         loading: false
       });
     });
@@ -41,18 +41,23 @@ class Menu extends React.Component {
     this.setState({ city }, () => this.setData());
   }
 
+  setError(err) {
+    this.setState({ error: err });
+  }
+
   render() {
     const { unit } = this.props;
     const { city, error, currentWeather, UV, list, loading } = this.state;
     return (
       <Container fluid>
-        <SearchBar setCity={newCity => this.setCity(newCity)} />
-
+        <SearchBar
+          setCity={newCity => this.setCity(newCity)}
+          setError={err => this.setError(err)}
+        />
         <Divider section horizontal>
           City:
           {city ? city.city_name : ""}
         </Divider>
-
         <Tabs
           error={error}
           show={city !== undefined}
