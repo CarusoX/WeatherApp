@@ -26,20 +26,22 @@ const WeatherCard = props => {
   const icon = getIconName(iconName);
   return (
     <Tab.Pane attached={false}>
-      <Grid columns={3} divided>
+      <Grid columns={3} divided stackable>
         <Grid.Row stretched>
           <Grid.Column stretched>
-            <Segment raised>
-              <div>
-                <h3 style={{ fontSize: 25 }}>State</h3>
-                {icon && (
-                  <Image
-                    src={require(`../../../icons/Theme2/${icon}.png`)}
-                    size="medium"
-                    verticalAlign="middle"
-                  />
-                )}
-              </div>
+            <Grid.Row>
+              <h3 style={{ fontSize: 25 }}>State</h3>
+            </Grid.Row>
+            <Grid.Row>
+              {icon && (
+                <Image
+                  src={require(`../../../icons/Theme2/${icon}.png`)}
+                  size="medium"
+                  verticalAlign="middle"
+                />
+              )}
+            </Grid.Row>
+            <Grid.Row>
               <Statistic>
                 <Statistic.Label
                   style={{ paddingTop: "40%", fontWeight: "bold" }}
@@ -47,7 +49,7 @@ const WeatherCard = props => {
                   {state}
                 </Statistic.Label>
               </Statistic>
-            </Segment>
+            </Grid.Row>
           </Grid.Column>
           <Grid.Column>
             <Cell

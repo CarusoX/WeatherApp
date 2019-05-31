@@ -29,14 +29,14 @@ const getForecastWeather = id => {
 const getUVIndex = coords => {
   const url = `${API_ENDPOINT}${API_UVI}?appid=${API_KEY}&lat=${
     coords.lat
-  }&lon=${coords.lon}`;
+    }&lon=${coords.lon}`;
   return fetch(url);
 };
 
 const getUVForecast = coords => {
   const url = `${API_ENDPOINT}${API_UVF}?appid=${API_KEY}&lat=${
     coords.lat
-  }&lon=${coords.lon}&cnt=4`;
+    }&lon=${coords.lon}&cnt=4`;
   return fetch(url);
 };
 
@@ -44,7 +44,7 @@ const getUVHistory = coords => {
   const period = getMonthPeriod();
   const url = `${API_ENDPOINT}${API_UVH}?appid=${API_KEY}&lat=${
     coords.lat
-  }&lon=${coords.lon}&start=${period.start}&end=${period.end}`;
+    }&lon=${coords.lon}&start=${period.start}&end=${period.end}`;
   return fetch(url);
 };
 
@@ -102,8 +102,7 @@ export const fetchData = city => {
     getUVHistory(city.coords)
   ])
     .then(responses => {
-      if (responses.filter(response => !response.ok).length)
-        throw Error("Error on fetch");
+      if (responses.filter(response => !response.ok).length) throw Error();
       return Promise.all(responses.map(result => result.json()));
     })
     .then(results => {
@@ -155,14 +154,13 @@ export const fetchData = city => {
         ]
       };
     })
-    .catch(err => console.log(err));
-  // TODO: do something with these errors
+    .catch(() => null);
 };
 
 export const fetchCities = city => {
   return getCityList(city)
     .then(response => {
-      if (!response.ok) throw Error("Error on fetch");
+      if (!response.ok) throw Error();
       return response.json();
     })
     .then(data => {
@@ -181,6 +179,5 @@ export const fetchCities = city => {
 
       return data.list;
     })
-    .catch(err => console.log(err));
-  // TODO: do something with these errors
+    .catch(() => null);
 };
