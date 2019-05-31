@@ -9,12 +9,12 @@ class Menu extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      error: undefined,
+      error: 0,
       loading: false,
-      city: undefined, // { id, coords:{ lat, lon }}
-      currentWeather: undefined,
-      UV: undefined,
-      list: undefined
+      city: undefined,
+      current: undefined,
+      forecast: undefined,
+      uv: undefined
     };
   }
 
@@ -22,15 +22,15 @@ class Menu extends React.Component {
     const { city } = this.state;
     this.setState({ loading: true });
 
-    fetchData(city).then(data => {
+    return fetchData(city).then(data => {
       if (!data) return null;
       if (typeof data === "number") {
         return this.setState({ error: data });
       }
       return this.setState({
-        currentWeather: data.results[0],
-        list: data.results[1],
-        UV: data.results[2],
+        current: data.results[0],
+        forecast: data.results[1],
+        uv: data.results[2],
         error: 0,
         loading: false
       });
@@ -47,7 +47,7 @@ class Menu extends React.Component {
 
   render() {
     const { unit } = this.props;
-    const { city, error, currentWeather, UV, list, loading } = this.state;
+    const { city, error, loading, current, uv, forecast } = this.state;
     return (
       <Container fluid>
         <SearchBar
@@ -61,11 +61,11 @@ class Menu extends React.Component {
         <Tabs
           error={error}
           show={city !== undefined}
-          currentWeather={currentWeather}
-          UV={UV}
-          list={list}
-          unit={unit}
           loading={loading}
+          unit={unit}
+          current={current}
+          forecast={forecast}
+          uv={uv}
         />
       </Container>
     );

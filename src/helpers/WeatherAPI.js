@@ -51,7 +51,7 @@ const getUVHistory = coords => {
 const filterDay = result => {
   return {
     state: result.weather[0].main,
-    icon: result.weather[0].icon,
+    iconName: result.weather[0].icon,
     temp: result.main.temp,
     humidity: result.main.humidity,
     pressure: result.main.pressure,

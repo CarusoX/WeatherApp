@@ -18,8 +18,23 @@ const errorPanes = error => [
   { menuItem: "UV Rays", render: () => <ErrorTab error={error} /> }
 ];
 
+const dataPanes = (current, forecast, uv, unit) => [
+  {
+    menuItem: "Current Weather",
+    render: () => <WeatherCard {...current} unit={unit} />
+  },
+  {
+    menuItem: "Week Forecast",
+    render: () => <ForecastCard {...forecast} unit={unit} />
+  },
+  {
+    menuItem: "UV Rays",
+    render: () => <UVTab {...uv} />
+  }
+];
+
 const Tabs = props => {
-  const { error, show, loading, unit, currentWeather, list, UV } = props;
+  const { error, show, loading, unit, current, forecast, uv } = props;
   if (error > 0) {
     return (
       <Tab
@@ -28,7 +43,7 @@ const Tabs = props => {
       />
     );
   }
-  if (show === false) {
+  if (!show) {
     return (
       <Tab
         menu={{ pointing: true, style: { justifyContent: "center" } }}
@@ -47,32 +62,7 @@ const Tabs = props => {
   return (
     <Tab
       menu={{ pointing: true, style: { justifyContent: "center" } }}
-      panes={[
-        {
-          menuItem: "Current Weather",
-          render: () => (
-            <Tab.Pane attached={false}>
-              <WeatherCard unit={unit} {...currentWeather} />
-            </Tab.Pane>
-          )
-        },
-        {
-          menuItem: "Week Forecast",
-          render: () => (
-            <Tab.Pane attached={false}>
-              <ForecastCard list={list} />
-            </Tab.Pane>
-          )
-        },
-        {
-          menuItem: "UV Rays",
-          render: () => (
-            <Tab.Pane attached={false}>
-              <UVTab UV={UV} />
-            </Tab.Pane>
-          )
-        }
-      ]}
+      panes={dataPanes(current, forecast, uv, unit)}
     />
   );
 };
@@ -80,9 +70,9 @@ const Tabs = props => {
 export default Tabs;
 
 Tabs.defaultProps = {
-  currentWeather: {},
-  list: {},
-  UV: {}
+  current: {},
+  forecast: {},
+  uv: {}
 };
 
 Tabs.propTypes = {
@@ -90,25 +80,25 @@ Tabs.propTypes = {
   show: PropTypes.bool.isRequired,
   loading: PropTypes.bool.isRequired,
   unit: PropTypes.string.isRequired,
-  currentWeather: PropTypes.shape({
+  current: PropTypes.shape({
     state: PropTypes.string,
-    icon: PropTypes.string,
+    iconName: PropTypes.string,
     temp: PropTypes.number,
     humidity: PropTypes.number,
     pressure: PropTypes.number,
     minTemp: PropTypes.number,
     maxTemp: PropTypes.number,
     windSpeed: PropTypes.number,
-    windDir: PropTypes.string,
-    clouds: PropTypes.string,
-    sunrise: PropTypes.string,
-    sunset: PropTypes.string
+    windDir: PropTypes.number,
+    clouds: PropTypes.number,
+    sunrise: PropTypes.number,
+    sunset: PropTypes.number
   }),
-  list: PropTypes.shape({
+  forecast: PropTypes.shape({
     detailedDays: PropTypes.array,
     days: PropTypes.array
   }),
-  UV: PropTypes.shape({
+  uv: PropTypes.shape({
     index: PropTypes.number,
     forecast: PropTypes.array,
     history: PropTypes.array
