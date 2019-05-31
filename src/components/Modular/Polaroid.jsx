@@ -2,35 +2,25 @@ import React from 'react'
 import { Divider } from 'semantic-ui-react'
 
 const polaroid = {
-  width: '80%',
   backgroundColor: 'white',
-  boxShadow: '0px 0px 27px 13px rgba(196,196,196,0.6)',
-  marginBottom: '25px',
-  marginLeft: '0px',
-  marginRight: '0px'
+  boxShadow: '0px 0px 27px 13px rgba(196,196,196,0.3)',
 };
 
 const image = {
   maxWidth: '80%',
   maxHeight: '80%',
-  marginLeft: '0px',
-  marginRight: '0px'
-};
-
-const text = {
-  fontSize: '30px',
 };
 
 const container = {
-  textAlign: 'center',
-  padding: '10px 20px',
-  width: '100%',
-  marginLeft: '0px',
-  marginRight: '0px'
+  padding: '5%'
+};
+
+const text = {
+  fontSize: '150%',
 };
 
 export const Polaroid = (props) => (
-  <div style={polaroid}>
+  <div style={{...polaroid, ...props.style}}>
     <img style={image} src={require('../../icons/Theme2/' + props.image)} />
     <Divider />
     <div style={container}>

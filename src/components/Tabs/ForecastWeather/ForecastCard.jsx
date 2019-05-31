@@ -41,52 +41,51 @@ class ForecastCard extends React.Component {
         //   this.day(day, 3),
         // )}
 
-        <div>
-
-          <div style={{width: '25%', height: '20%', float: 'left'}}>
+        <div style={{display: 'flex', flexDirection: 'row'}}>
 
             <Polaroid
               text='Selected'
               image='004-clouds.png'
+              style={{flexGrow: '2', alignItems: 'stretch', width: '75%'}}
             />
 
-          </div>
+            <div style={{flexGrow: '2', display: 'flex', flexDirection: 'column', justifyContent: 'space-evenly'}}>
 
-          <div style={{width: '15%', height: '10%', float: 'right', position: 'static', marginLeft: '0px', marginRight: '0px', borderWidth: '10px', borderColor: 'red'}}>
+              <div style={{flexGrow: '1', display: 'flex', flexDirection: 'row', justifyContent: 'space-evenly'}}>
 
-            <Polaroid
-            text='Selected'
-            image='004-clouds.png'
-            />
-          </div>
-          
-          <div style={{width: '15%', height: '10%', float: 'right', position: 'static', marginLeft: '0px', marginRight: '0px'}}>
-            <Polaroid
-            text='Selected'
-            image='004-clouds.png'
-            />
-          </div>
-          
-          <div style={{width: '15%', height: '10%', float: 'right', position: 'static', marginLeft: '0px', marginRight: '0px'}}>
-            <Polaroid
-            text='Selected'
-            image='004-clouds.png'
-            />
-          </div>
+                <Polaroid
+                  text='DAY 1'
+                  image='004-clouds.png'
+                  style={{maxWidth: '15%', height: '70%'}}
+                />
+                <Polaroid
+                  text='DAY 2'
+                  image='004-clouds.png'
+                  style={{maxWidth: '15%', height: '70%'}}
+                />
+                <Polaroid
+                  text='DAY 3'
+                  image='004-clouds.png'
+                  style={{maxWidth: '15%', height: '70%'}}
+                />
+                <Polaroid
+                  text='DAY 4'
+                  image='004-clouds.png'
+                  style={{maxWidth: '15%', height: '70%'}}
+                />
+                <Polaroid
+                  text='DAY 5'
+                  image='004-clouds.png'
+                  style={{maxWidth: '15%', height: '70%'}}
+                />
 
-          <div style={{width: '15%', height: '10%', float: 'right', position: 'static', marginLeft: '0px', marginRight: '0px'}}>
-            <Polaroid
-            text='Selected'
-            image='004-clouds.png'
-            />
-          </div>
+              </div> 
 
-          <div style={{width: '15%', height: '10%', float: 'right', position: 'static', marginLeft: '0px', marginRight: '0px'}}>
-            <Polaroid
-            text='Selected'
-            image='004-clouds.png'
-            />
-          </div>
+              <div style={{flexGrow: '1', display: 'flex', flexDirection: 'row', justifyContent: 'space-evenly'}}>
+
+              </div> 
+
+            </div>
 
         </div>
 
