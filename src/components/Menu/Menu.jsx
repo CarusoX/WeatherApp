@@ -1,8 +1,8 @@
-import React from 'react'
-import { Container, Divider } from 'semantic-ui-react'
-import { SearchBar } from '../Search/index.ts'
-import { Tabs }  from '../Tabs/index.ts'
-import { fetch_data } from '../../helpers/index.ts'
+import React from "react";
+import { Container, Divider } from "semantic-ui-react";
+import { SearchBar } from "../Search/index.ts";
+import { Tabs } from "../Tabs/index.ts";
+import { FetchData } from "../../helpers/index.ts";
 
 class Menu extends React.Component {
   
@@ -22,7 +22,7 @@ class Menu extends React.Component {
 
   setData() {
     this.setState({ loading: true });
-    fetch_data(this.state.city).then((data) => {
+    FetchData(this.state.city).then((data) => {
       if (!data) return;
       console.log(data)
       if(typeof(data) == 'number') {
