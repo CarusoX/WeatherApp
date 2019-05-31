@@ -6,11 +6,15 @@ const polaroid = {
   backgroundColor: 'white',
   boxShadow: '0px 0px 27px 13px rgba(196,196,196,0.6)',
   marginBottom: '25px',
+  marginLeft: '0px',
+  marginRight: '0px'
 };
 
 const image = {
   maxWidth: '80%',
   maxHeight: '80%',
+  marginLeft: '0px',
+  marginRight: '0px'
 };
 
 const text = {
@@ -21,6 +25,8 @@ const container = {
   textAlign: 'center',
   padding: '10px 20px',
   width: '100%',
+  marginLeft: '0px',
+  marginRight: '0px'
 };
 
 export const Polaroid = (props) => (
