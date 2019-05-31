@@ -1,53 +1,76 @@
-import React from "react";
-import { Grid, Tab } from "semantic-ui-react";
-import { getDateName, getIconName } from "../../../helpers/index.ts";
-import { Cell2 } from "../../Modular/index.ts";
+import React from 'react'
+import { getDateName, getIconName } from '../../../helpers/index.ts'
+import { Polaroid } from '../../Modular/index.ts'
+import UVHistory from '../UVWeather/UVHistory'
 
 class ForecastCard extends React.Component {
-  // day(d, w) {
-  //   return (
-  //     <Tab.Pane attached={false}>
-  //       <Cell2
-  //         width={w}
-  //         icon={getIconName(d.weather_icon)}
-  //         date={d.dt_txt
-  //           .slice(0, 10)
-  //           .split("-")
-  //           .join("/")}
-  //         day={getDateName(
-  //           d.dt_txt
-  //             .slice(0, 10)
-  //             .split("-")
-  //             .join("/")
-  //         )}
-  //         max={d.max_temp}
-  //         min={d.min_temp}
-  //         temp={d.temp}
-  //         humidity={d.humidity}
-  //         wind_direction={d.wind_dir}
-  //         wind_speed={d.wind_speed}
-  //       />
-  //     </Tab.Pane>
-  //   );
-  // }
 
-  render() {
-    const {days, detailedDays } = this.props;
+  constructor(props) {
+    super(props);
+    this.state = {
+      selected: 0
+    }
+  }
+
+  day(day, width) {
     return (
-      <Tab.Pane attached={false}>
-        <Grid columns={6} divided>
-          {/* Day by default */}
-
-          {/* {this.day(this.props.list.days[0], 5)} */}
-
-          {/* Days (clicked) */}
-          {/* this.props.list.days.map(day =>
-              this.day(day, 2),
-          ) */}
-        </Grid>
-      </Tab.Pane>
+      <Cell2
+        width={width}
+        icon={getIconName(day.icon)}
+        date={day.dt_txt.slice(0, 10).split('-').join('/')}
+        day={getDateName(day.dt_txt.slice(0, 10).split('-').join('/'))}
+        max={day.maxTemp}
+        min={day.minTemp}
+      />
     );
   }
-}
+
+  render() {
+    return (
+
+      // {this.day(this.props.list.days[0], 10)}
+
+      // {this.props.list.days.map(day =>
+      //   this.day(day, 3),
+      // )}
+
+      <div style={{ display: 'flex', flexDirection: 'row' }}>
+
+        <Polaroid
+          text='Selected'
+          image='004-clouds.png'
+          style={{ flexGrow: '2', alignItems: 'stretch', width: '75%' }}
+        />
+
+        <div style={{ flexGrow: '2', display: 'flex', flexDirection: 'column', justifyContent: 'space-evenly' }}>
+
+          <div style={{ flexGrow: '1', display: 'flex', flexDirection: 'row', justifyContent: 'space-evenly' }}>
+
+            {this.props.days.map(day =>
+              <Polaroid
+                key={day.dt_txt}
+                text={day.dt_txt}
+                image='004-clouds.png'
+                style={{ maxWidth: '15%', height: '70%' }}
+              />
+            )}
+
+          </div>
+
+          <div style={{ flexGrow: '1', display: 'flex', flexDirection: 'row', justifyContent: 'space-evenly' }}>
+
+            <UVHistory
+              history={this.props.history}
+            />
+
+          </div>
+
+        </div>
+
+      </div>
+
+    );
+  }
+};
 
 export default ForecastCard;
