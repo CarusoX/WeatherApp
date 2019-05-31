@@ -37,8 +37,10 @@ class Menu extends React.Component {
     });
   }
 
-  setCity(city) {
-    this.setState({ city }, () => this.setData());
+  setCity(newCity) {
+    const { city } = this.state;
+    if (!city || newCity.id !== city.id)
+      this.setState({ city: newCity }, () => this.setData());
   }
 
   setError(err) {

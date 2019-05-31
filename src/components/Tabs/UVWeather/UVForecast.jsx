@@ -11,6 +11,7 @@ const UVForecast = props => {
       <Card.Group stackable centered itemsPerRow="5">
         {forecast.map(item => (
           <UVCard
+            key={item.date}
             date={item.date.slice(5)}
             dateName={getDateName(item.date)}
             index={item.index}

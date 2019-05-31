@@ -68,7 +68,7 @@ export default class SearchExampleStandard extends Component {
             fluid
             loading={isLoading}
             onResultSelect={this.handleResultSelect}
-            onSearchChange={_.debounce(this.handleSearchChange, 500, {
+            onSearchChange={_.debounce(this.handleSearchChange, 300, {
               leading: true
             })}
             results={results}

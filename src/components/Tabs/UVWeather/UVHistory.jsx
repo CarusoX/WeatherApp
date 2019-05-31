@@ -10,6 +10,25 @@ import {
   ResponsiveContainer
 } from "recharts";
 
+const CustomizedAxisTick = props => {
+  const { x, y, payload } = props;
+
+  return (
+    <g transform={`translate(${x},${y})`}>
+      <text
+        x={0}
+        y={0}
+        dy={16}
+        textAnchor="end"
+        fill="#666"
+        transform="rotate(-35)"
+      >
+        {payload.value}
+      </text>
+    </g>
+  );
+};
+
 export default class UVHistory extends React.Component {
   static jsfiddleUrl = "https://jsfiddle.net/alidingling/xqjtetw0/";
 
@@ -43,7 +62,7 @@ export default class UVHistory extends React.Component {
             }}
           >
             <CartesianGrid strokeDasharray="3 3" />
-            <XAxis dataKey="date" />
+            <XAxis dataKey="date" height={60} tick={<CustomizedAxisTick />} />
             <YAxis />
             <Tooltip />
             <Area
@@ -94,4 +113,18 @@ export default class UVHistory extends React.Component {
 
 UVHistory.propTypes = {
   history: PropTypes.arrayOf(PropTypes.shape).isRequired
+};
+
+CustomizedAxisTick.defaultProps = {
+  x: 0,
+  y: 0,
+  payload: { value: "" }
+};
+
+CustomizedAxisTick.propTypes = {
+  x: PropTypes.number,
+  y: PropTypes.number,
+  payload: PropTypes.shape({
+    value: PropTypes.string
+  })
 };

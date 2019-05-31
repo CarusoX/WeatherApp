@@ -95,10 +95,10 @@ export default class UVIndex extends PureComponent {
   }
 
   static getDerivedStateFromProps(props) {
-    if (props.uv_index < 3) return { activeIndex: 0 };
-    if (props.uv_index < 6) return { activeIndex: 1 };
-    if (props.uv_index < 8) return { activeIndex: 2 };
-    if (props.uv_index < 11) return { activeIndex: 3 };
+    if (props.index < 3) return { activeIndex: 0 };
+    if (props.index < 6) return { activeIndex: 1 };
+    if (props.index < 8) return { activeIndex: 2 };
+    if (props.index < 11) return { activeIndex: 3 };
     return { activeIndex: 4 };
   }
 
@@ -138,7 +138,7 @@ export default class UVIndex extends PureComponent {
                     dataKey="value"
                   >
                     {data.map(entry => (
-                      <Cell fill={entry.color} />
+                      <Cell key={entry.name} fill={entry.color} />
                     ))}
                   </Pie>
                 </PieChart>
