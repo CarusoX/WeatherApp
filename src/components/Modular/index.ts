@@ -1,4 +1,5 @@
 export { default as Cell } from './Cell'
+export { default as SmallCell } from './SmallCell'
 export { default as DefaultTab } from './DefaultTab'
 export { default as ErrorTab } from './ErrorTab'
 export { PlaceholderImageSquare, PlaceholderParagraph, SegmentExampleLoading } from './Placeholders'

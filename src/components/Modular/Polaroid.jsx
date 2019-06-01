@@ -1,5 +1,7 @@
 import React from 'react'
 import { Divider } from 'semantic-ui-react'
+import { SmallCell } from "../Modular/index.ts";
+import { getTemp } from '../../helpers/index.ts'
 
 const big_polaroid = {
   border: '2px solid gray',
@@ -36,6 +38,12 @@ const container = {
   padding: '10%'
 };
 
+const big_header = {
+  fontSize: '200%',
+  fontWeight: '900',
+  marginTop: '0%'
+};
+
 const big_text = {
   fontSize: '150%',
 };
@@ -56,9 +64,41 @@ export const BigPolaroid = (props) => (
     <img style={big_image} src={require('../../icons/Theme2/' + props.image)} />
     <Divider />
     <div style={container}>
-      <p style={big_text}>{props.text}</p>
-      <p>Max: </p>
-      <p>Min: </p>
+      <p style={big_header}>{props.text}</p>
+      {/* <SmallCell
+        image="039-thermometer.png"
+        title="Temperature"
+        content={getTemp(this.props.temp, this.props.unit).toString()}
+      />
+
+      <SmallCell
+        image="018-high temperature.png"
+        title="Max Temperature"
+        content={getTemp(this.props.maxTemp, this.props.unit).toString()}
+      />
+
+      <SmallCell
+        image="022-low temperature.png"
+        title="Min Temperature"
+        content={getTemp(this.props.minTemp, this.props.unit).toString()}
+      /> */}
+
+      <SmallCell
+        style={{width:'5px'}}
+        image="004-clouds.png"
+        title="Clouds"
+        content={props.clouds.toString()}
+        unit="%"
+      />
+
+      <SmallCell
+        style={{width:'5px'}}
+        image="048-wind.png"
+        title="Wind Speed"
+        content={props.windSpeed.toString()}
+        unit="M/s"
+      />
+
     </div>
   </div>
 )

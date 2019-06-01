@@ -22,8 +22,20 @@ class ForecastCard extends React.Component {
         <div style={{ display: 'flex', flexDirection: 'row' }}>
 
         <BigPolaroid
-          text='Selected'
           image={getIconName(this.props.days[this.state.index].weather_icon) + '.png'}
+          // text={getDateName(this.props.days.dt_txt)}
+          // state={this.props.days[this.state.selected].state}
+          // unit={this.props.unit}
+          // temp={this.props.days[this.state.selected].temp}
+          // maxTemp={this.props.days[this.state.selected].maxTemp}
+          // minTemp={this.props.days[this.state.selected].minTemp}
+          clouds={90}
+          // humidity={this.props.days[this.state.selected].humidity}
+          windSpeed={100}
+          // windDir={this.props.days[this.state.selected].windDir}
+          // sunrise={this.props.days[this.state.selected].sunrise}
+          // sunset={this.props.days[this.state.selected].sunset}
+          // pressure={this.props.days[this.state.selected].pressure}
         />
         {console.log(this.props.days)}
         <div style={{ flexGrow: '2', display: 'flex', flexDirection: 'column', justifyContent: 'space-evenly' }}>
