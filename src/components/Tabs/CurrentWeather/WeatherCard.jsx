@@ -1,6 +1,6 @@
 import PropTypes from "prop-types";
 import React from "react";
-import { Segment, Grid, Image, Statistic, Tab } from "semantic-ui-react";
+import { Grid, Image, Statistic, Tab } from "semantic-ui-react";
 import { getTemp, getIconName, unixToHours } from "../../../helpers/index.ts";
 import { Cell } from "../../Modular/index.ts";
 

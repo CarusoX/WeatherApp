@@ -3,7 +3,7 @@ import { Divider } from 'semantic-ui-react'
 import { getDateName, getIconName } from '../../helpers/index.ts'
 
 const big_polaroid = {
-  border: '3px solid gray',
+  border: '2px solid gray',
   borderRadius: '5px',
   boxShadow: '0px 0px 27px 13px rgba(196,196,196,0.3)',
   backgroundColor: 'white',
@@ -13,12 +13,12 @@ const big_polaroid = {
 };
 
 const small_polaroid = {
-  border: '3px solid gray',
+  border: '2px solid gray',
   borderRadius: '5px',
-  boxShadow: '0px 0px 27px 13px rgba(196,196,196,0.3)',
+  boxShadow: '0px 0px 20px 10px rgba(196, 196, 196, 0.7)',
   backgroundColor: 'white',
   marginBottom: '10%',
-  maxWidth: '15%',
+  maxWidth: '17%',
   height: '70%'
 };
 
@@ -41,6 +41,8 @@ export const BigPolaroid = (props) => (
     <Divider />
     <div style={container}>
       <p style={text}>{props.text}</p>
+      <p>Max: </p>
+      <p>Min: </p>
     </div>
   </div>
 )

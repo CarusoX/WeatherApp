@@ -39,7 +39,7 @@ const Tabs = props => {
     return (
       <Tab
         menu={{ pointing: true, style: { justifyContent: "center" } }}
-        panes={errorPanes(error, false)}
+        panes={ errorPanes(error, false) }
       />
     );
   }
@@ -47,7 +47,7 @@ const Tabs = props => {
     return (
       <Tab
         menu={{ pointing: true, style: { justifyContent: "center" } }}
-        panes={defaultPanes(false)}
+        panes={ defaultPanes(false) }
       />
     );
   }
@@ -55,14 +55,14 @@ const Tabs = props => {
     return (
       <Tab
         menu={{ pointing: true, style: { justifyContent: "center" } }}
-        panes={defaultPanes(true)}
+        panes={ defaultPanes(true) }
       />
     );
   }
   return (
     <Tab
       menu={{ pointing: true, style: { justifyContent: "center" } }}
-      panes={dataPanes(current, forecast, uv, unit)}
+      panes={ dataPanes(current, forecast, uv, unit) }
     />
   );
 };
