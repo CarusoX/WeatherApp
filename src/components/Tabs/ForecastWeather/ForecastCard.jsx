@@ -8,37 +8,19 @@ class ForecastCard extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      selected: 0
+      selected: 0,
+      index: 0,
     }
-  }
-
-  day(day, width) {
-    return (
-      <Cell2
-        width={width}
-        icon={getIconName(day.icon)}
-        date={day.dt_txt.slice(0, 10).split('-').join('/')}
-        day={getDateName(day.dt_txt.slice(0, 10).split('-').join('/'))}
-        max={day.maxTemp}
-        min={day.minTemp}
-      />
-    );
   }
 
   render() {
     return (
 
-      // {this.day(this.props.list.days[0], 10)}
-
-      // {this.props.list.days.map(day =>
-      //   this.day(day, 3),
-      // )}
-
       <div style={{ display: 'flex', flexDirection: 'row' }}>
 
         <BigPolaroid
-          text='Selected'
-          image='004-clouds.png'
+          text={this.props.days[this.state.index].dt_txt}
+          image={getIconName(this.props.days[this.state.index].weather_icon) + '.png'}
         />
 
         <div style={{ flexGrow: '2', display: 'flex', flexDirection: 'column', justifyContent: 'space-evenly' }}>
@@ -48,7 +30,7 @@ class ForecastCard extends React.Component {
             {this.props.days.map(day =>
               <SmallPolaroid
                 text={day.dt_txt}
-                image='004-clouds.png'
+                image={getIconName(day.weather_icon) + '.png'}
               />
             )}
 

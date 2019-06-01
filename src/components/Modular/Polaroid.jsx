@@ -1,5 +1,6 @@
 import React from 'react'
 import { Divider } from 'semantic-ui-react'
+import { getDateName, getIconName } from '../../helpers/index.ts'
 
 const big_polaroid = {
   border: '3px solid gray',

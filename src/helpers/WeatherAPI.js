@@ -65,10 +65,17 @@ const filterDay = result => {
   };
 };
 
+
 const compressDays = result => {
+  const dict = new Object();
+  Object.keys(dict).forEach(v => dict[v] = undefined)
+  console.log(result)
   return result.reduce((a, b, i) => {
+
     const len = a.length - 1;
+    
     if (b.dt_txt.slice(11, 21) === "00:00:00") {
+      
       if (a.length) {
         a[len].temp /= a[len].num;
         a[len].temp = a[len].temp.toFixed(2);
@@ -80,15 +87,29 @@ const compressDays = result => {
       a[len].temp += b.temp;
       a[len].num += 1;
     }
-
-    if (b.dt_txt.slice(11, 21) === "12:00:00") {
-      a[len].weather_icon = b.weather_icon;
-    }
+    if(dict[b.iconName] === undefined) dict[b.iconName] = 0;
+    dict[b.iconName]++;
 
     if (i === result.length - 1) {
       a[len].temp /= a[len].num;
       a[len].temp = a[len].temp.toFixed(2);
     }
+
+    {/*el len 4 esta para sacar la mayor cantidad de iconos posibles para ese dia (ya que tiene poquitos)*/}
+    if (b.dt_txt.slice(11, 21) === "21:00:00" || len === 4) {
+      var sortDict = [];
+      for (var key in dict) {
+          sortDict.push([key, dict[key]]);
+      }
+
+      sortDict.sort(function(a, b) {
+          return b[1] - a[1];
+      });
+
+      a[len].weather_icon = sortDict[0][0];
+      Object.keys(dict).forEach(v => dict[v] = 0)
+    }
+    
     return a;
   }, []);
 };
@@ -134,7 +155,7 @@ export const fetchData = city => {
           // Forecast
           {
             detailedDays: DetailedDays,
-            days: compressDays(DetailedDays)
+            days: compressDays(DetailedDays),
           },
 
           // UVI
