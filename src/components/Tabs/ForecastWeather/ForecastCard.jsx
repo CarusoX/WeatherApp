@@ -1,4 +1,5 @@
 import React from 'react'
+import { Tab } from "semantic-ui-react";
 import { getDateName, getIconName } from '../../../helpers/index.ts'
 import { BigPolaroid, SmallPolaroid } from '../../Modular/index.ts'
 import UVHistory from '../UVWeather/UVHistory'
@@ -12,29 +13,24 @@ class ForecastCard extends React.Component {
     }
   }
 
-  day(day, width) {
-    return (
-      <Cell2
-        width={width}
-        icon={getIconName(day.icon)}
-        date={day.dt_txt.slice(0, 10).split('-').join('/')}
-        day={getDateName(day.dt_txt.slice(0, 10).split('-').join('/'))}
-        max={day.maxTemp}
-        min={day.minTemp}
-      />
-    );
-  }
+  // icon={getIconName(day.icon)}
+  // date={day.dt_txt.slice(0, 10).split('-').join('/')}
+  // day={getDateName(day.dt_txt.slice(0, 10).split('-').join('/'))}
+  // max={day.maxTemp}
+  // min={day.minTemp}
+  
+  // {this.day(this.props.list.days[0], 10)}
+
+  // {this.props.list.days.map(day =>
+  //   this.day(day, 3),
+  // )}
 
   render() {
     return (
 
-      // {this.day(this.props.list.days[0], 10)}
+      <Tab.Pane attached={false}>
 
-      // {this.props.list.days.map(day =>
-      //   this.day(day, 3),
-      // )}
-
-      <div style={{ display: 'flex', flexDirection: 'row' }}>
+        <div style={{ display: 'flex', flexDirection: 'row' }}>
 
         <BigPolaroid
           text='Selected'
@@ -64,7 +60,9 @@ class ForecastCard extends React.Component {
 
         </div>
 
-      </div>
+        </div>
+
+      </Tab.Pane>
 
     );
   }
