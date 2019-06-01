@@ -21,7 +21,7 @@ const ErrorTab = props => {
   return (
     <Tab.Pane attached={false}>
       <h1>We&apos;re sorry!</h1>
-      <h3> Something went wrong :( </h3>
+      <h3>Something went wrong :(</h3>
       <h3>{ErrorMessages[error]}</h3>
       <img
         src={require("../../images/" + ErrorImages[error])}

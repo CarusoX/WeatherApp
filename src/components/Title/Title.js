@@ -3,7 +3,7 @@ import React from "react";
 import { Header, Image } from "semantic-ui-react";
 import "semantic-ui-css/semantic.min.css";
 
-const Title = props => {
+export const Title = props => {
   const { size, image, title } = props;
   return (
     <Header as={size} icon textAlign="center">
@@ -18,5 +18,3 @@ Title.propTypes = {
   image: PropTypes.string.isRequired,
   title: PropTypes.string.isRequired
 };
-
-export default Title;
