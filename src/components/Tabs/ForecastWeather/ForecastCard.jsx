@@ -1,6 +1,6 @@
 import React from 'react'
 import { getDateName, getIconName } from '../../../helpers/index.ts'
-import { Polaroid } from '../../Modular/index.ts'
+import { BigPolaroid, SmallPolaroid } from '../../Modular/index.ts'
 import UVHistory from '../UVWeather/UVHistory'
 
 class ForecastCard extends React.Component {
@@ -36,10 +36,9 @@ class ForecastCard extends React.Component {
 
       <div style={{ display: 'flex', flexDirection: 'row' }}>
 
-        <Polaroid
+        <BigPolaroid
           text='Selected'
           image='004-clouds.png'
-          style={{ flexGrow: '2', alignItems: 'stretch', width: '75%' }}
         />
 
         <div style={{ flexGrow: '2', display: 'flex', flexDirection: 'column', justifyContent: 'space-evenly' }}>
@@ -47,11 +46,9 @@ class ForecastCard extends React.Component {
           <div style={{ flexGrow: '1', display: 'flex', flexDirection: 'row', justifyContent: 'space-evenly' }}>
 
             {this.props.days.map(day =>
-              <Polaroid
-                key={day.dt_txt}
+              <SmallPolaroid
                 text={day.dt_txt}
                 image='004-clouds.png'
-                style={{ maxWidth: '15%', height: '70%' }}
               />
             )}
 
