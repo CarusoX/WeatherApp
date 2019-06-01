@@ -95,7 +95,8 @@ const compressDays = result => {
       a[len].temp = a[len].temp.toFixed(2);
     }
 
-    {/*el len 4 esta para sacar la mayor cantidad de iconos posibles para ese dia (ya que tiene poquitos)*/}
+    {/*el len 4 esta para sacar la mayor cantidad de
+      iconos posibles para ese dia (ya que tiene poquitos)*/}
     if (b.dt_txt.slice(11, 21) === "21:00:00" || len === 4) {
       var sortDict = [];
       for (var key in dict) {

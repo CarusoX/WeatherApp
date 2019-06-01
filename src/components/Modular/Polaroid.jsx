@@ -21,25 +21,42 @@ const small_polaroid = {
   height: '70%'
 };
 
-const image = {
+const big_image = {
+  maxWidth: '80%',
+  maxHeight: '80%',
+};
+
+const small_image = {
+  marginTop: '10%',
   maxWidth: '80%',
   maxHeight: '80%',
 };
 
 const container = {
-  padding: '5%'
+  padding: '10%'
 };
 
-const text = {
+const big_text = {
   fontSize: '150%',
+};
+
+const small_header = {
+  fontSize: '130%',
+  fontWeight: '900',
+  marginTop: '0%'
+};
+
+const small_text = {
+  fontSize: '100%',
+  marginTop: '0%'
 };
 
 export const BigPolaroid = (props) => (
   <div style={big_polaroid}>
-    <img style={image} src={require('../../icons/Theme2/' + props.image)} />
+    <img style={big_image} src={require('../../icons/Theme2/' + props.image)} />
     <Divider />
     <div style={container}>
-      <p style={text}>{props.text}</p>
+      <p style={big_text}>{props.text}</p>
       <p>Max: </p>
       <p>Min: </p>
     </div>
@@ -48,10 +65,12 @@ export const BigPolaroid = (props) => (
 
 export const SmallPolaroid = (props) => (
   <div style={small_polaroid}>
-    <img style={image} src={require('../../icons/Theme2/' + props.image)} />
-    <Divider />
+    <img style={small_image} src={require('../../icons/Theme2/' + props.image)} />
+    <Divider style={{marginBottom: '0%'}} />
     <div style={container}>
-      <p style={text}>{props.text}</p>
+      <p style={small_header}>{props.text}</p>
+      <p style={small_text}>Max: {props.max}{props.unit}</p>
+      <p style={small_text}>Min: {props.min}{props.unit}</p>
     </div>
   </div>
 )

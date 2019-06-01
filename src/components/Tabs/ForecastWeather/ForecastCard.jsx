@@ -25,15 +25,18 @@ class ForecastCard extends React.Component {
           text='Selected'
           image={getIconName(this.props.days[this.state.index].weather_icon) + '.png'}
         />
-
+        {console.log(this.props.days)}
         <div style={{ flexGrow: '2', display: 'flex', flexDirection: 'column', justifyContent: 'space-evenly' }}>
 
           <div style={{ flexGrow: '1', display: 'flex', flexDirection: 'row', justifyContent: 'space-evenly' }}>
 
             {this.props.days.map((day, index) =>
               <SmallPolaroid
-                text={day.dt_txt}
                 image={getIconName(day.weather_icon) + '.png'}
+                text={getDateName(day.dt_txt)}
+                max={day.maxTemp}
+                min={day.minTemp}
+                unit={this.props.unit}
               />
             )}
 
