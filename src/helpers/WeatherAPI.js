@@ -29,14 +29,14 @@ const getForecastWeather = id => {
 const getUVIndex = coords => {
   const url = `${API_ENDPOINT}${API_UVI}?appid=${API_KEY}&lat=${
     coords.lat
-    }&lon=${coords.lon}`;
+  }&lon=${coords.lon}`;
   return fetch(url);
 };
 
 const getUVForecast = coords => {
   const url = `${API_ENDPOINT}${API_UVF}?appid=${API_KEY}&lat=${
     coords.lat
-    }&lon=${coords.lon}&cnt=4`;
+  }&lon=${coords.lon}&cnt=4`;
   return fetch(url);
 };
 
@@ -44,7 +44,7 @@ const getUVHistory = coords => {
   const period = getMonthPeriod();
   const url = `${API_ENDPOINT}${API_UVH}?appid=${API_KEY}&lat=${
     coords.lat
-    }&lon=${coords.lon}&start=${period.start}&end=${period.end}`;
+  }&lon=${coords.lon}&start=${period.start}&end=${period.end}`;
   return fetch(url);
 };
 
@@ -65,60 +65,48 @@ const filterDay = result => {
   };
 };
 
-
 const compressDays = result => {
-  const dict = new Object();
-  Object.keys(dict).forEach(v => dict[v] = undefined)
-  console.log(result)
   return result.reduce((a, b, i) => {
-
     const len = a.length - 1;
-    
+
     if (b.dt_txt.slice(11, 21) === "00:00:00") {
-      
       if (a.length) {
         a[len].temp /= a[len].num;
         a[len].temp = a[len].temp.toFixed(2);
+        a[len].bestIcon = Object.keys(a[len].bestIcon)
+          .sort((u, v) => a[len].bestIcon[u] - a[len].bestIcon[v])
+          .filter(icon => !icon.includes("n"))
+          .shift();
       }
+      b.bestIcon = {};
+      b.bestIcon[b.iconName] = 1;
       a.push(Object.assign({ num: 1 }, b));
     } else {
       a[len].min_temp = Math.min(a[len].min_temp, b.min_temp);
       a[len].max_temp = Math.max(a[len].max_temp, b.max_temp);
       a[len].temp += b.temp;
       a[len].num += 1;
+      if (a[len].bestIcon[b.iconName] === undefined)
+        a[len].bestIcon[b.iconName] = 0;
+      else a[len].bestIcon[b.iconName] += 1;
     }
-    if(dict[b.iconName] === undefined) dict[b.iconName] = 0;
-    dict[b.iconName]++;
 
     if (i === result.length - 1) {
+      a[len].bestIcon = Object.keys(a[len].bestIcon)
+        .sort((u, v) => a[len].bestIcon[u] - a[len].bestIcon[v])
+        .filter(icon => !icon.includes("n"))
+        .shift();
       a[len].temp /= a[len].num;
       a[len].temp = a[len].temp.toFixed(2);
     }
-
-    {/*el len 4 esta para sacar la mayor cantidad de
-      iconos posibles para ese dia (ya que tiene poquitos)*/}
-    if (b.dt_txt.slice(11, 21) === "21:00:00" || len === 4) {
-      var sortDict = [];
-      for (var key in dict) {
-          sortDict.push([key, dict[key]]);
-      }
-
-      sortDict.sort(function(a, b) {
-          return b[1] - a[1];
-      });
-
-      a[len].weather_icon = sortDict[0][0];
-      Object.keys(dict).forEach(v => dict[v] = 0)
-    }
-    
     return a;
   }, []);
 };
 
 export const fetchData = city => {
   return Promise.all([
-    getCurrentWeather(city.city_id),
-    getForecastWeather(city.city_id),
+    getCurrentWeather(city.id),
+    getForecastWeather(city.id),
     getUVIndex(city.coords),
     getUVForecast(city.coords),
     getUVHistory(city.coords)
@@ -156,7 +144,7 @@ export const fetchData = city => {
           // Forecast
           {
             detailedDays: DetailedDays,
-            days: compressDays(DetailedDays),
+            days: compressDays(DetailedDays)
           },
 
           // UVI

@@ -21,7 +21,7 @@ export default class SearchExampleStandard extends Component {
     const { setCity } = this.props;
     this.setState({ value: result.name });
     setCity({
-      city_id: result.key,
+      id: result.key,
       coords: result.coords,
       city_name: result.name
     });

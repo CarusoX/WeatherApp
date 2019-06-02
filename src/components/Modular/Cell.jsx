@@ -10,7 +10,7 @@ const Cell = props => {
         <Grid.Row>
           <Grid.Column width={5}>
             <Image
-              src={require("../../icons/Theme2/" + image)}
+              src={require(`../../icons/Theme2/${image}`)}
               size="mini"
               verticalAlign="middle"
             />

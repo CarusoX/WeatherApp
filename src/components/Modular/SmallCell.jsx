@@ -1,13 +1,13 @@
 import PropTypes from "prop-types";
 import React from "react";
-import { Grid, Image, Segment } from "semantic-ui-react";
+import { Image, Segment } from "semantic-ui-react";
 
 const SmallCell = props => {
   const { image, title, content, unit } = props;
   return (
-    <Segment raised style={{margin: '2px', padding: '0'}}>
+    <Segment raised style={{ margin: "2px", padding: "0" }}>
       <Image
-        src={require("../../icons/Theme2/" + image)}
+        src={require(`../../icons/Theme2/${image}`)}
         verticalAlign="middle"
         size="mini"
       />
