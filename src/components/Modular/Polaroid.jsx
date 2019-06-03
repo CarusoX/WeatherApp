@@ -88,24 +88,28 @@ export const BigPolaroid = props => {
       <Divider />
       <div style={container}>
         <p style={bigHeader}>{text}</p>
+        <p style={bigHeader}>{state}</p>
         
-          {/* <SmallCell
+        <SmallCell
+          style={{ width: "5px" }}
           image="039-thermometer.png"
           title="Temperature"
-          content={getTemp(this.props.temp, this.props.unit).toString()}
+          content={getTemp(temp, unit).toString()}
         />
 
         <SmallCell
+          style={{ width: "5px" }}
           image="018-high temperature.png"
           title="Max Temperature"
-          content={getTemp(this.props.maxTemp, this.props.unit).toString()}
+          content={getTemp(maxTemp, unit).toString()}
         />
 
         <SmallCell
+          style={{ width: "5px" }}
           image="022-low temperature.png"
           title="Min Temperature"
-          content={getTemp(this.props.minTemp, this.props.unit).toString()}
-        /> */}
+          content={getTemp(minTemp, unit).toString()}
+        />
 
         <SmallCell
           style={{ width: "5px" }}
@@ -122,7 +126,47 @@ export const BigPolaroid = props => {
           content={windSpeed.toString()}
           unit="M/s"
         />
-        
+
+        <SmallCell
+          style={{ width: "5px" }}
+          image="047-weathercock.png"
+          title="Wind Direction"
+          content={windDir.toString()}
+          unit="º"
+        />
+
+        <SmallCell
+          style={{ width: "5px" }}
+          image="019-humidity.png"
+          title="Humidity"
+          content={humidity.toString()}
+          unit="%"
+        />
+
+        <SmallCell
+          style={{ width: "5px" }}
+          image="012-dawn.png"
+          title="Sunrise"
+          content={sunrise.toString()}
+          unit="Hs"
+        />
+
+        <SmallCell
+          style={{ width: "5px" }}
+          image="037-sunset.png"
+          title="Sunset"
+          content={sunset.toString()}
+          unit="Hs"
+        />
+
+        <SmallCell
+          style={{ width: "5px" }}
+          image="026-pressure.png"
+          title="Preassure"
+          content={pressure.toString()}
+          unit="hPa"
+        />
+
       </div>
     </div>
   );
