@@ -109,10 +109,14 @@ export const BigPolaroid = props => {
     </div>
   );
 };
+
 export const SmallPolaroid = props => {
   const { text, max, min, unit, image } = props;
   return (
-    <div style={smallPolaroid}>
+    <div 
+      style={smallPolaroid}
+      onClick={props.select(text)}
+    >
       <img
         alt="img"
         style={smallImage}
@@ -122,14 +126,10 @@ export const SmallPolaroid = props => {
       <div style={container}>
         <p style={smallHeader}>{text}</p>
         <p style={smallText}>
-          Max:
-          {max}
-          {unit}
+          Max: {max} {unit}
         </p>
         <p style={smallText}>
-          Min:
-          {min}
-          {unit}
+          Min: {min} {unit}
         </p>
       </div>
     </div>

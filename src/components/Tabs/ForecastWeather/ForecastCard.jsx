@@ -13,6 +13,10 @@ class ForecastCard extends React.Component {
     };
   }
 
+  changeIndex(new_index) {
+    this.setState({index: new_index});
+  }
+
   render() {
     const { days, unit, history } = this.props;
     const { index } = this.state;
@@ -22,19 +26,19 @@ class ForecastCard extends React.Component {
           <BigPolaroid
             key={days[index].dt_txt}
             image={`${getIconName(days[index].bestIcon)}.png`}
-            // text={getDateName(this.props.days.dt_txt)}
-            // state={this.props.days[this.state.selected].state}
-            // unit={this.props.unit}
-            // temp={this.props.days[this.state.selected].temp}
-            // maxTemp={this.props.days[this.state.selected].maxTemp}
-            // minTemp={this.props.days[this.state.selected].minTemp}
-            clouds={90}
-            // humidity={this.props.days[this.state.selected].humidity}
-            windSpeed={100}
-            // windDir={this.props.days[this.state.selected].windDir}
-            // sunrise={this.props.days[this.state.selected].sunrise}
-            // sunset={this.props.days[this.state.selected].sunset}
-            // pressure={this.props.days[this.state.selected].pressure}
+            text={getDateName(this.props.days[index].dt_txt)}
+            state={this.props.days[index].state}
+            unit={this.props.unit}
+            temp={this.props.days[index].temp}
+            maxTemp={this.props.days[index].maxTemp}
+            minTemp={this.props.days[index].minTemp}
+            clouds={this.props.days[index].clouds}
+            humidity={this.props.days[index].humidity}
+            windSpeed={this.props.days[index].windSpeed}
+            windDir={this.props.days[index].windDir}
+            sunrise={this.props.days[index].sunrise}
+            sunset={this.props.days[index].sunset}
+            pressure={this.props.days[index].pressure}
           />
           <div
             style={{
@@ -52,8 +56,10 @@ class ForecastCard extends React.Component {
                 justifyContent: "space-evenly"
               }}
             >
-              {days.map(day => (
+              {days.map((day, i) => (
+                console.log(day.bestIcon),
                 <SmallPolaroid
+                  onClick={() => this.setState({ index: i })}
                   key={day.dt_txt}
                   image={`${getIconName(day.bestIcon)}.png`}
                   text={getDateName(day.dt_txt)}
