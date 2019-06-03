@@ -61,7 +61,23 @@ const smallText = {
 };
 
 export const BigPolaroid = props => {
-  const { clouds, windSpeed, image, text } = props;
+  const { 
+    image,
+    text,
+    state,
+    unit,
+    temp,
+    maxTemp,
+    minTemp,
+    clouds,
+    humidity,
+    windSpeed,
+    windDir,
+    sunrise,
+    sunset,
+    pressure
+   } = props;
+
   return (
     <div style={bigPolaroid}>
       <img
@@ -72,23 +88,24 @@ export const BigPolaroid = props => {
       <Divider />
       <div style={container}>
         <p style={bigHeader}>{text}</p>
-        {/* <SmallCell
-        image="039-thermometer.png"
-        title="Temperature"
-        content={getTemp(this.props.temp, this.props.unit).toString()}
-      />
+        
+          {/* <SmallCell
+          image="039-thermometer.png"
+          title="Temperature"
+          content={getTemp(this.props.temp, this.props.unit).toString()}
+        />
 
-      <SmallCell
-        image="018-high temperature.png"
-        title="Max Temperature"
-        content={getTemp(this.props.maxTemp, this.props.unit).toString()}
-      />
+        <SmallCell
+          image="018-high temperature.png"
+          title="Max Temperature"
+          content={getTemp(this.props.maxTemp, this.props.unit).toString()}
+        />
 
-      <SmallCell
-        image="022-low temperature.png"
-        title="Min Temperature"
-        content={getTemp(this.props.minTemp, this.props.unit).toString()}
-      /> */}
+        <SmallCell
+          image="022-low temperature.png"
+          title="Min Temperature"
+          content={getTemp(this.props.minTemp, this.props.unit).toString()}
+        /> */}
 
         <SmallCell
           style={{ width: "5px" }}
@@ -105,6 +122,7 @@ export const BigPolaroid = props => {
           content={windSpeed.toString()}
           unit="M/s"
         />
+        
       </div>
     </div>
   );
@@ -137,17 +155,37 @@ export const SmallPolaroid = props => {
 };
 
 BigPolaroid.defaultProps = {
-  clouds: 0,
-  windSpeed: 0,
   image: "",
-  text: ""
+  text: "",
+  state: "",
+  unit: 0,
+  temp: 0,
+  maxTemp: 0,
+  minTemp: 0,
+  clouds: 0,
+  humidity: 0,
+  windSpeed: 0,
+  windDir: 0,
+  sunrise: 0,
+  sunset: 0,
+  pressure: 0,
 };
 
 BigPolaroid.propTypes = {
-  clouds: PropTypes.number,
-  windSpeed: PropTypes.number,
   image: PropTypes.string,
-  text: PropTypes.string
+  text: PropTypes.string,
+  state: PropTypes.string,
+  unit: PropTypes.number,
+  temp: PropTypes.number,
+  maxTemp: PropTypes.number,
+  minTemp: PropTypes.number,
+  clouds: PropTypes.number,
+  humidity: PropTypes.number,
+  windSpeed: PropTypes.number,
+  windDir: PropTypes.number,
+  sunrise: PropTypes.number,
+  sunset: PropTypes.number,
+  pressure: PropTypes.number,
 };
 
 SmallPolaroid.defaultProps = {
