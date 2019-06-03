@@ -56,7 +56,6 @@ class ForecastCard extends React.Component {
               }}
             >
               {days.map((day, i) => (
-                console.log(day.bestIcon),
                 <SmallPolaroid
                   onClick={() => this.setState({ index: i })}
                   key={day.dt_txt}
