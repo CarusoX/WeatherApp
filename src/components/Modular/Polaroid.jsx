@@ -2,7 +2,7 @@ import PropTypes from "prop-types";
 import React from "react";
 import { Divider, Segment } from "semantic-ui-react";
 import { SmallCell } from "./index.ts";
-import { getTemp } from "../../helpers/index.ts";
+import { getTemp, unixToHours } from "../../helpers/index.ts";
 
 const bigPolaroid = {
   border: "2px solid gray",
@@ -15,6 +15,7 @@ const bigPolaroid = {
 };
 
 const smallPolaroid = {
+  cursor: "pointer",
   border: "2px solid gray",
   borderRadius: "5px",
   boxShadow: "0px 0px 20px 10px rgba(196, 196, 196, 0.7)",
@@ -139,13 +140,13 @@ export const BigPolaroid = props => {
             <SmallCell
               image="012-dawn.png"
               title="Sunrise"
-              content={sunrise.toString()}
+              content={unixToHours(sunrise)}
               unit="Hs"
             />
             <SmallCell
               image="037-sunset.png"
               title="Sunset"
-              content={sunset.toString()}
+              content={unixToHours(sunset)}
               unit="Hs"
             />
           </Segment.Group>

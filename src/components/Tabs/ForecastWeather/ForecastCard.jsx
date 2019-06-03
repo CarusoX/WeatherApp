@@ -3,7 +3,7 @@ import React from "react";
 import { Tab } from "semantic-ui-react";
 import { getDateName, getIconName } from "../../../helpers/index.ts";
 import { BigPolaroid, SmallPolaroid } from "../../Modular/index.ts";
-import UVHistory from "../UVWeather/UVHistory";
+import ForecastGraphic from "./ForecastGraphic";
 
 class ForecastCard extends React.Component {
   constructor(props) {
@@ -77,7 +77,7 @@ class ForecastCard extends React.Component {
                 justifyContent: "space-evenly"
               }}
             >
-              <UVHistory history={history} />
+              <ForecastGraphic history={history} />
             </div>
           </div>
         </div>
