@@ -9,7 +9,7 @@ class ForecastCard extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      index: 0
+      index: 4
     };
   }
 
@@ -18,7 +18,7 @@ class ForecastCard extends React.Component {
   }
 
   render() {
-    const { days, unit, history } = this.props;
+    const { detailedDays, days, unit } = this.props;
     const { index } = this.state;
     return (
       <Tab.Pane attached={false}>
@@ -77,7 +77,14 @@ class ForecastCard extends React.Component {
                 justifyContent: "space-evenly"
               }}
             >
-              <ForecastGraphic history={history} />
+              <ForecastGraphic 
+                  update={newIndex => this.changeIndex(newIndex)}
+                  days={
+                    detailedDays.filter((x, i) => 
+                      {return(i >= index && i < index + 8)}
+                    )
+                  }
+              />
             </div>
           </div>
         </div>

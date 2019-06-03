@@ -18,7 +18,7 @@ const CustomizedAxisTick = props => {
       <text
         x={0}
         y={0}
-        dy={16}
+        dy={2}
         textAnchor="end"
         fill="#666"
         transform="rotate(-35)"
@@ -33,15 +33,13 @@ export default class ForecastGraphic extends React.Component {
   static jsfiddleUrl = "https://jsfiddle.net/alidingling/xqjtetw0/";
 
   render() {
-    const { history } = this.props;
+    console.log(this.props)
+    const { days } = this.props;
 
-    const data = history.map(x => ({
-      date: x.date_iso
-        .slice(5, 10)
-        .split("-")
-        .join("/"),
-      maxTemp: Math.min(x.value, 3),
-      minTemp: Math.min(Math.max(0, x.value - 3), 3)
+    const data = days.map(x => ({
+      date: x.dt_txt.slice(11, 19),
+      maxTemp: x.maxTemp,
+      minTemp: x.minTemp
     }));
 
     return (
@@ -89,7 +87,7 @@ export default class ForecastGraphic extends React.Component {
 }
 
 ForecastGraphic.propTypes = {
-  history: PropTypes.arrayOf(PropTypes.shape).isRequired
+  days: PropTypes.arrayOf(PropTypes.shape).isRequired
 };
 
 CustomizedAxisTick.defaultProps = {
