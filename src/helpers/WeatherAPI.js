@@ -67,29 +67,36 @@ const compressDays = result => {
   const compress = [];
   result.forEach(day => {
     if (day.dt_txt.slice(11, 21) === "00:00:00") {
-      const bestIcon = {};
-      bestIcon[day.iconName] = 1;
-      compress.push(Object.assign({ num: 1, bestIcon }, day));
+      const bestChoise = {};
+      bestChoise[day.iconName] = { amount: 1, state: day.state };
+      compress.push(Object.assign({ num: 1, bestChoise }, day));
     } else {
       const len = compress.length - 1;
       compress[len].temp += day.temp;
       compress[len].minTemp = Math.min(compress[len].minTemp, day.minTemp);
       compress[len].maxTemp = Math.max(compress[len].maxTemp, day.maxTemp);
       compress[len].num += 1;
-      compress[len].bestIcon[day.iconName] += 1;
+      if (compress[len].bestChoise[day.iconName] === undefined) {
+        compress[len].bestChoise[day.iconName] = {
+          amount: 1,
+          state: day.state
+        };
+      } else compress[len].bestChoise[day.iconName].amount += 1;
     }
   });
   return compress.map(day => {
-    const newDay = day;
+    const newDay = Object.assign({}, day);
     newDay.temp /= newDay.num;
     newDay.temp = newDay.temp.toFixed(2);
-    newDay.bestIcon = Object.keys(newDay.bestIcon)
+    delete newDay.bestChoise;
+    newDay.bestIcon = Object.keys(day.bestChoise)
       .sort((u, v) => {
         if (u.includes("n")) return 1;
         if (v.includes("n")) return -1;
-        return newDay.bestIcon[u] - newDay.bestIcon[v];
+        return day.bestChoise[u].amount - day.bestChoise[v].amount;
       })
       .shift();
+    newDay.state = day.bestChoise[newDay.bestIcon].state;
     return newDay;
   });
 };
