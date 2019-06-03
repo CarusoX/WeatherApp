@@ -88,31 +88,27 @@ export const BigPolaroid = props => {
       <Divider />
       <div style={container}>
         <p style={bigHeader}>{text}</p>
-        <p style={bigHeader}>{state}</p>
+        <p style={bigText}>{state}</p>
         
         <SmallCell
-          style={{ width: "5px" }}
           image="039-thermometer.png"
           title="Temperature"
           content={getTemp(temp, unit).toString()}
         />
 
         <SmallCell
-          style={{ width: "5px" }}
           image="018-high temperature.png"
           title="Max Temperature"
           content={getTemp(maxTemp, unit).toString()}
         />
 
         <SmallCell
-          style={{ width: "5px" }}
           image="022-low temperature.png"
           title="Min Temperature"
           content={getTemp(minTemp, unit).toString()}
         />
 
         <SmallCell
-          style={{ width: "5px" }}
           image="004-clouds.png"
           title="Clouds"
           content={clouds.toString()}
@@ -120,7 +116,6 @@ export const BigPolaroid = props => {
         />
 
         <SmallCell
-          style={{ width: "5px" }}
           image="048-wind.png"
           title="Wind Speed"
           content={windSpeed.toString()}
@@ -128,7 +123,6 @@ export const BigPolaroid = props => {
         />
 
         <SmallCell
-          style={{ width: "5px" }}
           image="047-weathercock.png"
           title="Wind Direction"
           content={windDir.toString()}
@@ -136,7 +130,6 @@ export const BigPolaroid = props => {
         />
 
         <SmallCell
-          style={{ width: "5px" }}
           image="019-humidity.png"
           title="Humidity"
           content={humidity.toString()}
@@ -144,7 +137,6 @@ export const BigPolaroid = props => {
         />
 
         <SmallCell
-          style={{ width: "5px" }}
           image="012-dawn.png"
           title="Sunrise"
           content={sunrise.toString()}
@@ -152,7 +144,6 @@ export const BigPolaroid = props => {
         />
 
         <SmallCell
-          style={{ width: "5px" }}
           image="037-sunset.png"
           title="Sunset"
           content={sunset.toString()}
@@ -160,7 +151,6 @@ export const BigPolaroid = props => {
         />
 
         <SmallCell
-          style={{ width: "5px" }}
           image="026-pressure.png"
           title="Preassure"
           content={pressure.toString()}
@@ -177,7 +167,6 @@ export const SmallPolaroid = props => {
   return (
     <div 
       style={smallPolaroid}
-      onClick={props.select(text)}
     >
       <img
         alt="img"
@@ -219,7 +208,7 @@ BigPolaroid.propTypes = {
   image: PropTypes.string,
   text: PropTypes.string,
   state: PropTypes.string,
-  unit: PropTypes.number,
+  unit: PropTypes.string,
   temp: PropTypes.number,
   maxTemp: PropTypes.number,
   minTemp: PropTypes.number,
