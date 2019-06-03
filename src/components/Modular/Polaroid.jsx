@@ -19,13 +19,12 @@ const smallPolaroid = {
   borderRadius: "5px",
   boxShadow: "0px 0px 20px 10px rgba(196, 196, 196, 0.7)",
   backgroundColor: "white",
-  marginBottom: "10%",
   maxWidth: "17%",
-  height: "70%"
+  height: "50%"
 };
 
 const bigImage = {
-  marginTop: "5%",
+  marginTop: "3%",
   maxWidth: "80%",
   maxHeight: "80%"
 };
@@ -172,9 +171,9 @@ export const BigPolaroid = props => {
 };
 
 export const SmallPolaroid = props => {
-  const { text, max, min, unit, image } = props;
+  const { update, text, index, max, min, unit, image } = props;
   return (
-    <div style={smallPolaroid}>
+    <div style={smallPolaroid} onClick={() => update(index)}>
       <img
         alt="img"
         style={smallImage}
@@ -234,6 +233,7 @@ BigPolaroid.propTypes = {
 
 SmallPolaroid.defaultProps = {
   text: "",
+  index: 0,
   max: 0,
   min: 0,
   unit: "",
@@ -241,6 +241,8 @@ SmallPolaroid.defaultProps = {
 };
 
 SmallPolaroid.propTypes = {
+  update: PropTypes.func.isRequired,
+  index: PropTypes.number,
   text: PropTypes.string,
   max: PropTypes.number,
   min: PropTypes.number,

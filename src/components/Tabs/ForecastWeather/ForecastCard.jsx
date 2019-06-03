@@ -57,8 +57,9 @@ class ForecastCard extends React.Component {
             >
               {days.map((day, i) => (
                 <SmallPolaroid
-                  onClick={() => this.setState({ index: i })}
+                  update={newIndex => this.changeIndex(newIndex)}
                   key={day.dt_txt}
+                  index={i}
                   image={`${getIconName(day.bestIcon)}.png`}
                   text={getDateName(day.dt_txt)}
                   max={day.maxTemp}
@@ -72,7 +73,7 @@ class ForecastCard extends React.Component {
               style={{
                 display: "flex",
                 flexDirection: "row",
-                flexGrow: "3",
+                flexGrow: "1",
                 justifyContent: "space-evenly"
               }}
             >
