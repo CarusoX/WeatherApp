@@ -74,30 +74,37 @@ const compressDays = result => {
         a[len].temp /= a[len].num;
         a[len].temp = a[len].temp.toFixed(2);
         a[len].bestIcon = Object.keys(a[len].bestIcon)
-          .sort((u, v) => a[len].bestIcon[u] - a[len].bestIcon[v])
-          .filter(icon => !icon.includes("n"))
+          .sort((u, v) => {
+            if (u.includes("n")) return 1;
+            if (v.includes("n")) return -1;
+            return a[len].bestIcon[u] - a[len].bestIcon[v];
+          })
           .shift();
       }
       b.bestIcon = {};
       b.bestIcon[b.iconName] = 1;
       a.push(Object.assign({ num: 1 }, b));
     } else {
-      a[len].min_temp = Math.min(a[len].min_temp, b.min_temp);
-      a[len].max_temp = Math.max(a[len].max_temp, b.max_temp);
+      a[len].minTemp = Math.min(a[len].minTemp, b.minTemp);
+      a[len].maxTemp = Math.max(a[len].maxTemp, b.maxTemp);
       a[len].temp += b.temp;
       a[len].num += 1;
       if (a[len].bestIcon[b.iconName] === undefined)
-        a[len].bestIcon[b.iconName] = 0;
+        a[len].bestIcon[b.iconName] = 1;
       else a[len].bestIcon[b.iconName] += 1;
     }
 
     if (i === result.length - 1) {
-      a[len].bestIcon = Object.keys(a[len].bestIcon)
-        .sort((u, v) => a[len].bestIcon[u] - a[len].bestIcon[v])
-        .filter(icon => !icon.includes("n"))
+      const last = a.length - 1;
+      a[last].bestIcon = Object.keys(a[last].bestIcon)
+        .sort((u, v) => {
+          if (u.includes("n")) return 1;
+          if (v.includes("n")) return -1;
+          return a[last].bestIcon[u] - a[last].bestIcon[v];
+        })
         .shift();
-      a[len].temp /= a[len].num;
-      a[len].temp = a[len].temp.toFixed(2);
+      a[last].temp /= a[last].num;
+      a[last].temp = a[last].temp.toFixed(2);
     }
     return a;
   }, []);

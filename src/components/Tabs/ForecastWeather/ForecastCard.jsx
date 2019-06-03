@@ -82,13 +82,16 @@ class ForecastCard extends React.Component {
 }
 
 ForecastCard.defaultProps = {
-  days: [],
   unit: "",
   history: []
 };
 
 ForecastCard.propTypes = {
-  days: PropType.arrayOf(PropType.object),
+  days: PropType.arrayOf(
+    PropType.shape({
+      bestIcon: PropType.string.isRequired
+    })
+  ).isRequired,
   unit: PropType.string,
   history: PropType.arrayOf(PropType.object)
 };
