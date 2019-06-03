@@ -43,7 +43,8 @@ export default class ForecastGraphic extends React.Component {
     }));
 
     return (
-      <div style={{ width: "100%", height: 300 }}>
+      <div style={{ width: "100%", height: 300 }} onClick={() => update(index)}>
+        <h2>  {this.props.days[0].dt_txt.slice(0, 10)} </h2>
         <ResponsiveContainer>
           <LineChart
             width={500}

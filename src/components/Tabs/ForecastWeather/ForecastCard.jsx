@@ -9,7 +9,7 @@ class ForecastCard extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      index: 4
+      index: 0
     };
   }
 
@@ -81,7 +81,7 @@ class ForecastCard extends React.Component {
                   update={newIndex => this.changeIndex(newIndex)}
                   days={
                     detailedDays.filter((x, i) => 
-                      {return(i >= index && i < index + 8)}
+                      {return(i >= index*8 && i < index*8 + 8)}
                     )
                   }
               />
