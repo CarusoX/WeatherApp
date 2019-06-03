@@ -5,7 +5,7 @@ import { Image, Segment } from "semantic-ui-react";
 const SmallCell = props => {
   const { image, title, content, unit } = props;
   return (
-    <Segment raised style={{ margin: "2px", padding: "0" }}>
+    <Segment raised compact>
       <Image
         src={require(`../../icons/Theme2/${image}`)}
         verticalAlign="middle"

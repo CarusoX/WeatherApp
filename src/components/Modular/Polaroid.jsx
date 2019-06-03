@@ -1,6 +1,6 @@
 import PropTypes from "prop-types";
 import React from "react";
-import { Divider } from "semantic-ui-react";
+import { Divider, Segment } from "semantic-ui-react";
 import { SmallCell } from "./index.ts";
 import { getTemp } from "../../helpers/index.ts";
 
@@ -90,73 +90,80 @@ export const BigPolaroid = props => {
         <p style={bigHeader}>{text}</p>
         <p style={bigText}>{state}</p>
         
-        <SmallCell
-          image="039-thermometer.png"
-          title="Temperature"
-          content={getTemp(temp, unit).toString()}
-        />
+          <Segment.Group mini horizontal>
+          <SmallCell
+            image="039-thermometer.png"
+            title="Temperature"
+            content={getTemp(temp, unit).toString()}
+          />
+          <SmallCell
+            image="004-clouds.png"
+            title="Clouds"
+            content={clouds.toString()}
+            unit="%"
+          />
+          </Segment.Group>
 
-        <SmallCell
-          image="018-high temperature.png"
-          title="Max Temperature"
-          content={getTemp(maxTemp, unit).toString()}
-        />
+          <Segment.Group mini horizontal>
+          <SmallCell
+            image="018-high temperature.png"
+            title="Max Temperature"
+            content={getTemp(maxTemp, unit).toString()}
+            />
+          <SmallCell
+            image="022-low temperature.png"
+            title="Min Temperature"
+            content={getTemp(minTemp, unit).toString()}
+          />
+          </Segment.Group>
 
-        <SmallCell
-          image="022-low temperature.png"
-          title="Min Temperature"
-          content={getTemp(minTemp, unit).toString()}
-        />
+          <Segment.Group mini horizontal>
+          <SmallCell
+            image="048-wind.png"
+            title="Wind Speed"
+            content={windSpeed.toString()}
+            unit="M/s"
+          />
 
-        <SmallCell
-          image="004-clouds.png"
-          title="Clouds"
-          content={clouds.toString()}
-          unit="%"
-        />
+          <SmallCell
+            image="047-weathercock.png"
+            title="Wind Direction"
+            content={windDir.toString()}
+            unit="º"
+          />
+          </Segment.Group>
 
-        <SmallCell
-          image="048-wind.png"
-          title="Wind Speed"
-          content={windSpeed.toString()}
-          unit="M/s"
-        />
+          <Segment.Group mini horizontal>
+          <SmallCell
+            image="012-dawn.png"
+            title="Sunrise"
+            content={sunrise.toString()}
+            unit="Hs"
+          />
 
-        <SmallCell
-          image="047-weathercock.png"
-          title="Wind Direction"
-          content={windDir.toString()}
-          unit="º"
-        />
+          <SmallCell
+            image="037-sunset.png"
+            title="Sunset"
+            content={sunset.toString()}
+            unit="Hs"
+          />
+          </Segment.Group>
 
-        <SmallCell
-          image="019-humidity.png"
-          title="Humidity"
-          content={humidity.toString()}
-          unit="%"
-        />
+          <Segment.Group mini horizontal>
+          <SmallCell
+            image="019-humidity.png"
+            title="Humidity"
+            content={humidity.toString()}
+            unit="%"
+          />
 
-        <SmallCell
-          image="012-dawn.png"
-          title="Sunrise"
-          content={sunrise.toString()}
-          unit="Hs"
-        />
-
-        <SmallCell
-          image="037-sunset.png"
-          title="Sunset"
-          content={sunset.toString()}
-          unit="Hs"
-        />
-
-        <SmallCell
-          image="026-pressure.png"
-          title="Preassure"
-          content={pressure.toString()}
-          unit="hPa"
-        />
-
+          <SmallCell
+            image="026-pressure.png"
+            title="Preassure"
+            content={pressure.toString()}
+            unit="hPa"
+          />
+          </Segment.Group>
       </div>
     </div>
   );
