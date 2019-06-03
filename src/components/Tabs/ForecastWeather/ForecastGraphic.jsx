@@ -14,7 +14,6 @@ export default class ForecastGraphic extends React.Component {
   static jsfiddleUrl = "https://jsfiddle.net/alidingling/xqjtetw0/";
  
   render() {
-    console.log(this.props)
     const { minTemp, maxTemp, days } = this.props;
 
     const data = days.map(x => ({
@@ -26,6 +25,7 @@ export default class ForecastGraphic extends React.Component {
 
     return (
       <div style={{ width: "100%", height: 300 }}>
+        <h2>  {this.props.days[0].dt_txt.slice(0, 10)} </h2>
         <ResponsiveContainer>
           <LineChart
             width={500}
@@ -82,12 +82,12 @@ export default class ForecastGraphic extends React.Component {
                    height={60}
             />
             <YAxis 
-              domain={ ['auto'] }
+              domain={ [minTemp, maxTemp] }
             />
             <Tooltip />
             <Line
               type="monotone"
-              dataKey="humidity"
+              dataKey="maxTemp"
               activeDot={false}
               stackId="1"
               stroke="red"
