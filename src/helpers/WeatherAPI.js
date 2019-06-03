@@ -1,5 +1,3 @@
-/* eslint-disable no-param-reassign */
-
 import { getMonthPeriod } from "./index.ts";
 
 const { API_KEY } = process.env;
@@ -66,48 +64,34 @@ const filterDay = result => {
 };
 
 const compressDays = result => {
-  return result.reduce((a, b, i) => {
-    const len = a.length - 1;
-
-    if (b.dt_txt.slice(11, 21) === "00:00:00") {
-      if (a.length) {
-        a[len].temp /= a[len].num;
-        a[len].temp = a[len].temp.toFixed(2);
-        a[len].bestIcon = Object.keys(a[len].bestIcon)
-          .sort((u, v) => {
-            if (u.includes("n")) return 1;
-            if (v.includes("n")) return -1;
-            return a[len].bestIcon[u] - a[len].bestIcon[v];
-          })
-          .shift();
-      }
-      b.bestIcon = {};
-      b.bestIcon[b.iconName] = 1;
-      a.push(Object.assign({ num: 1 }, b));
+  const compress = [];
+  result.forEach(day => {
+    if (day.dt_txt.slice(11, 21) === "00:00:00") {
+      const bestIcon = {};
+      bestIcon[day.iconName] = 1;
+      compress.push(Object.assign({ num: 1, bestIcon }, day));
     } else {
-      a[len].minTemp = Math.min(a[len].minTemp, b.minTemp);
-      a[len].maxTemp = Math.max(a[len].maxTemp, b.maxTemp);
-      a[len].temp += b.temp;
-      a[len].num += 1;
-      if (a[len].bestIcon[b.iconName] === undefined)
-        a[len].bestIcon[b.iconName] = 1;
-      else a[len].bestIcon[b.iconName] += 1;
+      const len = compress.length - 1;
+      compress[len].temp += day.temp;
+      compress[len].minTemp = Math.min(compress[len].minTemp, day.minTemp);
+      compress[len].maxTemp = Math.max(compress[len].maxTemp, day.maxTemp);
+      compress[len].num += 1;
+      compress[len].bestIcon[day.iconName] += 1;
     }
-
-    if (i === result.length - 1) {
-      const last = a.length - 1;
-      a[last].bestIcon = Object.keys(a[last].bestIcon)
-        .sort((u, v) => {
-          if (u.includes("n")) return 1;
-          if (v.includes("n")) return -1;
-          return a[last].bestIcon[u] - a[last].bestIcon[v];
-        })
-        .shift();
-      a[last].temp /= a[last].num;
-      a[last].temp = a[last].temp.toFixed(2);
-    }
-    return a;
-  }, []);
+  });
+  return compress.map(day => {
+    const newDay = day;
+    newDay.temp /= newDay.num;
+    newDay.temp = newDay.temp.toFixed(2);
+    newDay.bestIcon = Object.keys(newDay.bestIcon)
+      .sort((u, v) => {
+        if (u.includes("n")) return 1;
+        if (v.includes("n")) return -1;
+        return newDay.bestIcon[u] - newDay.bestIcon[v];
+      })
+      .shift();
+    return newDay;
+  });
 };
 
 export const fetchData = city => {
