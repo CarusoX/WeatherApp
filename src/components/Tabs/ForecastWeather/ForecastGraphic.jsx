@@ -14,17 +14,18 @@ export default class ForecastGraphic extends React.Component {
   static jsfiddleUrl = "https://jsfiddle.net/alidingling/xqjtetw0/";
  
   render() {
+    console.log(this.props)
     const { minTemp, maxTemp, days } = this.props;
 
     const data = days.map(x => ({
       date: x.dt_txt.slice(11, 19),
       maxTemp: x.maxTemp,
-      minTemp: x.minTemp
+      minTemp: x.minTemp,
+      humidity: x.humidity,
     }));
 
     return (
       <div style={{ width: "100%", height: 300 }}>
-        <h2>  {this.props.days[0].dt_txt.slice(0, 10)} </h2>
         <ResponsiveContainer>
           <LineChart
             width={500}
@@ -60,6 +61,37 @@ export default class ForecastGraphic extends React.Component {
               stackId="1"
               stroke="blue"
               fill="blue"
+            />
+          </LineChart>
+        </ResponsiveContainer>
+
+        <ResponsiveContainer>
+          <LineChart
+            width={500}
+            height={400}
+            data={data}
+            margin={{
+              top: 10,
+              right: 30,
+              left: 0,
+              bottom: 0
+            }}
+          >
+            <CartesianGrid strokeDasharray="3 3" />
+            <XAxis dataKey="date"
+                   height={60}
+            />
+            <YAxis 
+              domain={ ['auto'] }
+            />
+            <Tooltip />
+            <Line
+              type="monotone"
+              dataKey="humidity"
+              activeDot={false}
+              stackId="1"
+              stroke="red"
+              fill="red"
             />
           </LineChart>
         </ResponsiveContainer>
