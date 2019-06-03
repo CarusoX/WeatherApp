@@ -7,11 +7,11 @@ import { getTemp } from "../../helpers/index.ts";
 const bigPolaroid = {
   border: "2px solid gray",
   borderRadius: "5px",
-  boxShadow: "0px 0px 27px 13px rgba(196,196,196,0.3)",
+  boxShadow: "0px 0px 27px 13px rgba(196,196,196,0.7)",
   backgroundColor: "white",
   flexGrow: "2",
   alignItems: "stretch",
-  width: "75%"
+  width: "100%"
 };
 
 const smallPolaroid = {
@@ -25,6 +25,7 @@ const smallPolaroid = {
 };
 
 const bigImage = {
+  marginTop: "5%",
   maxWidth: "80%",
   maxHeight: "80%"
 };
@@ -36,23 +37,25 @@ const smallImage = {
 };
 
 const container = {
-  padding: "10%"
+  padding: "0%"
 };
 
 const bigHeader = {
   fontSize: "200%",
   fontWeight: "900",
-  marginTop: "0%"
+  marginTop: "0%",
+  marginBottom: "0%"
 };
 
 const bigText = {
-  fontSize: "150%"
+  fontSize: "150%",
+  marginTop: "0%"
 };
 
 const smallHeader = {
   fontSize: "130%",
   fontWeight: "900",
-  marginTop: "0%"
+  marginTop: "5%"
 };
 
 const smallText = {
@@ -61,7 +64,7 @@ const smallText = {
 };
 
 export const BigPolaroid = props => {
-  const { 
+  const {
     image,
     text,
     state,
@@ -76,7 +79,7 @@ export const BigPolaroid = props => {
     sunrise,
     sunset,
     pressure
-   } = props;
+  } = props;
 
   return (
     <div style={bigPolaroid}>
@@ -89,81 +92,80 @@ export const BigPolaroid = props => {
       <div style={container}>
         <p style={bigHeader}>{text}</p>
         <p style={bigText}>{state}</p>
-        
-          <Segment.Group mini horizontal>
-          <SmallCell
-            image="039-thermometer.png"
-            title="Temperature"
-            content={getTemp(temp, unit).toString()}
-          />
-          <SmallCell
-            image="004-clouds.png"
-            title="Clouds"
-            content={clouds.toString()}
-            unit="%"
-          />
-          </Segment.Group>
 
+        <Segment.Group mini vertical>
           <Segment.Group mini horizontal>
-          <SmallCell
-            image="018-high temperature.png"
-            title="Max Temperature"
-            content={getTemp(maxTemp, unit).toString()}
+            <SmallCell
+              image="039-thermometer.png"
+              title="Temperature"
+              content={getTemp(temp, unit).toString()}
             />
-          <SmallCell
-            image="022-low temperature.png"
-            title="Min Temperature"
-            content={getTemp(minTemp, unit).toString()}
-          />
+            <SmallCell
+              image="004-clouds.png"
+              title="Clouds"
+              content={clouds.toString()}
+              unit="%"
+            />
           </Segment.Group>
 
           <Segment.Group mini horizontal>
-          <SmallCell
-            image="048-wind.png"
-            title="Wind Speed"
-            content={windSpeed.toString()}
-            unit="M/s"
-          />
-
-          <SmallCell
-            image="047-weathercock.png"
-            title="Wind Direction"
-            content={windDir.toString()}
-            unit="º"
-          />
+            <SmallCell
+              image="018-high temperature.png"
+              title="Max Temperature"
+              content={getTemp(maxTemp, unit).toString()}
+            />
+            <SmallCell
+              image="022-low temperature.png"
+              title="Min Temperature"
+              content={getTemp(minTemp, unit).toString()}
+            />
           </Segment.Group>
 
           <Segment.Group mini horizontal>
-          <SmallCell
-            image="012-dawn.png"
-            title="Sunrise"
-            content={sunrise.toString()}
-            unit="Hs"
-          />
-
-          <SmallCell
-            image="037-sunset.png"
-            title="Sunset"
-            content={sunset.toString()}
-            unit="Hs"
-          />
+            <SmallCell
+              image="048-wind.png"
+              title="Wind Speed"
+              content={windSpeed.toString()}
+              unit="M/s"
+            />
+            <SmallCell
+              image="047-weathercock.png"
+              title="Wind Direction"
+              content={windDir.toString()}
+              unit="º"
+            />
           </Segment.Group>
 
           <Segment.Group mini horizontal>
-          <SmallCell
-            image="019-humidity.png"
-            title="Humidity"
-            content={humidity.toString()}
-            unit="%"
-          />
-
-          <SmallCell
-            image="026-pressure.png"
-            title="Preassure"
-            content={pressure.toString()}
-            unit="hPa"
-          />
+            <SmallCell
+              image="012-dawn.png"
+              title="Sunrise"
+              content={sunrise.toString()}
+              unit="Hs"
+            />
+            <SmallCell
+              image="037-sunset.png"
+              title="Sunset"
+              content={sunset.toString()}
+              unit="Hs"
+            />
           </Segment.Group>
+
+          <Segment.Group mini horizontal>
+            <SmallCell
+              image="019-humidity.png"
+              title="Humidity"
+              content={humidity.toString()}
+              unit="%"
+            />
+            <SmallCell
+              image="026-pressure.png"
+              title="Preassure"
+              content={pressure.toString()}
+              unit="hPa"
+            />
+          </Segment.Group>
+        </Segment.Group>
       </div>
     </div>
   );
@@ -172,9 +174,7 @@ export const BigPolaroid = props => {
 export const SmallPolaroid = props => {
   const { text, max, min, unit, image } = props;
   return (
-    <div 
-      style={smallPolaroid}
-    >
+    <div style={smallPolaroid}>
       <img
         alt="img"
         style={smallImage}
@@ -184,10 +184,14 @@ export const SmallPolaroid = props => {
       <div style={container}>
         <p style={smallHeader}>{text}</p>
         <p style={smallText}>
-          Max: {max} {unit}
+          Max:
+          {max}
+          {unit}
         </p>
         <p style={smallText}>
-          Min: {min} {unit}
+          Min:
+          {min}
+          {unit}
         </p>
       </div>
     </div>
@@ -208,7 +212,7 @@ BigPolaroid.defaultProps = {
   windDir: 0,
   sunrise: 0,
   sunset: 0,
-  pressure: 0,
+  pressure: 0
 };
 
 BigPolaroid.propTypes = {
@@ -225,7 +229,7 @@ BigPolaroid.propTypes = {
   windDir: PropTypes.number,
   sunrise: PropTypes.number,
   sunset: PropTypes.number,
-  pressure: PropTypes.number,
+  pressure: PropTypes.number
 };
 
 SmallPolaroid.defaultProps = {

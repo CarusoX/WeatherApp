@@ -13,8 +13,8 @@ class ForecastCard extends React.Component {
     };
   }
 
-  changeIndex(new_index) {
-    this.setState({index: new_index});
+  changeIndex(newIndex) {
+    this.setState({ index: newIndex });
   }
 
   render() {
@@ -41,7 +41,7 @@ class ForecastCard extends React.Component {
           />
           <div
             style={{
-              flexGrow: "2",
+              flexGrow: "1",
               display: "flex",
               flexDirection: "column",
               justifyContent: "space-evenly"
@@ -49,9 +49,9 @@ class ForecastCard extends React.Component {
           >
             <div
               style={{
-                flexGrow: "1",
                 display: "flex",
                 flexDirection: "row",
+                flexGrow: "1",
                 justifyContent: "space-evenly"
               }}
             >
@@ -70,9 +70,9 @@ class ForecastCard extends React.Component {
 
             <div
               style={{
-                flexGrow: "1",
                 display: "flex",
                 flexDirection: "row",
+                flexGrow: "3",
                 justifyContent: "space-evenly"
               }}
             >
