@@ -84,6 +84,8 @@ class ForecastCard extends React.Component {
                       {return(i >= index*8 && i < index*8 + 8)}
                     )
                   }
+                  maxTemp={days[index].maxTemp}
+                  minTemp={days[index].minTemp}
               />
             </div>
           </div>

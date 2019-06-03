@@ -10,31 +10,11 @@ import {
   ResponsiveContainer
 } from "recharts";
 
-const CustomizedAxisTick = props => {
-  const { x, y, payload } = props;
-
-  return (
-    <g transform={`translate(${x},${y})`}>
-      <text
-        x={0}
-        y={0}
-        dy={2}
-        textAnchor="end"
-        fill="#666"
-        transform="rotate(-35)"
-      >
-        {payload.value}
-      </text>
-    </g>
-  );
-};
-
 export default class ForecastGraphic extends React.Component {
   static jsfiddleUrl = "https://jsfiddle.net/alidingling/xqjtetw0/";
-
+ 
   render() {
-    console.log(this.props)
-    const { days } = this.props;
+    const { minTemp, maxTemp, days } = this.props;
 
     const data = days.map(x => ({
       date: x.dt_txt.slice(11, 19),
@@ -43,7 +23,7 @@ export default class ForecastGraphic extends React.Component {
     }));
 
     return (
-      <div style={{ width: "100%", height: 300 }} onClick={() => update(index)}>
+      <div style={{ width: "100%", height: 300 }}>
         <h2>  {this.props.days[0].dt_txt.slice(0, 10)} </h2>
         <ResponsiveContainer>
           <LineChart
@@ -60,9 +40,10 @@ export default class ForecastGraphic extends React.Component {
             <CartesianGrid strokeDasharray="3 3" />
             <XAxis dataKey="date"
                    height={60}
-                   tick={<CustomizedAxisTick />}
             />
-            <YAxis />
+            <YAxis 
+              domain={ [minTemp, maxTemp] }
+            />
             <Tooltip />
             <Line
               type="monotone"
@@ -89,18 +70,4 @@ export default class ForecastGraphic extends React.Component {
 
 ForecastGraphic.propTypes = {
   days: PropTypes.arrayOf(PropTypes.shape).isRequired
-};
-
-CustomizedAxisTick.defaultProps = {
-  x: 0,
-  y: 0,
-  payload: { value: "" }
-};
-
-CustomizedAxisTick.propTypes = {
-  x: PropTypes.number,
-  y: PropTypes.number,
-  payload: PropTypes.shape({
-    value: PropTypes.string
-  })
 };
