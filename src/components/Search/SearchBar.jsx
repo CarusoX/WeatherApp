@@ -3,6 +3,7 @@ import PropTypes from "prop-types";
 import React, { Component } from "react";
 import { Search, Grid } from "semantic-ui-react";
 import { fetchCities, getCountryName } from "../../helpers/index.ts";
+import { Geolocalization } from "./index.ts";
 
 const initialState = { isLoading: false, results: [], value: "" };
 const errorState = { isLoading: false, results: [] };
@@ -63,8 +64,8 @@ export default class SearchExampleStandard extends Component {
 
     return (
       <Grid container stretched padded="vertically">
-        <Grid.Column>
-          {/* <Geolocalization /> */}
+        <Grid.Row centered>
+          <Geolocalization />
           <Search
             fluid
             loading={isLoading}
@@ -78,7 +79,7 @@ export default class SearchExampleStandard extends Component {
             selectFirstResult
             {...this.props}
           />
-        </Grid.Column>
+        </Grid.Row>
       </Grid>
     );
   }

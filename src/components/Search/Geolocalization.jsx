@@ -11,18 +11,28 @@ class Geolocalization extends React.Component {
     };
   }
 
-  active = () => {
-    if ("geolocation" in navigator) {
-      /* la geolocalización está disponible */
-    } else {
-      /* la geolocalización NO está disponible */
-    }
+  getLocation = () => {
+    navigator.geolocation.getCurrentPosition(position => {
+      alert(position)
+    });
   }
 
   render() {
 
-    
-    
+    // {require("../../icons/Theme2/map.png")}
+
+    if ("geolocation" in navigator) {
+      return (
+        <div>
+          <Button 
+            circular
+            color='blue'
+            icon="map marker alternate"
+            onClick={() => {this.getLocation()}}
+          />
+        </div>
+      );
+    }
   }
 }
 
