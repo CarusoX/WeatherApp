@@ -1,6 +1,6 @@
 import PropTypes from "prop-types";
 import React from "react";
-import { Divider, Segment } from "semantic-ui-react";
+import { Divider, Modal, Segment } from "semantic-ui-react";
 import { SmallCell } from "./index.ts";
 import { getTemp, unixToHoursMedium } from "../../helpers/index.ts";
 
@@ -11,7 +11,7 @@ const bigPolaroid = {
   backgroundColor: "white",
   flexGrow: "2",
   alignItems: "stretch",
-  width: "100%"
+  width: "75%"
 };
 
 const smallPolaroid = {
@@ -21,7 +21,7 @@ const smallPolaroid = {
   boxShadow: "0px 0px 20px 10px rgba(196, 196, 196, 0.7)",
   backgroundColor: "white",
   maxWidth: "17%",
-  height: "50%"
+  height: "55%"
 };
 
 const bigImage = {
@@ -96,19 +96,6 @@ export const BigPolaroid = props => {
         <Segment.Group mini vertical>
           <Segment.Group mini horizontal>
             <SmallCell
-              image="039-thermometer.png"
-              title="Temperature"
-              content={getTemp(temp, unit)}
-            />
-            <SmallCell
-              image="004-clouds.png"
-              title="Clouds"
-              content={clouds.toString() + "%"}
-            />
-          </Segment.Group>
-
-          <Segment.Group mini horizontal>
-            <SmallCell
               image="018-high temperature.png"
               title="Max Temperature"
               content={getTemp(maxTemp, unit)}
@@ -119,44 +106,93 @@ export const BigPolaroid = props => {
               content={getTemp(minTemp, unit)}
             />
           </Segment.Group>
-
           <Segment.Group mini horizontal>
             <SmallCell
-              image="048-wind.png"
-              title="Wind Speed"
-              content={windSpeed.toString() + " M/s"}
+              image="039-thermometer.png"
+              title="Temperature"
+              content={getTemp(temp, unit)}
             />
-            <SmallCell
-              image="047-weathercock.png"
-              title="Wind Direction"
-              content={windDir.toString() + "º"}
-            />
-          </Segment.Group>
+            <Modal
+              trigger={
 
-          <Segment.Group mini horizontal>
-            <SmallCell
-              image="012-dawn.png"
-              title="Sunrise"
-              content={unixToHoursMedium(sunrise) + " Hs"}
-            />
-            <SmallCell
-              image="037-sunset.png"
-              title="Sunset"
-              content={unixToHoursMedium(sunset) + " Hs"}
-            />
-          </Segment.Group>
+                <div>
+                  <SmallCell
+                    image="022-low temperature.png"
+                    title="Show more!"
+                    content={"+"}
+                  />
+                </div>
+              
+              }
+            >
+              <Modal.Header>
+                Know more about {text}
+              </Modal.Header>
+              <Modal.Content>
+                <Segment.Group mini horizontal>
+                  <SmallCell
+                    image="039-thermometer.png"
+                    title="Temperature"
+                    content={getTemp(temp, unit)}
+                  />
+                  <SmallCell
+                    image="004-clouds.png"
+                    title="Clouds"
+                    content={clouds.toString() + "%"}
+                  />
+                </Segment.Group>
+                <Segment.Group mini horizontal>
+                  <SmallCell
+                    image="018-high temperature.png"
+                    title="Max Temperature"
+                    content={getTemp(maxTemp, unit)}
+                  />
+                  <SmallCell
+                    image="022-low temperature.png"
+                    title="Min Temperature"
+                    content={getTemp(minTemp, unit)}
+                  />
+                </Segment.Group>
+                <Segment.Group mini horizontal>
+                  <SmallCell
+                    image="048-wind.png"
+                    title="Wind Speed"
+                    content={windSpeed.toString() + " M/s"}
+                  />
+                  <SmallCell
+                    image="047-weathercock.png"
+                    title="Wind Direction"
+                    content={windDir.toString() + "º"}
+                  />
+                </Segment.Group>
 
-          <Segment.Group mini horizontal>
-            <SmallCell
-              image="019-humidity.png"
-              title="Humidity"
-              content={humidity.toString() + "%"}
-            />
-            <SmallCell
-              image="026-pressure.png"
-              title="Preassure"
-              content={pressure.toString() + "hPa"}
-            />
+                <Segment.Group mini horizontal>
+                  <SmallCell
+                    image="012-dawn.png"
+                    title="Sunrise"
+                    content={unixToHoursMedium(sunrise) + " Hs"}
+                  />
+                  <SmallCell
+                    image="037-sunset.png"
+                    title="Sunset"
+                    content={unixToHoursMedium(sunset) + " Hs"}
+                  />
+                </Segment.Group>
+
+                <Segment.Group mini horizontal>
+                  <SmallCell
+                    image="019-humidity.png"
+                    title="Humidity"
+                    content={humidity.toString() + "%"}
+                  />
+                  <SmallCell
+                    image="026-pressure.png"
+                    title="Preassure"
+                    content={pressure.toString() + "hPa"}
+                  />
+                </Segment.Group>
+              </Modal.Content>
+            </Modal>
           </Segment.Group>
         </Segment.Group>
       </div>

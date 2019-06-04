@@ -78,14 +78,19 @@ class ForecastCard extends React.Component {
               }}
             >
               <ForecastGraphic 
-                  update={newIndex => this.changeIndex(newIndex)}
-                  days={
+                  data={
                     detailedDays.filter((x, i) => 
-                      {return(i >= index*8 && i < index*8 + 8)}
-                    )
+                      {return(i >= index * 8 && i < index * 8 + 8)}
+                    ).map(x => x.temp)
                   }
-                  maxTemp={days[index].maxTemp}
-                  minTemp={days[index].minTemp}
+                  max={days[index].maxTemp}
+                  min={days[index].minTemp}
+                  date={
+                    detailedDays.filter((x, i) => 
+                      {return(i >= index * 8 && i < index * 8 + 8)}
+                    ).map(x => x.dt_txt.slice(11, 19) + " Hs")
+                  }
+                  
               />
             </div>
           </div>
