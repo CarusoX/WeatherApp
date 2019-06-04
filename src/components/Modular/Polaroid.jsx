@@ -21,7 +21,7 @@ const smallPolaroid = {
   boxShadow: "0px 0px 20px 10px rgba(196, 196, 196, 0.7)",
   backgroundColor: "white",
   maxWidth: "17%",
-  height: "55%"
+  height: "70%"
 };
 
 const bigImage = {
@@ -94,7 +94,11 @@ export const BigPolaroid = props => {
         <p style={bigText}>{state}</p>
 
         <Segment.Group mini vertical>
-          <Segment.Group mini horizontal>
+            <SmallCell
+              image="039-thermometer.png"
+              title="Average Temperature"
+              content={getTemp(temp, unit)}
+            />
             <SmallCell
               image="018-high temperature.png"
               title="Max Temperature"
@@ -105,21 +109,13 @@ export const BigPolaroid = props => {
               title="Min Temperature"
               content={getTemp(minTemp, unit)}
             />
-          </Segment.Group>
-          <Segment.Group mini horizontal>
-            <SmallCell
-              image="039-thermometer.png"
-              title="Temperature"
-              content={getTemp(temp, unit)}
-            />
             <Modal
               trigger={
 
                 <div>
                   <SmallCell
-                    image="022-low temperature.png"
+                    image="plus.png"
                     title="Show more!"
-                    content={"+"}
                   />
                 </div>
               
@@ -193,7 +189,6 @@ export const BigPolaroid = props => {
                 </Segment.Group>
               </Modal.Content>
             </Modal>
-          </Segment.Group>
         </Segment.Group>
       </div>
     </div>
