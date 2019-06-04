@@ -6,10 +6,10 @@ import WeatherCard from "./CurrentWeather/WeatherCard";
 import ForecastCard from "./ForecastWeather/ForecastCard";
 import UVTab from "./UVWeather/UVTab";
 
-const defaultPanes = mode => [
-  { menuItem: "Current Weather", render: () => <DefaultTab mode={mode} /> },
-  { menuItem: "Week Forecast", render: () => <DefaultTab mode={mode} /> },
-  { menuItem: "UV Rays", render: () => <DefaultTab mode={mode} /> }
+const defaultPanes = () => [
+  { menuItem: "Current Weather", render: () => <DefaultTab /> },
+  { menuItem: "Week Forecast", render: () => <DefaultTab /> },
+  { menuItem: "UV Rays", render: () => <DefaultTab /> }
 ];
 
 const errorPanes = error => [
@@ -19,18 +19,27 @@ const errorPanes = error => [
 ];
 
 const dataPanes = (current, forecast, uv, unit) => [
-  {
+  current && {
     menuItem: "Current Weather",
     render: () => <WeatherCard {...current} unit={unit} />
   },
-  {
+  !current && {
+    menuItem: "Current Weather",
+    render: () => <Tab.pane loading />
+  },
+  forecast && {
     menuItem: "Week Forecast",
     render: () => <ForecastCard {...forecast} {...uv} unit={unit} />
   },
-  {
+  !forecast && {
+    menuItem: "Week Forecast",
+    render: () => <Tab.pane loading />
+  },
+  uv && {
     menuItem: "UV Rays",
     render: () => <UVTab {...uv} />
-  }
+  },
+  !uv && { menuItem: "UV Rays", render: () => <Tab.pane loading /> }
 ];
 
 const Tabs = props => {
@@ -39,7 +48,7 @@ const Tabs = props => {
     return (
       <Tab
         menu={{ pointing: true, style: { justifyContent: "center" } }}
-        panes={errorPanes(error, false)}
+        panes={errorPanes(error)}
       />
     );
   }
@@ -47,7 +56,7 @@ const Tabs = props => {
     return (
       <Tab
         menu={{ pointing: true, style: { justifyContent: "center" } }}
-        panes={defaultPanes(false)}
+        panes={defaultPanes()}
       />
     );
   }
@@ -73,20 +82,20 @@ Tabs.propTypes = {
   unit: PropTypes.string.isRequired,
   current: PropTypes.shape({
     state: PropTypes.string,
-    iconName: PropTypes.string,
+    iconname: PropTypes.string,
     temp: PropTypes.number,
     humidity: PropTypes.number,
     pressure: PropTypes.number,
-    minTemp: PropTypes.number,
-    maxTemp: PropTypes.number,
-    windSpeed: PropTypes.number,
-    windDir: PropTypes.number,
+    mintemp: PropTypes.number,
+    maxtemp: PropTypes.number,
+    windspeed: PropTypes.number,
+    winddir: PropTypes.number,
     clouds: PropTypes.number,
-    sunrise: PropTypes.number,
-    sunset: PropTypes.number
+    sunrise: PropTypes.string,
+    sunset: PropTypes.string
   }),
   forecast: PropTypes.shape({
-    detailedDays: PropTypes.array,
+    detaileddays: PropTypes.array,
     days: PropTypes.array
   }),
   uv: PropTypes.shape({

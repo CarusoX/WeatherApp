@@ -70,12 +70,12 @@ export const BigPolaroid = props => {
     state,
     unit,
     temp,
-    maxTemp,
-    minTemp,
+    maxtemp,
+    mintemp,
     clouds,
     humidity,
-    windSpeed,
-    windDir,
+    windspeed,
+    winddir,
     sunrise,
     sunset,
     pressure
@@ -93,8 +93,8 @@ export const BigPolaroid = props => {
         <p style={bigHeader}>{text}</p>
         <p style={bigText}>{state}</p>
 
-        <Segment.Group mini vertical>
-          <Segment.Group mini horizontal>
+        <Segment.Group vertical>
+          <Segment.Group horizontal>
             <SmallCell
               image="039-thermometer.png"
               title="Temperature"
@@ -108,35 +108,35 @@ export const BigPolaroid = props => {
             />
           </Segment.Group>
 
-          <Segment.Group mini horizontal>
+          <Segment.Group horizontal>
             <SmallCell
               image="018-high temperature.png"
               title="Max Temperature"
-              content={getTemp(maxTemp, unit).toString()}
+              content={getTemp(maxtemp, unit).toString()}
             />
             <SmallCell
               image="022-low temperature.png"
               title="Min Temperature"
-              content={getTemp(minTemp, unit).toString()}
+              content={getTemp(mintemp, unit).toString()}
             />
           </Segment.Group>
 
-          <Segment.Group mini horizontal>
+          <Segment.Group horizontal>
             <SmallCell
               image="048-wind.png"
               title="Wind Speed"
-              content={windSpeed.toString()}
+              content={windspeed.toString()}
               unit="M/s"
             />
             <SmallCell
               image="047-weathercock.png"
               title="Wind Direction"
-              content={windDir.toString()}
+              content={winddir.toString()}
               unit="º"
             />
           </Segment.Group>
 
-          <Segment.Group mini horizontal>
+          <Segment.Group horizontal>
             <SmallCell
               image="012-dawn.png"
               title="Sunrise"
@@ -151,7 +151,7 @@ export const BigPolaroid = props => {
             />
           </Segment.Group>
 
-          <Segment.Group mini horizontal>
+          <Segment.Group horizontal>
             <SmallCell
               image="019-humidity.png"
               title="Humidity"
@@ -202,57 +202,31 @@ export const SmallPolaroid = props => {
   );
 };
 
-BigPolaroid.defaultProps = {
-  image: "",
-  text: "",
-  state: "",
-  unit: 0,
-  temp: 0,
-  maxTemp: 0,
-  minTemp: 0,
-  clouds: 0,
-  humidity: 0,
-  windSpeed: 0,
-  windDir: 0,
-  sunrise: 0,
-  sunset: 0,
-  pressure: 0
-};
-
 BigPolaroid.propTypes = {
-  image: PropTypes.string,
-  text: PropTypes.string,
-  state: PropTypes.string,
-  unit: PropTypes.string,
-  temp: PropTypes.number,
-  maxTemp: PropTypes.number,
-  minTemp: PropTypes.number,
-  clouds: PropTypes.number,
-  humidity: PropTypes.number,
-  windSpeed: PropTypes.number,
-  windDir: PropTypes.number,
-  sunrise: PropTypes.number,
-  sunset: PropTypes.number,
-  pressure: PropTypes.number
-};
-
-SmallPolaroid.defaultProps = {
-  text: "",
-  index: 0,
-  max: 0,
-  min: 0,
-  unit: "",
-  image: ""
+  image: PropTypes.string.isRequired,
+  text: PropTypes.string.isRequired,
+  state: PropTypes.string.isRequired,
+  unit: PropTypes.string.isRequired,
+  temp: PropTypes.number.isRequired,
+  maxtemp: PropTypes.number.isRequired,
+  mintemp: PropTypes.number.isRequired,
+  clouds: PropTypes.number.isRequired,
+  humidity: PropTypes.number.isRequired,
+  windspeed: PropTypes.number.isRequired,
+  winddir: PropTypes.number.isRequired,
+  sunrise: PropTypes.string.isRequired,
+  sunset: PropTypes.string.isRequired,
+  pressure: PropTypes.number.isRequired
 };
 
 SmallPolaroid.propTypes = {
   update: PropTypes.func.isRequired,
-  index: PropTypes.number,
-  text: PropTypes.string,
-  max: PropTypes.number,
-  min: PropTypes.number,
-  unit: PropTypes.string,
-  image: PropTypes.string
+  index: PropTypes.number.isRequired,
+  text: PropTypes.string.isRequired,
+  max: PropTypes.number.isRequired,
+  min: PropTypes.number.isRequired,
+  unit: PropTypes.string.isRequired,
+  image: PropTypes.string.isRequired
 };
 
 // {props.texts.map(txt => (

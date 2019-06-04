@@ -24,17 +24,17 @@ class ForecastCard extends React.Component {
       <Tab.Pane attached={false} loading={!days}>
         <div style={{ display: "flex", flexDirection: "row" }}>
           <BigPolaroid
-            image={`${getIconName(days[index].bestIcon)}.png`}
+            image={`${getIconName(days[index].besticon)}.png`}
             text={getDateName(days[index].dt_txt)}
             state={days[index].state}
             unit={unit}
             temp={days[index].temp}
-            maxTemp={days[index].maxTemp}
-            minTemp={days[index].minTemp}
+            maxtemp={days[index].maxtemp}
+            mintemp={days[index].mintemp}
             clouds={days[index].clouds}
             humidity={days[index].humidity}
-            windSpeed={days[index].windSpeed}
-            windDir={days[index].windDir}
+            windspeed={days[index].windspeed}
+            winddir={days[index].winddir}
             sunrise={days[index].sunrise}
             sunset={days[index].sunset}
             pressure={days[index].pressure}
@@ -60,10 +60,10 @@ class ForecastCard extends React.Component {
                   update={newIndex => this.changeIndex(newIndex)}
                   key={day.dt_txt}
                   index={i}
-                  image={`${getIconName(day.bestIcon)}.png`}
+                  image={`${getIconName(day.besticon)}.png`}
                   text={getDateName(day.dt_txt)}
-                  max={day.maxTemp}
-                  min={day.minTemp}
+                  max={day.maxtemp}
+                  min={day.mintemp}
                   unit={unit}
                 />
               ))}
@@ -86,19 +86,10 @@ class ForecastCard extends React.Component {
   }
 }
 
-ForecastCard.defaultProps = {
-  unit: "",
-  history: []
-};
-
 ForecastCard.propTypes = {
-  days: PropType.arrayOf(
-    PropType.shape({
-      bestIcon: PropType.string.isRequired
-    })
-  ).isRequired,
-  unit: PropType.string,
-  history: PropType.arrayOf(PropType.object)
+  days: PropType.arrayOf(PropType.object).isRequired,
+  unit: PropType.string.isRequired,
+  history: PropType.arrayOf(PropType.object).isRequired
 };
 
 export default ForecastCard;

@@ -10,20 +10,20 @@ const path2 = "../../../icons/Theme2/";
 const WeatherCard = props => {
   const {
     state,
-    iconName,
+    iconname,
     temp,
     humidity,
     pressure,
-    minTemp,
-    maxTemp,
-    windSpeed,
-    windDir,
+    mintemp,
+    maxtemp,
+    windspeed,
+    winddir,
     clouds,
     sunrise,
     sunset,
     unit
   } = props;
-  const icon = getIconName(iconName);
+  const icon = getIconName(iconname);
   return (
     <Tab.Pane attached={false} loading={!temp}>
       <Grid columns={3} divided stackable>
@@ -61,13 +61,13 @@ const WeatherCard = props => {
             <Cell
               image="018-high temperature.png"
               title="Max Temperature"
-              content={getTemp(maxTemp, unit).toString()}
+              content={getTemp(maxtemp, unit).toString()}
             />
 
             <Cell
               image="022-low temperature.png"
               title="Min Temperature"
-              content={getTemp(minTemp, unit).toString()}
+              content={getTemp(mintemp, unit).toString()}
             />
 
             <Cell
@@ -80,7 +80,7 @@ const WeatherCard = props => {
             <Cell
               image="048-wind.png"
               title="Wind Speed"
-              content={windSpeed.toString()}
+              content={windspeed.toString()}
               unit="M/s"
             />
           </Grid.Column>
@@ -116,7 +116,7 @@ const WeatherCard = props => {
             <Cell
               image="047-weathercock.png"
               title="Wind Direction"
-              content={windDir.toString()}
+              content={winddir.toString()}
               unit="º"
             />
           </Grid.Column>
@@ -129,33 +129,22 @@ const WeatherCard = props => {
 export default WeatherCard;
 
 WeatherCard.defaultProps = {
-  state: "",
-  iconName: "",
-  temp: 0,
-  humidity: 0,
-  pressure: 0,
-  minTemp: 0,
-  maxTemp: 0,
-  windSpeed: 0,
-  windDir: 0,
-  clouds: 0,
-  sunrise: 0,
-  sunset: 0,
-  unit: ""
-};
+  sunrise: "",
+  sunset: ""
+}
 
 WeatherCard.propTypes = {
-  state: PropTypes.string,
-  iconName: PropTypes.string,
-  temp: PropTypes.number,
-  humidity: PropTypes.number,
-  pressure: PropTypes.number,
-  minTemp: PropTypes.number,
-  maxTemp: PropTypes.number,
-  windSpeed: PropTypes.number,
-  windDir: PropTypes.number,
-  clouds: PropTypes.number,
-  sunrise: PropTypes.number,
-  sunset: PropTypes.number,
-  unit: PropTypes.string
+  state: PropTypes.string.isRequired,
+  iconname: PropTypes.string.isRequired,
+  temp: PropTypes.number.isRequired,
+  humidity: PropTypes.number.isRequired,
+  pressure: PropTypes.number.isRequired,
+  mintemp: PropTypes.number.isRequired,
+  maxtemp: PropTypes.number.isRequired,
+  windspeed: PropTypes.number.isRequired,
+  winddir: PropTypes.number.isRequired,
+  clouds: PropTypes.number.isRequired,
+  sunrise: PropTypes.string,
+  sunset: PropTypes.string,
+  unit: PropTypes.string.isRequired
 };

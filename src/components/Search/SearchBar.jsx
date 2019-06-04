@@ -20,9 +20,7 @@ export default class SearchExampleStandard extends Component {
   handleResultSelect = (e, { result }) => {
     const { setCity } = this.props;
     this.setState({ value: result.name });
-    setCity({
-      ...result
-    });
+    setCity(result);
   };
 
   handleSearchChange = (e, { value }) => {
@@ -44,7 +42,7 @@ export default class SearchExampleStandard extends Component {
             newCity.title = `${city.name} - ${getCountryName(city.country)}`;
             newCity.description = `(Lat, Lon): (${city.coord.lat}, ${
               city.coord.lon
-            })`;
+              })`;
             newCity.country = getCountryName(city.country);
             return newCity;
           });

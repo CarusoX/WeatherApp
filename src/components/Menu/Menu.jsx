@@ -34,12 +34,13 @@ class Menu extends React.Component {
   }
 
   setCity(newCity) {
+    const result = { ...newCity };
     const { city } = this.state;
     if (!city || newCity.key !== city.id) {
       this.setState(
         {
-          city: { id: newCity.key, name: newCity.name, coords: newCity.coord },
-          current: newCity,
+          city: { id: result.key, name: result.name, coords: result.coord },
+          current: result,
           forecast: undefined,
           uv: undefined
         },

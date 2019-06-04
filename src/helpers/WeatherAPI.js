@@ -47,14 +47,14 @@ const filterDay = result => {
     country: result.sys.country,
     coord: result.coord,
     state: result.weather[0].main,
-    iconName: result.weather[0].icon,
+    iconname: result.weather[0].icon,
     temp: result.main.temp,
     humidity: result.main.humidity,
     pressure: result.main.pressure,
-    minTemp: result.main.temp_min,
-    maxTemp: result.main.temp_max,
-    windSpeed: result.wind.speed,
-    windDir: result.wind.deg,
+    mintemp: result.main.temp_min,
+    maxtemp: result.main.temp_max,
+    windspeed: result.wind.speed,
+    winddir: result.wind.deg,
     clouds: result.clouds.all,
     sunrise: result.sys.sunrise,
     sunset: result.sys.sunset
@@ -66,20 +66,20 @@ const compressDays = result => {
   result.forEach(day => {
     if (day.dt_txt.slice(11, 21) === "00:00:00") {
       const bestChoise = {};
-      bestChoise[day.iconName] = { amount: 1, state: day.state };
+      bestChoise[day.iconname] = { amount: 1, state: day.state };
       compress.push(Object.assign({ num: 1, bestChoise }, day));
     } else {
       const len = compress.length - 1;
       compress[len].temp += day.temp;
-      compress[len].minTemp = Math.min(compress[len].minTemp, day.minTemp);
-      compress[len].maxTemp = Math.max(compress[len].maxTemp, day.maxTemp);
+      compress[len].mintemp = Math.min(compress[len].mintemp, day.mintemp);
+      compress[len].maxtemp = Math.max(compress[len].maxtemp, day.maxtemp);
       compress[len].num += 1;
-      if (compress[len].bestChoise[day.iconName] === undefined) {
-        compress[len].bestChoise[day.iconName] = {
+      if (compress[len].bestChoise[day.iconname] === undefined) {
+        compress[len].bestChoise[day.iconname] = {
           amount: 1,
           state: day.state
         };
-      } else compress[len].bestChoise[day.iconName].amount += 1;
+      } else compress[len].bestChoise[day.iconname].amount += 1;
     }
   });
   return compress.map(day => {
@@ -87,14 +87,14 @@ const compressDays = result => {
     newDay.temp /= newDay.num;
     newDay.temp = newDay.temp.toFixed(2);
     delete newDay.bestChoise;
-    newDay.bestIcon = Object.keys(day.bestChoise)
+    newDay.besticon = Object.keys(day.bestChoise)
       .sort((u, v) => {
         if (u.includes("n")) return 1;
         if (v.includes("n")) return -1;
         return day.bestChoise[u].amount - day.bestChoise[v].amount;
       })
       .shift();
-    newDay.state = day.bestChoise[newDay.bestIcon].state;
+    newDay.state = day.bestChoise[newDay.besticon].state;
     return newDay;
   });
 };
@@ -136,7 +136,7 @@ export const fetchData = city => {
         results: [
           // Forecast
           {
-            detailedDays: DetailedDays,
+            detaileddays: DetailedDays,
             days: compressDays(DetailedDays)
           },
 
