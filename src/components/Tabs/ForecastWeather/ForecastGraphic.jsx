@@ -59,10 +59,7 @@ export default class ForecastGraphic extends React.Component {
             }}
           >
             <CartesianGrid strokeDasharray="3 3" />
-            <XAxis dataKey="date"
-                   height={60}
-                   tick={<CustomizedAxisTick />}
-            />
+            <XAxis dataKey="date" height={60} tick={<CustomizedAxisTick />} />
             <YAxis />
             <Tooltip />
             <Line

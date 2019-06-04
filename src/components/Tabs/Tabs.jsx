@@ -34,7 +34,7 @@ const dataPanes = (current, forecast, uv, unit) => [
 ];
 
 const Tabs = props => {
-  const { error, show, loading, unit, current, forecast, uv } = props;
+  const { error, show, unit, current, forecast, uv } = props;
   if (error > 0) {
     return (
       <Tab
@@ -48,14 +48,6 @@ const Tabs = props => {
       <Tab
         menu={{ pointing: true, style: { justifyContent: "center" } }}
         panes={defaultPanes(false)}
-      />
-    );
-  }
-  if (loading) {
-    return (
-      <Tab
-        menu={{ pointing: true, style: { justifyContent: "center" } }}
-        panes={defaultPanes(true)}
       />
     );
   }
@@ -78,7 +70,6 @@ Tabs.defaultProps = {
 Tabs.propTypes = {
   error: PropTypes.number.isRequired,
   show: PropTypes.bool.isRequired,
-  loading: PropTypes.bool.isRequired,
   unit: PropTypes.string.isRequired,
   current: PropTypes.shape({
     state: PropTypes.string,

@@ -25,7 +25,7 @@ const WeatherCard = props => {
   } = props;
   const icon = getIconName(iconName);
   return (
-    <Tab.Pane attached={false}>
+    <Tab.Pane attached={false} loading={!temp}>
       <Grid columns={3} divided stackable>
         <Grid.Row stretched>
           <Grid.Column stretched>

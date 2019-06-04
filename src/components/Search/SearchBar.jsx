@@ -21,9 +21,7 @@ export default class SearchExampleStandard extends Component {
     const { setCity } = this.props;
     this.setState({ value: result.name });
     setCity({
-      id: result.key,
-      coords: result.coords,
-      city_name: result.name
+      ...result
     });
   };
 
@@ -41,14 +39,15 @@ export default class SearchExampleStandard extends Component {
             return this.setState(errorState);
           }
 
-          const cities = result.map(res => ({
-            title: `${res.name} - ${getCountryName(res.sys.country)}`,
-            description: `(Lat, Lon): (${res.coord.lat}, ${res.coord.lon})`,
-            name: res.name,
-            country: getCountryName(res.sys.country),
-            coords: res.coord,
-            key: res.id
-          }));
+          const cities = result.map(city => {
+            const newCity = Object.assign({}, city);
+            newCity.title = `${city.name} - ${getCountryName(city.country)}`;
+            newCity.description = `(Lat, Lon): (${city.coord.lat}, ${
+              city.coord.lon
+            })`;
+            newCity.country = getCountryName(city.country);
+            return newCity;
+          });
           return this.setState({
             isLoading: false,
             results: cities

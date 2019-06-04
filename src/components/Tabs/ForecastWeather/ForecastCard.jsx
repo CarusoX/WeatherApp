@@ -21,7 +21,7 @@ class ForecastCard extends React.Component {
     const { days, unit, history } = this.props;
     const { index } = this.state;
     return (
-      <Tab.Pane attached={false}>
+      <Tab.Pane attached={false} loading={!days}>
         <div style={{ display: "flex", flexDirection: "row" }}>
           <BigPolaroid
             image={`${getIconName(days[index].bestIcon)}.png`}

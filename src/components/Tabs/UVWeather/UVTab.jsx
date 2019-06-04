@@ -8,7 +8,7 @@ import UVHistory from "./UVHistory";
 const UVTab = props => {
   const { index, forecast, history } = props;
   return (
-    <Tab.Pane attached={false}>
+    <Tab.Pane attached={false} loading={!index}>
       <Grid stackable centered>
         <Grid.Row>
           <UVIndex index={index} />

@@ -174,7 +174,11 @@ export const BigPolaroid = props => {
 export const SmallPolaroid = props => {
   const { update, text, index, max, min, unit, image } = props;
   return (
-    <div style={smallPolaroid} onClick={() => update(index)}>
+    <div
+      style={smallPolaroid}
+      onClick={() => update(index)}
+      role="presentation"
+    >
       <img
         alt="img"
         style={smallImage}

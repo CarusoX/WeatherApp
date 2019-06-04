@@ -39,7 +39,7 @@ class App extends React.Component {
           </Grid>
         </Segment>
 
-        <Title title="WEATHER APP" size="h1" image="045-weather.png" />
+        <Title title="WEATHER APP" size="h1" />
 
         <Grid centered>
           <Grid.Column width="15" verticalAlign="middle">
