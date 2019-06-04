@@ -7,7 +7,7 @@ class App extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      unit: "Cº"
+      unit: "C"
     };
   }
 
@@ -20,18 +20,18 @@ class App extends React.Component {
             <Grid.Column textAlign="center">
               <Button.Group floated="right" size="mini">
                 <Button
-                  onClick={() => this.setState({ unit: "Cº" })}
-                  active={unit === "Cº"}
+                  onClick={() => this.setState({ unit: "C" })}
+                  active={unit === "C"}
                   content="Cº"
                 />
                 <Button
-                  onClick={() => this.setState({ unit: "Fº" })}
-                  active={unit === "Fº"}
+                  onClick={() => this.setState({ unit: "F" })}
+                  active={unit === "F"}
                   content="Fº"
                 />
                 <Button
-                  onClick={() => this.setState({ unit: "Kº" })}
-                  active={unit === "Kº"}
+                  onClick={() => this.setState({ unit: "K" })}
+                  active={unit === "K"}
                   content="Kº"
                 />
               </Button.Group>

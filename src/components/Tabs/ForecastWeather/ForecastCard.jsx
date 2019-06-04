@@ -41,7 +41,7 @@ class ForecastCard extends React.Component {
           />
           <div
             style={{
-              flexGrow: "1",
+              flexGrow: "2",
               display: "flex",
               flexDirection: "column",
               justifyContent: "space-evenly"

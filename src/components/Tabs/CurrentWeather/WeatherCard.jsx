@@ -55,19 +55,19 @@ const WeatherCard = props => {
             <Cell
               image="039-thermometer.png"
               title="Temperature"
-              content={getTemp(temp, unit).toString()}
+              content={getTemp(temp, unit)}
             />
 
             <Cell
               image="018-high temperature.png"
               title="Max Temperature"
-              content={getTemp(maxTemp, unit).toString()}
+              content={getTemp(maxTemp, unit)}
             />
 
             <Cell
               image="022-low temperature.png"
               title="Min Temperature"
-              content={getTemp(minTemp, unit).toString()}
+              content={getTemp(minTemp, unit)}
             />
 
             <Cell

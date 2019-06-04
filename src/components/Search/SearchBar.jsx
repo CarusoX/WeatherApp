@@ -64,6 +64,7 @@ export default class SearchExampleStandard extends Component {
     return (
       <Grid container stretched padded="vertically">
         <Grid.Column>
+          {/* <Geolocalization /> */}
           <Search
             fluid
             loading={isLoading}

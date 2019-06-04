@@ -7,7 +7,7 @@ import { getTemp, unixToHours } from "../../helpers/index.ts";
 const bigPolaroid = {
   border: "2px solid gray",
   borderRadius: "5px",
-  boxShadow: "0px 0px 27px 13px rgba(196,196,196,0.7)",
+  boxShadow: "0px 0px 27px 13px rgba(196, 196, 196, 0.7)",
   backgroundColor: "white",
   flexGrow: "2",
   alignItems: "stretch",
@@ -98,7 +98,7 @@ export const BigPolaroid = props => {
             <SmallCell
               image="039-thermometer.png"
               title="Temperature"
-              content={getTemp(temp, unit).toString()}
+              content={getTemp(temp, unit)}
             />
             <SmallCell
               image="004-clouds.png"
@@ -112,12 +112,12 @@ export const BigPolaroid = props => {
             <SmallCell
               image="018-high temperature.png"
               title="Max Temperature"
-              content={getTemp(maxTemp, unit).toString()}
+              content={getTemp(maxTemp, unit)}
             />
             <SmallCell
               image="022-low temperature.png"
               title="Min Temperature"
-              content={getTemp(minTemp, unit).toString()}
+              content={getTemp(minTemp, unit)}
             />
           </Segment.Group>
 
@@ -185,13 +185,11 @@ export const SmallPolaroid = props => {
         <p style={smallHeader}>{text}</p>
         <p style={smallText}>
           Max:
-          {max}
-          {unit}
+          {getTemp(max, unit)}
         </p>
         <p style={smallText}>
           Min:
-          {min}
-          {unit}
+          {getTemp(min, unit)}
         </p>
       </div>
     </div>
