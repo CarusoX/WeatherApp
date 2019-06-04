@@ -21,7 +21,6 @@ const Cell = props => {
             </Grid.Row>
             <Grid.Row>
               {content}
-              {unit}
             </Grid.Row>
           </Grid.Column>
         </Grid.Row>
@@ -30,15 +29,10 @@ const Cell = props => {
   );
 };
 
-Cell.defaultProps = {
-  unit: ""
-};
-
 Cell.propTypes = {
   image: PropTypes.string.isRequired,
   title: PropTypes.string.isRequired,
-  content: PropTypes.string.isRequired,
-  unit: PropTypes.string
+  content: PropTypes.string.isRequired
 };
 
 export default Cell;

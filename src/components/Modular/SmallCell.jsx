@@ -13,13 +13,8 @@ const SmallCell = props => {
       />
       <h3>{title}</h3>
       {content}
-      {unit}
     </Segment>
   );
-};
-
-SmallCell.defaultProps = {
-  unit: ""
 };
 
 SmallCell.propTypes = {

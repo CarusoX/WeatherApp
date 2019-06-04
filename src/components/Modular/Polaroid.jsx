@@ -103,8 +103,7 @@ export const BigPolaroid = props => {
             <SmallCell
               image="004-clouds.png"
               title="Clouds"
-              content={clouds.toString()}
-              unit="%"
+              content={clouds.toString() + "%"}
             />
           </Segment.Group>
 
@@ -125,14 +124,12 @@ export const BigPolaroid = props => {
             <SmallCell
               image="048-wind.png"
               title="Wind Speed"
-              content={windSpeed.toString()}
-              unit="M/s"
+              content={windSpeed.toString() + " M/s"}
             />
             <SmallCell
               image="047-weathercock.png"
               title="Wind Direction"
-              content={windDir.toString()}
-              unit="º"
+              content={windDir.toString() + "º"}
             />
           </Segment.Group>
 
@@ -140,14 +137,12 @@ export const BigPolaroid = props => {
             <SmallCell
               image="012-dawn.png"
               title="Sunrise"
-              content={unixToHours(sunrise)}
-              unit="Hs"
+              content={unixToHours(sunrise) + " H/s"}
             />
             <SmallCell
               image="037-sunset.png"
               title="Sunset"
-              content={unixToHours(sunset)}
-              unit="Hs"
+              content={unixToHours(sunset) + " H/s"}
             />
           </Segment.Group>
 
@@ -155,14 +150,12 @@ export const BigPolaroid = props => {
             <SmallCell
               image="019-humidity.png"
               title="Humidity"
-              content={humidity.toString()}
-              unit="%"
+              content={humidity.toString() + "%"}
             />
             <SmallCell
               image="026-pressure.png"
               title="Preassure"
-              content={pressure.toString()}
-              unit="hPa"
+              content={pressure.toString() + "hPa"}
             />
           </Segment.Group>
         </Segment.Group>

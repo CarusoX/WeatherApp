@@ -73,51 +73,44 @@ const WeatherCard = props => {
             <Cell
               image="004-clouds.png"
               title="Clouds"
-              content={clouds.toString()}
-              unit="%"
+              content={clouds.toString() + "%"}
             />
 
             <Cell
               image="048-wind.png"
               title="Wind Speed"
-              content={windSpeed.toString()}
-              unit="M/s"
+              content={windSpeed.toString() + " M/s"}
             />
           </Grid.Column>
           <Grid.Column>
             <Cell
               image="012-dawn.png"
               title="Sunrise"
-              content={unixToHours(sunrise)}
-              unit="Hs"
+              content={unixToHours(sunrise) + " Hs"}
             />
 
             <Cell
               image="037-sunset.png"
               title="Sunset"
-              content={unixToHours(sunset)}
-              unit="Hs"
+              content={unixToHours(sunset) + " Hs"}
             />
 
             <Cell
               image="019-humidity.png"
               title="Humidity"
-              content={humidity.toString()}
-              unit="%"
+              content={humidity.toString() + "%"}
             />
 
             <Cell
               image="026-pressure.png"
               title="Preassure"
-              content={pressure.toString()}
-              unit="hPa"
+              content={pressure.toString() + " hPa"}
             />
 
             <Cell
               image="047-weathercock.png"
               title="Wind Direction"
-              content={windDir.toString()}
-              unit="º"
+              content={windDir.toString() + "º"}
             />
           </Grid.Column>
         </Grid.Row>
