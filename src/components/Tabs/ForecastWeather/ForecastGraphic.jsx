@@ -17,7 +17,7 @@ export default class ForecastGraphic extends React.Component {
     const { minTemp, maxTemp, days } = this.props;
 
     const data = days.map(x => ({
-      date: x.dt_txt.slice(11, 19),
+      date: x.dt_txt.slice(11, 13) + " Hs",
       maxTemp: x.maxTemp,
       minTemp: x.minTemp,
       humidity: x.humidity,

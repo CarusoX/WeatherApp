@@ -1,7 +1,7 @@
 import PropTypes from "prop-types";
 import React from "react";
 import { Grid, Image, Statistic, Tab } from "semantic-ui-react";
-import { getTemp, getIconName, unixToHours } from "../../../helpers/index.ts";
+import { getTemp, getIconName, unixToHoursMedium } from "../../../helpers/index.ts";
 import { Cell } from "../../Modular/index.ts";
 
 const path1 = "../../../icons/Theme1/";
@@ -86,13 +86,13 @@ const WeatherCard = props => {
             <Cell
               image="012-dawn.png"
               title="Sunrise"
-              content={unixToHours(sunrise) + " Hs"}
+              content={unixToHoursMedium(sunrise) + " Hs"}
             />
 
             <Cell
               image="037-sunset.png"
               title="Sunset"
-              content={unixToHours(sunset) + " Hs"}
+              content={unixToHoursMedium(sunset) + " Hs"}
             />
 
             <Cell

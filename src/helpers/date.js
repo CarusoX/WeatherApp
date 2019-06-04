@@ -15,10 +15,23 @@ export const getMonthPeriod = () => {
   };
 };
 
-export const unixToHours = t => {
+export const unixToHoursLarge = t => {
   const dt = new Date(1000 * t);
   const hr = dt.getHours();
   const m = `0${dt.getMinutes()}`;
   const s = `0${dt.getSeconds()}`;
   return `${hr}:${m.substr(-2)}:${s.substr(-2)}`;
+};
+
+export const unixToHoursMedium = t => {
+  const dt = new Date(1000 * t);
+  const hr = dt.getHours();
+  const m = `0${dt.getMinutes()}`;
+  return `${hr}:${m.substr(-2)}`;
+};
+
+export const unixToHoursSmall = t => {
+  const dt = new Date(1000 * t);
+  const hr = dt.getHours();
+  return `${hr}`;
 };
