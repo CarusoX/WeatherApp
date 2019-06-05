@@ -77,6 +77,7 @@ export default class SearchExampleStandard extends Component {
             value={value}
             resultRenderer={resultRenderer}
             selectFirstResult
+            
             {...this.props}
           />
         </Grid.Row>

@@ -18,7 +18,7 @@ class App extends React.Component {
         <Segment>
           <Grid>
             <Grid.Column textAlign="center">
-              <Button.Group floated="right" size="mini">
+              <Button.Group floated="right" size="mini" inverted color="blue">
                 <Button
                   onClick={() => this.setState({ unit: "C" })}
                   active={unit === "C"}
