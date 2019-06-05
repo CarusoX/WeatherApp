@@ -18,9 +18,9 @@ class ForecastCard extends React.Component {
   }
 
   render() {
-    console.log(this.props)
+
     if(this.props.history.length === 0){
-      return(<dib> LOADING </dib>);
+      return(<dib/>);
     }
     else{
       const { detailedDays, days, unit } = this.props;

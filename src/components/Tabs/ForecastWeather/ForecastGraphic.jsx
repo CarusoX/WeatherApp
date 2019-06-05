@@ -1,11 +1,11 @@
 import PropTypes from "prop-types";
 import React from "react";
 import {
+  AreaChart,
+  Area,
   XAxis,
   YAxis,
   CartesianGrid,
-  Line,
-  LineChart,
   Tooltip,
   ResponsiveContainer
 } from "recharts";
@@ -16,14 +16,14 @@ export default class ForecastGraphic extends React.Component {
   render() {
     const { date, values, max, min } = this.props;
     const data = date.map((x, i) => ({
-          dates : date[i],
-          temp : values[i],
-        }))
+      dates : date[i],
+      temp : values[i],
+    }))
 
     return (
       <div style={{ width: "100%", height: 300 }}>
         <ResponsiveContainer>
-          <LineChart
+          <AreaChart
             width={500}
             height={400}
             data={data}
@@ -42,7 +42,7 @@ export default class ForecastGraphic extends React.Component {
               domain={ [min, max] }
             />
             <Tooltip />
-            <Line
+            <Area
               type="monotone"
               dataKey="temp"
               activeDot={false}
@@ -50,7 +50,7 @@ export default class ForecastGraphic extends React.Component {
               stroke="blue"
               fill="blue"
             />
-          </LineChart>
+          </AreaChart>
         </ResponsiveContainer>
       </div>
     )
