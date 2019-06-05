@@ -1,6 +1,6 @@
 import PropTypes from "prop-types";
 import React from "react";
-import { Divider, Modal, Segment } from "semantic-ui-react";
+import { Divider, Modal, Segment, Image, Header } from "semantic-ui-react";
 import { SmallCell } from "./index.ts";
 import { getTemp, unixToHoursMedium } from "../../helpers/index.ts";
 
@@ -110,6 +110,7 @@ export const BigPolaroid = props => {
               content={getTemp(minTemp, unit)}
             />
             <Modal
+              closeIcon
               trigger={
 
                 <div>
@@ -124,67 +125,80 @@ export const BigPolaroid = props => {
               <Modal.Header>
                 Know more about {text}
               </Modal.Header>
-              <Modal.Content>
-                <Segment.Group mini horizontal>
+              <Modal.Content scrolling>
+                <Segment.Group raised horizontal>
                   <SmallCell
                     image="039-thermometer.png"
                     title="Temperature"
                     content={getTemp(temp, unit)}
+                    style={{inverted: "inverted",
+                            color: "blue",
+                            raised: "true",
+                            loading: "true"}}
                   />
                   <SmallCell
                     image="004-clouds.png"
                     title="Clouds"
                     content={clouds.toString() + "%"}
+                    style={{color: "blue"}}
                   />
                 </Segment.Group>
-                <Segment.Group mini horizontal>
+                <Segment.Group raised horizontal>
                   <SmallCell
                     image="018-high temperature.png"
                     title="Max Temperature"
                     content={getTemp(maxTemp, unit)}
+                    style={{color: "blue"}}
                   />
                   <SmallCell
                     image="022-low temperature.png"
                     title="Min Temperature"
                     content={getTemp(minTemp, unit)}
+                    style={{color: "blue"}}
                   />
                 </Segment.Group>
-                <Segment.Group mini horizontal>
+                <Segment.Group raised horizontal>
                   <SmallCell
                     image="048-wind.png"
                     title="Wind Speed"
                     content={windSpeed.toString() + " M/s"}
+                    style={{color: "blue"}}
                   />
                   <SmallCell
                     image="047-weathercock.png"
                     title="Wind Direction"
                     content={windDir.toString() + "º"}
+                    style={{color: "blue"}}
                   />
                 </Segment.Group>
 
-                <Segment.Group mini horizontal>
+                <Segment.Group raised horizontal>
                   <SmallCell
                     image="012-dawn.png"
                     title="Sunrise"
                     content={unixToHoursMedium(sunrise) + " Hs"}
+                    style={{color: "blue"}}
                   />
                   <SmallCell
                     image="037-sunset.png"
                     title="Sunset"
                     content={unixToHoursMedium(sunset) + " Hs"}
+                    style={{color: "blue"}}
                   />
                 </Segment.Group>
 
-                <Segment.Group mini horizontal>
+                <Segment.Group raised horizontal>
                   <SmallCell
                     image="019-humidity.png"
                     title="Humidity"
                     content={humidity.toString() + "%"}
+                    style={{color: "blue"}}
                   />
                   <SmallCell
                     image="026-pressure.png"
                     title="Preassure"
                     content={pressure.toString() + "hPa"}
+                    style={{color: "blue"}}
                   />
                 </Segment.Group>
               </Modal.Content>
