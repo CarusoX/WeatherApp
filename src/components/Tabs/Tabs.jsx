@@ -25,7 +25,7 @@ const dataPanes = (current, forecast, uv, unit) => [
   },
   {
     menuItem: "Week Forecast",
-    render: () => <ForecastCard {...forecast} {...uv} unit={unit} />
+    render: () => <ForecastCard {...forecast} unit={unit} />
   },
   {
     menuItem: "UV Rays",
