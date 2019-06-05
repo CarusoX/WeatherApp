@@ -21,15 +21,24 @@ const errorPanes = error => [
 const dataPanes = (current, forecast, uv, unit) => [
   {
     menuItem: "Current Weather",
-    render: () => <WeatherCard {...current} unit={unit} />
+    render: () => {
+      if (current) return <WeatherCard {...current} unit={unit} />;
+      return <Tab.Pane loading />;
+    }
   },
   {
     menuItem: "Week Forecast",
-    render: () => <ForecastCard {...forecast} unit={unit} />
+    render: () => {
+      if (forecast) return <ForecastCard {...forecast} unit={unit} />;
+      return <Tab.Pane loading />;
+    }
   },
   {
     menuItem: "UV Rays",
-    render: () => <UVTab {...uv} />
+    render: () => {
+      if (uv) return <UVTab {...uv} />;
+      return <Tab.Pane loading />;
+    }
   }
 ];
 
