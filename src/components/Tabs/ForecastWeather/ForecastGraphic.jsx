@@ -35,9 +35,7 @@ export default class ForecastGraphic extends React.Component {
             }}
           >
             <CartesianGrid strokeDasharray="3 3" />
-            <XAxis dataKey="dates"
-                    height={60}
-            />
+            <XAxis dataKey="dates" height={60} />
             <YAxis 
               domain={ [min, max] }
             />
@@ -49,6 +47,7 @@ export default class ForecastGraphic extends React.Component {
               stackId="1"
               stroke="blue"
               fill="blue"
+              fillOpacity={0.3}
             />
           </AreaChart>
         </ResponsiveContainer>
