@@ -18,84 +18,90 @@ class ForecastCard extends React.Component {
   }
 
   render() {
-    const { detailedDays, days, unit } = this.props;
-    const { index } = this.state;
-    return (
-      <Tab.Pane attached={false}>
-        <div style={{ display: "flex", flexDirection: "row" }}>
-          <BigPolaroid
-            image={`${getIconName(days[index].bestIcon)}.png`}
-            text={getDateName(days[index].dt_txt)}
-            state={days[index].state}
-            unit={unit}
-            temp={days[index].temp}
-            maxTemp={days[index].maxTemp}
-            minTemp={days[index].minTemp}
-            clouds={days[index].clouds}
-            humidity={days[index].humidity}
-            windSpeed={days[index].windSpeed}
-            windDir={days[index].windDir}
-            sunrise={days[index].sunrise}
-            sunset={days[index].sunset}
-            pressure={days[index].pressure}
-          />
-          <div
-            style={{
-              flexGrow: "2",
-              display: "flex",
-              flexDirection: "column",
-              justifyContent: "space-evenly"
-            }}
-          >
+    console.log(this.props)
+    if(this.props.history.length === 0){
+      return(<dib> LOADING </dib>);
+    }
+    else{
+      const { detailedDays, days, unit } = this.props;
+      const { index } = this.state;
+      return (
+        <Tab.Pane attached={false}>
+          <div style={{ display: "flex", flexDirection: "row" }}>
+            <BigPolaroid
+              image={`${getIconName(days[index].bestIcon)}.png`}
+              text={getDateName(days[index].dt_txt)}
+              state={days[index].state}
+              unit={unit}
+              temp={days[index].temp}
+              maxTemp={days[index].maxTemp}
+              minTemp={days[index].minTemp}
+              clouds={days[index].clouds}
+              humidity={days[index].humidity}
+              windSpeed={days[index].windSpeed}
+              windDir={days[index].windDir}
+              sunrise={days[index].sunrise}
+              sunset={days[index].sunset}
+              pressure={days[index].pressure}
+            />
             <div
               style={{
+                flexGrow: "2",
                 display: "flex",
-                flexDirection: "row",
-                flexGrow: "1",
+                flexDirection: "column",
                 justifyContent: "space-evenly"
               }}
             >
-              {days.map((day, i) => (
-                <SmallPolaroid
-                  update={newIndex => this.changeIndex(newIndex)}
-                  key={day.dt_txt}
-                  index={i}
-                  image={`${getIconName(day.bestIcon)}.png`}
-                  text={getDateName(day.dt_txt)}
-                  max={day.maxTemp}
-                  min={day.minTemp}
-                  unit={unit}
-                />
-              ))}
-            </div>
+              <div
+                style={{
+                  display: "flex",
+                  flexDirection: "row",
+                  flexGrow: "1",
+                  justifyContent: "space-evenly"
+                }}
+              >
+                {days.map((day, i) => (
+                  <SmallPolaroid
+                    update={newIndex => this.changeIndex(newIndex)}
+                    key={day.dt_txt}
+                    index={i}
+                    image={`${getIconName(day.bestIcon)}.png`}
+                    text={getDateName(day.dt_txt)}
+                    max={day.maxTemp}
+                    min={day.minTemp}
+                    unit={unit}
+                  />
+                ))}
+              </div>
 
-            <div
-              style={{
-                display: "flex",
-                flexDirection: "row",
-                flexGrow: "1",
-                justifyContent: "space-evenly"
-              }}
-            >
-              <ForecastGraphic 
-                  values={
-                    detailedDays.filter((x, i) => 
-                      {return(i >= index * 8 && i < index * 8 + 8)}
-                    ).map(x => x.temp)
-                  }
-                  max={days[index].maxTemp}
-                  min={days[index].minTemp}
-                  date={
-                    detailedDays.filter((x, i) => 
-                      {return(i >= index * 8 && i < index * 8 + 8)}
-                    ).map(x => x.dt_txt.slice(11, 16) + " Hs")
-                  }                 
-              />
+              <div
+                style={{
+                  display: "flex",
+                  flexDirection: "row",
+                  flexGrow: "1",
+                  justifyContent: "space-evenly"
+                }}
+              >
+                <ForecastGraphic 
+                    values={
+                      detailedDays.filter((x, i) => 
+                        {return(i >= index * 8 && i < index * 8 + 8)}
+                      ).map(x => x.temp)
+                    }
+                    max={days[index].maxTemp}
+                    min={days[index].minTemp}
+                    date={
+                      detailedDays.filter((x, i) => 
+                        {return(i >= index * 8 && i < index * 8 + 8)}
+                      ).map(x => x.dt_txt.slice(11, 16) + " Hs")
+                    }                 
+                />
+              </div>
             </div>
           </div>
-        </div>
-      </Tab.Pane>
-    );
+        </Tab.Pane>
+      );
+    }
   }
 }
 
