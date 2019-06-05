@@ -20,7 +20,7 @@ class ForecastCard extends React.Component {
   render() {
 
     if(this.props.history.length === 0){
-      return(<dib/>);
+      return(<div/>);
     }
     else{
       const { detailedDays, days, unit } = this.props;
@@ -73,7 +73,6 @@ class ForecastCard extends React.Component {
                   />
                 ))}
               </div>
-
               <div
                 style={{
                   display: "flex",
@@ -83,18 +82,19 @@ class ForecastCard extends React.Component {
                 }}
               >
                 <ForecastGraphic 
-                    values={
-                      detailedDays.filter((x, i) => 
-                        {return(i >= index * 8 && i < index * 8 + 8)}
-                      ).map(x => x.temp)
-                    }
-                    max={days[index].maxTemp}
-                    min={days[index].minTemp}
-                    date={
-                      detailedDays.filter((x, i) => 
-                        {return(i >= index * 8 && i < index * 8 + 8)}
-                      ).map(x => x.dt_txt.slice(11, 16) + " Hs")
-                    }                 
+                  values={
+                    detailedDays.filter((x, i) => 
+                      {return(i >= index * 8 && i < index * 8 + 8)}
+                    ).map(x => x.temp)
+                  }
+                  max={days[index].maxTemp}
+                  min={days[index].minTemp}
+                  date={
+                    detailedDays.filter((x, i) => 
+                      {return(i >= index * 8 && i < index * 8 + 8)}
+                    ).map(x => x.dt_txt.slice(11, 16) + " Hs")
+                  }    
+                  info={'Temp'}             
                 />
               </div>
             </div>

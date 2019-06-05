@@ -14,14 +14,15 @@ export default class ForecastGraphic extends React.Component {
   static jsfiddleUrl = "https://jsfiddle.net/alidingling/xqjtetw0/";
   
   render() {
-    const { date, values, max, min } = this.props;
+    const { info, date, values, max, min } = this.props;
     const data = date.map((x, i) => ({
       dates : date[i],
-      temp : values[i],
+      value : values[i],
     }))
 
     return (
       <div style={{ width: "100%", height: 300 }}>
+        <h2> {info} </h2>
         <ResponsiveContainer>
           <AreaChart
             width={500}
@@ -42,7 +43,7 @@ export default class ForecastGraphic extends React.Component {
             <Tooltip />
             <Area
               type="monotone"
-              dataKey="temp"
+              dataKey="value"
               activeDot={false}
               stackId="1"
               stroke="blue"
