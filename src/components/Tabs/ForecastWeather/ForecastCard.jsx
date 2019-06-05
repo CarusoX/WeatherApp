@@ -78,7 +78,7 @@ class ForecastCard extends React.Component {
               }}
             >
               <ForecastGraphic 
-                  data={
+                  values={
                     detailedDays.filter((x, i) => 
                       {return(i >= index * 8 && i < index * 8 + 8)}
                     ).map(x => x.temp)
@@ -88,9 +88,8 @@ class ForecastCard extends React.Component {
                   date={
                     detailedDays.filter((x, i) => 
                       {return(i >= index * 8 && i < index * 8 + 8)}
-                    ).map(x => x.dt_txt.slice(11, 19) + " Hs")
-                  }
-                  
+                    ).map(x => x.dt_txt.slice(11, 16) + " Hs")
+                  }                 
               />
             </div>
           </div>

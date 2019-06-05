@@ -14,8 +14,11 @@ export default class ForecastGraphic extends React.Component {
   static jsfiddleUrl = "https://jsfiddle.net/alidingling/xqjtetw0/";
   
   render() {
-    {console.log(this.props)}
-    const { date, data, max, min } = this.props;
+    const { date, values, max, min } = this.props;
+    const data = date.map((x, i) => ({
+          dates : date[i],
+          temp : values[i],
+        }))
 
     return (
       <div style={{ width: "100%", height: 300 }}>
@@ -32,7 +35,7 @@ export default class ForecastGraphic extends React.Component {
             }}
           >
             <CartesianGrid strokeDasharray="3 3" />
-            <XAxis dataKey="date"
+            <XAxis dataKey="dates"
                     height={60}
             />
             <YAxis 
@@ -41,11 +44,11 @@ export default class ForecastGraphic extends React.Component {
             <Tooltip />
             <Line
               type="monotone"
-              dataKey="data"
+              dataKey="temp"
               activeDot={false}
               stackId="1"
-              stroke="red"
-              fill="red"
+              stroke="blue"
+              fill="blue"
             />
           </LineChart>
         </ResponsiveContainer>
