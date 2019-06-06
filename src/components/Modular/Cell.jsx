@@ -3,7 +3,7 @@ import React from "react";
 import { Grid, Image, Segment } from "semantic-ui-react";
 
 const Cell = props => {
-  const { image, title, content, unit } = props;
+  const { image, title, content } = props;
   return (
     <Segment raised>
       <Grid container stackable>
@@ -19,9 +19,7 @@ const Cell = props => {
             <Grid.Row>
               <h3 style={{ fontSize: 15 }}>{title}</h3>
             </Grid.Row>
-            <Grid.Row>
-              {content}
-            </Grid.Row>
+            <Grid.Row>{content}</Grid.Row>
           </Grid.Column>
         </Grid.Row>
       </Grid>

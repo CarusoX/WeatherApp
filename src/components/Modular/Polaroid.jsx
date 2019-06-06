@@ -1,6 +1,6 @@
 import PropTypes from "prop-types";
 import React from "react";
-import { Divider, Modal, Segment, Image, Header } from "semantic-ui-react";
+import { Divider, Modal, Segment } from "semantic-ui-react";
 import { SmallCell } from "./index.ts";
 import { getTemp, unixToHoursMedium } from "../../helpers/index.ts";
 

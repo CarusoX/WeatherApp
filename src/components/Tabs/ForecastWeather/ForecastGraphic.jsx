@@ -12,17 +12,17 @@ import {
 
 export default class ForecastGraphic extends React.Component {
   static jsfiddleUrl = "https://jsfiddle.net/alidingling/xqjtetw0/";
-  
+
   render() {
     const { info, date, values, max, min } = this.props;
     const data = date.map((x, i) => ({
-      dates : date[i],
-      value : values[i],
-    }))
+      dates: date[i],
+      value: values[i]
+    }));
 
     return (
       <div style={{ width: "100%", height: 300 }}>
-        <h2> {info} </h2>
+        <h2>{info}</h2>
         <ResponsiveContainer>
           <AreaChart
             width={500}
@@ -37,9 +37,7 @@ export default class ForecastGraphic extends React.Component {
           >
             <CartesianGrid strokeDasharray="3 3" />
             <XAxis dataKey="dates" height={60} />
-            <YAxis 
-              domain={ [min, max] }
-            />
+            <YAxis domain={[min, max]} />
             <Tooltip />
             <Area
               type="monotone"
@@ -53,11 +51,9 @@ export default class ForecastGraphic extends React.Component {
           </AreaChart>
         </ResponsiveContainer>
       </div>
-    )
+    );
   }
 }
-
-
 ForecastGraphic.propTypes = {
-  data: PropTypes.arrayOf(PropTypes.shape).isRequired
+  data: PropTypes.arrayOf(PropTypes.shape({})).isRequired
 };

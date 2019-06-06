@@ -3,7 +3,6 @@ import React from "react";
 import { Button } from "semantic-ui-react";
 
 class Geolocalization extends React.Component {
-
   constructor(props) {
     super(props);
     this.state = {
@@ -13,30 +12,29 @@ class Geolocalization extends React.Component {
 
   getLocation = () => {
     navigator.geolocation.getCurrentPosition(position => {
-      alert(position)
+      alert(position);
     });
-  }
+  };
 
   render() {
-
-    // {require("../../icons/Theme2/map.png")}
-
     if ("geolocation" in navigator) {
       return (
         <div>
-          <Button 
+          <Button
             circular
-            color='blue'
+            color="blue"
             icon="map marker alternate"
-            onClick={() => {this.getLocation()}}
+            onClick={() => {
+              this.getLocation();
+            }}
           />
         </div>
       );
     }
+    return null;
   }
 }
 
-Geolocalization.propTypes = {
-};
+Geolocalization.propTypes = {};
 
 export default Geolocalization;
