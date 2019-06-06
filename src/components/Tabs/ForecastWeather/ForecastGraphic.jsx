@@ -1,4 +1,4 @@
-import PropTypes from "prop-types";
+import PropType from "prop-types";
 import React from "react";
 import {
   AreaChart,
@@ -14,15 +14,15 @@ export default class ForecastGraphic extends React.Component {
   static jsfiddleUrl = "https://jsfiddle.net/alidingling/xqjtetw0/";
 
   render() {
-    const { info, date, values, max, min } = this.props;
+    const { info, date, values, unit } = this.props;
     const data = date.map((x, i) => ({
       dates: date[i],
-      Temp: values[i]
+      Temp: values[i],
+      humidity: values[i],
+      unit
     }));
-
     return (
       <div style={{ width: "100%", height: 300 }}>
-        <h2>{info}</h2>
         <ResponsiveContainer>
           <AreaChart
             width={500}
@@ -37,11 +37,12 @@ export default class ForecastGraphic extends React.Component {
           >
             <CartesianGrid strokeDasharray="3 3" />
             <XAxis dataKey="dates" height={60} />
-            <YAxis domain={[min, max]} />
+            <YAxis />
             <Tooltip />
             <Area
               type="monotone"
-              dataKey="Temp"
+              dataKey={info}
+              unit={unit}
               activeDot={false}
               stackId="1"
               stroke="blue"
@@ -54,4 +55,9 @@ export default class ForecastGraphic extends React.Component {
     );
   }
 }
-ForecastGraphic.propTypes = {};
+ForecastGraphic.propTypes = {
+  info: PropType.string.isRequired,
+  date: PropType.arrayOf(PropType.shape()).isRequired,
+  values: PropType.arrayOf(PropType.shape()).isRequired,
+  unit: PropType.string.isRequired
+};

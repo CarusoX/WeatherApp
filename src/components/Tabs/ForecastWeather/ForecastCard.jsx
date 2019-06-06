@@ -82,14 +82,36 @@ class ForecastCard extends React.Component {
                     return i >= index * 8 && i < index * 8 + 8;
                   })
                   .map(x => x.temp)}
-                max={days[index].maxTemp}
-                min={days[index].minTemp}
                 date={detailedDays
                   .filter((x, i) => {
                     return i >= index * 8 && i < index * 8 + 8;
                   })
                   .map(x => `${x.dt_txt.slice(11, 16)} Hs`)}
                 info="Temp"
+                unit={`º${unit}`}
+              />
+            </div>
+            <div
+              style={{
+                display: "flex",
+                flexDirection: "row",
+                flexGrow: "1",
+                justifyContent: "space-evenly"
+              }}
+            >
+              <ForecastGraphic
+                values={detailedDays
+                  .filter((x, i) => {
+                    return i >= index * 8 && i < index * 8 + 8;
+                  })
+                  .map(x => x.humidity)}
+                date={detailedDays
+                  .filter((x, i) => {
+                    return i >= index * 8 && i < index * 8 + 8;
+                  })
+                  .map(x => `${x.dt_txt.slice(11, 16)} Hs`)}
+                info="humidity"
+                unit="%"
               />
             </div>
           </div>
