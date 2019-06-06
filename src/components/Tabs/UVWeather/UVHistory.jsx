@@ -1,5 +1,6 @@
 import PropTypes from "prop-types";
 import React from "react";
+import { Message } from "semantic-ui-react";
 import {
   AreaChart,
   Area,
@@ -27,6 +28,28 @@ const CustomizedAxisTick = props => {
       </text>
     </g>
   );
+};
+
+const getColor = index => {
+  if (index < 3) return "green";
+  if (index < 6) return "yellow";
+  if (index < 8) return "orange";
+  if (index < 11) return "red";
+  return "violet";
+};
+
+const CustomTooltip = ({ active, payload, label }) => {
+  if (active) {
+    const index = payload.reduce((a, b) => a + b.value, 0);
+    return (
+      <Message color={getColor(index)}>
+        <Message.Header>{label}</Message.Header>
+        <Message.Content>{`UV: ${index}`}</Message.Content>
+      </Message>
+    );
+  }
+
+  return null;
 };
 
 export default class UVHistory extends React.Component {
@@ -64,7 +87,7 @@ export default class UVHistory extends React.Component {
             <CartesianGrid strokeDasharray="3 3" />
             <XAxis dataKey="date" height={60} tick={<CustomizedAxisTick />} />
             <YAxis />
-            <Tooltip />
+            <Tooltip content={<CustomTooltip />} />
             <Area
               type="monotone"
               dataKey="uv1"
@@ -125,6 +148,20 @@ CustomizedAxisTick.propTypes = {
   x: PropTypes.number,
   y: PropTypes.number,
   payload: PropTypes.shape({
-    value: PropTypes.string
+    value: PropTypes.number
   })
+};
+
+CustomTooltip.defaultProps = {
+  active: false,
+  payload: {},
+  label: ""
+};
+
+CustomTooltip.propTypes = {
+  active: PropTypes.bool,
+  payload: PropTypes.shape({
+    value: PropTypes.number
+  }),
+  label: PropTypes.string
 };
