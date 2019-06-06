@@ -115,16 +115,10 @@ UVHistory.propTypes = {
   history: PropTypes.arrayOf(PropTypes.shape).isRequired
 };
 
-CustomizedAxisTick.defaultProps = {
-  x: 0,
-  y: 0,
-  payload: { value: "" }
-};
-
 CustomizedAxisTick.propTypes = {
-  x: PropTypes.number,
-  y: PropTypes.number,
+  x: PropTypes.number.isRequired,
+  y: PropTypes.number.isRequired,
   payload: PropTypes.shape({
-    value: PropTypes.string
-  })
+    value: PropTypes.string.isRequired
+  }).isRequired
 };

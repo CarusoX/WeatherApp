@@ -1,7 +1,11 @@
 import PropTypes from "prop-types";
 import React from "react";
 import { Grid, Image, Statistic, Tab } from "semantic-ui-react";
-import { getTemp, getIconName, unixToHoursMedium } from "../../../helpers/index.ts";
+import {
+  getTemp,
+  getIconName,
+  unixToHoursMedium
+} from "../../../helpers/index.ts";
 import { Cell } from "../../Modular/index.ts";
 
 const path1 = "../../../icons/Theme1/";
@@ -73,44 +77,44 @@ const WeatherCard = props => {
             <Cell
               image="004-clouds.png"
               title="Clouds"
-              content={clouds.toString() + "%"}
+              content={`${clouds.toString()} %`}
             />
 
             <Cell
               image="048-wind.png"
               title="Wind Speed"
-              content={windSpeed.toString() + " M/s"}
+              content={`${windSpeed.toString()} M/s`}
             />
           </Grid.Column>
           <Grid.Column>
             <Cell
               image="012-dawn.png"
               title="Sunrise"
-              content={unixToHoursMedium(sunrise) + " Hs"}
+              content={`${unixToHoursMedium(sunrise)} Hs`}
             />
 
             <Cell
               image="037-sunset.png"
               title="Sunset"
-              content={unixToHoursMedium(sunset) + " Hs"}
+              content={`${unixToHoursMedium(sunset)} Hs`}
             />
 
             <Cell
               image="019-humidity.png"
               title="Humidity"
-              content={humidity.toString() + "%"}
+              content={`${humidity.toString()}%`}
             />
 
             <Cell
               image="026-pressure.png"
               title="Preassure"
-              content={pressure.toString() + " hPa"}
+              content={`${pressure.toString()} hPa`}
             />
 
             <Cell
               image="047-weathercock.png"
               title="Wind Direction"
-              content={windDir.toString() + "º"}
+              content={`${windDir.toString()}º`}
             />
           </Grid.Column>
         </Grid.Row>
@@ -121,34 +125,18 @@ const WeatherCard = props => {
 
 export default WeatherCard;
 
-WeatherCard.defaultProps = {
-  state: "",
-  iconName: "",
-  temp: 0,
-  humidity: 0,
-  pressure: 0,
-  minTemp: 0,
-  maxTemp: 0,
-  windSpeed: 0,
-  windDir: 0,
-  clouds: 0,
-  sunrise: 0,
-  sunset: 0,
-  unit: ""
-};
-
 WeatherCard.propTypes = {
-  state: PropTypes.string,
-  iconName: PropTypes.string,
-  temp: PropTypes.number,
-  humidity: PropTypes.number,
-  pressure: PropTypes.number,
-  minTemp: PropTypes.number,
-  maxTemp: PropTypes.number,
-  windSpeed: PropTypes.number,
-  windDir: PropTypes.number,
-  clouds: PropTypes.number,
-  sunrise: PropTypes.number,
-  sunset: PropTypes.number,
-  unit: PropTypes.string
+  state: PropTypes.string.isRequired,
+  iconName: PropTypes.string.isRequired,
+  temp: PropTypes.number.isRequired,
+  humidity: PropTypes.number.isRequired,
+  pressure: PropTypes.number.isRequired,
+  minTemp: PropTypes.number.isRequired,
+  maxTemp: PropTypes.number.isRequired,
+  windSpeed: PropTypes.number.isRequired,
+  windDir: PropTypes.number.isRequired,
+  clouds: PropTypes.number.isRequired,
+  sunrise: PropTypes.string.isRequired,
+  sunset: PropTypes.string.isRequired,
+  unit: PropTypes.string.isRequired
 };

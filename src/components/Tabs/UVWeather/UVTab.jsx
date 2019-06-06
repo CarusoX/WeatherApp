@@ -27,14 +27,8 @@ const UVTab = props => {
 
 export default UVTab;
 
-UVTab.defaultProps = {
-  index: 0,
-  forecast: [],
-  history: []
-};
-
 UVTab.propTypes = {
-  index: PropTypes.number,
-  forecast: PropTypes.arrayOf(PropTypes.shape),
-  history: PropTypes.arrayOf(PropTypes.shape)
+  index: PropTypes.number.isRequired,
+  forecast: PropTypes.arrayOf(PropTypes.shape).isRequired,
+  history: PropTypes.arrayOf(PropTypes.shape).isRequired
 };

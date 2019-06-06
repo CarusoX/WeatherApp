@@ -18,7 +18,6 @@ class ForecastCard extends React.Component {
   }
 
   render() {
-    if(!this.props.days) return (<div/>)
     const { detailedDays, days, unit } = this.props;
     const { index } = this.state;
     return (
@@ -77,20 +76,20 @@ class ForecastCard extends React.Component {
                 justifyContent: "space-evenly"
               }}
             >
-              <ForecastGraphic 
-                values={
-                  detailedDays.filter((x, i) => 
-                    {return(i >= index * 8 && i < index * 8 + 8)}
-                  ).map(x => x.temp)
-                }
+              <ForecastGraphic
+                values={detailedDays
+                  .filter((x, i) => {
+                    return i >= index * 8 && i < index * 8 + 8;
+                  })
+                  .map(x => x.temp)}
                 max={days[index].maxTemp}
                 min={days[index].minTemp}
-                date={
-                  detailedDays.filter((x, i) => 
-                    {return(i >= index * 8 && i < index * 8 + 8)}
-                  ).map(x => x.dt_txt.slice(11, 16) + " Hs")
-                }    
-                info={'Temp'}             
+                date={detailedDays
+                  .filter((x, i) => {
+                    return i >= index * 8 && i < index * 8 + 8;
+                  })
+                  .map(x => `${x.dt_txt.slice(11, 16)} Hs`)}
+                info="Temp"
               />
             </div>
           </div>
@@ -102,3 +101,8 @@ class ForecastCard extends React.Component {
 
 export default ForecastCard;
 
+ForecastCard.propTypes = {
+  detailedDays: PropType.arrayOf(PropType.shape()).isRequired,
+  days: PropType.arrayOf(PropType.shape()).isRequired,
+  unit: PropType.string.isRequired
+};

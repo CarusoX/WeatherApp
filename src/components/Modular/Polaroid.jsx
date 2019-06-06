@@ -94,115 +94,108 @@ export const BigPolaroid = props => {
         <p style={bigText}>{state}</p>
 
         <Segment.Group mini vertical>
-            <SmallCell
-              image="039-thermometer.png"
-              title="Average Temperature"
-              content={getTemp(temp, unit)}
-            />
-            <SmallCell
-              image="018-high temperature.png"
-              title="Max Temperature"
-              content={getTemp(maxTemp, unit)}
-            />
-            <SmallCell
-              image="022-low temperature.png"
-              title="Min Temperature"
-              content={getTemp(minTemp, unit)}
-            />
-            <Modal
-              closeIcon
-              trigger={
+          <SmallCell
+            image="039-thermometer.png"
+            title="Average Temperature"
+            content={getTemp(temp, unit)}
+          />
+          <SmallCell
+            image="018-high temperature.png"
+            title="Max Temperature"
+            content={getTemp(maxTemp, unit)}
+          />
+          <SmallCell
+            image="022-low temperature.png"
+            title="Min Temperature"
+            content={getTemp(minTemp, unit)}
+          />
+          <Modal
+            closeIcon
+            trigger={
+              <div><SmallCell image="plus.png" title="Show more!" /></div>
+            }
+          >
+            <Modal.Header>{`Know more about ${text}`}</Modal.Header>
+            <Modal.Content scrolling>
+              <Segment.Group raised horizontal>
+                <SmallCell
+                  image="039-thermometer.png"
+                  title="Temperature"
+                  content={getTemp(temp, unit)}
+                  style={{
+                    inverted: "inverted",
+                    color: "blue",
+                    raised: "true",
+                    loading: "true"
+                  }}
+                />
+                <SmallCell
+                  image="004-clouds.png"
+                  title="Clouds"
+                  content={`${clouds.toString()}%`}
+                  style={{ color: "blue" }}
+                />
+              </Segment.Group>
+              <Segment.Group raised horizontal>
+                <SmallCell
+                  image="018-high temperature.png"
+                  title="Max Temperature"
+                  content={getTemp(maxTemp, unit)}
+                  style={{ color: "blue" }}
+                />
+                <SmallCell
+                  image="022-low temperature.png"
+                  title="Min Temperature"
+                  content={getTemp(minTemp, unit)}
+                  style={{ color: "blue" }}
+                />
+              </Segment.Group>
+              <Segment.Group raised horizontal>
+                <SmallCell
+                  image="048-wind.png"
+                  title="Wind Speed"
+                  content={`${windSpeed.toString()} M/s`}
+                  style={{ color: "blue" }}
+                />
+                <SmallCell
+                  image="047-weathercock.png"
+                  title="Wind Direction"
+                  content={`${windDir.toString()}º`}
+                  style={{ color: "blue" }}
+                />
+              </Segment.Group>
 
-                <div>
-                  <SmallCell
-                    image="plus.png"
-                    title="Show more!"
-                  />
-                </div>
-              
-              }
-            >
-              <Modal.Header>
-                Know more about {text}
-              </Modal.Header>
-              <Modal.Content scrolling>
-                <Segment.Group raised horizontal>
-                  <SmallCell
-                    image="039-thermometer.png"
-                    title="Temperature"
-                    content={getTemp(temp, unit)}
-                    style={{inverted: "inverted",
-                            color: "blue",
-                            raised: "true",
-                            loading: "true"}}
-                  />
-                  <SmallCell
-                    image="004-clouds.png"
-                    title="Clouds"
-                    content={clouds.toString() + "%"}
-                    style={{color: "blue"}}
-                  />
-                </Segment.Group>
-                <Segment.Group raised horizontal>
-                  <SmallCell
-                    image="018-high temperature.png"
-                    title="Max Temperature"
-                    content={getTemp(maxTemp, unit)}
-                    style={{color: "blue"}}
-                  />
-                  <SmallCell
-                    image="022-low temperature.png"
-                    title="Min Temperature"
-                    content={getTemp(minTemp, unit)}
-                    style={{color: "blue"}}
-                  />
-                </Segment.Group>
-                <Segment.Group raised horizontal>
-                  <SmallCell
-                    image="048-wind.png"
-                    title="Wind Speed"
-                    content={windSpeed.toString() + " M/s"}
-                    style={{color: "blue"}}
-                  />
-                  <SmallCell
-                    image="047-weathercock.png"
-                    title="Wind Direction"
-                    content={windDir.toString() + "º"}
-                    style={{color: "blue"}}
-                  />
-                </Segment.Group>
+              <Segment.Group raised horizontal>
+                <SmallCell
+                  image="012-dawn.png"
+                  title="Sunrise"
+                  content={`${unixToHoursMedium(sunrise)} Hs`}
+                  style={{ color: "blue" }}
+                />
+                <SmallCell
+                  image="037-sunset.png"
+                  title="Sunset"
+                  content={`${unixToHoursMedium(sunset)} Hs`}
+                  style={{ color: "blue" }}
+                />
+              </Segment.Group>
 
-                <Segment.Group raised horizontal>
-                  <SmallCell
-                    image="012-dawn.png"
-                    title="Sunrise"
-                    content={unixToHoursMedium(sunrise) + " Hs"}
-                    style={{color: "blue"}}
-                  />
-                  <SmallCell
-                    image="037-sunset.png"
-                    title="Sunset"
-                    content={unixToHoursMedium(sunset) + " Hs"}
-                    style={{color: "blue"}}
-                  />
-                </Segment.Group>
-
-                <Segment.Group raised horizontal>
-                  <SmallCell
-                    image="019-humidity.png"
-                    title="Humidity"
-                    content={humidity.toString() + "%"}
-                    style={{color: "blue"}}
-                  />
-                  <SmallCell
-                    image="026-pressure.png"
-                    title="Preassure"
-                    content={pressure.toString() + "hPa"}
-                    style={{color: "blue"}}
-                  />
-                </Segment.Group>
-              </Modal.Content>
-            </Modal>
+              <Segment.Group raised horizontal>
+                <SmallCell
+                  image="019-humidity.png"
+                  title="Humidity"
+                  content={`${humidity.toString()}%`}
+                  style={{ color: "blue" }}
+                />
+                <SmallCell
+                  image="026-pressure.png"
+                  title="Preassure"
+                  content={`${pressure.toString()}hPa`}
+                  style={{ color: "blue" }}
+                />
+              </Segment.Group>
+            </Modal.Content>
+          </Modal>
         </Segment.Group>
       </div>
     </div>
@@ -221,68 +214,38 @@ export const SmallPolaroid = props => {
       <Divider style={{ marginBottom: "0%" }} />
       <div style={container}>
         <p style={smallHeader}>{text}</p>
-        <p style={smallText}>
-          Max: {getTemp(max, unit)}
-        </p>
-        <p style={smallText}>
-          Min: {getTemp(min, unit)}
-        </p>
+        <p style={smallText}>{`Max: ${getTemp(max, unit)}`}</p>
+        <p style={smallText}>{`Min: {getTemp(min, unit)}`}</p>
       </div>
     </div>
   );
 };
 
-BigPolaroid.defaultProps = {
-  image: "",
-  text: "",
-  state: "",
-  unit: 0,
-  temp: 0,
-  maxTemp: 0,
-  minTemp: 0,
-  clouds: 0,
-  humidity: 0,
-  windSpeed: 0,
-  windDir: 0,
-  sunrise: 0,
-  sunset: 0,
-  pressure: 0
-};
-
 BigPolaroid.propTypes = {
-  image: PropTypes.string,
-  text: PropTypes.string,
-  state: PropTypes.string,
-  unit: PropTypes.string,
-  temp: PropTypes.number,
-  maxTemp: PropTypes.number,
-  minTemp: PropTypes.number,
-  clouds: PropTypes.number,
-  humidity: PropTypes.number,
-  windSpeed: PropTypes.number,
-  windDir: PropTypes.number,
-  sunrise: PropTypes.number,
-  sunset: PropTypes.number,
-  pressure: PropTypes.number
-};
-
-SmallPolaroid.defaultProps = {
-  text: "",
-  index: 0,
-  max: 0,
-  min: 0,
-  unit: "",
-  image: ""
+  image: PropTypes.string.isRequired,
+  text: PropTypes.string.isRequired,
+  state: PropTypes.string.isRequired,
+  unit: PropTypes.string.isRequired,
+  temp: PropTypes.number.isRequired,
+  maxTemp: PropTypes.number.isRequired,
+  minTemp: PropTypes.number.isRequired,
+  clouds: PropTypes.number.isRequired,
+  humidity: PropTypes.number.isRequired,
+  windSpeed: PropTypes.number.isRequired,
+  windDir: PropTypes.number.isRequired,
+  sunrise: PropTypes.number.isRequired,
+  sunset: PropTypes.number.isRequired,
+  pressure: PropTypes.number.isRequired
 };
 
 SmallPolaroid.propTypes = {
   update: PropTypes.func.isRequired,
-  index: PropTypes.number,
-  text: PropTypes.string,
-  max: PropTypes.number,
-  min: PropTypes.number,
-  unit: PropTypes.string,
-  image: PropTypes.string
+  index: PropTypes.number.isRequired,
+  text: PropTypes.string.isRequired,
+  max: PropTypes.number.isRequired,
+  min: PropTypes.number.isRequired,
+  unit: PropTypes.string.isRequired,
+  image: PropTypes.string.isRequired
 };
 
 // {props.texts.map(txt => (

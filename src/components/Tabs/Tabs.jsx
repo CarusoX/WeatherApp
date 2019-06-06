@@ -78,38 +78,32 @@ const Tabs = props => {
 
 export default Tabs;
 
-Tabs.defaultProps = {
-  current: {},
-  forecast: {},
-  uv: {}
-};
-
 Tabs.propTypes = {
   error: PropTypes.number.isRequired,
   show: PropTypes.bool.isRequired,
   loading: PropTypes.bool.isRequired,
   unit: PropTypes.string.isRequired,
   current: PropTypes.shape({
-    state: PropTypes.string,
-    iconName: PropTypes.string,
-    temp: PropTypes.number,
-    humidity: PropTypes.number,
-    pressure: PropTypes.number,
-    minTemp: PropTypes.number,
-    maxTemp: PropTypes.number,
-    windSpeed: PropTypes.number,
-    windDir: PropTypes.number,
-    clouds: PropTypes.number,
-    sunrise: PropTypes.number,
-    sunset: PropTypes.number
-  }),
+    state: PropTypes.string.isRequired,
+    iconName: PropTypes.string.isRequired,
+    temp: PropTypes.number.isRequired,
+    humidity: PropTypes.number.isRequired,
+    pressure: PropTypes.number.isRequired,
+    minTemp: PropTypes.number.isRequired,
+    maxTemp: PropTypes.number.isRequired,
+    windSpeed: PropTypes.number.isRequired,
+    windDir: PropTypes.number.isRequired,
+    clouds: PropTypes.number.isRequired,
+    sunrise: PropTypes.string.isRequired,
+    sunset: PropTypes.string.isRequired
+  }).isRequired,
   forecast: PropTypes.shape({
-    detailedDays: PropTypes.array,
-    days: PropTypes.array
-  }),
+    detailedDays: PropTypes.array.isRequired,
+    days: PropTypes.array.isRequired
+  }).isRequired,
   uv: PropTypes.shape({
-    index: PropTypes.number,
-    forecast: PropTypes.array,
-    history: PropTypes.array
-  })
+    index: PropTypes.number.isRequired,
+    forecast: PropTypes.array.isRequired,
+    history: PropTypes.array.isRequired
+  }).isRequired
 };
