@@ -31,7 +31,7 @@ export default class SearchExampleStandard extends Component {
   handleSearchChange = (e, { value }) => {
     this.setState({ isLoading: true, value }, () => {
       setTimeout(() => {
-        if (value.length < 1) return this.setState(initialState);
+        if (value.length < 1) return null;
 
         return fetchCities(value).then(result => {
           if (!result) return this.setState(errorState);
@@ -71,13 +71,14 @@ export default class SearchExampleStandard extends Component {
             loading={isLoading}
             onResultSelect={this.handleResultSelect}
             onSearchChange={_.debounce(this.handleSearchChange, 300, {
-              leading: true
+              leading: true,
+              maxWait: 500,
+              trailing: true
             })}
             results={results}
             value={value}
             resultRenderer={resultRenderer}
             selectFirstResult
-            
             {...this.props}
           />
         </Grid.Row>

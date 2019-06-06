@@ -136,7 +136,7 @@ WeatherCard.propTypes = {
   windSpeed: PropTypes.number.isRequired,
   windDir: PropTypes.number.isRequired,
   clouds: PropTypes.number.isRequired,
-  sunrise: PropTypes.string.isRequired,
-  sunset: PropTypes.string.isRequired,
+  sunrise: PropTypes.number.isRequired,
+  sunset: PropTypes.number.isRequired,
   unit: PropTypes.string.isRequired
 };

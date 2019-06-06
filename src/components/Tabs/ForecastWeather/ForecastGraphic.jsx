@@ -17,7 +17,7 @@ export default class ForecastGraphic extends React.Component {
     const { info, date, values, max, min } = this.props;
     const data = date.map((x, i) => ({
       dates: date[i],
-      value: values[i]
+      Temp: values[i]
     }));
 
     return (
@@ -41,7 +41,7 @@ export default class ForecastGraphic extends React.Component {
             <Tooltip />
             <Area
               type="monotone"
-              dataKey="value"
+              dataKey="Temp"
               activeDot={false}
               stackId="1"
               stroke="blue"
@@ -54,6 +54,4 @@ export default class ForecastGraphic extends React.Component {
     );
   }
 }
-ForecastGraphic.propTypes = {
-  data: PropTypes.arrayOf(PropTypes.shape({})).isRequired
-};
+ForecastGraphic.propTypes = {};

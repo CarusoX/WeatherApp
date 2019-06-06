@@ -94,8 +94,8 @@ Tabs.propTypes = {
     windSpeed: PropTypes.number.isRequired,
     windDir: PropTypes.number.isRequired,
     clouds: PropTypes.number.isRequired,
-    sunrise: PropTypes.string.isRequired,
-    sunset: PropTypes.string.isRequired
+    sunrise: PropTypes.number.isRequired,
+    sunset: PropTypes.number.isRequired
   }).isRequired,
   forecast: PropTypes.shape({
     detailedDays: PropTypes.array.isRequired,

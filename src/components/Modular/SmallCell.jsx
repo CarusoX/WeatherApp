@@ -5,7 +5,7 @@ import { Header, Image, Segment } from "semantic-ui-react";
 const SmallCell = props => {
   const { image, title, content, style } = props;
   return (
-    <Segment {...style}>
+    <Segment vertical {...style}>
       <Image
         src={require(`../../icons/Theme2/${image}`)}
         centered
@@ -17,11 +17,16 @@ const SmallCell = props => {
   );
 };
 
+SmallCell.defaultProps = {
+  content: "",
+  style: {}
+};
+
 SmallCell.propTypes = {
   image: PropTypes.string.isRequired,
   title: PropTypes.string.isRequired,
-  content: PropTypes.string.isRequired,
-  style: PropTypes.shape({}).isRequired
+  content: PropTypes.string,
+  style: PropTypes.shape({})
 };
 
 export default SmallCell;

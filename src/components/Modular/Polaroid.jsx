@@ -93,7 +93,7 @@ export const BigPolaroid = props => {
         <p style={bigHeader}>{text}</p>
         <p style={bigText}>{state}</p>
 
-        <Segment.Group mini vertical>
+        <Segment.Group>
           <SmallCell
             image="039-thermometer.png"
             title="Average Temperature"
