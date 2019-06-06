@@ -58,7 +58,7 @@ class Menu extends React.Component {
         />
         <Divider section horizontal>
           City:
-          {city ? city.city_name : ""}
+          {city ? ` ${city.city_name}` : ""}
         </Divider>
         <Tabs
           error={error}

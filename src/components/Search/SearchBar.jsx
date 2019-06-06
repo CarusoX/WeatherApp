@@ -31,7 +31,7 @@ export default class SearchExampleStandard extends Component {
   handleSearchChange = (e, { value }) => {
     this.setState({ isLoading: true, value }, () => {
       setTimeout(() => {
-        if (value.length < 1) return null;
+        if (value.length < 3) return null;
 
         return fetchCities(value).then(result => {
           if (!result) return this.setState(errorState);
