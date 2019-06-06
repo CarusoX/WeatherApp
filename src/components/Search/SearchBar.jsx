@@ -2,7 +2,7 @@ import _ from "lodash";
 import PropTypes from "prop-types";
 import React, { Component } from "react";
 import { Search, Grid } from "semantic-ui-react";
-import { fetchCities, fetchData, getCountryName } from "../../helpers/index.ts";
+import { fetchCities, getCountryName } from "../../helpers/index.ts";
 import { Geolocalization } from "./index.ts";
 
 const initialState = { isLoading: false, results: [], value: "" };
@@ -61,13 +61,14 @@ export default class SearchExampleStandard extends Component {
 
   handleGeolocalization = coords => {
     const { setCity } = this.props;
-    setCity({
-      id: -1,
-      coords,
-      city_name: -1
+    return fetchCities(coords).then(result => {
+      console.log(result);
+      setCity({
+        id: result.key,
+        coords,
+        city_name: result.name
+      });
     });
-    console.log(coords);
-    fetchData(coords);
   };
 
   render() {

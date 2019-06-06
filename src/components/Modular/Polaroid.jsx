@@ -1,8 +1,8 @@
 import PropTypes from "prop-types";
 import React from "react";
-import { Divider, Modal, Segment, Grid } from "semantic-ui-react";
+import { Divider, Modal, Segment } from "semantic-ui-react";
 import { SmallCell } from "./index.ts";
-import { getTemp, unixToHoursMedium } from "../../helpers/index.ts";
+import { getTemp } from "../../helpers/index.ts";
 
 export const BigPolaroid = props => {
   const {
@@ -14,11 +14,8 @@ export const BigPolaroid = props => {
     maxTemp,
     minTemp,
     clouds,
-    humidity,
     windSpeed,
     windDir,
-    sunrise,
-    sunset,
     pressure
   } = props;
 
@@ -54,7 +51,9 @@ export const BigPolaroid = props => {
           <Modal
             closeIcon
             trigger={
-              <div><SmallCell image="plus.png" title="Show more!" /></div>
+              <div>
+                <SmallCell image="plus.png" title="Show more!" />
+              </div>
             }
           >
             <Modal.Header>{`Know more about ${text}`}</Modal.Header>
@@ -150,7 +149,8 @@ const bigPolaroid = {
   backgroundColor: "white",
   flexGrow: "2",
   alignItems: "stretch",
-  width: "75%"
+  width: "100%",
+  maxWidth: "400px"
 };
 
 const smallPolaroid = {
@@ -159,8 +159,10 @@ const smallPolaroid = {
   borderRadius: "5px",
   boxShadow: "0px 0px 20px 10px rgba(196, 196, 196, 0.7)",
   backgroundColor: "white",
-  maxWidth: "17%",
-  height: "70%"
+  width: "100%",
+  height: "100%",
+  maxWidth: "141px",
+  maxHeight: "255px"
 };
 
 const bigImage = {
