@@ -1,5 +1,6 @@
 import PropTypes from "prop-types";
 import React from "react";
+import _ from "lodash";
 import { Tab } from "semantic-ui-react";
 import { DefaultTab, ErrorTab } from "../Modular/index.ts";
 import WeatherCard from "./CurrentWeather/WeatherCard";
@@ -22,21 +23,22 @@ const dataPanes = (current, forecast, uv, unit) => [
   {
     menuItem: "Current Weather",
     render: () => {
-      if (current) return <WeatherCard {...current} unit={unit} />;
+      if (!_.isEmpty(current)) return <WeatherCard {...current} unit={unit} />;
       return <Tab.Pane loading />;
     }
   },
   {
     menuItem: "Week Forecast",
     render: () => {
-      if (forecast) return <ForecastCard {...forecast} unit={unit} />;
+      if (!_.isEmpty(forecast))
+        return <ForecastCard {...forecast} unit={unit} />;
       return <Tab.Pane loading />;
     }
   },
   {
     menuItem: "UV Rays",
     render: () => {
-      if (uv) return <UVTab {...uv} />;
+      if (!_.isEmpty(uv)) return <UVTab {...uv} />;
       return <Tab.Pane loading />;
     }
   }
