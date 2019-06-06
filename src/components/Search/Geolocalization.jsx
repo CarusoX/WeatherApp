@@ -2,39 +2,33 @@ import PropTypes from "prop-types";
 import React from "react";
 import { Button } from "semantic-ui-react";
 
-class Geolocalization extends React.Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      geo: false
-    };
+const getLocation = fun => {
+  return navigator.geolocation.getCurrentPosition(position => {
+    return fun(position.coords.latitude, position.coords.longitude);
+  });
+};
+
+const Geolocalization = props => {
+  const { newCity } = props;
+  if ("geolocation" in navigator) {
+    return (
+      <div>
+        <Button
+          circular
+          color="blue"
+          icon="map marker alternate"
+          onClick={() => {
+            getLocation(newCity);
+          }}
+        />
+      </div>
+    );
   }
+  return null;
+};
 
-  getLocation = () => {
-    navigator.geolocation.getCurrentPosition(position => {
-      alert(position);
-    });
-  };
-
-  render() {
-    if ("geolocation" in navigator) {
-      return (
-        <div>
-          <Button
-            circular
-            color="blue"
-            icon="map marker alternate"
-            onClick={() => {
-              this.getLocation();
-            }}
-          />
-        </div>
-      );
-    }
-    return null;
-  }
-}
-
-Geolocalization.propTypes = {};
+Geolocalization.propTypes = {
+  newCity: PropTypes.func.isRequired
+};
 
 export default Geolocalization;

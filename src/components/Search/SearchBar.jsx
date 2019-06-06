@@ -59,13 +59,22 @@ export default class SearchExampleStandard extends Component {
     });
   };
 
+  handleGeolocalization = coords => {
+    const { setCity } = this.props;
+    setCity({
+      id: -1,
+      coords,
+      city_name: -1
+    });
+  };
+
   render() {
     const { isLoading, value, results } = this.state;
 
     return (
       <Grid container stretched padded="vertically">
         <Grid.Row centered>
-          <Geolocalization />
+          <Geolocalization newCity={geo => this.handleGeolocalization(geo)} />
           <Search
             fluid
             loading={isLoading}
