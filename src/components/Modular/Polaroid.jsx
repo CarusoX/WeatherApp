@@ -215,7 +215,7 @@ export const SmallPolaroid = props => {
       <div style={container}>
         <p style={smallHeader}>{text}</p>
         <p style={smallText}>{`Max: ${getTemp(max, unit)}`}</p>
-        <p style={smallText}>{`Min: {getTemp(min, unit)}`}</p>
+        <p style={smallText}>{`Min: ${getTemp(min, unit)}`}</p>
       </div>
     </div>
   );

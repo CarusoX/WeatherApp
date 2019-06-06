@@ -22,7 +22,7 @@ class Menu extends React.Component {
     const { city } = this.state;
     this.setState({ loading: true });
 
-    return fetchData(city).then(data => {
+    return fetchData(city.coords).then(data => {
       if (!data) return null;
       if (typeof data === "number") {
         return this.setState({ error: data });

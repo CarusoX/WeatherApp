@@ -16,13 +16,17 @@ const getCityList = city => {
   return fetch(url);
 };
 
-const getCurrentWeather = id => {
-  const url = `${API_ENDPOINT}${API_WEATHER}?id=${id}&units=metric&appid=${API_KEY}`;
+const getCurrentWeather = coords => {
+  const url = `${API_ENDPOINT}${API_WEATHER}?lat=${coords.lat}&lon=${
+    coords.lon
+  }&units=metric&appid=${API_KEY}`;
   return fetch(url);
 };
 
-const getForecastWeather = id => {
-  const url = `${API_ENDPOINT}${API_FORECAST}?id=${id}&units=metric&appid=${API_KEY}`;
+const getForecastWeather = coords => {
+  const url = `${API_ENDPOINT}${API_FORECAST}?lat=${coords.lat}&lon=${
+    coords.lon
+  }&units=metric&appid=${API_KEY}`;
   return fetch(url);
 };
 
@@ -110,13 +114,13 @@ const compressDays = result => {
   }, []);
 };
 
-export const fetchData = city => {
+export const fetchData = coords => {
   return Promise.all([
-    getCurrentWeather(city.id),
-    getForecastWeather(city.id),
-    getUVIndex(city.coords),
-    getUVForecast(city.coords),
-    getUVHistory(city.coords)
+    getCurrentWeather(coords),
+    getForecastWeather(coords),
+    getUVIndex(coords),
+    getUVForecast(coords),
+    getUVHistory(coords)
   ])
     .then(responses => {
       if (responses.filter(response => !response.ok).length) throw Error();
