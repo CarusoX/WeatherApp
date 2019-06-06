@@ -82,8 +82,6 @@ class ForecastCard extends React.Component {
                     return i >= index * 8 && i < index * 8 + 8;
                   })
                   .map(x => x.temp)}
-                max={days[index].maxTemp}
-                min={days[index].minTemp}
                 date={detailedDays
                   .filter((x, i) => {
                     return i >= index * 8 && i < index * 8 + 8;
