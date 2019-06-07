@@ -8,9 +8,6 @@ import {
 } from "../../../helpers/index.ts";
 import { Cell } from "../../Modular/index.ts";
 
-const path1 = "../../../icons/Theme1/";
-const path2 = "../../../icons/Theme2/";
-
 const WeatherCard = props => {
   const {
     state,

@@ -18,11 +18,19 @@ export default class ForecastGraphic extends React.Component {
     const { info, date, values, unit } = this.props;
     const data = date.map((x, i) => ({
       dates: date[i],
-      temp: getTemp(values[i], unit.slice(1, 2)).slice(0, 3),
-      humidity: values[i]
+      Temp: getTemp(values[i], unit.slice(1, 2)).slice(0, 3),
+      Humidity: values[i]
     }));
     return (
       <div style={{ width: "100%", height: 300 }}>
+        <h2
+          style={{
+            fontSize: 35,
+            fontWeight: "bold"
+          }}
+        >
+          {info}
+        </h2>
         <ResponsiveContainer>
           <AreaChart
             width={500}
