@@ -4,7 +4,10 @@ import { Button } from "semantic-ui-react";
 
 const getLocation = fun => {
   return navigator.geolocation.getCurrentPosition(position => {
-    return fun(position.coords.latitude, position.coords.longitude);
+    return fun({
+      lat: position.coords.latitude,
+      lon: position.coords.longitude
+    });
   });
 };
 
