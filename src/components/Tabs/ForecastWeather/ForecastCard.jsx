@@ -62,6 +62,8 @@ class ForecastCard extends React.Component {
                   index={i}
                   image={`${getIconName(day.bestIcon)}.png`}
                   text={getDateName(day.dt_txt)}
+                  max={day.maxTemp}
+                  min={day.minTemp}
                   unit={unit}
                 />
               ))}
