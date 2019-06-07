@@ -1,17 +1,24 @@
 import _ from "lodash";
 import PropTypes from "prop-types";
 import React, { Component } from "react";
-import { Search, Grid } from "semantic-ui-react";
+import { Search, Grid, Flag } from "semantic-ui-react";
 import { fetchCities, getCountryName } from "../../helpers/index.ts";
 import { Geolocalization } from "./index.ts";
 
 const initialState = { isLoading: false, results: [], value: "" };
 const errorState = { isLoading: false, results: [] };
 
-const resultRenderer = ({ title, description }) => [
+const resultRenderer = ({ title, description, image }) => [
   <div key="content" className="content">
-    {title && <div className="title">{title}</div>}
-    {description && <div className="description">{description}</div>}
+    <Grid>
+      <Grid.Column>
+        <Flag style={{}} name={image.toLowerCase()} />
+      </Grid.Column>
+      <Grid.Column>
+        {title && <div className="title">{title}</div>}
+        {description && <div className="description">{description}</div>}
+      </Grid.Column>
+    </Grid>
   </div>
 ];
 
@@ -46,6 +53,7 @@ export default class SearchExampleStandard extends Component {
               title: res.name,
               description: getCountryName(res.sys.country),
               full: `${res.name} - ${res.sys.country}`,
+              image: res.sys.country,
               country: getCountryName(res.sys.country),
               coords: res.coord,
               key: res.id
