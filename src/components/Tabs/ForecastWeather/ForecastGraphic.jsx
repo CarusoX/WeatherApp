@@ -18,7 +18,7 @@ export default class ForecastGraphic extends Component {
     const { info, date, values, unit } = this.props;
     const data = date.map((x, i) => ({
       dates: date[i],
-      Temp: getTemp(values[i], unit.slice(1, 2)).slice(0, 3),
+      Temperature: getTemp(values[i], unit.slice(2, 3)).slice(0, -3),
       Humidity: values[i]
     }));
     return (

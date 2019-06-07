@@ -90,7 +90,7 @@ class ForecastCard extends Component {
                     return i >= index * 8 && i < index * 8 + 8;
                   })
                   .map(x => `${x.dt_txt.slice(11, 16)} Hs`)}
-                info="Temp"
+                info="Temperature"
                 unit={` º${unit}`}
               />
             </div>
