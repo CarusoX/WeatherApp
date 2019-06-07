@@ -10,7 +10,6 @@ class Menu extends React.Component {
     super(props);
     this.state = {
       error: 0,
-      loading: false,
       city: undefined,
       current: undefined,
       forecast: undefined,
@@ -20,22 +19,30 @@ class Menu extends React.Component {
 
   setData() {
     const { city } = this.state;
-    this.setState({ loading: true });
-
-    return fetchData(city.coords).then(data => {
-      if (!data) return null;
-      if (typeof data === "number") {
-        return this.setState({ error: data });
-      }
-      city.city_name = data.results[3].name;
-      return this.setState({
-        current: data.results[0],
-        forecast: data.results[1],
-        uv: data.results[2],
+    this.setState(
+      {
         error: 0,
-        loading: false
-      });
-    });
+        city: { name: "" },
+        current: undefined,
+        forecast: undefined,
+        uv: undefined
+      },
+      () => {
+        return fetchData(city.coords).then(data => {
+          if (!data) return null;
+          if (typeof data === "number") {
+            return this.setState({ error: data });
+          }
+          return this.setState({
+            current: data.results[0],
+            forecast: data.results[1],
+            uv: data.results[2],
+            city: data.results[0].city,
+            error: 0
+          });
+        });
+      }
+    );
   }
 
   setCity(newCity) {
@@ -50,7 +57,7 @@ class Menu extends React.Component {
 
   render() {
     const { unit, theme } = this.props;
-    const { city, error, loading, current, uv, forecast } = this.state;
+    const { city, error, current, uv, forecast } = this.state;
     return (
       <Container fluid>
         <SearchBar
@@ -59,12 +66,11 @@ class Menu extends React.Component {
         />
         <Divider section horizontal>
           City:
-          {city ? ` ${city.city_name}` : ""}
+          {city ? ` ${city.name}` : ""}
         </Divider>
         <Tabs
           error={error}
           show={city !== undefined}
-          loading={loading}
           unit={unit}
           current={current}
           forecast={forecast}
