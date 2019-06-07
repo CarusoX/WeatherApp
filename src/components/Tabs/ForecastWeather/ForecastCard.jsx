@@ -1,11 +1,11 @@
 import PropType from "prop-types";
-import React from "react";
+import React, { Component } from "react";
 import { Tab } from "semantic-ui-react";
 import { getDateName, getIconName } from "../../../helpers/index.ts";
 import { BigPolaroid, SmallPolaroid } from "../../Modular/index.ts";
 import ForecastGraphic from "./ForecastGraphic";
 
-class ForecastCard extends React.Component {
+class ForecastCard extends Component {
   constructor(props) {
     super(props);
     this.state = {

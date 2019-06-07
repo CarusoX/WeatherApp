@@ -1,5 +1,5 @@
 import PropType from "prop-types";
-import React from "react";
+import React, { Component } from "react";
 import {
   AreaChart,
   Area,
@@ -11,7 +11,7 @@ import {
 } from "recharts";
 import { getTemp } from "../../../helpers/index.ts";
 
-export default class ForecastGraphic extends React.Component {
+export default class ForecastGraphic extends Component {
   static jsfiddleUrl = "https://jsfiddle.net/alidingling/xqjtetw0/";
 
   render() {

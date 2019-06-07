@@ -1,6 +1,6 @@
 import PropTypes from "prop-types";
-import React from "react";
-import { Divider, Modal, Segment } from "semantic-ui-react";
+import React, { Component } from "react";
+import { Divider, Modal, Segment, Transition } from "semantic-ui-react";
 import { SmallCell } from "./index.ts";
 import { getTemp } from "../../helpers/index.ts";
 
@@ -164,23 +164,42 @@ export const BigPolaroid = props => {
   );
 };
 
-export const SmallPolaroid = props => {
-  const { update, text, index, max, min, unit, image, theme } = props;
-  return (
-    <div style={smallPolaroid} onClick={() => update(index)}>
-      <img
-        alt="img"
-        style={smallImage}
-        src={require(`../../icons/Theme${theme}/${image}`)}
-      />
-      <Divider style={{ marginBottom: "0%" }} />
-      <div style={container}>
-        <p style={smallHeader}>{text}</p>
-        <p style={smallText}>{`Max: ${getTemp(max, unit)}`}</p>
-        <p style={smallText}>{`Min: ${getTemp(min, unit)}`}</p>
-      </div>
-    </div>
-  );
+export default class SmallPolaroid extends Component {
+  state = { animation: "pulse", duration: 300, visible: true };
+
+  handleChange = (e, { name, value }) => this.setState({ [name]: value });
+
+  toggleVisibility = () =>
+    this.setState(prevState => ({ visible: !prevState.visible }));
+
+  render() {
+    const { update, text, index, max, min, unit, image, theme } = this.props;
+    const { animation, duration, visible } = this.state;
+    return (
+      <Transition animation={animation} duration={duration} visible={visible}>
+        <div
+          style={smallPolaroid}
+          onClick={() => {
+            this.toggleVisibility();
+            update(index);
+          }}
+          role="presentation"
+        >
+          <img
+            alt="img"
+            style={smallImage}
+            src={require(`../../icons/Theme${theme}/${image}`)}
+          />
+          <Divider style={{ marginBottom: "0%" }} />
+          <div style={container}>
+            <p style={smallHeader}>{text}</p>
+            <p style={smallText}>{`Max: ${getTemp(max, unit)}`}</p>
+            <p style={smallText}>{`Min: ${getTemp(min, unit)}`}</p>
+          </div>
+        </div>
+      </Transition>
+    );
+  }
 };
 
 BigPolaroid.propTypes = {

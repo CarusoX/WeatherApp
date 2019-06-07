@@ -1,9 +1,9 @@
-import React from "react";
+import React, { Component } from "react";
 import { Button, Container, Grid, Segment } from "semantic-ui-react";
 import { Title } from "./Title/index.ts";
 import { Menu } from "./Menu/index.ts";
 
-class App extends React.Component {
+class App extends Component {
   constructor(props) {
     super(props);
     this.state = {

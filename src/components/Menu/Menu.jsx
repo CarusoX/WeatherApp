@@ -1,11 +1,11 @@
 import PropTypes from "prop-types";
-import React from "react";
+import React, { Component } from "react";
 import { Container, Divider } from "semantic-ui-react";
 import { SearchBar } from "../Search/index.ts";
 import { Tabs } from "../Tabs/index.ts";
 import { fetchData } from "../../helpers/index.ts";
 
-class Menu extends React.Component {
+class Menu extends Component {
   constructor(props) {
     super(props);
     this.state = {
