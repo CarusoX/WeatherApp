@@ -88,7 +88,7 @@ class ForecastCard extends React.Component {
                   })
                   .map(x => `${x.dt_txt.slice(11, 16)} Hs`)}
                 info="temp"
-                unit={unit}
+                unit={`º${unit}`}
               />
             </div>
             <div
