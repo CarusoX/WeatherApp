@@ -90,7 +90,7 @@ class ForecastCard extends React.Component {
                     return i >= index * 8 && i < index * 8 + 8;
                   })
                   .map(x => `${x.dt_txt.slice(11, 16)} Hs`)}
-                info="temp"
+                info="Temp"
                 unit={`º${unit}`}
               />
             </div>
@@ -113,7 +113,7 @@ class ForecastCard extends React.Component {
                     return i >= index * 8 && i < index * 8 + 8;
                   })
                   .map(x => `${x.dt_txt.slice(11, 16)} Hs`)}
-                info="humidity"
+                info="Humidity"
                 unit="%"
               />
             </div>
