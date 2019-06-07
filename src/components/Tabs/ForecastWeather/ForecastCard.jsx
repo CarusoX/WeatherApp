@@ -20,24 +20,25 @@ class ForecastCard extends React.Component {
   render() {
     const { detailedDays, days, unit } = this.props;
     const { index } = this.state;
+    const thisDay = days[index];
     return (
       <Tab.Pane attached={false}>
         <div style={{ display: "flex", flexDirection: "row" }}>
           <BigPolaroid
-            image={`${getIconName(days[index].bestIcon)}.png`}
-            text={getDateName(days[index].dt_txt)}
-            state={days[index].state}
+            image={`${getIconName(thisDay.bestIcon)}.png`}
+            text={getDateName(thisDay.dt_txt)}
+            state={thisDay.state}
+            temp={thisDay.temp}
+            maxTemp={thisDay.maxTemp}
+            minTemp={thisDay.minTemp}
+            clouds={thisDay.clouds}
+            humidity={thisDay.humidity}
+            windSpeed={thisDay.windSpeed}
+            windDir={thisDay.windDir}
+            sunrise={thisDay.sunrise}
+            sunset={thisDay.sunset}
+            pressure={thisDay.pressure}
             unit={unit}
-            temp={days[index].temp}
-            maxTemp={days[index].maxTemp}
-            minTemp={days[index].minTemp}
-            clouds={days[index].clouds}
-            humidity={days[index].humidity}
-            windSpeed={days[index].windSpeed}
-            windDir={days[index].windDir}
-            sunrise={days[index].sunrise}
-            sunset={days[index].sunset}
-            pressure={days[index].pressure}
           />
           <div
             style={{
