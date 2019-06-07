@@ -1,5 +1,5 @@
 import PropType from "prop-types";
-import React from "react";
+import React, { Component } from "react";
 import {
   AreaChart,
   Area,
@@ -11,14 +11,14 @@ import {
 } from "recharts";
 import { getTemp } from "../../../helpers/index.ts";
 
-export default class ForecastGraphic extends React.Component {
+export default class ForecastGraphic extends Component {
   static jsfiddleUrl = "https://jsfiddle.net/alidingling/xqjtetw0/";
 
   render() {
     const { info, date, values, unit } = this.props;
     const data = date.map((x, i) => ({
       dates: date[i],
-      Temp: getTemp(values[i], unit.slice(1, 2)).slice(0, 3),
+      Temperature: getTemp(values[i], unit.slice(2, 3)).slice(0, -3),
       Humidity: values[i]
     }));
     return (

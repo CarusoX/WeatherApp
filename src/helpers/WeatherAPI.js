@@ -54,6 +54,7 @@ const getUVHistory = coords => {
 
 const filterDay = result => {
   return {
+    city: { name: result.name, id: result.id },
     state: result.weather[0].main,
     iconName: result.weather[0].icon,
     temp: result.main.temp,
@@ -146,7 +147,6 @@ export const fetchData = coords => {
           a.push(Object.assign(filterDay(b), { dt_txt: b.dt_txt }));
         return a;
       }, []);
-
       return {
         results: [
           // Current
@@ -171,9 +171,6 @@ export const fetchData = coords => {
               };
             }),
             history: results[4]
-          },
-          {
-            name: results[1].city.name
           }
         ]
       };

@@ -1,9 +1,9 @@
-import React from "react";
+import React, { Component } from "react";
 import { Button, Container, Grid, Segment } from "semantic-ui-react";
 import { Title } from "./Title/index.ts";
 import { Menu } from "./Menu/index.ts";
 
-class App extends React.Component {
+class App extends Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -35,17 +35,17 @@ class App extends React.Component {
                 <Button
                   onClick={() => this.setState({ unit: "C" })}
                   active={unit === "C"}
-                  content="Cº"
+                  content="ºC"
                 />
                 <Button
                   onClick={() => this.setState({ unit: "F" })}
                   active={unit === "F"}
-                  content="Fº"
+                  content="ºF"
                 />
                 <Button
                   onClick={() => this.setState({ unit: "K" })}
                   active={unit === "K"}
-                  content="Kº"
+                  content="ºK"
                 />
               </Button.Group>
             </Grid.Column>

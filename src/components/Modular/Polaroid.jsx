@@ -1,8 +1,8 @@
 import PropTypes from "prop-types";
-import React from "react";
-import { Divider, Modal, Segment } from "semantic-ui-react";
+import React, { Component } from "react";
+import { Divider, Modal, Segment, Transition } from "semantic-ui-react";
 import { SmallCell } from "./index.ts";
-import { getTemp } from "../../helpers/index.ts";
+import { getTemp, getWindDir } from "../../helpers/index.ts";
 
 const bigPolaroid = {
   border: "2px solid gray",
@@ -66,6 +66,14 @@ const smallText = {
   marginTop: "0%"
 };
 
+const miniCell = theme => {
+  return (
+    <div>
+      <SmallCell image="plus.png" title="Show more!" theme={theme} />
+    </div>
+  );
+};
+
 export const BigPolaroid = props => {
   const {
     image,
@@ -114,14 +122,7 @@ export const BigPolaroid = props => {
             theme={theme}
           />
           <Divider />
-          <Modal
-            closeIcon
-            trigger={
-              <div>
-                <SmallCell image="plus.png" title="Show more!" theme={theme} />
-              </div>
-            }
-          >
+          <Modal closeIcon trigger={miniCell(theme)}>
             <Modal.Header>{`Know more about ${text}`}</Modal.Header>
             <Modal.Content scrolling>
               <Segment.Group raised horizontal>
@@ -135,7 +136,7 @@ export const BigPolaroid = props => {
                 <SmallCell
                   image="047-weathercock.png"
                   title="Wind Direction"
-                  content={`${windDir.toString()}º`}
+                  content={getWindDir(windDir)}
                   style={{ color: "blue" }}
                   theme={theme}
                 />
@@ -164,24 +165,43 @@ export const BigPolaroid = props => {
   );
 };
 
-export const SmallPolaroid = props => {
-  const { update, text, index, max, min, unit, image, theme } = props;
-  return (
-    <div style={smallPolaroid} onClick={() => update(index)}>
-      <img
-        alt="img"
-        style={smallImage}
-        src={require(`../../icons/Theme${theme}/${image}`)}
-      />
-      <Divider style={{ marginBottom: "0%" }} />
-      <div style={container}>
-        <p style={smallHeader}>{text}</p>
-        <p style={smallText}>{`Max: ${getTemp(max, unit)}`}</p>
-        <p style={smallText}>{`Min: ${getTemp(min, unit)}`}</p>
-      </div>
-    </div>
-  );
-};
+export default class SmallPolaroid extends Component {
+  state = { animation: "pulse", duration: 300, visible: true };
+
+  handleChange = (e, { name, value }) => this.setState({ [name]: value });
+
+  toggleVisibility = () =>
+    this.setState(prevState => ({ visible: !prevState.visible }));
+
+  render() {
+    const { update, text, index, max, min, unit, image, theme } = this.props;
+    const { animation, duration, visible } = this.state;
+    return (
+      <Transition animation={animation} duration={duration} visible={visible}>
+        <div
+          style={smallPolaroid}
+          onClick={() => {
+            this.toggleVisibility();
+            update(index);
+          }}
+          role="presentation"
+        >
+          <img
+            alt="img"
+            style={smallImage}
+            src={require(`../../icons/Theme${theme}/${image}`)}
+          />
+          <Divider style={{ marginBottom: "0%" }} />
+          <div style={container}>
+            <p style={smallHeader}>{text}</p>
+            <p style={smallText}>{`Max: ${getTemp(max, unit)}`}</p>
+            <p style={smallText}>{`Min: ${getTemp(min, unit)}`}</p>
+          </div>
+        </div>
+      </Transition>
+    );
+  }
+}
 
 BigPolaroid.propTypes = {
   image: PropTypes.string.isRequired,

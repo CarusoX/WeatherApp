@@ -1,5 +1,5 @@
 import PropTypes from "prop-types";
-import React from "react";
+import React, { Component } from "react";
 import { Message } from "semantic-ui-react";
 import {
   AreaChart,
@@ -52,7 +52,7 @@ const CustomTooltip = ({ active, payload, label }) => {
   return null;
 };
 
-export default class UVHistory extends React.Component {
+export default class UVHistory extends Component {
   static jsfiddleUrl = "https://jsfiddle.net/alidingling/xqjtetw0/";
 
   render() {
