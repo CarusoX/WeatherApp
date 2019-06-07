@@ -171,6 +171,9 @@ export const fetchData = coords => {
               };
             }),
             history: results[4]
+          },
+          {
+            name: results[1].city.name
           }
         ]
       };

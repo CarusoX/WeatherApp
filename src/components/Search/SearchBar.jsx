@@ -50,6 +50,7 @@ export default class SearchExampleStandard extends Component {
             coords: res.coord,
             key: res.id
           }));
+
           return this.setState({
             isLoading: false,
             results: cities
@@ -61,13 +62,10 @@ export default class SearchExampleStandard extends Component {
 
   handleGeolocalization = coords => {
     const { setCity } = this.props;
-    return fetchCities(coords).then(result => {
-      console.log(result);
-      setCity({
-        id: result.key,
-        coords,
-        city_name: result.name
-      });
+    setCity({
+      id: "",
+      coords,
+      city_name: ""
     });
   };
 

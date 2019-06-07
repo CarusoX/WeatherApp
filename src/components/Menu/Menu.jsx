@@ -27,6 +27,7 @@ class Menu extends React.Component {
       if (typeof data === "number") {
         return this.setState({ error: data });
       }
+      city.city_name = data.results[3].name;
       return this.setState({
         current: data.results[0],
         forecast: data.results[1],
