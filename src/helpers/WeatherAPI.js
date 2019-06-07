@@ -147,7 +147,6 @@ export const fetchData = coords => {
           a.push(Object.assign(filterDay(b), { dt_txt: b.dt_txt }));
         return a;
       }, []);
-
       return {
         results: [
           // Current

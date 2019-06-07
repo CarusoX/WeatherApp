@@ -2,7 +2,7 @@ import PropTypes from "prop-types";
 import React, { Component } from "react";
 import { Divider, Modal, Segment, Transition } from "semantic-ui-react";
 import { SmallCell } from "./index.ts";
-import { getTemp } from "../../helpers/index.ts";
+import { getTemp, getWindDir } from "../../helpers/index.ts";
 
 const bigPolaroid = {
   border: "2px solid gray",
@@ -66,6 +66,14 @@ const smallText = {
   marginTop: "0%"
 };
 
+const miniCell = theme => {
+  return (
+    <div>
+      <SmallCell image="plus.png" title="Show more!" theme={theme} />
+    </div>
+  );
+};
+
 export const BigPolaroid = props => {
   const {
     image,
@@ -114,14 +122,7 @@ export const BigPolaroid = props => {
             theme={theme}
           />
           <Divider />
-          <Modal
-            closeIcon
-            trigger={
-              <div>
-                <SmallCell image="plus.png" title="Show more!" theme={theme} />
-              </div>
-            }
-          >
+          <Modal closeIcon trigger={miniCell(theme)}>
             <Modal.Header>{`Know more about ${text}`}</Modal.Header>
             <Modal.Content scrolling>
               <Segment.Group raised horizontal>
@@ -135,7 +136,7 @@ export const BigPolaroid = props => {
                 <SmallCell
                   image="047-weathercock.png"
                   title="Wind Direction"
-                  content={`${windDir.toString()}º`}
+                  content={getWindDir(windDir)}
                   style={{ color: "blue" }}
                   theme={theme}
                 />
@@ -200,7 +201,7 @@ export default class SmallPolaroid extends Component {
       </Transition>
     );
   }
-};
+}
 
 BigPolaroid.propTypes = {
   image: PropTypes.string.isRequired,

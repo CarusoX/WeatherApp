@@ -31,7 +31,7 @@ export default class SearchExampleStandard extends Component {
     setCity({
       id: result.key,
       coords: result.coords,
-      city_name: result.title
+      name: result.title
     });
   };
 
@@ -73,9 +73,9 @@ export default class SearchExampleStandard extends Component {
   handleGeolocalization = coords => {
     const { setCity } = this.props;
     setCity({
-      id: "",
+      id: -1,
       coords,
-      city_name: ""
+      name: "Geolocalized"
     });
   };
 

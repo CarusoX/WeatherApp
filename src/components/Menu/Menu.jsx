@@ -22,7 +22,6 @@ class Menu extends Component {
     this.setState(
       {
         error: 0,
-        city: { name: "" },
         current: undefined,
         forecast: undefined,
         uv: undefined
@@ -35,7 +34,6 @@ class Menu extends Component {
           }
           return this.setState({
             current: data.results[0],
-            city: data.results[0].city,
             forecast: data.results[1],
             uv: data.results[2],
             error: 0

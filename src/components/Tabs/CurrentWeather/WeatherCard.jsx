@@ -4,7 +4,8 @@ import { Grid, Image, Statistic, Tab } from "semantic-ui-react";
 import {
   getTemp,
   getIconName,
-  unixToHoursMedium
+  unixToHoursMedium,
+  getWindDir
 } from "../../../helpers/index.ts";
 import { Cell } from "../../Modular/index.ts";
 
@@ -121,7 +122,7 @@ const WeatherCard = props => {
             <Cell
               image="047-weathercock.png"
               title="Wind Direction"
-              content={`${windDir.toString()}º`}
+              content={getWindDir(windDir)}
               theme={theme}
             />
           </Grid.Column>
