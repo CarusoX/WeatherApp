@@ -3,7 +3,8 @@ export { default as SmallCell } from "./SmallCell";
 export { default as DefaultTab } from "./DefaultTab";
 export { default as ErrorTab } from "./ErrorTab";
 export { default as UVCard } from "./UVCard";
-export { BigPolaroid, default as SmallPolaroid } from "./Polaroid";
+export { default as SmallPolaroid } from "./SmallPolaroid";
+export { default as BigPolaroid } from "./BigPolaroid";
 export {
   PlaceholderImageSquare,
   PlaceholderParagraph,

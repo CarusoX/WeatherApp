@@ -1,5 +1,6 @@
-import PropType from "prop-types";
+import PropTypes from "prop-types";
 import React, { Component } from "react";
+import { Message } from "semantic-ui-react";
 import {
   AreaChart,
   Area,
@@ -10,6 +11,20 @@ import {
   ResponsiveContainer
 } from "recharts";
 import { getTemp } from "../../../helpers/index.ts";
+
+const CustomTooltip = ({ active, payload, label, info, unit }) => {
+  if (active) {
+    return (
+      <Message color={info === "Temperature" ? "blue" : "orange"}>
+        <Message.Header>{label}</Message.Header>
+        <Message.Content>
+          {`${info}: ${payload[0].value} ${unit}`}
+        </Message.Content>
+      </Message>
+    );
+  }
+  return null;
+};
 
 export default class ForecastGraphic extends Component {
   static jsfiddleUrl = "https://jsfiddle.net/alidingling/xqjtetw0/";
@@ -46,15 +61,14 @@ export default class ForecastGraphic extends Component {
             <CartesianGrid strokeDasharray="3 3" />
             <XAxis dataKey="dates" height={60} />
             <YAxis />
-            <Tooltip />
+            <Tooltip content={<CustomTooltip info={info} unit={unit} />} />
             <Area
               type="monotone"
               dataKey={info}
-              unit={unit}
               activeDot={false}
               stackId="1"
-              stroke="blue"
-              fill="blue"
+              stroke={info === "Temperature" ? "blue" : "orange"}
+              fill={info === "Temperature" ? "blue" : "orange"}
               fillOpacity={0.3}
             />
           </AreaChart>
@@ -64,8 +78,24 @@ export default class ForecastGraphic extends Component {
   }
 }
 ForecastGraphic.propTypes = {
-  info: PropType.string.isRequired,
-  date: PropType.arrayOf(PropType.string).isRequired,
-  values: PropType.arrayOf(PropType.shape()).isRequired,
-  unit: PropType.string.isRequired
+  info: PropTypes.string.isRequired,
+  date: PropTypes.arrayOf(PropTypes.string).isRequired,
+  values: PropTypes.arrayOf(PropTypes.shape()).isRequired,
+  unit: PropTypes.string.isRequired
+};
+
+CustomTooltip.defaultProps = {
+  active: false,
+  payload: {},
+  label: ""
+};
+
+CustomTooltip.propTypes = {
+  active: PropTypes.bool,
+  payload: PropTypes.arrayOf(
+    PropTypes.shape({
+      value: PropTypes.number
+    })
+  ),
+  label: PropTypes.string
 };
