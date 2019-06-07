@@ -20,11 +20,11 @@ export default class SearchExampleStandard extends Component {
 
   handleResultSelect = (e, { result }) => {
     const { setCity } = this.props;
-    this.setState({ value: result.name });
+    this.setState({ value: result.title });
     setCity({
       id: result.key,
       coords: result.coords,
-      city_name: result.name
+      city_name: result.title
     });
   };
 
@@ -41,15 +41,17 @@ export default class SearchExampleStandard extends Component {
             setError(result);
             return this.setState(errorState);
           }
-
-          const cities = result.map(res => ({
-            title: `${res.name} - ${getCountryName(res.sys.country)}`,
-            description: `(Lat, Lon): (${res.coord.lat}, ${res.coord.lon})`,
-            name: res.name,
-            country: getCountryName(res.sys.country),
-            coords: res.coord,
-            key: res.id
-          }));
+          const cities = _.uniqBy(
+            result.map(res => ({
+              title: res.name,
+              description: getCountryName(res.sys.country),
+              full: `${res.name} - ${res.sys.country}`,
+              country: getCountryName(res.sys.country),
+              coords: res.coord,
+              key: res.id
+            })),
+            "full"
+          );
 
           return this.setState({
             isLoading: false,
