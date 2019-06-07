@@ -9,6 +9,7 @@ import {
   Tooltip,
   ResponsiveContainer
 } from "recharts";
+import { getTemp } from "../../../helpers/index.ts";
 
 export default class ForecastGraphic extends React.Component {
   static jsfiddleUrl = "https://jsfiddle.net/alidingling/xqjtetw0/";
@@ -17,7 +18,7 @@ export default class ForecastGraphic extends React.Component {
     const { info, date, values, unit } = this.props;
     const data = date.map((x, i) => ({
       dates: date[i],
-      Temp: values[i],
+      temp: getTemp(values[i], unit).slice(0, 4),
       humidity: values[i],
       unit
     }));
