@@ -19,6 +19,8 @@ const iconmap = {
   "50n": "016-haze"
 };
 
+// const a = require("../icons/Theme2/036-sun.png");
+
 // const theme2 = {
 //   "01d": require("../icons/Theme2/036-sun.png"),
 //   "01n": require("../icons/Theme2/024-moon"),
