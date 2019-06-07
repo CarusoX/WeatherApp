@@ -65,7 +65,7 @@ export default class ForecastGraphic extends Component {
 }
 ForecastGraphic.propTypes = {
   info: PropType.string.isRequired,
-  date: PropType.arrayOf(PropType.shape()).isRequired,
+  date: PropType.arrayOf(PropType.string).isRequired,
   values: PropType.arrayOf(PropType.shape()).isRequired,
   unit: PropType.string.isRequired
 };

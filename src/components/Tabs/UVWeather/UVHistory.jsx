@@ -148,7 +148,7 @@ CustomizedAxisTick.propTypes = {
   x: PropTypes.number,
   y: PropTypes.number,
   payload: PropTypes.shape({
-    value: PropTypes.number
+    value: PropTypes.string
   })
 };
 
@@ -160,8 +160,10 @@ CustomTooltip.defaultProps = {
 
 CustomTooltip.propTypes = {
   active: PropTypes.bool,
-  payload: PropTypes.shape({
-    value: PropTypes.number
-  }),
+  payload: PropTypes.arrayOf(
+    PropTypes.shape({
+      value: PropTypes.number
+    })
+  ),
   label: PropTypes.string
 };

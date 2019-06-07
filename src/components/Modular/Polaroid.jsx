@@ -208,7 +208,7 @@ BigPolaroid.propTypes = {
   text: PropTypes.string.isRequired,
   state: PropTypes.string.isRequired,
   unit: PropTypes.string.isRequired,
-  temp: PropTypes.number.isRequired,
+  temp: PropTypes.string.isRequired,
   maxTemp: PropTypes.number.isRequired,
   minTemp: PropTypes.number.isRequired,
   clouds: PropTypes.number.isRequired,
