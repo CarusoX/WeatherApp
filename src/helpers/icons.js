@@ -19,6 +19,27 @@ const iconmap = {
   "50n": "016-haze"
 };
 
+// const theme2 = {
+//   "01d": require("../icons/Theme2/036-sun.png"),
+//   "01n": require("../icons/Theme2/024-moon"),
+//   "02d": require("../icons/Theme2/007-cloudy day"),
+//   "02n": require("../icons/Theme2/025-night"),
+//   "03d": require("../icons/Theme2/003-cloud"),
+//   "03n": require("../icons/Theme2/003-cloud"),
+//   "04d": require("../icons/Theme2/004-clouds"),
+//   "04n": require("../icons/Theme2/004-clouds"),
+//   "09d": require("../icons/Theme2/027-rain"),
+//   "09n": require("../icons/Theme2/027-rain"),
+//   "10d": require("../icons/Theme2/046-weather"),
+//   "10n": require("../icons/Theme2/046-weather"),
+//   "11d": require("../icons/Theme2/041-thunderstorm"),
+//   "11n": require("../icons/Theme2/041-thunderstorm"),
+//   "13d": require("../icons/Theme2/032-snowy"),
+//   "13n": require("../icons/Theme2/033-snowy"),
+//   "50d": require("../icons/Theme2/016-haze"),
+//   "50n": require("../icons/Theme2/016-haze")
+// };
+
 const getIconName = code => {
   return iconmap[code];
 };

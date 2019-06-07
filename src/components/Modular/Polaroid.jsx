@@ -4,6 +4,68 @@ import { Divider, Modal, Segment } from "semantic-ui-react";
 import { SmallCell } from "./index.ts";
 import { getTemp } from "../../helpers/index.ts";
 
+const bigPolaroid = {
+  border: "2px solid gray",
+  borderRadius: "5px",
+  boxShadow: "0px 0px 27px 13px rgba(196, 196, 196, 0.7)",
+  backgroundColor: "white",
+  flexGrow: "2",
+  alignItems: "stretch",
+  width: "100%",
+  maxWidth: "400px"
+};
+
+const smallPolaroid = {
+  cursor: "pointer",
+  border: "2px solid gray",
+  borderRadius: "5px",
+  boxShadow: "0px 0px 20px 10px rgba(196, 196, 196, 0.7)",
+  backgroundColor: "white",
+  width: "100%",
+  height: "100%",
+  maxWidth: "141px",
+  maxHeight: "260px"
+};
+
+const bigImage = {
+  marginTop: "3%",
+  maxWidth: "80%",
+  maxHeight: "80%"
+};
+
+const smallImage = {
+  marginTop: "10%",
+  maxWidth: "80%",
+  maxHeight: "80%"
+};
+
+const container = {
+  padding: "0%"
+};
+
+const bigHeader = {
+  fontSize: "200%",
+  fontWeight: "900",
+  marginTop: "0%",
+  marginBottom: "0%"
+};
+
+const bigText = {
+  fontSize: "150%",
+  marginTop: "0%"
+};
+
+const smallHeader = {
+  fontSize: "130%",
+  fontWeight: "900",
+  marginTop: "5%"
+};
+
+const smallText = {
+  fontSize: "100%",
+  marginTop: "0%"
+};
+
 export const BigPolaroid = props => {
   const {
     image,
@@ -145,70 +207,4 @@ SmallPolaroid.propTypes = {
   unit: PropTypes.string.isRequired,
   image: PropTypes.string.isRequired,
   theme: PropTypes.number.isRequired
-};
-
-// {props.texts.map(txt => (
-//   <p style={text}>{txt}</p>
-// ))}
-
-const bigPolaroid = {
-  border: "2px solid gray",
-  borderRadius: "5px",
-  boxShadow: "0px 0px 27px 13px rgba(196, 196, 196, 0.7)",
-  backgroundColor: "white",
-  flexGrow: "2",
-  alignItems: "stretch",
-  width: "100%",
-  maxWidth: "400px"
-};
-
-const smallPolaroid = {
-  cursor: "pointer",
-  border: "2px solid gray",
-  borderRadius: "5px",
-  boxShadow: "0px 0px 20px 10px rgba(196, 196, 196, 0.7)",
-  backgroundColor: "white",
-  width: "100%",
-  height: "100%",
-  maxWidth: "141px",
-  maxHeight: "260px"
-};
-
-const bigImage = {
-  marginTop: "3%",
-  maxWidth: "80%",
-  maxHeight: "80%"
-};
-
-const smallImage = {
-  marginTop: "10%",
-  maxWidth: "80%",
-  maxHeight: "80%"
-};
-
-const container = {
-  padding: "0%"
-};
-
-const bigHeader = {
-  fontSize: "200%",
-  fontWeight: "900",
-  marginTop: "0%",
-  marginBottom: "0%"
-};
-
-const bigText = {
-  fontSize: "150%",
-  marginTop: "0%"
-};
-
-const smallHeader = {
-  fontSize: "130%",
-  fontWeight: "900",
-  marginTop: "5%"
-};
-
-const smallText = {
-  fontSize: "100%",
-  marginTop: "0%"
 };
