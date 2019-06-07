@@ -19,11 +19,12 @@ const errorPanes = error => [
   { menuItem: "UV Rays", render: () => <ErrorTab error={error} /> }
 ];
 
-const dataPanes = (current, forecast, uv, unit) => [
+const dataPanes = (current, forecast, uv, unit, theme) => [
   {
     menuItem: "Current Weather",
     render: () => {
-      if (!_.isEmpty(current)) return <WeatherCard {...current} unit={unit} />;
+      if (!_.isEmpty(current))
+        return <WeatherCard {...current} unit={unit} theme={theme} />;
       return <Tab.Pane loading />;
     }
   },
@@ -31,7 +32,7 @@ const dataPanes = (current, forecast, uv, unit) => [
     menuItem: "Week Forecast",
     render: () => {
       if (!_.isEmpty(forecast))
-        return <ForecastCard {...forecast} unit={unit} />;
+        return <ForecastCard {...forecast} unit={unit} theme={theme} />;
       return <Tab.Pane loading />;
     }
   },
@@ -45,7 +46,7 @@ const dataPanes = (current, forecast, uv, unit) => [
 ];
 
 const Tabs = props => {
-  const { error, show, loading, unit, current, forecast, uv } = props;
+  const { error, show, loading, unit, current, forecast, uv, theme } = props;
   if (error > 0) {
     return (
       <Tab
@@ -73,7 +74,7 @@ const Tabs = props => {
   return (
     <Tab
       menu={{ pointing: true, style: { justifyContent: "center" } }}
-      panes={dataPanes(current, forecast, uv, unit)}
+      panes={dataPanes(current, forecast, uv, unit, theme)}
     />
   );
 };
@@ -91,6 +92,7 @@ Tabs.propTypes = {
   show: PropTypes.bool.isRequired,
   loading: PropTypes.bool.isRequired,
   unit: PropTypes.string.isRequired,
+  theme: PropTypes.number.isRequired,
   current: PropTypes.shape({
     state: PropTypes.string,
     iconName: PropTypes.string,

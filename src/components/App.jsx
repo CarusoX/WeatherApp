@@ -7,17 +7,30 @@ class App extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
+      theme: 2,
       unit: "C"
     };
   }
 
   render() {
-    const { unit } = this.state;
+    const { unit, theme } = this.state;
     return (
       <Container fluid>
         <Segment>
           <Grid>
             <Grid.Column textAlign="center">
+              <Button
+                floated="left"
+                color="blue"
+                size="mini"
+                inverted
+                content={`Theme ${theme}`}
+                active={false}
+                onClick={() => {
+                  if (theme === 1) return this.setState({ theme: 2 });
+                  return this.setState({ theme: 1 });
+                }}
+              />
               <Button.Group floated="right" size="mini" inverted color="blue">
                 <Button
                   onClick={() => this.setState({ unit: "C" })}
@@ -39,11 +52,16 @@ class App extends React.Component {
           </Grid>
         </Segment>
 
-        <Title title="WEATHER APP" size="h1" image="045-weather.png" />
+        <Title
+          title="WEATHER APP"
+          size="h1"
+          image="045-weather.png"
+          theme={theme}
+        />
 
         <Grid centered>
           <Grid.Column width="15" verticalAlign="middle">
-            <Menu unit={unit} />
+            <Menu unit={unit} theme={theme} />
           </Grid.Column>
         </Grid>
       </Container>

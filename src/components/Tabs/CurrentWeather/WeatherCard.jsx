@@ -8,9 +8,6 @@ import {
 } from "../../../helpers/index.ts";
 import { Cell } from "../../Modular/index.ts";
 
-const path1 = "../../../icons/Theme1/";
-const path2 = "../../../icons/Theme2/";
-
 const WeatherCard = props => {
   const {
     state,
@@ -25,7 +22,8 @@ const WeatherCard = props => {
     clouds,
     sunrise,
     sunset,
-    unit
+    unit,
+    theme
   } = props;
   const icon = getIconName(iconName);
   return (
@@ -39,7 +37,7 @@ const WeatherCard = props => {
             <Grid.Row>
               {icon && (
                 <Image
-                  src={require(`../../../icons/Theme2/${icon}.png`)}
+                  src={require(`../../../icons/Theme${theme}/${icon}.png`)}
                   size="medium"
                   verticalAlign="middle"
                 />
@@ -60,30 +58,35 @@ const WeatherCard = props => {
               image="039-thermometer.png"
               title="Temperature"
               content={getTemp(temp, unit)}
+              theme={theme}
             />
 
             <Cell
               image="018-high temperature.png"
               title="Max Temperature"
               content={getTemp(maxTemp, unit)}
+              theme={theme}
             />
 
             <Cell
               image="022-low temperature.png"
               title="Min Temperature"
               content={getTemp(minTemp, unit)}
+              theme={theme}
             />
 
             <Cell
               image="004-clouds.png"
               title="Clouds"
               content={`${clouds.toString()} %`}
+              theme={theme}
             />
 
             <Cell
               image="048-wind.png"
               title="Wind Speed"
               content={`${windSpeed.toString()} M/s`}
+              theme={theme}
             />
           </Grid.Column>
           <Grid.Column>
@@ -91,30 +94,35 @@ const WeatherCard = props => {
               image="012-dawn.png"
               title="Sunrise"
               content={`${unixToHoursMedium(sunrise)} Hs`}
+              theme={theme}
             />
 
             <Cell
               image="037-sunset.png"
               title="Sunset"
               content={`${unixToHoursMedium(sunset)} Hs`}
+              theme={theme}
             />
 
             <Cell
               image="019-humidity.png"
               title="Humidity"
               content={`${humidity.toString()}%`}
+              theme={theme}
             />
 
             <Cell
               image="026-pressure.png"
               title="Preassure"
               content={`${pressure.toString()} hPa`}
+              theme={theme}
             />
 
             <Cell
               image="047-weathercock.png"
               title="Wind Direction"
               content={`${windDir.toString()}º`}
+              theme={theme}
             />
           </Grid.Column>
         </Grid.Row>
@@ -138,5 +146,6 @@ WeatherCard.propTypes = {
   clouds: PropTypes.number.isRequired,
   sunrise: PropTypes.number.isRequired,
   sunset: PropTypes.number.isRequired,
-  unit: PropTypes.string.isRequired
+  unit: PropTypes.string.isRequired,
+  theme: PropTypes.number.isRequired
 };

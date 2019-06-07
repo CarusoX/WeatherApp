@@ -18,7 +18,7 @@ class ForecastCard extends React.Component {
   }
 
   render() {
-    const { detailedDays, days, unit } = this.props;
+    const { detailedDays, days, unit, theme } = this.props;
     const { index } = this.state;
     const thisDay = days[index];
     return (
@@ -38,6 +38,7 @@ class ForecastCard extends React.Component {
             sunrise={thisDay.sunrise}
             sunset={thisDay.sunset}
             pressure={thisDay.pressure}
+            theme={theme}
             unit={unit}
           />
           <div
@@ -66,6 +67,7 @@ class ForecastCard extends React.Component {
                   max={day.maxTemp}
                   min={day.minTemp}
                   unit={unit}
+                  theme={theme}
                 />
               ))}
             </div>
@@ -127,5 +129,6 @@ export default ForecastCard;
 ForecastCard.propTypes = {
   detailedDays: PropType.arrayOf(PropType.shape()).isRequired,
   days: PropType.arrayOf(PropType.shape()).isRequired,
-  unit: PropType.string.isRequired
+  unit: PropType.string.isRequired,
+  theme: PropType.number.isRequired
 };

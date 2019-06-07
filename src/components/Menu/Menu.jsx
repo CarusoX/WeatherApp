@@ -49,7 +49,7 @@ class Menu extends React.Component {
   }
 
   render() {
-    const { unit } = this.props;
+    const { unit, theme } = this.props;
     const { city, error, loading, current, uv, forecast } = this.state;
     return (
       <Container fluid>
@@ -69,6 +69,7 @@ class Menu extends React.Component {
           current={current}
           forecast={forecast}
           uv={uv}
+          theme={theme}
         />
       </Container>
     );
@@ -76,7 +77,8 @@ class Menu extends React.Component {
 }
 
 Menu.propTypes = {
-  unit: PropTypes.string.isRequired
+  unit: PropTypes.string.isRequired,
+  theme: PropTypes.number.isRequired
 };
 
 export default Menu;

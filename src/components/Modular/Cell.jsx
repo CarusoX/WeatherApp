@@ -3,14 +3,14 @@ import React from "react";
 import { Grid, Image, Segment } from "semantic-ui-react";
 
 const Cell = props => {
-  const { image, title, content } = props;
+  const { image, title, content, theme } = props;
   return (
     <Segment raised>
       <Grid container stackable>
         <Grid.Row>
           <Grid.Column width={5}>
             <Image
-              src={require(`../../icons/Theme2/${image}`)}
+              src={require(`../../icons/Theme${theme}/${image}`)}
               size="mini"
               verticalAlign="middle"
             />
@@ -30,7 +30,8 @@ const Cell = props => {
 Cell.propTypes = {
   image: PropTypes.string.isRequired,
   title: PropTypes.string.isRequired,
-  content: PropTypes.string.isRequired
+  content: PropTypes.string.isRequired,
+  theme: PropTypes.number.isRequired
 };
 
 export default Cell;
