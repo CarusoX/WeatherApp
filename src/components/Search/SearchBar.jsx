@@ -2,7 +2,7 @@ import _ from "lodash";
 import PropTypes from "prop-types";
 import React, { Component } from "react";
 import { Search, Grid } from "semantic-ui-react";
-import Flag from "react-world-flags";
+import { Flag } from "react-world-flags";
 import { fetchCities, getCountryName } from "../../helpers/index.ts";
 import { Geolocalization } from "./index.ts";
 
