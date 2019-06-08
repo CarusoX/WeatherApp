@@ -11,12 +11,11 @@ const errorState = { isLoading: false, results: [] };
 
 const resultRenderer = ({ title, description, image }) => [
   <div key="content" className="content">
-    {console.log(image.toLowerCase())}
-    <Grid>
-      <Grid.Column width={2}>
+    <Grid textAlign="left">
+      <Grid.Column width={3}>
         <Flag code={image.toLowerCase()} height="30" />
       </Grid.Column>
-      <Grid.Column>
+      <Grid.Column width={5}>
         {title && <div className="title">{title}</div>}
         {description && <div className="description">{description}</div>}
       </Grid.Column>
@@ -24,7 +23,7 @@ const resultRenderer = ({ title, description, image }) => [
   </div>
 ];
 
-export default class SearchExampleStandard extends Component {
+export default class SearchBar extends Component {
   state = initialState;
 
   handleResultSelect = (e, { result }) => {
@@ -77,7 +76,7 @@ export default class SearchExampleStandard extends Component {
     setCity({
       id: -1,
       coords,
-      name: "Geolocalized"
+      name: "Geolocalizated"
     });
   };
 
@@ -109,7 +108,7 @@ export default class SearchExampleStandard extends Component {
   }
 }
 
-SearchExampleStandard.propTypes = {
+SearchBar.propTypes = {
   setCity: PropTypes.func.isRequired,
   setError: PropTypes.func.isRequired
 };

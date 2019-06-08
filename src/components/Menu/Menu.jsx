@@ -1,9 +1,10 @@
 import PropTypes from "prop-types";
 import React, { Component } from "react";
-import { Container, Divider } from "semantic-ui-react";
+import { Container, Divider, Grid, Header, Image } from "semantic-ui-react";
 import { SearchBar } from "../Search/index.ts";
 import { Tabs } from "../Tabs/index.ts";
 import { fetchData } from "../../helpers/index.ts";
+import { ErrorTab } from "../Modular/index.ts";
 
 class Menu extends Component {
   constructor(props) {
@@ -58,6 +59,9 @@ class Menu extends Component {
     const { city, error, current, uv, forecast } = this.state;
     return (
       <Container fluid>
+        {error !== 0 && (
+          <ErrorTab error={error} closeError={() => this.setError(0)} />
+        )}
         <SearchBar
           setCity={newCity => this.setCity(newCity)}
           setError={err => this.setError(err)}

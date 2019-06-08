@@ -1,6 +1,6 @@
 import PropTypes from "prop-types";
 import React from "react";
-import { Tab } from "semantic-ui-react";
+import { Button, Modal, Tab } from "semantic-ui-react";
 
 const ErrorImages = {
   1: "invalid_key.png",
@@ -17,22 +17,28 @@ const ErrorMessages = {
 };
 
 const ErrorTab = props => {
-  const { error } = props;
+  const { error, closeError } = props;
   return (
-    <Tab.Pane attached={false}>
-      <h1>We&apos;re sorry!</h1>
-      <h3>Something went wrong :(</h3>
-      <h3>{ErrorMessages[error]}</h3>
-      <img
-        src={require("../../images/" + ErrorImages[error])}
-        alt="Error"
-        style={{ maxHeight: 50, maxWidth: 50 }}
-      />
-    </Tab.Pane>
+    <Modal open={error !== 0} closeIcon size="small">
+      <Modal.Content>
+        <Tab.Pane attached={false}>
+          <h1>We&apos;re sorry!</h1>
+          <h3>Something went wrong :(</h3>
+          <h3>{ErrorMessages[error]}</h3>
+          <img
+            src={require("../../images/" + ErrorImages[error])}
+            alt="Error"
+            style={{ maxHeight: 50, maxWidth: 50 }}
+          />
+        </Tab.Pane>
+        <Button color="red" content="Close" onClick={closeError} />
+      </Modal.Content>
+    </Modal>
   );
 };
 export default ErrorTab;
 
 ErrorTab.propTypes = {
-  error: PropTypes.number.isRequired
+  error: PropTypes.number.isRequired,
+  closeError: PropTypes.func.isRequired
 };
