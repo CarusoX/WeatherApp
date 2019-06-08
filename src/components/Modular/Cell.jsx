@@ -1,6 +1,7 @@
 import PropTypes from "prop-types";
 import React from "react";
 import { Grid, Image, Segment } from "semantic-ui-react";
+import { getIconName } from "../../helpers/index.ts";
 
 const Cell = props => {
   const { image, title, content, theme } = props;
@@ -10,7 +11,7 @@ const Cell = props => {
         <Grid.Row>
           <Grid.Column width={5}>
             <Image
-              src={require(`../../icons/Theme${theme}/${image}`)}
+              src={getIconName(image, theme)}
               size="mini"
               verticalAlign="middle"
             />

@@ -2,7 +2,7 @@ import PropTypes from "prop-types";
 import React, { Component } from "react";
 import { Divider, Modal, Segment, Transition } from "semantic-ui-react";
 import { SmallCell } from "./index.ts";
-import { getTemp, getWindDir } from "../../helpers/index.ts";
+import { getTemp, getWindDir, getIconName } from "../../helpers/index.ts";
 
 const bigPolaroid = {
   border: "2px solid gray",
@@ -71,11 +71,7 @@ export default class BigPolaroid extends Component {
     return (
       <Transition animation={animation} duration={duration} visible={visible}>
         <div style={bigPolaroid}>
-          <img
-            alt="img"
-            style={bigImage}
-            src={require(`../../icons/Theme${theme}/${image}`)}
-          />
+          <img alt="img" style={bigImage} src={getIconName(image, theme)} />
           <Divider />
           <div style={container}>
             <p style={bigHeader}>{text}</p>

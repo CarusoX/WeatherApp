@@ -1,7 +1,7 @@
 import PropTypes from "prop-types";
 import React, { Component } from "react";
 import { Divider, Transition } from "semantic-ui-react";
-import { getTemp } from "../../helpers/index.ts";
+import { getTemp, getIconName } from "../../helpers/index.ts";
 
 const smallPolaroid = {
   cursor: "pointer",
@@ -57,11 +57,7 @@ export default class SmallPolaroid extends Component {
           }}
           role="presentation"
         >
-          <img
-            alt="img"
-            style={smallImage}
-            src={require(`../../icons/Theme${theme}/${image}`)}
-          />
+          <img alt="img" style={smallImage} src={getIconName(image, theme)} />
           <Divider style={{ marginBottom: "0%" }} />
           <div style={container}>
             <p style={smallHeader}>{text}</p>

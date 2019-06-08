@@ -26,7 +26,6 @@ const WeatherCard = props => {
     unit,
     theme
   } = props;
-  const icon = getIconName(iconName);
   return (
     <Tab.Pane attached={false}>
       <Grid columns={3} divided stackable>
@@ -36,13 +35,13 @@ const WeatherCard = props => {
               <h3 style={{ fontSize: 25 }}>State</h3>
             </Grid.Row>
             <Grid.Row>
-              {icon && (
+              {
                 <Image
-                  src={require(`../../../icons/Theme${theme}/${icon}.png`)}
+                  src={getIconName(iconName, theme)}
                   size="medium"
                   verticalAlign="middle"
                 />
-              )}
+              }
             </Grid.Row>
             <Grid.Row>
               <Statistic>

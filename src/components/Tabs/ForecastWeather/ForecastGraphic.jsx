@@ -94,8 +94,10 @@ CustomTooltip.propTypes = {
   active: PropTypes.bool,
   payload: PropTypes.arrayOf(
     PropTypes.shape({
-      value: PropTypes.number
+      value: PropTypes.string
     })
   ),
-  label: PropTypes.string
+  label: PropTypes.string,
+  unit: PropTypes.string.isRequired,
+  info: PropTypes.string.isRequired
 };
