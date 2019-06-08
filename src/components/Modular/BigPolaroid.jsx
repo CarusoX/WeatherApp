@@ -46,12 +46,11 @@ const miniCell = theme => {
 };
 
 export default class BigPolaroid extends Component {
-  state = { animation: "bounce", duration: 500, visible: true };
+  state = { animation: "bounce", duration: 300, visible: true };
 
-  handleChange = (e, { name, value }) => this.setState({ [name]: value });
-
-  toggleVisibility = () =>
+  componentWillReceiveProps() {
     this.setState(prevState => ({ visible: !prevState.visible }));
+  }
 
   render() {
     const {

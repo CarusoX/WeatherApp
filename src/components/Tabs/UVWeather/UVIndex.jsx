@@ -26,7 +26,7 @@ const data = [
     name: "Very High",
     value: 60,
     description:
-      "Take extra precautions because unprotected skin and eyes" +
+      "Take extra precautions because unprotected skin and eyes " +
       "will be damaged and can burn quickly.",
     color: "brown"
   },
@@ -34,7 +34,7 @@ const data = [
     name: "Extreme",
     value: 60,
     description:
-      "Take all precautions because unprotected skin and eyes" +
+      "Take all precautions because unprotected skin and eyes " +
       "can burn in minutes.",
     color: "purple"
   }
