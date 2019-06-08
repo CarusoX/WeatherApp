@@ -38,6 +38,12 @@ const b13n = require("../icons/Theme2/033-snowy.png");
 const b50d = require("../icons/Theme2/016-haze.png");
 const b50n = require("../icons/Theme2/016-haze.png");
 
+// Icon for errors
+const code1 = require("../images/invalid_key.png");
+const code2 = require("../images/wrong_search.png");
+const code3 = require("../images/blocked_key.png");
+const code4 = require("../images/server_error.png");
+
 const iconmap1 = {
   "01d": a01d,
   "01n": a01n,
@@ -80,9 +86,18 @@ const iconmap2 = {
   "50n": b50n
 };
 
-const getIconName = (code, theme) => {
+const ErrorImages = {
+  1: code1,
+  2: code2,
+  3: code3,
+  4: code4
+};
+
+export const getIconName = (code, theme) => {
   if (theme === 1) return iconmap1[code];
   return iconmap2[code];
 };
 
-export default getIconName;
+export const getErrorImage = error => {
+  return ErrorImages[error];
+};

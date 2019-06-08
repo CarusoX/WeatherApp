@@ -1,6 +1,6 @@
 import PropTypes from "prop-types";
 import React, { Component } from "react";
-import { Container, Divider, Grid, Header, Image } from "semantic-ui-react";
+import { Container, Divider } from "semantic-ui-react";
 import { SearchBar } from "../Search/index.ts";
 import { Tabs } from "../Tabs/index.ts";
 import { fetchData } from "../../helpers/index.ts";
