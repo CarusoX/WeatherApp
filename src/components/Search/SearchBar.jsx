@@ -13,7 +13,7 @@ const resultRenderer = ({ title, description, image }) => [
   <div key="content" className="content">
     <Grid textAlign="left">
       <Grid.Column width={3}>
-        <Flag code={image.toLowerCase()} height="30" />
+        {/* <Flag code={image.toLowerCase()} height="30" /> */}
       </Grid.Column>
       <Grid.Column width={5}>
         {title && <div className="title">{title}</div>}

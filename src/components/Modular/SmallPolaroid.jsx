@@ -57,7 +57,11 @@ export default class SmallPolaroid extends Component {
           }}
           role="presentation"
         >
-          <img alt="img" style={smallImage} src={getIconName(image, theme)} />
+          <img
+            alt="img"
+            style={smallImage}
+            src={`/icons/Theme${theme}/${getIconName(image)}`}
+          />
           <Divider style={{ marginBottom: "0%" }} />
           <div style={container}>
             <p style={smallHeader}>{text}</p>

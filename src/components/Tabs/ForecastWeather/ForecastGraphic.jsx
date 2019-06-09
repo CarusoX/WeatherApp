@@ -80,7 +80,7 @@ export default class ForecastGraphic extends Component {
 ForecastGraphic.propTypes = {
   info: PropTypes.string.isRequired,
   date: PropTypes.arrayOf(PropTypes.string).isRequired,
-  values: PropTypes.arrayOf(PropTypes.shape()).isRequired,
+  values: PropTypes.arrayOf(PropTypes.number).isRequired,
   unit: PropTypes.string.isRequired
 };
 
@@ -92,11 +92,7 @@ CustomTooltip.defaultProps = {
 
 CustomTooltip.propTypes = {
   active: PropTypes.bool,
-  payload: PropTypes.arrayOf(
-    PropTypes.shape({
-      value: PropTypes.string
-    })
-  ),
+  payload: PropTypes.oneOfType([PropTypes.object, PropTypes.array]),
   label: PropTypes.string,
   unit: PropTypes.string.isRequired,
   info: PropTypes.string.isRequired
