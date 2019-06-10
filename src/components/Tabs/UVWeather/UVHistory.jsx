@@ -160,10 +160,6 @@ CustomTooltip.defaultProps = {
 
 CustomTooltip.propTypes = {
   active: PropTypes.bool,
-  payload: PropTypes.arrayOf(
-    PropTypes.shape({
-      value: PropTypes.number
-    })
-  ),
+  payload: PropTypes.oneOfType([PropTypes.array, PropTypes.object]),
   label: PropTypes.string
 };

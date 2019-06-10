@@ -2,7 +2,7 @@ import _ from "lodash";
 import PropTypes from "prop-types";
 import React, { Component } from "react";
 import { Search, Grid } from "semantic-ui-react";
-import { Flag } from "react-world-flags";
+import Flag from "react-world-flags";
 import { fetchCities, getCountryName } from "../../helpers/index.ts";
 import { Geolocalization } from "./index.ts";
 
@@ -11,11 +11,11 @@ const errorState = { isLoading: false, results: [] };
 
 const resultRenderer = ({ title, description, image }) => [
   <div key="content" className="content">
-    <Grid textAlign="left">
+    <Grid>
       <Grid.Column width={3}>
-        {/* <Flag code={image.toLowerCase()} height="30" /> */}
+        <Flag code={image.toLowerCase()} height="30" />
       </Grid.Column>
-      <Grid.Column width={5}>
+      <Grid.Column width={13}>
         {title && <div className="title">{title}</div>}
         {description && <div className="description">{description}</div>}
       </Grid.Column>

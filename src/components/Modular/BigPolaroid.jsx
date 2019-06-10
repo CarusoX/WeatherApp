@@ -46,7 +46,7 @@ const miniCell = theme => {
 };
 
 export default class BigPolaroid extends Component {
-  state = { animation: "bounce", duration: 300, visible: true };
+  state = { animation: "pulse", duration: 1000, visible: true };
 
   componentWillReceiveProps() {
     this.setState(prevState => ({ visible: !prevState.visible }));
@@ -131,7 +131,7 @@ export default class BigPolaroid extends Component {
                     <SmallCell
                       image="026-pressure.png"
                       title="Preassure"
-                      content={`${pressure.toString()}hPa`}
+                      content={`${pressure.toString()} hPa`}
                       style={{ color: "blue" }}
                       theme={theme}
                     />
